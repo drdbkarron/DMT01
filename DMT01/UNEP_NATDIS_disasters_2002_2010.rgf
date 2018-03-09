@@ -1,0 +1,2125 @@
+<?xml version="1.0"?>
+<grid xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <head>
+    <meta>
+      <culture>en-US</culture>
+      <editor>ReoGrid Core</editor>
+      <core-ver>2.1.0.0</core-ver>
+    </meta>
+    <rows>200</rows>
+    <cols>100</cols>
+    <default-row-height>20</default-row-height>
+    <default-col-width>70</default-col-width>
+    <settings meta="30475026398" />
+    <script />
+  </head>
+  <style color="#000000" font="Calibri" font-size="11" align="general" valign="middle" />
+  <rows>
+    <row row="0" height="20" text-color="#ffdcaa">
+      <style bgcolor="#00ff00" />
+    </row>
+  </rows>
+  <cols>
+    <col col="0" width="195" last-width="160" auto-width="false">
+      <style bgcolor="#beffbe" />
+    </col>
+    <col col="1" width="96" last-width="69" auto-width="false" />
+    <col col="3" width="84" last-width="70" auto-width="false" />
+    <col col="4" width="84" last-width="70" auto-width="false" />
+    <col col="5" width="122" last-width="70" />
+    <col col="6" width="84" last-width="70" auto-width="false" />
+  </cols>
+  <v-borders>
+    <v-border row="1" col="0" pos="left" rows="199" />
+    <v-border row="1" col="1" pos="all" rows="199" />
+    <v-border row="0" col="2" pos="all" rows="1" />
+    <v-border row="0" col="3" pos="all" rows="1" />
+    <v-border row="0" col="4" pos="all" rows="1" />
+    <v-border row="0" col="5" pos="all" rows="1" />
+    <v-border row="0" col="6" pos="all" rows="1" />
+    <v-border row="0" col="7" pos="all" rows="1" />
+    <v-border row="0" col="8" pos="all" rows="1" />
+    <v-border row="0" col="9" pos="all" rows="1" />
+    <v-border row="0" col="10" pos="all" rows="1" />
+    <v-border row="0" col="11" pos="all" rows="1" />
+    <v-border row="0" col="12" pos="all" rows="1" />
+    <v-border row="0" col="13" pos="all" rows="1" />
+    <v-border row="0" col="14" pos="all" rows="1" />
+    <v-border row="0" col="15" pos="all" rows="1" />
+    <v-border row="0" col="16" pos="all" rows="1" />
+    <v-border row="0" col="17" pos="all" rows="1" />
+    <v-border row="0" col="18" pos="all" rows="1" />
+    <v-border row="0" col="19" pos="all" rows="1" />
+    <v-border row="0" col="20" pos="all" rows="1" />
+    <v-border row="0" col="21" pos="all" rows="1" />
+    <v-border row="0" col="22" pos="all" rows="1" />
+    <v-border row="0" col="23" pos="all" rows="1" />
+    <v-border row="0" col="24" pos="all" rows="1" />
+    <v-border row="0" col="25" pos="all" rows="1" />
+    <v-border row="0" col="26" pos="all" rows="1" />
+    <v-border row="0" col="27" pos="all" rows="1" />
+    <v-border row="0" col="28" pos="all" rows="1" />
+    <v-border row="0" col="29" pos="all" rows="1" />
+    <v-border row="0" col="30" pos="all" rows="1" />
+    <v-border row="0" col="31" pos="all" rows="1" />
+    <v-border row="0" col="32" pos="all" rows="1" />
+    <v-border row="0" col="33" pos="all" rows="1" />
+    <v-border row="0" col="34" pos="all" rows="1" />
+    <v-border row="0" col="35" pos="all" rows="1" />
+    <v-border row="0" col="36" pos="all" rows="1" />
+    <v-border row="0" col="37" pos="all" rows="1" />
+    <v-border row="0" col="38" pos="all" rows="1" />
+    <v-border row="0" col="39" pos="all" rows="1" />
+    <v-border row="0" col="40" pos="all" rows="1" />
+    <v-border row="0" col="41" pos="all" rows="1" />
+    <v-border row="0" col="42" pos="all" rows="1" />
+    <v-border row="0" col="43" pos="all" rows="1" />
+    <v-border row="0" col="44" pos="all" rows="1" />
+    <v-border row="0" col="45" pos="all" rows="1" />
+    <v-border row="0" col="46" pos="all" rows="1" />
+    <v-border row="0" col="47" pos="all" rows="1" />
+    <v-border row="0" col="48" pos="all" rows="1" />
+    <v-border row="0" col="49" pos="all" rows="1" />
+    <v-border row="0" col="50" pos="all" rows="1" />
+    <v-border row="0" col="51" pos="all" rows="1" />
+    <v-border row="0" col="52" pos="all" rows="1" />
+    <v-border row="0" col="53" pos="all" rows="1" />
+    <v-border row="0" col="54" pos="all" rows="1" />
+    <v-border row="0" col="55" pos="all" rows="1" />
+    <v-border row="0" col="56" pos="all" rows="1" />
+    <v-border row="0" col="57" pos="all" rows="1" />
+    <v-border row="0" col="58" pos="all" rows="1" />
+    <v-border row="0" col="59" pos="all" rows="1" />
+    <v-border row="0" col="60" pos="all" rows="1" />
+    <v-border row="0" col="61" pos="all" rows="1" />
+    <v-border row="0" col="62" pos="all" rows="1" />
+    <v-border row="0" col="63" pos="all" rows="1" />
+    <v-border row="0" col="64" pos="all" rows="1" />
+    <v-border row="0" col="65" pos="all" rows="1" />
+    <v-border row="0" col="66" pos="all" rows="1" />
+    <v-border row="0" col="67" pos="all" rows="1" />
+    <v-border row="0" col="68" pos="all" rows="1" />
+    <v-border row="0" col="69" pos="all" rows="1" />
+    <v-border row="0" col="70" pos="all" rows="1" />
+    <v-border row="0" col="71" pos="all" rows="1" />
+    <v-border row="0" col="72" pos="all" rows="1" />
+    <v-border row="0" col="73" pos="all" rows="1" />
+    <v-border row="0" col="74" pos="all" rows="1" />
+    <v-border row="0" col="75" pos="all" rows="1" />
+    <v-border row="0" col="76" pos="all" rows="1" />
+    <v-border row="0" col="77" pos="all" rows="1" />
+    <v-border row="0" col="78" pos="all" rows="1" />
+    <v-border row="0" col="79" pos="all" rows="1" />
+    <v-border row="0" col="80" pos="all" rows="1" />
+    <v-border row="0" col="81" pos="all" rows="1" />
+    <v-border row="0" col="82" pos="all" rows="1" />
+    <v-border row="0" col="83" pos="all" rows="1" />
+    <v-border row="0" col="84" pos="all" rows="1" />
+    <v-border row="0" col="85" pos="all" rows="1" />
+    <v-border row="0" col="86" pos="all" rows="1" />
+    <v-border row="0" col="87" pos="all" rows="1" />
+    <v-border row="0" col="88" pos="all" rows="1" />
+    <v-border row="0" col="89" pos="all" rows="1" />
+    <v-border row="0" col="90" pos="all" rows="1" />
+    <v-border row="0" col="91" pos="all" rows="1" />
+    <v-border row="0" col="92" pos="all" rows="1" />
+    <v-border row="0" col="93" pos="all" rows="1" />
+    <v-border row="0" col="94" pos="all" rows="1" />
+    <v-border row="0" col="95" pos="all" rows="1" />
+    <v-border row="0" col="96" pos="all" rows="1" />
+    <v-border row="0" col="97" pos="all" rows="1" />
+    <v-border row="0" col="98" pos="all" rows="1" />
+    <v-border row="0" col="99" pos="all" rows="1" />
+    <v-border row="0" col="100" pos="right" rows="1" />
+  </v-borders>
+  <h-borders>
+    <h-border row="0" col="1" pos="top" cols="99" />
+    <h-border row="1" col="0" pos="top" cols="100" />
+    <h-border row="2" col="0" pos="all" cols="1" />
+    <h-border row="3" col="0" pos="all" cols="1" />
+    <h-border row="4" col="0" pos="all" cols="1" />
+    <h-border row="5" col="0" pos="all" cols="1" />
+    <h-border row="6" col="0" pos="all" cols="1" />
+    <h-border row="7" col="0" pos="all" cols="1" />
+    <h-border row="8" col="0" pos="all" cols="1" />
+    <h-border row="9" col="0" pos="all" cols="1" />
+    <h-border row="10" col="0" pos="all" cols="1" />
+    <h-border row="11" col="0" pos="all" cols="1" />
+    <h-border row="12" col="0" pos="all" cols="1" />
+    <h-border row="13" col="0" pos="all" cols="1" />
+    <h-border row="14" col="0" pos="all" cols="1" />
+    <h-border row="15" col="0" pos="all" cols="1" />
+    <h-border row="16" col="0" pos="all" cols="1" />
+    <h-border row="17" col="0" pos="all" cols="1" />
+    <h-border row="18" col="0" pos="all" cols="1" />
+    <h-border row="19" col="0" pos="all" cols="1" />
+    <h-border row="20" col="0" pos="all" cols="1" />
+    <h-border row="21" col="0" pos="all" cols="1" />
+    <h-border row="22" col="0" pos="all" cols="1" />
+    <h-border row="23" col="0" pos="all" cols="1" />
+    <h-border row="24" col="0" pos="all" cols="1" />
+    <h-border row="25" col="0" pos="all" cols="1" />
+    <h-border row="26" col="0" pos="all" cols="1" />
+    <h-border row="27" col="0" pos="all" cols="1" />
+    <h-border row="28" col="0" pos="all" cols="1" />
+    <h-border row="29" col="0" pos="all" cols="1" />
+    <h-border row="30" col="0" pos="all" cols="1" />
+    <h-border row="31" col="0" pos="all" cols="1" />
+    <h-border row="32" col="0" pos="all" cols="1" />
+    <h-border row="33" col="0" pos="all" cols="1" />
+    <h-border row="34" col="0" pos="all" cols="1" />
+    <h-border row="35" col="0" pos="all" cols="1" />
+    <h-border row="36" col="0" pos="all" cols="1" />
+    <h-border row="37" col="0" pos="all" cols="1" />
+    <h-border row="38" col="0" pos="all" cols="1" />
+    <h-border row="39" col="0" pos="all" cols="1" />
+    <h-border row="40" col="0" pos="all" cols="1" />
+    <h-border row="41" col="0" pos="all" cols="1" />
+    <h-border row="42" col="0" pos="all" cols="1" />
+    <h-border row="43" col="0" pos="all" cols="1" />
+    <h-border row="44" col="0" pos="all" cols="1" />
+    <h-border row="45" col="0" pos="all" cols="1" />
+    <h-border row="46" col="0" pos="all" cols="1" />
+    <h-border row="47" col="0" pos="all" cols="1" />
+    <h-border row="48" col="0" pos="all" cols="1" />
+    <h-border row="49" col="0" pos="all" cols="1" />
+    <h-border row="50" col="0" pos="all" cols="1" />
+    <h-border row="51" col="0" pos="all" cols="1" />
+    <h-border row="52" col="0" pos="all" cols="1" />
+    <h-border row="53" col="0" pos="all" cols="1" />
+    <h-border row="54" col="0" pos="all" cols="1" />
+    <h-border row="55" col="0" pos="all" cols="1" />
+    <h-border row="56" col="0" pos="all" cols="1" />
+    <h-border row="57" col="0" pos="all" cols="1" />
+    <h-border row="58" col="0" pos="all" cols="1" />
+    <h-border row="59" col="0" pos="all" cols="1" />
+    <h-border row="60" col="0" pos="all" cols="1" />
+    <h-border row="61" col="0" pos="all" cols="1" />
+    <h-border row="62" col="0" pos="all" cols="1" />
+    <h-border row="63" col="0" pos="all" cols="1" />
+    <h-border row="64" col="0" pos="all" cols="1" />
+    <h-border row="65" col="0" pos="all" cols="1" />
+    <h-border row="66" col="0" pos="all" cols="1" />
+    <h-border row="67" col="0" pos="all" cols="1" />
+    <h-border row="68" col="0" pos="all" cols="1" />
+    <h-border row="69" col="0" pos="all" cols="1" />
+    <h-border row="70" col="0" pos="all" cols="1" />
+    <h-border row="71" col="0" pos="all" cols="1" />
+    <h-border row="72" col="0" pos="all" cols="1" />
+    <h-border row="73" col="0" pos="all" cols="1" />
+    <h-border row="74" col="0" pos="all" cols="1" />
+    <h-border row="75" col="0" pos="all" cols="1" />
+    <h-border row="76" col="0" pos="all" cols="1" />
+    <h-border row="77" col="0" pos="all" cols="1" />
+    <h-border row="78" col="0" pos="all" cols="1" />
+    <h-border row="79" col="0" pos="all" cols="1" />
+    <h-border row="80" col="0" pos="all" cols="1" />
+    <h-border row="81" col="0" pos="all" cols="1" />
+    <h-border row="82" col="0" pos="all" cols="1" />
+    <h-border row="83" col="0" pos="all" cols="1" />
+    <h-border row="84" col="0" pos="all" cols="1" />
+    <h-border row="85" col="0" pos="all" cols="1" />
+    <h-border row="86" col="0" pos="all" cols="1" />
+    <h-border row="87" col="0" pos="all" cols="1" />
+    <h-border row="88" col="0" pos="all" cols="1" />
+    <h-border row="89" col="0" pos="all" cols="1" />
+    <h-border row="90" col="0" pos="all" cols="1" />
+    <h-border row="91" col="0" pos="all" cols="1" />
+    <h-border row="92" col="0" pos="all" cols="1" />
+    <h-border row="93" col="0" pos="all" cols="1" />
+    <h-border row="94" col="0" pos="all" cols="1" />
+    <h-border row="95" col="0" pos="all" cols="1" />
+    <h-border row="96" col="0" pos="all" cols="1" />
+    <h-border row="97" col="0" pos="all" cols="1" />
+    <h-border row="98" col="0" pos="all" cols="1" />
+    <h-border row="99" col="0" pos="all" cols="1" />
+    <h-border row="100" col="0" pos="all" cols="1" />
+    <h-border row="101" col="0" pos="all" cols="1" />
+    <h-border row="102" col="0" pos="all" cols="1" />
+    <h-border row="103" col="0" pos="all" cols="1" />
+    <h-border row="104" col="0" pos="all" cols="1" />
+    <h-border row="105" col="0" pos="all" cols="1" />
+    <h-border row="106" col="0" pos="all" cols="1" />
+    <h-border row="107" col="0" pos="all" cols="1" />
+    <h-border row="108" col="0" pos="all" cols="1" />
+    <h-border row="109" col="0" pos="all" cols="1" />
+    <h-border row="110" col="0" pos="all" cols="1" />
+    <h-border row="111" col="0" pos="all" cols="1" />
+    <h-border row="112" col="0" pos="all" cols="1" />
+    <h-border row="113" col="0" pos="all" cols="1" />
+    <h-border row="114" col="0" pos="all" cols="1" />
+    <h-border row="115" col="0" pos="all" cols="1" />
+    <h-border row="116" col="0" pos="all" cols="1" />
+    <h-border row="117" col="0" pos="all" cols="1" />
+    <h-border row="118" col="0" pos="all" cols="1" />
+    <h-border row="119" col="0" pos="all" cols="1" />
+    <h-border row="120" col="0" pos="all" cols="1" />
+    <h-border row="121" col="0" pos="all" cols="1" />
+    <h-border row="122" col="0" pos="all" cols="1" />
+    <h-border row="123" col="0" pos="all" cols="1" />
+    <h-border row="124" col="0" pos="all" cols="1" />
+    <h-border row="125" col="0" pos="all" cols="1" />
+    <h-border row="126" col="0" pos="all" cols="1" />
+    <h-border row="127" col="0" pos="all" cols="1" />
+    <h-border row="128" col="0" pos="all" cols="1" />
+    <h-border row="129" col="0" pos="all" cols="1" />
+    <h-border row="130" col="0" pos="all" cols="1" />
+    <h-border row="131" col="0" pos="all" cols="1" />
+    <h-border row="132" col="0" pos="all" cols="1" />
+    <h-border row="133" col="0" pos="all" cols="1" />
+    <h-border row="134" col="0" pos="all" cols="1" />
+    <h-border row="135" col="0" pos="all" cols="1" />
+    <h-border row="136" col="0" pos="all" cols="1" />
+    <h-border row="137" col="0" pos="all" cols="1" />
+    <h-border row="138" col="0" pos="all" cols="1" />
+    <h-border row="139" col="0" pos="all" cols="1" />
+    <h-border row="140" col="0" pos="all" cols="1" />
+    <h-border row="141" col="0" pos="all" cols="1" />
+    <h-border row="142" col="0" pos="all" cols="1" />
+    <h-border row="143" col="0" pos="all" cols="1" />
+    <h-border row="144" col="0" pos="all" cols="1" />
+    <h-border row="145" col="0" pos="all" cols="1" />
+    <h-border row="146" col="0" pos="all" cols="1" />
+    <h-border row="147" col="0" pos="all" cols="1" />
+    <h-border row="148" col="0" pos="all" cols="1" />
+    <h-border row="149" col="0" pos="all" cols="1" />
+    <h-border row="150" col="0" pos="all" cols="1" />
+    <h-border row="151" col="0" pos="all" cols="1" />
+    <h-border row="152" col="0" pos="all" cols="1" />
+    <h-border row="153" col="0" pos="all" cols="1" />
+    <h-border row="154" col="0" pos="all" cols="1" />
+    <h-border row="155" col="0" pos="all" cols="1" />
+    <h-border row="156" col="0" pos="all" cols="1" />
+    <h-border row="157" col="0" pos="all" cols="1" />
+    <h-border row="158" col="0" pos="all" cols="1" />
+    <h-border row="159" col="0" pos="all" cols="1" />
+    <h-border row="160" col="0" pos="all" cols="1" />
+    <h-border row="161" col="0" pos="all" cols="1" />
+    <h-border row="162" col="0" pos="all" cols="1" />
+    <h-border row="163" col="0" pos="all" cols="1" />
+    <h-border row="164" col="0" pos="all" cols="1" />
+    <h-border row="165" col="0" pos="all" cols="1" />
+    <h-border row="166" col="0" pos="all" cols="1" />
+    <h-border row="167" col="0" pos="all" cols="1" />
+    <h-border row="168" col="0" pos="all" cols="1" />
+    <h-border row="169" col="0" pos="all" cols="1" />
+    <h-border row="170" col="0" pos="all" cols="1" />
+    <h-border row="171" col="0" pos="all" cols="1" />
+    <h-border row="172" col="0" pos="all" cols="1" />
+    <h-border row="173" col="0" pos="all" cols="1" />
+    <h-border row="174" col="0" pos="all" cols="1" />
+    <h-border row="175" col="0" pos="all" cols="1" />
+    <h-border row="176" col="0" pos="all" cols="1" />
+    <h-border row="177" col="0" pos="all" cols="1" />
+    <h-border row="178" col="0" pos="all" cols="1" />
+    <h-border row="179" col="0" pos="all" cols="1" />
+    <h-border row="180" col="0" pos="all" cols="1" />
+    <h-border row="181" col="0" pos="all" cols="1" />
+    <h-border row="182" col="0" pos="all" cols="1" />
+    <h-border row="183" col="0" pos="all" cols="1" />
+    <h-border row="184" col="0" pos="all" cols="1" />
+    <h-border row="185" col="0" pos="all" cols="1" />
+    <h-border row="186" col="0" pos="all" cols="1" />
+    <h-border row="187" col="0" pos="all" cols="1" />
+    <h-border row="188" col="0" pos="all" cols="1" />
+    <h-border row="189" col="0" pos="all" cols="1" />
+    <h-border row="190" col="0" pos="all" cols="1" />
+    <h-border row="191" col="0" pos="all" cols="1" />
+    <h-border row="192" col="0" pos="all" cols="1" />
+    <h-border row="193" col="0" pos="all" cols="1" />
+    <h-border row="194" col="0" pos="all" cols="1" />
+    <h-border row="195" col="0" pos="all" cols="1" />
+    <h-border row="196" col="0" pos="all" cols="1" />
+    <h-border row="197" col="0" pos="all" cols="1" />
+    <h-border row="198" col="0" pos="all" cols="1" />
+    <h-border row="199" col="0" pos="all" cols="1" />
+    <h-border row="200" col="0" pos="bottom" cols="1" />
+  </h-borders>
+  <cells>
+    <cell row="0" col="0">UN Natural Disasters 2002-2010<style bgcolor="#ffb2b2" /></cell>
+    <cell row="0" col="1" format="number">wood<format-args decimal-places="2" use-separator="true" /></cell>
+    <cell row="0" col="2" format="number">fish<format-args decimal-places="2" use-separator="true" /></cell>
+    <cell row="0" col="3" format="number">urban_p<format-args decimal-places="2" use-separator="true" /></cell>
+    <cell row="0" col="4" format="number">landsurf<format-args decimal-places="2" use-separator="true" /></cell>
+    <cell row="0" col="5" format="currency">gdp<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="0" col="6" format="percent">hdi<format-args decimal-places="2" /></cell>
+    <cell row="1" col="0" format="text">country_name</cell>
+    <cell row="1" col="1" format="number">3255938.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="1" col="2" format="number">1600<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="1" col="3" format="number">5986468.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="1" col="4" format="number">65286<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="1" col="5" format="currency">7145343.41915<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="1" col="6" format="percent">0.447721574435<format-args decimal-places="2" /></cell>
+    <cell row="2" col="0" format="text">Algeria</cell>
+    <cell row="2" col="1" format="number">7869237.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="2" col="2" format="number">130801.388888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="2" col="3" format="number">21908144.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="2" col="4" format="number">238174<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="2" col="5" format="currency">103819634.6603<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="2" col="6" format="percent">0.725421278985<format-args decimal-places="2" /></cell>
+    <cell row="3" col="0" format="text">Angola</cell>
+    <cell row="3" col="1" format="number">4759945.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="3" col="2" format="number">250095.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="3" col="3" format="number">7559072.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="3" col="4" format="number">124670<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="3" col="5" format="currency">35180069.4332778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="3" col="6" format="percent">0.508624907815<format-args decimal-places="2" /></cell>
+    <cell row="4" col="0" format="text">Argentina</cell>
+    <cell row="4" col="1" format="number">13756444.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="4" col="2" format="number">951606<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="4" col="3" format="number">35707136.7777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="4" col="4" format="number">273669<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="4" col="5" format="currency">235611640.434111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="4" col="6" format="percent">0.81087101602<format-args decimal-places="2" /></cell>
+    <cell row="5" col="0" format="text">Australia</cell>
+    <cell row="5" col="1" format="number">31470888.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="5" col="2" format="number">223720.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="5" col="3" format="number">18274996.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="5" col="4" format="number">768230<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="5" col="5" format="currency">715297063.758889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="5" col="6" format="percent">0.927409977913<format-args decimal-places="2" /></cell>
+    <cell row="6" col="0" format="text">Austria</cell>
+    <cell row="6" col="1" format="number">17962344.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="6" col="2" format="number">786.833333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="6" col="3" format="number">5426949.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="6" col="4" format="number">8244.08888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="6" col="5" format="currency">321017608.607444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="6" col="6" format="percent">0.879002372764<format-args decimal-places="2" /></cell>
+    <cell row="7" col="0" format="text">Bahamas</cell>
+    <cell row="7" col="1" format="number">49352<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="7" col="2" format="number">14961.7222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="7" col="3" format="number">276225.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="7" col="4" format="number">1001<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="7" col="5" format="currency">7654541.89438667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="7" col="6" format="percent">0.773953443223<format-args decimal-places="2" /></cell>
+    <cell row="8" col="0" format="text">Bangladesh</cell>
+    <cell row="8" col="1" format="number">27836566.6666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="8" col="2" format="number">2116573.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="8" col="3" format="number">40024712<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="8" col="4" format="number">13017<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="8" col="5" format="currency">65013231.2537778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="8" col="6" format="percent">0.546427598075<format-args decimal-places="2" /></cell>
+    <cell row="9" col="0" format="text">Barbados</cell>
+    <cell row="9" col="1" format="number">10831.1111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="9" col="2" format="number">2701.66666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="9" col="3" format="number">90175.1111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="9" col="4" format="number">43<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="9" col="5" format="currency">3943198.67149778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="9" col="6" format="percent">0.779916542088<format-args decimal-places="2" /></cell>
+    <cell row="10" col="0" format="text">Belgium</cell>
+    <cell row="10" col="1" format="number">4786381.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="10" col="2" format="number">24877.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="10" col="3" format="number">10305990<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="10" col="4" format="number">3028<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="10" col="5" format="currency">392349976.385333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="10" col="6" format="percent">0.882948290109<format-args decimal-places="2" /></cell>
+    <cell row="11" col="0" format="text">Belize</cell>
+    <cell row="11" col="1" format="number">174822.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="11" col="2" format="number">213671.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="11" col="3" format="number">133977<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="11" col="4" format="number">2281<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="11" col="5" format="currency">1137524.48359444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="11" col="6" format="percent">0.709493875414<format-args decimal-places="2" /></cell>
+    <cell row="12" col="0" format="text">Bolivia</cell>
+    <cell row="12" col="1" format="number">3078368.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="12" col="2" format="number">6779.11111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="12" col="3" format="number">6005571.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="12" col="4" format="number">108330<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="12" col="5" format="currency">10114715.8956<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="12" col="6" format="percent">0.641230349448<format-args decimal-places="2" /></cell>
+    <cell row="13" col="0" format="text">Brazil</cell>
+    <cell row="13" col="1" format="number">235331333.333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="13" col="2" format="number">1084624.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="13" col="3" format="number">156970626.222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="13" col="4" format="number">835814<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="13" col="5" format="currency">930683581.637<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="13" col="6" format="percent">0.73738314473<format-args decimal-places="2" /></cell>
+    <cell row="14" col="0" format="text">Bulgaria</cell>
+    <cell row="14" col="1" format="number">5504346.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="14" col="2" format="number">12241.0111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="14" col="3" format="number">5394252.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="14" col="4" format="number">10866<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="14" col="5" format="currency">30509011.8801444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="14" col="6" format="percent">0.772812689872<format-args decimal-places="2" /></cell>
+    <cell row="15" col="0" format="text">BurkinaFaso</cell>
+    <cell row="15" col="1" format="number">11303888.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="15" col="2" format="number">10454.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="15" col="3" format="number">3130285.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="15" col="4" format="number">27360<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="15" col="5" format="currency">5746088.7288<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="15" col="6" format="percent">0.377786665928<format-args decimal-places="2" /></cell>
+    <cell row="16" col="0" format="text">Cameroon</cell>
+    <cell row="16" col="1" format="number">11586388.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="16" col="2" format="number">132689<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="16" col="3" format="number">8841081.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="16" col="4" format="number">47271<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="16" col="5" format="currency">17128019.0071111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="16" col="6" format="percent">0.48572616969<format-args decimal-places="2" /></cell>
+    <cell row="17" col="0" format="text">Canada</cell>
+    <cell row="17" col="1" format="number">170555333.333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="17" col="2" format="number">1034006.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="17" col="3" format="number">26213332<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="17" col="4" format="number">909351<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="17" col="5" format="currency">1171816217.98222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="17" col="6" format="percent">0.903135968599<format-args decimal-places="2" /></cell>
+    <cell row="18" col="0" format="text">Chile</cell>
+    <cell row="18" col="1" format="number">46161911.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="18" col="2" format="number">3971084.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="18" col="3" format="number">14304845.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="18" col="4" format="number">74353.2<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="18" col="5" format="currency">128349873.652889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="18" col="6" format="percent">0.813791672442<format-args decimal-places="2" /></cell>
+    <cell row="19" col="0" format="text">China</cell>
+    <cell row="19" col="1" format="number">315696444.444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="19" col="2" format="number">44947122.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="19" col="3" format="number">575029870.666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="19" col="4" format="number">942470<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="19" col="5" format="currency">2638305435.53667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="19" col="6" format="percent">0.698547629042<format-args decimal-places="2" /></cell>
+    <cell row="20" col="0" format="text">Colombia</cell>
+    <cell row="20" col="1" format="number">11442955.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="20" col="2" format="number">176632.333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="20" col="3" format="number">32363736.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="20" col="4" format="number">110950<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="20" col="5" format="currency">155827459.726222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="20" col="6" format="percent">0.705924620061<format-args decimal-places="2" /></cell>
+    <cell row="21" col="0" format="text">Congo</cell>
+    <cell row="21" col="1" format="number">76339300<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="21" col="2" format="number">235828.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="21" col="3" format="number">21633027.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="21" col="4" format="number">226705<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="21" col="5" format="currency">12701713.6866667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="21" col="6" format="percent">0.407727322997<format-args decimal-places="2" /></cell>
+    <cell row="22" col="0" format="text">CongoBrazzaville</cell>
+    <cell row="22" col="1" format="number">3391400<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="22" col="2" format="number">57323.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="22" col="3" format="number">2379706.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="22" col="4" format="number">34150<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="22" col="5" format="currency">6359245.61209222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="22" col="6" format="percent">0.554019419525<format-args decimal-places="2" /></cell>
+    <cell row="23" col="0" format="text">CostaRica</cell>
+    <cell row="23" col="1" format="number">4682361.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="23" col="2" format="number">46311.1222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="23" col="3" format="number">2884575.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="23" col="4" format="number">5106<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="23" col="5" format="currency">21332858.6471556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="23" col="6" format="percent">0.749997740479<format-args decimal-places="2" /></cell>
+    <cell row="24" col="0" format="text">Cuba</cell>
+    <cell row="24" col="1" format="number">2362600<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="24" col="2" format="number">59799.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="24" col="3" format="number">8602256.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="24" col="4" format="number">10642.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="24" col="5" format="currency">46020166.5571778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="24" col="6" format="percent">0.777672776407<format-args decimal-places="2" /></cell>
+    <cell row="25" col="0" format="text">Denmark</cell>
+    <cell row="25" col="1" format="number">2304900<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="25" col="2" format="number">921276.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="25" col="3" format="number">4689811.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="25" col="4" format="number">4243<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="25" col="5" format="currency">264163915.081222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="25" col="6" format="percent">0.908387714666<format-args decimal-places="2" /></cell>
+    <cell row="26" col="0" format="text">DominicanRepublic</cell>
+    <cell row="26" col="1" format="number">754552<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="26" col="2" format="number">16169.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="26" col="3" format="number">6440960.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="26" col="4" format="number">4832<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="26" col="5" format="currency">37265317.3738778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="26" col="6" format="percent">0.700954015168<format-args decimal-places="2" /></cell>
+    <cell row="27" col="0" format="text">Ecuador</cell>
+    <cell row="27" col="1" format="number">6414313.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="27" col="2" format="number">582671.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="27" col="3" format="number">8659801.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="27" col="4" format="number">24836<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="27" col="5" format="currency">42660220.7995111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="27" col="6" format="percent">0.716778494081<format-args decimal-places="2" /></cell>
+    <cell row="28" col="0" format="text">Egypt</cell>
+    <cell row="28" col="1" format="number">17299288.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="28" col="2" format="number">984412.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="28" col="3" format="number">33643616.6666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="28" col="4" format="number">99545<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="28" col="5" format="currency">98049215.1674667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="28" col="6" format="percent">0.680996994405<format-args decimal-places="2" /></cell>
+    <cell row="29" col="0" format="text">ElSalvador</cell>
+    <cell row="29" col="1" format="number">4917044.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="29" col="2" format="number">44216.7333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="29" col="3" format="number">3765438.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="29" col="4" format="number">2072<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="29" col="5" format="currency">17441005.2172556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="29" col="6" format="percent">0.652732913106<format-args decimal-places="2" /></cell>
+    <cell row="30" col="0" format="text">Ethiopia</cell>
+    <cell row="30" col="1" format="number">98631300<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="30" col="2" format="number">12910.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="30" col="3" format="number">12704198.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="30" col="4" format="number">100000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="30" col="5" format="currency">14280378.3220622<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="30" col="6" format="percent">0.411652864685<format-args decimal-places="2" /></cell>
+    <cell row="31" col="0" format="text">Fiji</cell>
+    <cell row="31" col="1" format="number">475165<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="31" col="2" format="number">43550.5<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="31" col="3" format="number">418449<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="31" col="4" format="number">1827<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="31" col="5" format="currency">2993544.15533222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="31" col="6" format="percent">0.71689898097<format-args decimal-places="2" /></cell>
+    <cell row="32" col="0" format="text">France</cell>
+    <cell row="32" col="1" format="number">53736833.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="32" col="2" format="number">743194.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="32" col="3" format="number">49152798.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="32" col="4" format="number">54755.9666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="32" col="5" format="currency">2221067784.10556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="32" col="6" format="percent">0.880909135897<format-args decimal-places="2" /></cell>
+    <cell row="33" col="0" format="text">Georgia</cell>
+    <cell row="33" col="1" format="number">665032<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="33" col="2" format="number">25764.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="33" col="3" format="number">2173966.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="33" col="4" format="number">6949<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="33" col="5" format="currency">6856871.76532889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="33" col="6" format="percent">0.734885624127<format-args decimal-places="2" /></cell>
+    <cell row="34" col="0" format="text">Germany</cell>
+    <cell row="34" col="1" format="number">55765411.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="34" col="2" format="number">287273.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="34" col="3" format="number">60561461.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="34" col="4" format="number">34871.1111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="34" col="5" format="currency">2932994639.19<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="34" col="6" format="percent">0.906466666261<format-args decimal-places="2" /></cell>
+    <cell row="35" col="0" format="text">Ghana</cell>
+    <cell row="35" col="1" format="number">34421477.7777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="35" col="2" format="number">371151.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="35" col="3" format="number">10660162.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="35" col="4" format="number">22754<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="35" col="5" format="currency">11650358.41706<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="35" col="6" format="percent">0.553547705419<format-args decimal-places="2" /></cell>
+    <cell row="36" col="0" format="text">Greece</cell>
+    <cell row="36" col="1" format="number">1512248.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="36" col="2" format="number">193772.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="36" col="3" format="number">8242632.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="36" col="4" format="number">12890<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="36" col="5" format="currency">250262887.310889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="36" col="6" format="percent">0.866493544303<format-args decimal-places="2" /></cell>
+    <cell row="37" col="0" format="text">Guatemala</cell>
+    <cell row="37" col="1" format="number">17124544.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="37" col="2" format="number">32685.3555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="37" col="3" format="number">6390867.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="37" col="4" format="number">10716<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="37" col="5" format="currency">28763666.4774667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="37" col="6" format="percent">0.611042287378<format-args decimal-places="2" /></cell>
+    <cell row="38" col="0" format="text">Haiti</cell>
+    <cell row="38" col="1" format="number">2247671.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="38" col="2" format="number">12036.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="38" col="3" format="number">4311565.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="38" col="4" format="number">2756<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="38" col="5" format="currency">4291144.84351556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="38" col="6" format="percent">0.470579590552<format-args decimal-places="2" /></cell>
+    <cell row="39" col="0" format="text">Honduras</cell>
+    <cell row="39" col="1" format="number">9431576.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="39" col="2" format="number">52088.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="39" col="3" format="number">3711417.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="39" col="4" format="number">11189<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="39" col="5" format="currency">10102903.4208444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="39" col="6" format="percent">0.609887832716<format-args decimal-places="2" /></cell>
+    <cell row="40" col="0" format="text">India</cell>
+    <cell row="40" col="1" format="number">351390000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="40" col="2" format="number">6949330<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="40" col="3" format="number">343886867.222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="40" col="4" format="number">297319<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="40" col="5" format="currency">920482873.474222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="40" col="6" format="percent">0.585646474692<format-args decimal-places="2" /></cell>
+    <cell row="41" col="0" format="text">Indonesia</cell>
+    <cell row="41" col="1" format="number">121693666.666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="41" col="2" format="number">5835790<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="41" col="3" format="number">107621884.444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="41" col="4" format="number">181157<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="41" col="5" format="currency">306180355.052<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="41" col="6" format="percent">0.664590886938<format-args decimal-places="2" /></cell>
+    <cell row="42" col="0" format="text">Iran</cell>
+    <cell row="42" col="1" format="number">817777.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="42" col="2" format="number">457143<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="42" col="3" format="number">48583794.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="42" col="4" format="number">162855<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="42" col="5" format="currency">203137577.383222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="42" col="6" format="percent">0.74331611533<format-args decimal-places="2" /></cell>
+    <cell row="43" col="0" format="text">Ireland</cell>
+    <cell row="43" col="1" format="number">2577690<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="43" col="2" format="number">296371.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="43" col="3" format="number">2594620.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="43" col="4" format="number">6889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="43" col="5" format="currency">210004733.235<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="43" col="6" format="percent">0.9079997916<format-args decimal-places="2" /></cell>
+    <cell row="44" col="0" format="text">Israel</cell>
+    <cell row="44" col="1" format="number">27000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="44" col="2" format="number">24211.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="44" col="3" format="number">6477237.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="44" col="4" format="number">2164<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="44" col="5" format="currency">149968494.839889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="44" col="6" format="percent">0.883231116529<format-args decimal-places="2" /></cell>
+    <cell row="45" col="0" format="text">Italy</cell>
+    <cell row="45" col="1" format="number">8272515.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="45" col="2" format="number">403518.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="45" col="3" format="number">39494760.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="45" col="4" format="number">29413.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="45" col="5" format="currency">1847609167.31556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="45" col="6" format="percent">0.868561324408<format-args decimal-places="2" /></cell>
+    <cell row="46" col="0" format="text">Jamaica</cell>
+    <cell row="46" col="1" format="number">714067.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="46" col="2" format="number">20050<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="46" col="3" format="number">1462245.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="46" col="4" format="number">1083<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="46" col="5" format="currency">-9.999<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="46" col="6" format="percent">0.727087520296<format-args decimal-places="2" /></cell>
+    <cell row="47" col="0" format="text">Japan</cell>
+    <cell row="47" col="1" format="number">16530255.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="47" col="2" format="number">4731636.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="47" col="3" format="number">110774724.444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="47" col="4" format="number">36450.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="47" col="5" format="currency">4558033379.43111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="47" col="6" format="percent">0.884146552627<format-args decimal-places="2" /></cell>
+    <cell row="48" col="0" format="text">Kenya</cell>
+    <cell row="48" col="1" format="number">25622388.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="48" col="2" format="number">141050.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="48" col="3" format="number">8220491.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="48" col="4" format="number">56914<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="48" col="5" format="currency">19803285.9702111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="48" col="6" format="percent">0.528785348343<format-args decimal-places="2" /></cell>
+    <cell row="49" col="0" format="text">Korea</cell>
+    <cell row="49" col="1" format="number">4950262.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="49" col="2" format="number">2165244.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="49" col="3" format="number">39478580.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="49" col="4" format="number">9693.55555555555<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="49" col="5" format="currency">942469216.500222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="49" col="6" format="percent">0.88647044551<format-args decimal-places="2" /></cell>
+    <cell row="50" col="0" format="text">Lebanon</cell>
+    <cell row="50" col="1" format="number">26105.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="50" col="2" format="number">3935.77777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="50" col="3" format="number">3454390.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="50" col="4" format="number">1023<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="50" col="5" format="currency">23368239.1603111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="50" col="6" format="percent">0.755828136659<format-args decimal-places="2" /></cell>
+    <cell row="51" col="0" format="text">Lesotho</cell>
+    <cell row="51" col="1" format="number">2061648.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="51" col="2" format="number">47.2222222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="51" col="3" format="number">447900.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="51" col="4" format="number">3036<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="51" col="5" format="currency">1459230.51940778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="51" col="6" format="percent">0.471582594559<format-args decimal-places="2" /></cell>
+    <cell row="52" col="0" format="text">Liberia</cell>
+    <cell row="52" col="1" format="number">6628011.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="52" col="2" format="number">10750.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="52" col="3" format="number">1597174.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="52" col="4" format="number">9632<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="52" col="5" format="currency">689501.603796667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="52" col="6" format="percent">0.404815224408<format-args decimal-places="2" /></cell>
+    <cell row="53" col="0" format="text">Luxembourg</cell>
+    <cell row="53" col="1" format="number">277793.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="53" col="2" format="number">0.5<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="53" col="3" format="number">412563.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="53" col="4" format="number">259<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="53" col="5" format="currency">38038490.6619889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="53" col="6" format="percent">0.885995061562<format-args decimal-places="2" /></cell>
+    <cell row="54" col="0" format="text">Malawi</cell>
+    <cell row="54" col="1" format="number">6601314.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="54" col="2" format="number">66612.1666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="54" col="3" format="number">2047540.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="54" col="4" format="number">9428<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="54" col="5" format="currency">3016415.74142222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="54" col="6" format="percent">0.419853124818<format-args decimal-places="2" /></cell>
+    <cell row="55" col="0" format="text">Mauritania</cell>
+    <cell row="55" col="1" format="number">1669356.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="55" col="2" format="number">223151.333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="55" col="3" format="number">1742318.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="55" col="4" format="number">103070<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="55" col="5" format="currency">1953201.88505333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="55" col="6" format="percent">0.487680411824<format-args decimal-places="2" /></cell>
+    <cell row="56" col="0" format="text">Mexico</cell>
+    <cell row="56" col="1" format="number">44508011.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="56" col="2" format="number">1555811.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="56" col="3" format="number">84632332.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="56" col="4" format="number">194395<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="56" col="5" format="currency">885284166.237667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="56" col="6" format="percent">0.745596695657<format-args decimal-places="2" /></cell>
+    <cell row="57" col="0" format="text">Mongolia</cell>
+    <cell row="57" col="1" format="number">783853.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="57" col="2" format="number">233.888888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="57" col="3" format="number">1631619.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="57" col="4" format="number">155356<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="57" col="5" format="currency">2748790.40757667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="57" col="6" format="percent">0.695293378901<format-args decimal-places="2" /></cell>
+    <cell row="58" col="0" format="text">Morocco</cell>
+    <cell row="58" col="1" format="number">7395603.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="58" col="2" format="number">987975.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="58" col="3" format="number">17228889.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="58" col="4" format="number">44630<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="58" col="5" format="currency">63592142.387<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="58" col="6" format="percent">0.610832181032<format-args decimal-places="2" /></cell>
+    <cell row="59" col="0" format="text">Mozambique</cell>
+    <cell row="59" col="1" format="number">18047444.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="59" col="2" format="number">107505.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="59" col="3" format="number">6529456.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="59" col="4" format="number">78638<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="59" col="5" format="currency">7042852.47648556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="59" col="6" format="percent">0.40109392199<format-args decimal-places="2" /></cell>
+    <cell row="60" col="0" format="text">Myanmar</cell>
+    <cell row="60" col="1" format="number">42002377.7777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="60" col="2" format="number">2583351.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="60" col="3" format="number">14371543.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="60" col="4" format="number">65341.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="60" col="5" format="currency">-9.999<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="60" col="6" format="percent">0.520393693587<format-args decimal-places="2" /></cell>
+    <cell row="61" col="0" format="text">Nepal</cell>
+    <cell row="61" col="1" format="number">13901644.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="61" col="2" format="number">43620.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="61" col="3" format="number">4021374.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="61" col="4" format="number">14335<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="61" col="5" format="currency">8530099.23902111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="61" col="6" format="percent">0.530778700586<format-args decimal-places="2" /></cell>
+    <cell row="62" col="0" format="text">Netherlands</cell>
+    <cell row="62" col="1" format="number">1040141.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="62" col="2" format="number">528554.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="62" col="3" format="number">13650576.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="62" col="4" format="number">3374.88888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="62" col="5" format="currency">692320318.484778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="62" col="6" format="percent">0.909236032164<format-args decimal-places="2" /></cell>
+    <cell row="63" col="0" format="text">Nicaragua</cell>
+    <cell row="63" col="1" format="number">6072861.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="63" col="2" format="number">39751.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="63" col="3" format="number">3065806.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="63" col="4" format="number">12034<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="63" col="5" format="currency">6500572.79866667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="63" col="6" format="percent">0.618728965765<format-args decimal-places="2" /></cell>
+    <cell row="64" col="0" format="text">Niger</cell>
+    <cell row="64" col="1" format="number">9679248.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="64" col="2" format="number">37859<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="64" col="3" format="number">2407086.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="64" col="4" format="number">126670<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="64" col="5" format="currency">3647340.17529667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="64" col="6" format="percent">0.325667542925<format-args decimal-places="2" /></cell>
+    <cell row="65" col="0" format="text">Nigeria</cell>
+    <cell row="65" col="1" format="number">71047555.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="65" col="2" format="number">630200.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="65" col="3" format="number">57381548.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="65" col="4" format="number">91077<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="65" col="5" format="currency">119001862.603667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="65" col="6" format="percent">0.492838355826<format-args decimal-places="2" /></cell>
+    <cell row="66" col="0" format="text">Norway</cell>
+    <cell row="66" col="1" format="number">9478602.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="66" col="2" format="number">2513833.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="66" col="3" format="number">3653624.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="66" col="4" format="number">36526.8<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="66" col="5" format="currency">305314017.160222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="66" col="6" format="percent">0.939844408685<format-args decimal-places="2" /></cell>
+    <cell row="67" col="0" format="text">Pakistan</cell>
+    <cell row="67" col="1" format="number">31798777.7777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="67" col="2" format="number">575607.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="67" col="3" format="number">55320566.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="67" col="4" format="number">77088<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="67" col="5" format="currency">112819441.340278<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="67" col="6" format="percent">0.521613115051<format-args decimal-places="2" /></cell>
+    <cell row="68" col="0" format="text">Panama</cell>
+    <cell row="68" col="1" format="number">1329464.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="68" col="2" format="number">239183.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="68" col="3" format="number">2171682.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="68" col="4" format="number">7434<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="68" col="5" format="currency">17364517.7560778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="68" col="6" format="percent">0.76103540239<format-args decimal-places="2" /></cell>
+    <cell row="69" col="0" format="text">PapuaNewGuinea</cell>
+    <cell row="69" col="1" format="number">8435222.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="69" col="2" format="number">220905.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="69" col="3" format="number">847691.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="69" col="4" format="number">45286<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="69" col="5" format="currency">5201894.92007667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="69" col="6" format="percent">0.493333213232<format-args decimal-places="2" /></cell>
+    <cell row="70" col="0" format="text">Paraguay</cell>
+    <cell row="70" col="1" format="number">10197045.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="70" col="2" format="number">23125.2666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="70" col="3" format="number">3381959.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="70" col="4" format="number">39730<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="70" col="5" format="currency">9273279.72009556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="70" col="6" format="percent">0.668207494262<format-args decimal-places="2" /></cell>
+    <cell row="71" col="0" format="text">Peru</cell>
+    <cell row="71" col="1" format="number">8934911.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="71" col="2" format="number">7436160<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="71" col="3" format="number">21095783.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="71" col="4" format="number">128000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="71" col="5" format="currency">82428906.8904111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="71" col="6" format="percent">0.717597467814<format-args decimal-places="2" /></cell>
+    <cell row="72" col="0" format="text">Philippines</cell>
+    <cell row="72" col="1" format="number">16086944.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="72" col="2" format="number">2663508.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="72" col="3" format="number">40598391.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="72" col="4" format="number">29817<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="72" col="5" format="currency">108775508.709211<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="72" col="6" format="percent">0.654393903425<format-args decimal-places="2" /></cell>
+    <cell row="73" col="0" format="text">Poland</cell>
+    <cell row="73" col="1" format="number">32815455.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="73" col="2" format="number">197420.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="73" col="3" format="number">23402379.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="73" col="4" format="number">30629.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="73" col="5" format="currency">325651592.640222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="73" col="6" format="percent">0.829135937784<format-args decimal-places="2" /></cell>
+    <cell row="74" col="0" format="text">Portugal</cell>
+    <cell row="74" col="1" format="number">10115425.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="74" col="2" format="number">227630.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="74" col="3" format="number">6112703.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="74" col="4" format="number">9150.66666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="74" col="5" format="currency">199343721.625333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="74" col="6" format="percent">0.819367406764<format-args decimal-places="2" /></cell>
+    <cell row="75" col="0" format="text">Romania</cell>
+    <cell row="75" col="1" format="number">14394455.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="75" col="2" format="number">14085.1211111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="75" col="3" format="number">11210383.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="75" col="4" format="number">22996.4444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="75" col="5" format="currency">104388451.662733<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="75" col="6" format="percent">0.784498226613<format-args decimal-places="2" /></cell>
+    <cell row="76" col="0" format="text">Samoa</cell>
+    <cell row="76" col="1" format="number">80366.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="76" col="2" format="number">11263.7777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="76" col="3" format="number">38024.7777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="76" col="4" format="number">283<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="76" col="5" format="currency">464936.405637778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="76" col="6" format="percent">0.696121633924<format-args decimal-places="2" /></cell>
+    <cell row="77" col="0" format="text">SaudiArabia</cell>
+    <cell row="77" col="1" format="number">219277.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="77" col="2" format="number">79376.5444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="77" col="3" format="number">19990395.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="77" col="4" format="number">214969<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="77" col="5" format="currency">347781604.851333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="77" col="6" format="percent">0.804672540682<format-args decimal-places="2" /></cell>
+    <cell row="78" col="0" format="text">SouthAfrica</cell>
+    <cell row="78" col="1" format="number">32231811.1111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="78" col="2" format="number">710699.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="78" col="3" format="number">29042753.6666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="78" col="4" format="number">121309<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="78" col="5" format="currency">267855433.838222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="78" col="6" format="percent">0.643299621901<format-args decimal-places="2" /></cell>
+    <cell row="79" col="0" format="text">Spain</cell>
+    <cell row="79" col="1" format="number">15678422.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="79" col="2" format="number">1128716.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="79" col="3" format="number">34342699.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="79" col="4" format="number">49900.1111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="79" col="5" format="currency">1173735440.13667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="79" col="6" format="percent">0.866617284632<format-args decimal-places="2" /></cell>
+    <cell row="80" col="0" format="text">SriLanka</cell>
+    <cell row="80" col="1" format="number">6175455.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="80" col="2" format="number">311121.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="80" col="3" format="number">3586332<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="80" col="4" format="number">6271<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="80" col="5" format="currency">26426634.9146444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="80" col="6" format="percent">0.738250374563<format-args decimal-places="2" /></cell>
+    <cell row="81" col="0" format="text">Sudan</cell>
+    <cell row="81" col="1" format="number">20081966.6666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="81" col="2" format="number">65321.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="81" col="3" format="number">10363073.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="81" col="4" format="number">237600<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="81" col="5" format="currency">29192381.9307889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="81" col="6" format="percent">0.465174007193<format-args decimal-places="2" /></cell>
+    <cell row="82" col="0" format="text">Swaziland</cell>
+    <cell row="82" col="1" format="number">1323826.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="82" col="2" format="number">80.2222222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="82" col="3" format="number">247682.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="82" col="4" format="number">1720<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="82" col="5" format="currency">2666222.04551<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="82" col="6" format="percent">0.524663242117<format-args decimal-places="2" /></cell>
+    <cell row="83" col="0" format="text">Sweden</cell>
+    <cell row="83" col="1" format="number">72233333.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="83" col="2" format="number">250030.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="83" col="3" format="number">7703570.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="83" col="4" format="number">41034<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="83" col="5" format="currency">394398024.608111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="83" col="6" format="percent">0.901034181638<format-args decimal-places="2" /></cell>
+    <cell row="84" col="0" format="text">Switzerland</cell>
+    <cell row="84" col="1" format="number">5100595.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="84" col="2" format="number">779.444444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="84" col="3" format="number">5530048.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="84" col="4" format="number">3951.8<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="84" col="5" format="currency">420636903.188333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="84" col="6" format="percent">0.924370413175<format-args decimal-places="2" /></cell>
+    <cell row="85" col="0" format="text">Tajikistan</cell>
+    <cell row="85" col="1" format="number">70000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="85" col="2" format="number">437.166666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="85" col="3" format="number">1856937.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="85" col="4" format="number">13996<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="85" col="5" format="currency">2489122.71183889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="85" col="6" format="percent">0.607724883788<format-args decimal-places="2" /></cell>
+    <cell row="86" col="0" format="text">Tanzania</cell>
+    <cell row="86" col="1" format="number">24254877.7777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="86" col="2" format="number">354148.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="86" col="3" format="number">10472643.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="86" col="4" format="number">88580<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="86" col="5" format="currency">15160400.0502333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="86" col="6" format="percent">0.499915320369<format-args decimal-places="2" /></cell>
+    <cell row="87" col="0" format="text">Thailand</cell>
+    <cell row="87" col="1" format="number">33596422.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="87" col="2" format="number">3617407.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="87" col="3" format="number">25580215.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="87" col="4" format="number">51089<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="87" col="5" format="currency">181770465.101222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="87" col="6" format="percent">0.715837803744<format-args decimal-places="2" /></cell>
+    <cell row="88" col="0" format="text">Tonga</cell>
+    <cell row="88" col="1" format="number">3910.11111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="88" col="2" format="number">2813.83333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="88" col="3" format="number">23601.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="88" col="4" format="number">72<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="88" col="5" format="currency">257965.362874444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="88" col="6" format="percent">0.712920113588<format-args decimal-places="2" /></cell>
+    <cell row="89" col="0" format="text">TrinidadAndTobago</cell>
+    <cell row="89" col="1" format="number">90168.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="89" col="2" format="number">14797.2444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="89" col="3" format="number">126887.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="89" col="4" format="number">513<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="89" col="5" format="currency">16993877.0127222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="89" col="6" format="percent">0.771703180282<format-args decimal-places="2" /></cell>
+    <cell row="90" col="0" format="text">Tunisia</cell>
+    <cell row="90" col="1" format="number">2368134.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="90" col="2" format="number">104850.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="90" col="3" format="number">6665442<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="90" col="4" format="number">15536<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="90" col="5" format="currency">34328600.4454889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="90" col="6" format="percent">0.71387091962<format-args decimal-places="2" /></cell>
+    <cell row="91" col="0" format="text">Turkey</cell>
+    <cell row="91" col="1" format="number">17815555.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="91" col="2" format="number">578415.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="91" col="3" format="number">47023256.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="91" col="4" format="number">76963<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="91" col="5" format="currency">489591079.421889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="91" col="6" format="percent">0.737629695701<format-args decimal-places="2" /></cell>
+    <cell row="92" col="0" format="text">Uganda</cell>
+    <cell row="92" col="1" format="number">40924844.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="92" col="2" format="number">401592.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="92" col="3" format="number">3974315.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="92" col="4" format="number">19981<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="92" col="5" format="currency">10151067.3313689<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="92" col="6" format="percent">0.472912152234<format-args decimal-places="2" /></cell>
+    <cell row="93" col="0" format="text">UK</cell>
+    <cell row="93" col="1" format="number">8536705.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="93" col="2" format="number">664300.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="93" col="3" format="number">48872098<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="93" col="4" format="number">24193<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="93" col="5" format="currency">2414189945.18222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="93" col="6" format="percent">0.906005510143<format-args decimal-places="2" /></cell>
+    <cell row="94" col="0" format="text">USA</cell>
+    <cell row="94" col="1" format="number">416088777.777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="94" col="2" format="number">4832332.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="94" col="3" format="number">239061644.888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="94" col="4" format="number">915708.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="94" col="5" format="currency">13052863630.2556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="94" col="6" format="percent">0.908582293476<format-args decimal-places="2" /></cell>
+    <cell row="95" col="0" format="text">Vanuatu</cell>
+    <cell row="95" col="1" format="number">119000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="95" col="2" format="number">161864.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="95" col="3" format="number">50374<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="95" col="4" format="number">1219<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="95" col="5" format="currency">426024.272311111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="95" col="6" format="percent">0.589309564718<format-args decimal-places="2" /></cell>
+    <cell row="96" col="0" format="text">Venezuela</cell>
+    <cell row="96" col="1" format="number">5574833.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="96" col="2" format="number">405485.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="96" col="3" format="number">24128847.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="96" col="4" format="number">88205<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="96" col="5" format="currency">153151226.858<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="96" col="6" format="percent">0.756817863701<format-args decimal-places="2" /></cell>
+    <cell row="97" col="0" format="text">VietNam</cell>
+    <cell row="97" col="1" format="number">27458722.2222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="97" col="2" format="number">3791685.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="97" col="3" format="number">23282907.6666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="97" col="4" format="number">31012.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="97" col="5" format="currency">61889711.2575556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="97" col="6" format="percent">0.653469040229<format-args decimal-places="2" /></cell>
+    <cell row="98" col="0" format="text">Zambia</cell>
+    <cell row="98" col="1" format="number">9643260<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="98" col="2" format="number">76908.8333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="98" col="3" format="number">4611442.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="98" col="4" format="number">74339<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="98" col="5" format="currency">9276980.20765889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="98" col="6" format="percent">0.554613674261<format-args decimal-places="2" /></cell>
+    <cell row="99" col="0" format="text">Albania</cell>
+    <cell row="99" col="1" format="number">356622.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="99" col="2" format="number">6166.33333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="99" col="3" format="number">1426961<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="99" col="4" format="number">2740<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="99" col="5" format="currency">8902297.34203778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="99" col="6" format="percent">0.722489461115<format-args decimal-places="2" /></cell>
+    <cell row="100" col="0" format="text">Benin</cell>
+    <cell row="100" col="1" format="number">6531988.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="100" col="2" format="number">37767<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="100" col="3" format="number">3327632.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="100" col="4" format="number">11276<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="100" col="5" format="currency">4579099.78907222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="100" col="6" format="percent">0.467581232133<format-args decimal-places="2" /></cell>
+    <cell row="101" col="0" format="text">Cambodia</cell>
+    <cell row="101" col="1" format="number">9182972.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="101" col="2" format="number">454023.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="101" col="3" format="number">2601890.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="101" col="4" format="number">17652<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="101" col="5" format="currency">6808310.59707889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="101" col="6" format="percent">0.535822257216<format-args decimal-places="2" /></cell>
+    <cell row="102" col="0" format="text">Chad</cell>
+    <cell row="102" col="1" format="number">7357677.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="102" col="2" format="number">79666.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="102" col="3" format="number">2277927.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="102" col="4" format="number">125920<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="102" col="5" format="currency">6312076.11592556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="102" col="6" format="percent">0.371198391549<format-args decimal-places="2" /></cell>
+    <cell row="103" col="0" format="text">Comoros</cell>
+    <cell row="103" col="1" format="number">263485.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="103" col="2" format="number">22199.7222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="103" col="3" format="number">175120<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="103" col="4" format="number">186.1<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="103" col="5" format="currency">384699.910487778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="103" col="6" format="percent">0.488357448166<format-args decimal-places="2" /></cell>
+    <cell row="104" col="0" format="text">CoteIvoire</cell>
+    <cell row="104" col="1" format="number">10299633.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="104" col="2" format="number">57026<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="104" col="3" format="number">8959084.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="104" col="4" format="number">31800<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="104" col="5" format="currency">17579514.1080222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="104" col="6" format="percent">0.444479106097<format-args decimal-places="2" /></cell>
+    <cell row="105" col="0" format="text">Cyprus</cell>
+    <cell row="105" col="1" format="number">12545.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="105" col="2" format="number">43286.5111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="105" col="3" format="number">712116.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="105" col="4" format="number">924<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="105" col="5" format="currency">17578237.2803111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="105" col="6" format="percent">0.848341118792<format-args decimal-places="2" /></cell>
+    <cell row="106" col="0" format="text">Gabon</cell>
+    <cell row="106" col="1" format="number">3977340<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="106" col="2" format="number">38728.7777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="106" col="3" format="number">1220309.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="106" col="4" format="number">25767<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="106" col="5" format="currency">8845364.18317333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="106" col="6" format="percent">0.663218859499<format-args decimal-places="2" /></cell>
+    <cell row="107" col="0" format="text">Iraq</cell>
+    <cell row="107" col="1" format="number">177000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="107" col="2" format="number">43798.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="107" col="3" format="number">19099833.6666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="107" col="4" format="number">43669.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="107" col="5" format="currency">52763985.0003778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="107" col="6" format="percent">0.644955982925<format-args decimal-places="2" /></cell>
+    <cell row="108" col="0" format="text">Jordan</cell>
+    <cell row="108" col="1" format="number">273547.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="108" col="2" format="number">1041.33333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="108" col="3" format="number">4940293.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="108" col="4" format="number">8836<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="108" col="5" format="currency">13671016.8163667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="108" col="6" format="percent">0.743113966144<format-args decimal-places="2" /></cell>
+    <cell row="109" col="0" format="text">Lao</cell>
+    <cell row="109" col="1" format="number">6439071.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="109" col="2" format="number">95455.7777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="109" col="3" format="number">1680525.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="109" col="4" format="number">23080<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="109" col="5" format="currency">3033133.16410444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="109" col="6" format="percent">0.539318442129<format-args decimal-places="2" /></cell>
+    <cell row="110" col="0" format="text">Madagascar</cell>
+    <cell row="110" col="1" format="number">12219544.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="110" col="2" format="number">140617.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="110" col="3" format="number">5609873.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="110" col="4" format="number">58154<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="110" col="5" format="currency">5235552.31729444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="110" col="6" format="percent">0.504317682608<format-args decimal-places="2" /></cell>
+    <cell row="111" col="0" format="text">Malaysia</cell>
+    <cell row="111" col="1" format="number">25648888.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="111" col="2" format="number">1519877.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="111" col="3" format="number">17662468.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="111" col="4" format="number">32855<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="111" col="5" format="currency">150506491.228444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="111" col="6" format="percent">0.769497825503<format-args decimal-places="2" /></cell>
+    <cell row="112" col="0" format="text">Maldives</cell>
+    <cell row="112" col="1" format="number">14537.1111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="112" col="2" format="number">151575.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="112" col="3" format="number">117732.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="112" col="4" format="number">30<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="112" col="5" format="currency">1200054.59500667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="112" col="6" format="percent">0.682715146795<format-args decimal-places="2" /></cell>
+    <cell row="113" col="0" format="text">Mali</cell>
+    <cell row="113" col="1" format="number">5497645.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="113" col="2" format="number">101103.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="113" col="3" format="number">4387725.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="113" col="4" format="number">122019<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="113" col="5" format="currency">5710182.82188111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="113" col="6" format="percent">0.409257002296<format-args decimal-places="2" /></cell>
+    <cell row="114" col="0" format="text">Mauritius</cell>
+    <cell row="114" col="1" format="number">14677.7777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="114" col="2" format="number">9080.1<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="114" col="3" format="number">509890.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="114" col="4" format="number">203<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="114" col="5" format="currency">6678963.48461<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="114" col="6" format="percent">0.755714964657<format-args decimal-places="2" /></cell>
+    <cell row="115" col="0" format="text">Namibia</cell>
+    <cell row="115" col="1" format="number">801647.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="115" col="2" format="number">493856.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="115" col="3" format="number">777240.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="115" col="4" format="number">82329<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="115" col="5" format="currency">7651064.19087445<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="115" col="6" format="percent">0.610337437074<format-args decimal-places="2" /></cell>
+    <cell row="116" col="0" format="text">NewZealand</cell>
+    <cell row="116" col="1" format="number">20764666.6666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="116" col="2" format="number">595188.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="116" col="3" format="number">3588000.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="116" col="4" format="number">26331<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="116" col="5" format="currency">114227553.065889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="116" col="6" format="percent">0.904930895<format-args decimal-places="2" /></cell>
+    <cell row="117" col="0" format="text">RussianFederation</cell>
+    <cell row="117" col="1" format="number">176955333.333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="117" col="2" format="number">3153421.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="117" col="3" format="number">105507008.777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="117" col="4" format="number">1637895.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="117" col="5" format="currency">802575986.860222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="117" col="6" format="percent">0.782933893015<format-args decimal-places="2" /></cell>
+    <cell row="118" col="0" format="text">Rwanda</cell>
+    <cell row="118" col="1" format="number">5733873.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="118" col="2" format="number">9383.16111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="118" col="3" format="number">1894896.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="118" col="4" format="number">2467<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="118" col="5" format="currency">2904273.48583222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="118" col="6" format="percent">0.453282470711<format-args decimal-places="2" /></cell>
+    <cell row="119" col="0" format="text">SolomonIslands</cell>
+    <cell row="119" col="1" format="number">1311514.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="119" col="2" format="number">32171.9444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="119" col="3" format="number">88366.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="119" col="4" format="number">2799<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="119" col="5" format="currency">440677.702358889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="119" col="6" format="percent">0.494278001781<format-args decimal-places="2" /></cell>
+    <cell row="120" col="0" format="text">Ukraine</cell>
+    <cell row="120" col="1" format="number">15054033.3333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="120" col="2" format="number">246946.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="120" col="3" format="number">31870594.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="120" col="4" format="number">57933.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="120" col="5" format="currency">87214466.6067444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="120" col="6" format="percent">0.732075011213<format-args decimal-places="2" /></cell>
+    <cell row="121" col="0" format="text">Uruguay</cell>
+    <cell row="121" col="1" format="number">6797555.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="121" col="2" format="number">108975.455555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="121" col="3" format="number">3124105.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="121" col="4" format="number">17502<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="121" col="5" format="currency">18462871.6934778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="121" col="6" format="percent">0.780163482917<format-args decimal-places="2" /></cell>
+    <cell row="122" col="0" format="text">Yemen</cell>
+    <cell row="122" col="1" format="number">381721<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="122" col="2" format="number">198682<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="122" col="3" format="number">6277028.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="122" col="4" format="number">52797<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="122" col="5" format="currency">17294682.4689111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="122" col="6" format="percent">0.496475893024<format-args decimal-places="2" /></cell>
+    <cell row="123" col="0" format="text">Zimbabwe</cell>
+    <cell row="123" col="1" format="number">9143532.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="123" col="2" format="number">13182.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="123" col="3" format="number">4473509<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="123" col="4" format="number">38685<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="123" col="5" format="currency">5703952.58422667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="123" col="6" format="percent">0.460912072462<format-args decimal-places="2" /></cell>
+    <cell row="124" col="0" format="text">Azerbaijan</cell>
+    <cell row="124" col="1" format="number">11644.4444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="124" col="2" format="number">865.777777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="124" col="3" format="number">4497123.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="124" col="4" format="number">8264.14444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="124" col="5" format="currency">17985000.3004489<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="124" col="6" format="percent">0.740672427053<format-args decimal-places="2" /></cell>
+    <cell row="125" col="0" format="text">Bhutan</cell>
+    <cell row="125" col="1" format="number">4777787.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="125" col="2" format="number">57.4444444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="125" col="3" format="number">211748.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="125" col="4" format="number">3849.1<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="125" col="5" format="currency">933839.873755555<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="125" col="6" format="percent">0.572702864944<format-args decimal-places="2" /></cell>
+    <cell row="126" col="0" format="text">Botswana</cell>
+    <cell row="126" col="1" format="number">769399.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="126" col="2" format="number">108.444444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="126" col="3" format="number">1045684.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="126" col="4" format="number">56673<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="126" col="5" format="currency">10585924.3808933<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="126" col="6" format="percent">0.681065560117<format-args decimal-places="2" /></cell>
+    <cell row="127" col="0" format="text">Burundi</cell>
+    <cell row="127" col="1" format="number">9540230<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="127" col="2" format="number">13982.3666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="127" col="3" format="number">746994.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="127" col="4" format="number">2568<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="127" col="5" format="currency">1198898.43920778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="127" col="6" format="percent">0.389604800617<format-args decimal-places="2" /></cell>
+    <cell row="128" col="0" format="text">CaboVerde</cell>
+    <cell row="128" col="1" format="number">175518.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="128" col="2" format="number">16225.6111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="128" col="3" format="number">280736.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="128" col="4" format="number">403<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="128" col="5" format="currency">1067771.09728556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="128" col="6" format="percent">0.629357348664<format-args decimal-places="2" /></cell>
+    <cell row="129" col="0" format="text">CentralAfricanRepublic</cell>
+    <cell row="129" col="1" format="number">2802466.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="129" col="2" format="number">27133.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="129" col="3" format="number">1604436.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="129" col="4" format="number">62298<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="129" col="5" format="currency">1512693.22755444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="129" col="6" format="percent">0.362156946829<format-args decimal-places="2" /></cell>
+    <cell row="130" col="0" format="text">Croatia</cell>
+    <cell row="130" col="1" format="number">4133000<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="130" col="2" format="number">48907.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="130" col="3" format="number">2512562.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="130" col="4" format="number">5594.88888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="130" col="5" format="currency">45897851.9690667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="130" col="6" format="percent">0.807276849894<format-args decimal-places="2" /></cell>
+    <cell row="131" col="0" format="text">Gambia</cell>
+    <cell row="131" col="1" format="number">769329.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="131" col="2" format="number">39908.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="131" col="3" format="number">796712.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="131" col="4" format="number">1012<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="131" col="5" format="currency">654563.804807778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="131" col="6" format="percent">0.441006471338<format-args decimal-places="2" /></cell>
+    <cell row="132" col="0" format="text">Guinea</cell>
+    <cell row="132" col="1" format="number">12393255.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="132" col="2" format="number">105106.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="132" col="3" format="number">3301545.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="132" col="4" format="number">24572<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="132" col="5" format="currency">3009836.24977222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="132" col="6" format="percent">0.387507231143<format-args decimal-places="2" /></cell>
+    <cell row="133" col="0" format="text">Guinea-Bissau</cell>
+    <cell row="133" col="1" format="number">2584232.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="133" col="2" format="number">6754<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="133" col="3" format="number">593693.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="133" col="4" format="number">2812<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="133" col="5" format="currency">605747.799186667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="133" col="6" format="percent">0.412626574759<format-args decimal-places="2" /></cell>
+    <cell row="134" col="0" format="text">Hungary</cell>
+    <cell row="134" col="1" format="number">5670553.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="134" col="2" format="number">20721.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="134" col="3" format="number">6739751<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="134" col="4" format="number">8981.77777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="134" col="5" format="currency">110311731.2945<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="134" col="6" format="percent">0.821484248722<format-args decimal-places="2" /></cell>
+    <cell row="135" col="0" format="text">Kyrgyzstan</cell>
+    <cell row="135" col="1" format="number">32455.5555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="135" col="2" format="number">93.5555555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="135" col="3" format="number">1840537<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="135" col="4" format="number">19180<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="135" col="5" format="currency">2641887.84785333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="135" col="6" format="percent">0.633801100662<format-args decimal-places="2" /></cell>
+    <cell row="136" col="0" format="text">Libya</cell>
+    <cell row="136" col="1" format="number">1016808.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="136" col="2" format="number">42293.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="136" col="3" format="number">4524603<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="136" col="4" format="number">175954<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="136" col="5" format="currency">45654256.9807111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="136" col="6" format="percent">0.756259413721<format-args decimal-places="2" /></cell>
+    <cell row="137" col="0" format="text">Lithuania</cell>
+    <cell row="137" col="1" format="number">6085641.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="137" col="2" format="number">164088.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="137" col="3" format="number">2189282.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="137" col="4" format="number">6267.83333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="137" col="5" format="currency">26521857.4458<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="137" col="6" format="percent">0.826807556908<format-args decimal-places="2" /></cell>
+    <cell row="138" col="0" format="text">SaintVincentGrenadines</cell>
+    <cell row="138" col="1" format="number">7703.22222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="138" col="2" format="number">55889.7222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="138" col="3" format="number">51536.4444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="138" col="4" format="number">39<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="138" col="5" format="currency">567745.590653333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="138" col="6" format="percent">0.711363142069<format-args decimal-places="2" /></cell>
+    <cell row="139" col="0" format="text">Senegal</cell>
+    <cell row="139" col="1" format="number">6097495.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="139" col="2" format="number">418521.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="139" col="3" format="number">4801071.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="139" col="4" format="number">19253<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="139" col="5" format="currency">8925933.66326333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="139" col="6" format="percent">0.455779060649<format-args decimal-places="2" /></cell>
+    <cell row="140" col="0" format="text">SierraLeone</cell>
+    <cell row="140" col="1" format="number">5584233.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="140" col="2" format="number">146363.222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="140" col="3" format="number">2150820.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="140" col="4" format="number">7218<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="140" col="5" format="currency">1741730.20029556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="140" col="6" format="percent">0.38750597261<format-args decimal-places="2" /></cell>
+    <cell row="141" col="0" format="text">Uzbekistan</cell>
+    <cell row="141" col="1" format="number">29866.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="141" col="2" format="number">6582.33333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="141" col="3" format="number">9747199.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="141" col="4" format="number">42540<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="141" col="5" format="currency">15977106.7621556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="141" col="6" format="percent">0.655119973562<format-args decimal-places="2" /></cell>
+    <cell row="142" col="0" format="text">Belarus</cell>
+    <cell row="142" col="1" format="number">8583511.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="142" col="2" format="number">10805<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="142" col="3" format="number">7015409.44444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="142" col="4" format="number">20285.7777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="142" col="5" format="currency">33069212.4126667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="142" col="6" format="percent">0.78616337481<format-args decimal-places="2" /></cell>
+    <cell row="143" col="0" format="text">Djibouti</cell>
+    <cell row="143" col="1" format="number">330720.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="143" col="2" format="number">1251.16666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="143" col="3" format="number">612400.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="143" col="4" format="number">2318<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="143" col="5" format="currency">757753.554772222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="143" col="6" format="percent">0.452637665293<format-args decimal-places="2" /></cell>
+    <cell row="144" col="0" format="text">Eritrea</cell>
+    <cell row="144" col="1" format="number">1186912.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="144" col="2" format="number">4971.88888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="144" col="3" format="number">778905<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="144" col="4" format="number">10100<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="144" col="5" format="currency">1065130.59730778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="144" col="6" format="percent">0.381413546154<format-args decimal-places="2" /></cell>
+    <cell row="145" col="0" format="text">Kazakhstan</cell>
+    <cell row="145" col="1" format="number">377088.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="145" col="2" format="number">35769.1333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="145" col="3" format="number">8406095<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="145" col="4" format="number">269970<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="145" col="5" format="currency">61405367.7791222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="145" col="6" format="percent">0.765537546299<format-args decimal-places="2" /></cell>
+    <cell row="146" col="0" format="text">Macedonia</cell>
+    <cell row="146" col="1" format="number">736444.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="146" col="2" format="number">382.666666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="146" col="3" format="number">1184459.66666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="146" col="4" format="number">2533.88888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="146" col="5" format="currency">6286783.47907333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="146" col="6" format="percent">0.738019221495<format-args decimal-places="2" /></cell>
+    <cell row="147" col="0" format="text">UnitedArabEmirates</cell>
+    <cell row="147" col="1" format="number">17140.4444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="147" col="2" format="number">89254.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="147" col="3" format="number">4608306.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="147" col="4" format="number">8360<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="147" col="5" format="currency">185833465.536<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="147" col="6" format="percent">0.828390712233<format-args decimal-places="2" /></cell>
+    <cell row="148" col="0" format="text">Moldova</cell>
+    <cell row="148" col="1" format="number">355855.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="148" col="2" format="number">6368.11111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="148" col="3" format="number">1622682.55555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="148" col="4" format="number">3288.11111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="148" col="5" format="currency">3043132.60435444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="148" col="6" format="percent">0.672168138145<format-args decimal-places="2" /></cell>
+    <cell row="149" col="0" format="text">SaintLucia</cell>
+    <cell row="149" col="1" format="number">9694<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="149" col="2" format="number">1889.43666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="149" col="3" format="number">36682.4444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="149" col="4" format="number">61<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="149" col="5" format="currency">972998.935952222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="149" col="6" format="percent">0.72962853655<format-args decimal-places="2" /></cell>
+    <cell row="150" col="0" format="text">SyrianArabRepublic</cell>
+    <cell row="150" col="1" format="number">62502.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="150" col="2" format="number">16298.1111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="150" col="3" format="number">10324206.4444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="150" col="4" format="number">18363.2222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="150" col="5" format="currency">-9.999<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="150" col="6" format="percent">0.639097941427<format-args decimal-places="2" /></cell>
+    <cell row="151" col="0" format="text">Togo</cell>
+    <cell row="151" col="1" format="number">4879268.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="151" col="2" format="number">24164.1666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="151" col="3" format="number">2092507.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="151" col="4" format="number">5439<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="151" col="5" format="currency">2201804.31346778<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="151" col="6" format="percent">0.459400460516<format-args decimal-places="2" /></cell>
+    <cell row="152" col="0" format="text">CzechRepublic</cell>
+    <cell row="152" col="1" format="number">16155888.8888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="152" col="2" format="number">23628.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="152" col="3" format="number">7568742.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="152" col="4" format="number">7725.55555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="152" col="5" format="currency">140278118.369667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="152" col="6" format="percent">0.862666724513<format-args decimal-places="2" /></cell>
+    <cell row="153" col="0" format="text">Guyana</cell>
+    <cell row="153" col="1" format="number">1319091.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="153" col="2" format="number">50557.2888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="153" col="3" format="number">212074.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="153" col="4" format="number">19685<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="153" col="5" format="currency">841269.076338889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="153" col="6" format="percent">0.623896542406<format-args decimal-places="2" /></cell>
+    <cell row="154" col="0" format="text">Seychelles</cell>
+    <cell row="154" col="1" format="number">12420<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="154" col="2" format="number">83897.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="154" col="3" format="number">43668<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="154" col="4" format="number">46<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="154" col="5" format="currency">994424.053118889<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="154" col="6" format="percent">0.743078103466<format-args decimal-places="2" /></cell>
+    <cell row="155" col="0" format="text">Slovakia</cell>
+    <cell row="155" col="1" format="number">8070402.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="155" col="2" format="number">1901.66666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="155" col="3" format="number">2979161.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="155" col="4" format="number">4809.9<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="155" col="5" format="currency">67356172.3666111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="155" col="6" format="percent">0.827444860584<format-args decimal-places="2" /></cell>
+    <cell row="156" col="0" format="text">Slovenia</cell>
+    <cell row="156" col="1" format="number">2787147.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="156" col="2" format="number">1576.55555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="156" col="3" format="number">1014983.33333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="156" col="4" format="number">2014<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="156" col="5" format="currency">37548481.3367<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="156" col="6" format="percent">0.87582318106<format-args decimal-places="2" /></cell>
+    <cell row="157" col="0" format="text">BosniaAndHerzegovina</cell>
+    <cell row="157" col="1" format="number">3892491.11111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="157" col="2" format="number">3531.22222222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="157" col="3" format="number">1476873.77777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="157" col="4" format="number">5100<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="157" col="5" format="currency">11432723.11345<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="157" col="6" format="percent">0.710197592067<format-args decimal-places="2" /></cell>
+    <cell row="158" col="0" format="text">Micronesia</cell>
+    <cell row="158" col="1" format="number">2298.77777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="158" col="2" format="number">26699.8888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="158" col="3" format="number">23544.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="158" col="4" format="number">70<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="158" col="5" format="currency">245985.563266667<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="158" col="6" format="percent">0.638048991416<format-args decimal-places="2" /></cell>
+    <cell row="159" col="0" format="text">Latvia</cell>
+    <cell row="159" col="1" format="number">12086405.5555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="159" col="2" format="number">142967.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="159" col="3" format="number">1503069.22222222<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="159" col="4" format="number">6219.91111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="159" col="5" format="currency">16018499.5242333<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="159" col="6" format="percent">0.810715171699<format-args decimal-places="2" /></cell>
+    <cell row="160" col="0" format="text">EquatorialGuinea</cell>
+    <cell row="160" col="1" format="number">955872.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="160" col="2" format="number">4814.94444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="160" col="3" format="number">311417.111111111<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="160" col="4" format="number">2805<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="160" col="5" format="currency">7731768.35525556<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="160" col="6" format="percent">0.590802049568<format-args decimal-places="2" /></cell>
+    <cell row="161" col="0" format="text">Suriname</cell>
+    <cell row="161" col="1" format="number">230474.444444444<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="161" col="2" format="number">30978.1<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="161" col="3" format="number">335748.888888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="161" col="4" format="number">15600<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="161" col="5" format="currency">1858568.54463<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="161" col="6" format="percent">0.707432409921<format-args decimal-places="2" /></cell>
+    <cell row="162" col="0" format="text">Timor-Leste</cell>
+    <cell row="162" col="1" format="number">142504.555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="162" col="2" format="number">3476.55555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="162" col="3" format="number">280347.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="162" col="4" format="number">1487<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="162" col="5" format="currency">538368.077602222<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="162" col="6" format="percent">0.600098039764<format-args decimal-places="2" /></cell>
+    <cell row="163" col="0" format="text">Oman</cell>
+    <cell row="163" col="1" format="number">33799.3333333333<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="163" col="2" format="number">153217.777777778<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="163" col="3" format="number">1919258.88888889<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="163" col="4" format="number">30950<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="163" col="5" format="currency">34058631.7534111<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="163" col="6" format="percent">0.794935866242<format-args decimal-places="2" /></cell>
+    <cell row="164" col="0" format="text">SaoTomeAndPrincipe</cell>
+    <cell row="164" col="1" format="number">116334.666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="164" col="2" format="number">4338.05555555556<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="164" col="3" format="number">93931.6666666667<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="164" col="4" format="number">96<format-args decimal-places="0" use-separator="true" /></cell>
+    <cell row="164" col="5" format="currency">136971.605604444<format-args decimal-places="2" pattern="$," culture="English (United States)" /></cell>
+    <cell row="164" col="6" format="percent">0.543570706596<format-args decimal-places="2" /></cell>
+    <cell row="165" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="165" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="165" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="165" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="165" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="165" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="166" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="166" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="166" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="166" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="166" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="166" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="167" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="167" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="167" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="167" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="167" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="167" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="168" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="168" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="168" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="168" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="168" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="168" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="169" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="169" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="169" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="169" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="169" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="169" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="170" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="170" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="170" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="170" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="170" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="170" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="171" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="171" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="171" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="171" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="171" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="171" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="172" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="172" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="172" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="172" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="172" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="172" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="173" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="173" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="173" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="173" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="173" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="173" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="174" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="174" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="174" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="174" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="174" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="174" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="175" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="175" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="175" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="175" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="175" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="175" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="176" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="176" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="176" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="176" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="176" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="176" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="177" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="177" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="177" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="177" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="177" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="177" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="178" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="178" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="178" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="178" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="178" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="178" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="179" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="179" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="179" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="179" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="179" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="179" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="180" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="180" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="180" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="180" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="180" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="180" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="181" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="181" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="181" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="181" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="181" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="181" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="182" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="182" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="182" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="182" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="182" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="182" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="183" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="183" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="183" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="183" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="183" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="183" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="184" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="184" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="184" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="184" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="184" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="184" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="185" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="185" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="185" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="185" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="185" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="185" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="186" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="186" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="186" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="186" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="186" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="186" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="187" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="187" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="187" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="187" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="187" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="187" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="188" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="188" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="188" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="188" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="188" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="188" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="189" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="189" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="189" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="189" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="189" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="189" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="190" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="190" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="190" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="190" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="190" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="190" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="191" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="191" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="191" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="191" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="191" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="191" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="192" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="192" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="192" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="192" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="192" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="192" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="193" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="193" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="193" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="193" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="193" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="193" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="194" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="194" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="194" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="194" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="194" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="194" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="195" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="195" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="195" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="195" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="195" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="195" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="196" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="196" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="196" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="196" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="196" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="196" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="197" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="197" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="197" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="197" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="197" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="197" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="198" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="198" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="198" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="198" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="198" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="198" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+    <cell row="199" col="1" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="199" col="2" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="199" col="3" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="199" col="4" format="number">
+      <format-args decimal-places="2" use-separator="true" />
+    </cell>
+    <cell row="199" col="5" format="currency">
+      <format-args decimal-places="2" pattern="$," culture="English (United States)" />
+    </cell>
+    <cell row="199" col="6" format="percent">
+      <format-args decimal-places="2" />
+    </cell>
+  </cells>
+</grid>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SharpGL;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,77 @@ namespace DMT01
     /// </summary>
     public partial class MainWindow : Window
     {
+		static long Draws=0, Resizes = 0;
         public MainWindow()
         {
             InitializeComponent();
-        }
-    }
+
+			Debug.WriteLine(String.Format("{0}", "MainWindow"));
+
+		}
+
+		private void myReoGridControl_Loaded( object sender , RoutedEventArgs e )
+		{
+
+		System.Diagnostics.Debug.WriteLine(String.Format("{0}", "myReoGridControl_Loaded"));
+			TextRange tr1 = new TextRange(SpreadsheetDirPath_RichTextBox.Document.ContentStart, SpreadsheetDirPath_RichTextBox.Document.ContentEnd);
+			TextRange tr2 = new TextRange(SpreadsheetFileName_RichTextBox.Document.ContentStart, SpreadsheetFileName_RichTextBox.Document.ContentEnd);
+			String Path = String.Format(@"{0}\{1}", tr1.Text.Trim(), tr2.Text.Trim());
+			if(System.IO.File.Exists(Path))					
+			{
+				myReoGridControl.Load(Path, unvell.ReoGrid.IO.FileFormat.Excel2007);
+			}
+		}
+
+		private void myOpenGLControl_Loaded(object sender, RoutedEventArgs e)
+		{
+
+			Debug.WriteLine(String.Format("{0}", "myOpenGLControl_Loaded"));
+
+		}
+
+		private void myOpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
+		{
+			Debug.WriteLine(String.Format("{0} {1}", "myOpenGLControl_OpenGLDraw" , Draws));
+			//  Get the OpenGL object.
+			OpenGL gl = myOpenGLControl.OpenGL;
+
+			//  Clear the color and depth buffer.
+			gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+			Draws++;
+		}
+
+		private void myOpenGLControl_OpenGLInitialized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
+		{
+
+			//  Get the OpenGL object.
+			OpenGL gl = myOpenGLControl.OpenGL;
+
+			//  Set the clear color.
+			gl.ClearColor(.1f, 0, 0, 0);
+			Debug.WriteLine(String.Format("{0}", "myOpenGLControl_OpenGLInitialized"));
+		}
+
+		private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
+		{
+
+			//  Get the OpenGL object.
+			OpenGL gl = myOpenGLControl.OpenGL;
+
+			//  Set the projection matrix.
+			gl.MatrixMode(OpenGL.GL_PROJECTION);
+
+
+		}
+
+		private void SpreadsheetDirPath_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
+		}
+
+		private void SpreadsheetFileName_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
+		}
+	}
 }
