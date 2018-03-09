@@ -79,11 +79,14 @@
                 BorderThickness="3,3,2,2"
                 IsHitTestVisible="False"
                 Loaded="myOpenGLControl_Loaded"
+                OpenGLDraw="myOpenGLControl_OpenGLDraw"
+                OpenGLInitialized="myOpenGLControl_OpenGLInitialized"
                 OpenGLVersion="OpenGL2_0"
                 RenderTransformOrigin="0.375,0.493"
+                Resized="myOpenGLControl_Resized"
                 ScrollViewer.CanContentScroll="True"
                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                TabIndex="2147483644" OpenGLDraw="myOpenGLControl_OpenGLDraw" OpenGLInitialized="myOpenGLControl_OpenGLInitialized" Resized="myOpenGLControl_Resized" />
+                TabIndex="2147483644" />
         </StackPanel>
         <StackPanel
             x:Name="BottomStackPanel"
@@ -148,7 +151,7 @@
                                 VerticalAlignment="Bottom"
                                 VerticalContentAlignment="Bottom"
                                 Background="#FF975959"
-                                DockPanel.Dock="Bottom" 
+                                DockPanel.Dock="Bottom"
                                 TextChanged="SpreadsheetDirPath_RichTextBox_TextChanged">
                                 <FlowDocument>
                                     <Paragraph>
@@ -166,7 +169,8 @@
                                 VerticalAlignment="Bottom"
                                 VerticalContentAlignment="Bottom"
                                 Background="#FFF0EB87"
-                                DockPanel.Dock="Bottom" TextChanged="SpreadsheetFileName_RichTextBox_TextChanged">
+                                DockPanel.Dock="Bottom"
+                                TextChanged="SpreadsheetFileName_RichTextBox_TextChanged">
                                 <FlowDocument>
                                     <Paragraph>
                                         <Run>UNEP_NATDIS_disasters_2002_2010.xlsx</Run>
@@ -174,13 +178,18 @@
                                 </FlowDocument>
                             </RichTextBox>
                         </DockPanel>
-                        <Button x:Name="spreadsheet_load_Button" Margin="6,10,621,108" Content="load spreadsheet" />
-                        <Button x:Name="Button2"
+                        <Button
+                            x:Name="spreadsheet_load_Button"
+                            Margin="6,10,621,108"
+                            Content="load spreadsheet" />
+                        <Button
+                            x:Name="Button2"
                             Width="96"
+                            Height="25"
                             Margin="177,10,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Content="Button" Height="25" />
+                            Content="Button" />
                     </Grid>
                 </TabItem>
             </TabControl>
