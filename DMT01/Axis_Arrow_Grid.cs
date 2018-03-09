@@ -15,12 +15,12 @@ namespace Axis_Arrow_Grid
             {
             Arrow(gl, 1);
             }
-        public static void Arrow(OpenGL gl, double zscale)
+        public static void Arrow(OpenGL gl, float zscale)
             {
 
             float r_Arrow_shaft_cylinder = 0.09f;
             float r_arrow_head = 0.20f;
-            double step_radians = 30.0 * degrees_to_radians;
+            float step_radians = 30.0 * MySimpleMath.MySimpleMath.degrees_to_radians() ;
             float cyl_height = 0.50f;
             float cone_height = 0.5f;
 
@@ -41,13 +41,13 @@ namespace Axis_Arrow_Grid
             double stopper = Math.PI - step;
             for (double i = 0.0; i < stopper; i += step)
                 {
-                Float[] Vertex0 = { r_arrow_head * (float)Math.Sin(i), r_arrow_head * (float)Math.Cos(i), 0.0f };
-                Float[] Vertex1 = { 0, 0, cone_height * zscale };
+                float[] Vertex0 = { r_arrow_head * (float)Math.Sin(i), r_arrow_head * (float)Math.Cos(i), 0.0f };
+                float[] Vertex1 = { 0, 0, cone_height * zscale };
 
                 double i0 = i + step;
 
-                Float[] Vertex2 = { r_arrow_head * (float)Math.Sin(i0), r_arrow_head * (float)Math.Cos(i0), 0.0f };
-                Float[] Vertex3 = { 0, 0, cone_height * zscale };
+                float[] Vertex2 = { r_arrow_head * (float)Math.Sin(i0), r_arrow_head * (float)Math.Cos(i0), 0.0f };
+                float[] Vertex3 = { 0, 0, cone_height * zscale };
 
                 Triangle.Draw(gl, Vertex0, Vertex1, Vertex2, true, false);
                 Triangle.Draw(gl, Vertex1, Vertex2, Vertex3, false, false);
@@ -77,10 +77,10 @@ namespace Axis_Arrow_Grid
                 float y2 = y1;
                 float z2 = cyl_height * (float)zscale;
 
-                Float[] Vertex0 = { x, y, z };
-                Float[] Vertex1 = { x0, y0, z0 };
-                Float[] Vertex2 = { x1, y1, z1 };
-                Float[] Vertex3 = { x2, y2, z2 };
+                float[] Vertex0 = { x, y, z };
+                float[] Vertex1 = { x0, y0, z0 };
+                float[] Vertex2 = { x1, y1, z1 };
+                float[] Vertex3 = { x2, y2, z2 };
 
                 Triangle.Draw(gl, Vertex0, Vertex1, Vertex2, true, false);
                 Triangle.Draw(gl, Vertex1, Vertex2, Vertex3, false, false);
