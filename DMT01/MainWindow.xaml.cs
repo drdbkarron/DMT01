@@ -27,14 +27,14 @@ namespace DMT01
         {
             InitializeComponent();
 
-			Debug.WriteLine(String.Format("{0}", "MainWindow"));
+			Debug.WriteLine(String.Format("{0}", nameof(MainWindow)));
 
 		}
 
 		private void myReoGridControl_Loaded( object sender , RoutedEventArgs e )
 		{
 
-		System.Diagnostics.Debug.WriteLine(String.Format("{0}", "myReoGridControl_Loaded"));
+		System.Diagnostics.Debug.WriteLine(String.Format("{0}", nameof(myReoGridControl_Loaded)));
 			TextRange tr1 = new TextRange(SpreadsheetDirPath_RichTextBox.Document.ContentStart, SpreadsheetDirPath_RichTextBox.Document.ContentEnd);
 			TextRange tr2 = new TextRange(SpreadsheetFileName_RichTextBox.Document.ContentStart, SpreadsheetFileName_RichTextBox.Document.ContentEnd);
 			String Path = String.Format(@"{0}\{1}", tr1.Text.Trim(), tr2.Text.Trim());
@@ -47,13 +47,13 @@ namespace DMT01
 		private void myOpenGLControl_Loaded(object sender, RoutedEventArgs e)
 		{
 
-			Debug.WriteLine(String.Format("{0}", "myOpenGLControl_Loaded"));
+			Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_Loaded)));
 
 		}
 
 		private void myOpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
-			Debug.WriteLine(String.Format("{0} {1}", "myOpenGLControl_OpenGLDraw" , Draws));
+			Debug.WriteLine(String.Format("{0} {1}", nameof(myOpenGLControl_OpenGLDraw), Draws));
 			//  Get the OpenGL object.
 			OpenGL gl = myOpenGLControl.OpenGL;
 
@@ -70,7 +70,7 @@ namespace DMT01
 
 			//  Set the clear color.
 			gl.ClearColor(.1f, 0, 0, 0);
-			Debug.WriteLine(String.Format("{0}", "myOpenGLControl_OpenGLInitialized"));
+			Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLInitialized)));
 		}
 
 		private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
@@ -85,12 +85,12 @@ namespace DMT01
 
 		}
 
-		private void SpreadsheetDirPath_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		private static void SpreadsheetDirPath_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 
 		}
 
-		private void SpreadsheetFileName_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		private static void SpreadsheetFileName_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 
 		}

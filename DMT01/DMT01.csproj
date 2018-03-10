@@ -78,6 +78,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Axis_Arrow_Grid.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LocalMaths.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

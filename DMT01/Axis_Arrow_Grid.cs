@@ -20,7 +20,7 @@ namespace Axis_Arrow_Grid
 
             float r_Arrow_shaft_cylinder = 0.09f;
             float r_arrow_head = 0.20f;
-            float step_radians = 30.0 * MySimpleMath.MySimpleMath.degrees_to_radians() ;
+            float step_radians = 30.0f * MySimpleMath.MySimpleMath.degrees_to_radians() ;
             float cyl_height = 0.50f;
             float cone_height = 0.5f;
 
@@ -36,7 +36,7 @@ namespace Axis_Arrow_Grid
             ArrowHeadCone(gl, r_arrow_head, cone_height + 0.05f, step_radians, zscale);
             gl.PopMatrix();
             }
-        static void ArrowHeadCone(SharpGL.OpenGL gl, float r_arrow_head, float cone_height, double step, double zscale)
+        static void ArrowHeadCone(SharpGL.OpenGL gl, float r_arrow_head, float cone_height, float step, float zscale)
             {
             double stopper = Math.PI - step;
             for (double i = 0.0; i < stopper; i += step)
