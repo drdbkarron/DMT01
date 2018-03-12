@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="DMT01.H_Slider_UserControl1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DMT01"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="H_Slider_UserControl"
+    Width="834.32"
+    Height="80"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    Background="#FFCD98BC"
+    mc:Ignorable="d" Padding="2">
+    <Grid
+        Width="826"
+        Margin="2,0,3,0"
+        HorizontalAlignment="Center"
+        Background="#FF2D3A39" Height="75" VerticalAlignment="Top">
+        <DockPanel
+            Width="794"
+            Height="50"
+            Margin="30,0,12,4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Background="#FFF78513"
+            LastChildFill="False">
+            <TextBox x:Name="Slider_Low_TextBox"
+                Width="29"
+                Height="22"
+                Margin="3,17,2,18"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="#FF608EDE"
+                Text="{Binding ElementName=theH_Slider,Path=Minimum,UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap"
+                />
+            <Slider
+                x:Name="theH_Slider"    
+                Width="699"
+                Height="39"
+                Margin="0,8,0,10"
+                Padding="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                AutoToolTipPlacement="TopLeft"
+                Background="#FF56529B"
+                BorderBrush="#FFE20D0D"
+                BorderThickness="3"
+                Maximum="100"
+                Minimum="10"
+                SmallChange="0"
+                TickPlacement="BottomRight"
+                Value="50" />
+            <TextBox x:Name="Slider_Hi_TextBox"
+                Width="30"
+                Height="22"
+                Margin="15,15,3,18"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="#FFC90C0C"
+              Text="{Binding ElementName=theH_Slider,Path=Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                />
+        </DockPanel>
+        <TextBox x:Name="Slider_Value_TextBox"
+            Width="22"
+            Margin="498,2,306,0"
+                 Text="{Binding ElementName=theH_Slider,Path=Value, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap" Height="20" VerticalAlignment="Top" />
+        <Label Content="Eye Coordinates" HorizontalAlignment="Center" Margin="338,2,338,0" Width="150" Background="#FFCB1E1E" Padding="2,2,1,1" BorderBrush="#FF306456" HorizontalContentAlignment="Center" Height="20" VerticalAlignment="Top"/>
+
+    </Grid>
+</UserControl>

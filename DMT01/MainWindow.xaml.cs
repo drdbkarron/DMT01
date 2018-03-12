@@ -44,12 +44,6 @@ namespace DMT01
 			}
 		}
 
-		private void myOpenGLControl_Loaded(object sender, RoutedEventArgs e)
-		{
-
-			Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_Loaded)));
-
-		}
 
 		private void myOpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
@@ -82,17 +76,9 @@ namespace DMT01
 			//  Set the projection matrix.
 			gl.MatrixMode(OpenGL.GL_PROJECTION);
 
+			Resizes++;
 
 		}
 
-		private static void SpreadsheetDirPath_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
-		{
-
-		}
-
-		private static void SpreadsheetFileName_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
-		{
-
-		}
 	}
 }

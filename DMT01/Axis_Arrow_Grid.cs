@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
 using MySimpleMath;
+using DMT;
 
 namespace Axis_Arrow_Grid
 {
@@ -26,7 +27,8 @@ namespace Axis_Arrow_Grid
 
             gl.PushMatrix();
 
-            if (ShowLocalAxis)
+
+			if (ShowLocalAxis)
                 Axis_Class.LocalAxis(gl);
 
             ArrowShaftCylinder(gl, r_Arrow_shaft_cylinder, cyl_height + .05f, step_radians, zscale);
@@ -48,9 +50,8 @@ namespace Axis_Arrow_Grid
 
                 float[] Vertex2 = { r_arrow_head * (float)Math.Sin(i0), r_arrow_head * (float)Math.Cos(i0), 0.0f };
                 float[] Vertex3 = { 0, 0, cone_height * zscale };
-
-                Triangle.Draw(gl, Vertex0, Vertex1, Vertex2, true, false);
-                Triangle.Draw(gl, Vertex1, Vertex2, Vertex3, false, false);
+				Triangle.Draw(gl, Vertex0, Vertex1, Vertex2, true, false);
+				Triangle.Draw(gl, Vertex1, Vertex2, Vertex3, false, false);
                 }
 
             }
@@ -81,9 +82,8 @@ namespace Axis_Arrow_Grid
                 float[] Vertex1 = { x0, y0, z0 };
                 float[] Vertex2 = { x1, y1, z1 };
                 float[] Vertex3 = { x2, y2, z2 };
-
-                Triangle.Draw(gl, Vertex0, Vertex1, Vertex2, true, false);
-                Triangle.Draw(gl, Vertex1, Vertex2, Vertex3, false, false);
+				Triangle.Draw(gl, Vertex0, Vertex1, Vertex2, true, false);
+				Triangle.Draw(gl, Vertex1, Vertex2, Vertex3, false, false);
                 }
             }
         }
