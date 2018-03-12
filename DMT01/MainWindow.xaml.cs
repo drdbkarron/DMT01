@@ -38,7 +38,7 @@ namespace DMT01
 			TextRange tr1 = new TextRange(SpreadsheetDirPath_RichTextBox.Document.ContentStart, SpreadsheetDirPath_RichTextBox.Document.ContentEnd);
 			TextRange tr2 = new TextRange(SpreadsheetFileName_RichTextBox.Document.ContentStart, SpreadsheetFileName_RichTextBox.Document.ContentEnd);
 			String Path = String.Format(@"{0}\{1}", tr1.Text.Trim(), tr2.Text.Trim());
-			if(System.IO.File.Exists(Path))					
+			if(System.IO.File.Exists(Path))
 			{
 				myReoGridControl.Load(Path, unvell.ReoGrid.IO.FileFormat.Excel2007);
 			}
