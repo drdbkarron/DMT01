@@ -94,33 +94,15 @@
             Margin="10,10,0,16"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Background="#FF1A319B">
-            <StackPanel x:Name="DrawingStatslabelCluster_stackpanel" Height="47" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="930" HorizontalAlignment="Center" Background="#FF782D60" Margin="0,13,0,0">
-                <StackPanel.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </StackPanel.RenderTransform>
-                <Label x:Name="Draws_Label" Content="Label" Margin="63,9,0,6" Height="29" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="45">
-                    <Label.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform AngleY="0" AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Label.RenderTransform>
-                </Label>
-            </StackPanel>
+            Background="#FF1A319B"
+            Orientation="Horizontal">
             <TabControl
                 Width="951"
                 Height="460"
-                Margin="3,7,0,23"
+                Margin="3,81,0,23"
                 HorizontalAlignment="Center"
-                Background="#FFF1F1C6" VerticalAlignment="Top">
+                VerticalAlignment="Center"
+                Background="#FFF1F1C6">
                 <TabItem x:Name="Eye_and_Camera__TabItem" Header="Eye and Camera">
                     <Grid
                         Width="927"
@@ -230,7 +212,11 @@
                                 Background="#FF3B9393"
                                 DockPanel.Dock="Top"
                                 TextAlignment="Center"
-                                TextWrapping="Wrap"><Run Text="Spreadsheet File Name"/></TextBlock>
+                                TextWrapping="Wrap">
+                                <Run>
+                                    Spreadsheet File Name
+                                </Run>
+                            </TextBlock>
                             <RichTextBox
                                 x:Name="SpreadsheetDirPath_RichTextBox"
                                 Width="743"
@@ -244,7 +230,7 @@
                                 DockPanel.Dock="Bottom">
                                 <FlowDocument>
                                     <Paragraph>
-                                        <Run Text="C:\Users\karro\Downloads\Downloads\2018-00-00\2018-02-00"/>
+                                        <Run></Run>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -261,7 +247,7 @@
                                 DockPanel.Dock="Bottom">
                                 <FlowDocument>
                                     <Paragraph>
-                                        <Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx"/>
+                                        <Run>UNEP_NATDIS_disasters_2002_2010.xlsx</Run>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -269,7 +255,7 @@
                         <Button
                             x:Name="spreadsheet_load_Button"
                             Margin="6,10,621,108"
-                            Content="load spreadsheet" />
+                            Content="load spreadsheet" Click="spreadsheet_load_Button_Click" />
                         <Button
                             x:Name="Button2"
                             Width="96"
@@ -305,16 +291,6 @@
                     <Grid Background="#FFE5E5E5" />
                 </TabItem>
             </TabControl>
-            <Label x:Name="Draws_Label_Copy" Content="Label" Margin="63,9,0,6" Height="29" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="45">
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.RenderTransform>
-            </Label>
         </StackPanel>
     </StackPanel>
 </Window>
