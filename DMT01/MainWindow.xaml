@@ -89,32 +89,33 @@
         </StackPanel>
         <StackPanel
             x:Name="BottomStackPanel"
-            Width="964"
-            Height="421"
-            Margin="8,10,0,16"
+            Width="962"
+            Height="564"
+            Margin="10,10,0,16"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Background="#FF1A319B"
             Orientation="Horizontal">
             <TabControl
-                Width="950"
-                Height="401"
-                Margin="3,10,0,10"
+                Width="951"
+                Height="460"
+                Margin="3,81,0,23"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="#FFF1F1C6">
                 <TabItem x:Name="Eye_and_Camera__TabItem" Header="Eye and Camera">
                     <Grid
-                        Width="914"
-                        Height="326"
-                        Margin="22,0,8,0"
+                        Width="927"
+                        Height="426"
+                        Margin="10,0,8,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Background="#FFC1DC47">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="101*" />
-                            <RowDefinition Height="105*" />
-                            <RowDefinition Height="120*" />
+                            <RowDefinition Height="131*" />
+                            <RowDefinition Height="137*" />
+                            <RowDefinition Height="91*" />
+                            <RowDefinition Height="67*" />
                         </Grid.RowDefinitions>
                         <local:H_Slider_UserControl1
                             x:Name="Eye_Z_H_Sslider_UserControl"
@@ -131,17 +132,60 @@
                             Grid.Row="1"
                             Width="882"
                             Height="96"
-                            Margin="10,7,22,2" />
+                            Margin="16,23,29,18" />
                         <local:H_Slider_UserControl1
                             x:Name="Eye_Y_H_Sslider_UserControl"
                             Grid.Row="2"
                             Width="882"
-                            Height="100"
+                            Height="78"
                             Margin="10,10,0,0"
                             HorizontalAlignment="Left"
+                            VerticalAlignment="Top" />
+                        <StackPanel
+                            x:Name="DrawMe_StackPanel"
+                            Grid.Row="3" Orientation="Horizontal"
+                            Width="750"
+                            Height="20"
+                            Margin="16,10,0,0"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            
-                            />
+                            Background="#FF5D4B5F">
+                            <CheckBox
+                                x:Name="AxisDrawMe_CheckBox"
+                                Width="83"
+                                HorizontalAlignment="Left"
+                                Content="DrawAxis" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
+                            <CheckBox
+                                x:Name="AxisDrawMe_CheckBox_Copy"
+                                Width="83"
+                                HorizontalAlignment="Left"
+                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
+                            <CheckBox
+                                x:Name="AxisDrawMe_CheckBox_Copy1"
+                                Width="83"
+                                HorizontalAlignment="Left"
+                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
+                            <CheckBox
+                                x:Name="AxisDrawMe_CheckBox_Copy2"
+                                Width="83"
+                                HorizontalAlignment="Left"
+                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
+                            <CheckBox
+                                x:Name="AxisDrawMe_CheckBox_Copy3"
+                                Width="83"
+                                HorizontalAlignment="Left"
+                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
+                            <CheckBox
+                                x:Name="AxisDrawMe_CheckBox_Copy4"
+                                Width="83"
+                                HorizontalAlignment="Left"
+                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
+                            <CheckBox
+                                x:Name="AxisDrawMe_CheckBox_Copy5"
+                                Width="83"
+                                HorizontalAlignment="Left"
+                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
+                        </StackPanel>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Spreadsheet Load file">

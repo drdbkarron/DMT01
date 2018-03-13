@@ -29,5 +29,22 @@ namespace DMT01
 																				
 		}
 
+		public Double SliderValue
+		{
+			get
+			{
+				return theH_Slider.Value;
+			}
+			set
+			{
+				if (theH_Slider.Value == value)
+				{
+					return;
+				}
+
+				theH_Slider.Value = value;
+			}
+		}
+
 	}
 }

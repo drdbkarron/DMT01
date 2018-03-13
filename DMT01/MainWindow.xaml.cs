@@ -53,6 +53,11 @@ namespace DMT01
 
 			//  Clear the color and depth buffer.
 			gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+
+			if(AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
+			{
+				Axis_Arrow_Grid.Axis_Class.MyGlobalAxis(gl);
+			}
 			Draws++;
 		}
 
