@@ -8,38 +8,41 @@
     x:Name="H_Slider_UserControl"
     Width="834.32"
     Height="80"
+    Padding="2"
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     Background="#FFCD98BC"
-    mc:Ignorable="d" Padding="2">
+    mc:Ignorable="d">
     <Grid
         Width="826"
+        Height="75"
         Margin="2,0,3,0"
         HorizontalAlignment="Center"
-        Background="#FF2D3A39" Height="75" VerticalAlignment="Top">
+        VerticalAlignment="Top"
+        Background="#FF2D3A39">
         <DockPanel
-            Width="794"
+            Width="809"
             Height="50"
-            Margin="30,0,12,4"
+            Margin="10,0,7,4"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Background="#FFF78513"
             LastChildFill="False">
-            <TextBox x:Name="Slider_Low_TextBox"
+            <TextBox
+                x:Name="Slider_Low_TextBox"
                 Width="29"
                 Height="22"
                 Margin="3,17,2,18"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="#FF608EDE"
-                Text="{Binding ElementName=theH_Slider,Path=Minimum,UpdateSourceTrigger=PropertyChanged}"
-                TextWrapping="Wrap"
-                />
+                Text="{Binding ElementName=theH_Slider, Mode=TwoWay,Path=Minimum, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" TextChanged="Slider_Low_TextBox_TextChanged" TextInput="Slider_Low_TextBox_TextInput" MouseWheel="Slider_Low_TextBox_MouseWheel" />
             <Slider
-                x:Name="theH_Slider"    
-                Width="699"
-                Height="39"
-                Margin="0,8,0,10"
+                x:Name="theH_Slider"
+                Width="731"
+                Height="40"
+                Margin="0,4,0,6"
                 Padding="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -52,23 +55,37 @@
                 SmallChange="0"
                 TickPlacement="BottomRight"
                 Value="50" />
-            <TextBox x:Name="Slider_Hi_TextBox"
+            <TextBox
+                x:Name="Slider_Hi_TextBox"
                 Width="30"
                 Height="22"
                 Margin="15,15,3,18"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Background="#FFC90C0C"
-              Text="{Binding ElementName=theH_Slider,Path=Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                />
+                Text="{Binding ElementName=theH_Slider, Path=Maximum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </DockPanel>
-        <TextBox x:Name="Slider_Value_TextBox"
-            Width="22"
-            Margin="498,2,306,0"
-                 Text="{Binding ElementName=theH_Slider,Path=Value, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+        <TextBox
+            x:Name="Slider_Value_TextBox"
+            Width="27"
+            Height="20"
+            Margin="498,2,301,0"
             HorizontalAlignment="Center"
-            TextWrapping="Wrap" Height="20" VerticalAlignment="Top" />
-        <Label Content="Eye Coordinates" HorizontalAlignment="Center" Margin="338,2,338,0" Width="150" Background="#FFCB1E1E" Padding="2,2,1,1" BorderBrush="#FF306456" HorizontalContentAlignment="Center" Height="20" VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            Text="{Binding ElementName=theH_Slider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="Wrap" />
+        <Label
+            x:Name="HSliderControlClusterMain_Label"
+            Width="150"
+            Height="20"
+            Margin="338,2,338,0"
+            Padding="2,2,1,1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Background="#FFCB1E1E"
+            BorderBrush="#FF306456"
+            Content="Eye Coordinates" />
 
     </Grid>
 </UserControl>

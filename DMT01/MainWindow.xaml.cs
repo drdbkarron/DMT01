@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SharpGL.SceneGraph.Primitives;
+using SharpGL.SceneGraph;
 
 namespace DMT01
 {
@@ -44,7 +46,7 @@ namespace DMT01
 			}
 		}
 
-
+		float rotation = 0;
 		private void myOpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
 			Debug.WriteLine(String.Format("{0} {1}", nameof(myOpenGLControl_OpenGLDraw), Draws));
@@ -53,11 +55,23 @@ namespace DMT01
 
 			//  Clear the color and depth buffer.
 			gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+			// Move Left And Into The Screen
+			gl.LoadIdentity();
+			//gl.Translate(0.0f, 0.0f, -6.0f);
+			gl.Translate(0.0f, 0.0f, -Eye_Z_H_Sslider_UserControl.SliderValue);
 
-			if(AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
+
+			gl.Rotate(rotation, 0.0f, 1.0f, 0.0f);
+
+			Teapot tp = new Teapot();
+			tp.Draw(gl, 14, 1, OpenGL.GL_FILL);
+
+			rotation += 3.0f;
+			if (AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
 			{
 				Axis_Arrow_Grid.Axis_Class.MyGlobalAxis(gl);
 			}
+			Draws_Label.Content = String.Format("Draw Count: {0}", Draws);
 			Draws++;
 		}
 
@@ -68,7 +82,28 @@ namespace DMT01
 			OpenGL gl = myOpenGLControl.OpenGL;
 
 			//  Set the clear color.
-			gl.ClearColor(.1f, 0, 0, 0);
+			gl.ClearColor(.1f, 0.1f, 0.1f, 0);
+
+			gl.Enable(OpenGL.GL_DEPTH_TEST);
+
+			float[] global_ambient = new float[] { 0.5f, 0.5f, 0.5f, 1.0f };
+			float[] light0pos = new float[] { 0.0f, 5.0f, 10.0f, 1.0f };
+			float[] light0ambient = new float[] { 0.2f, 0.2f, 0.2f, 1.0f };
+			float[] light0diffuse = new float[] { 0.3f, 0.3f, 0.3f, 1.0f };
+			float[] light0specular = new float[] { 0.8f, 0.8f, 0.8f, 1.0f };
+
+			float[] lmodel_ambient = new float[] { 0.2f, 0.2f, 0.2f, 1.0f };
+			gl.LightModel(OpenGL.GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+
+			gl.LightModel(OpenGL.GL_LIGHT_MODEL_AMBIENT, global_ambient);
+			gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_POSITION, light0pos);
+			gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_AMBIENT, light0ambient);
+			gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_DIFFUSE, light0diffuse);
+			gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPECULAR, light0specular);
+			gl.Enable(OpenGL.GL_LIGHTING);
+			gl.Enable(OpenGL.GL_LIGHT0);
+
+			gl.ShadeModel(OpenGL.GL_SMOOTH);
 			Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLInitialized)));
 		}
 

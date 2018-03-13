@@ -29,11 +29,11 @@ namespace DMT01
 																				
 		}
 
-		public Double SliderValue
+		public float SliderValue
 		{
 			get
 			{
-				return theH_Slider.Value;
+				return (float)theH_Slider.Value;
 			}
 			set
 			{
@@ -41,10 +41,80 @@ namespace DMT01
 				{
 					return;
 				}
-
 				theH_Slider.Value = value;
 			}
 		}
 
+		public Double SliderMaxValue
+		{
+			get
+			{
+				return theH_Slider.Maximum;
+			}
+			set
+			{
+				if (theH_Slider.Maximum == value)
+				{
+					return;
+				}
+
+				theH_Slider.Maximum = value;
+			}
+		}
+		public Double SliderMinValue
+		{
+			get
+			{
+				return theH_Slider.Minimum;
+			}
+			set
+			{
+				if (theH_Slider.Minimum == value)
+				{
+					return;
+				}
+
+				theH_Slider.Minimum = value;
+			}
+		}
+		public String LabelText
+		{
+			get
+			{
+				return HSliderControlClusterMain_Label.Content as String;
+			}
+			set
+			{
+				if (HSliderControlClusterMain_Label.Content as String == value)
+				{
+					return;
+				}
+
+				HSliderControlClusterMain_Label.Content = value;
+			}
+		}
+
+		private static void Slider_Low_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
+			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_TextChanged)));
+
+		}
+
+		private static void Slider_Low_TextBox_TextInput(object sender, TextCompositionEventArgs e)
+		{
+			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_TextInput)));
+
+		}
+
+		private static void Slider_Low_TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
+		{
+			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_MouseWheel)));
+			TextBox TB = sender as TextBox;
+			int Low = 0;
+			if (int.TryParse(TB.Text, out Low)) { } else { };
+				
+
+		}
 	}
 }
