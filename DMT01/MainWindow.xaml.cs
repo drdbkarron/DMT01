@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 
 namespace DMT01
@@ -72,7 +73,22 @@ namespace DMT01
 			Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLInitialized)));
 		}
 
-		private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
+        private void spreadsheet_load_Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(String.Format("{0}", nameof(spreadsheet_load_Button_Click)));
+            TextRange tr1 = new TextRange(SpreadsheetDirPath_RichTextBox.Document.ContentStart, SpreadsheetDirPath_RichTextBox.Document.ContentEnd);
+            TextRange tr2 = new TextRange(SpreadsheetFileName_RichTextBox.Document.ContentStart, SpreadsheetFileName_RichTextBox.Document.ContentEnd);
+            String Path = String.Format(@"{0}\{1}", tr1.Text.Trim(), tr2.Text.Trim());
+            var a = DMT01.Properties.Resources.UNEP_NATDIS_disasters_2002_2010;
+
+            
+            
+             myReoGridControl.Load(Path, unvell.ReoGrid.IO.FileFormat.Excel2007);
+           
+
+        }
+
+        private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
 
 			//  Get the OpenGL object.

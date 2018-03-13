@@ -230,7 +230,7 @@
                                 DockPanel.Dock="Bottom">
                                 <FlowDocument>
                                     <Paragraph>
-                                        <Run>C:\Users\karro\Downloads\Downloads\2018-00-00\2018-02-00</Run>
+                                        <Run></Run>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -255,7 +255,7 @@
                         <Button
                             x:Name="spreadsheet_load_Button"
                             Margin="6,10,621,108"
-                            Content="load spreadsheet" />
+                            Content="load spreadsheet" Click="spreadsheet_load_Button_Click" />
                         <Button
                             x:Name="Button2"
                             Width="96"
