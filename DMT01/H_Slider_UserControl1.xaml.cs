@@ -33,15 +33,15 @@ namespace DMT01
 		{
 			get
 			{
-				return (float)theH_Slider.Value;
+				return (float)this.theH_Slider.Value;
 			}
 			set
 			{
-				if (theH_Slider.Value == value)
+				if (this.theH_Slider.Value == value)
 				{
 					return;
 				}
-				theH_Slider.Value = value;
+				this.theH_Slider.Value = value;
 			}
 		}
 
