@@ -50,12 +50,14 @@ namespace DMT01
 		float rotation = 0;
 		private void myOpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
-			Debug.WriteLine(String.Format("{0} {1}", nameof(myOpenGLControl_OpenGLDraw), Draws));
+			//Debug.WriteLine(String.Format("{0} {1}", nameof(myOpenGLControl_OpenGLDraw), Draws));
 			//  Get the OpenGL object.
 			OpenGL gl = myOpenGLControl.OpenGL;
 
 			//  Clear the color and depth buffer.
 			gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+			gl.MatrixMode(SharpGL.Enumerations.MatrixMode.Projection);
+
 			// Move Left And Into The Screen
 			gl.LoadIdentity();
 
@@ -63,9 +65,15 @@ namespace DMT01
 
 			LookAt(gl);
 
+
+			//(double fovy, double aspect, double zNear, double zFar)
+			gl.Perspective()
+
 			gl.Translate(Eye_X_H_Sslider_UserControl.SliderValue, Eye_Y_H_Sslider_UserControl.SliderValue, Eye_Z_H_Sslider_UserControl.SliderValue);
 
 			gl.Rotate(rotation, 0.0f, 1.0f, 0.0f);
+
+			gl.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
 
 			if (DrawTeaPot_CheckBox.IsChecked.GetValueOrDefault())
 			{
