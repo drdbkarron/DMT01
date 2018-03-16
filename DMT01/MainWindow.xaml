@@ -10,8 +10,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="DMTWindow"
     Title="MainWindow"
-    Width="1048"
-    Height="1043"
+    Width="1072"
+    Height="1100"
     Margin="0"
     Padding="3"
     HorizontalAlignment="Left"
@@ -29,8 +29,8 @@
     <StackPanel
         x:Name="TopStackPanel"
         Width="982"
-        Height="980"
-        Margin="31,10,21,16"
+        Height="1015"
+        Margin="43,38,33,10"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Background="#FFE2DECD"
@@ -90,105 +90,251 @@
         <StackPanel
             x:Name="BottomStackPanel"
             Width="962"
-            Height="564"
+            Height="675"
             Margin="10,10,0,16"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Background="#FF1A319B"
-            Orientation="Horizontal">
+            Background="#FF1A319B">
+            <StackPanel
+                x:Name="DrawMe_StackPanel"
+                Width="639"
+                Height="20"
+                Margin="19,7,304,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#FF5D4B5F"
+                Orientation="Horizontal">
+                <CheckBox
+                    x:Name="AxisDrawMe_CheckBox"
+                    Width="83"
+                    Margin="4,2,3,2"
+                    HorizontalAlignment="Left"
+                    BorderBrush="#FFEA0909"
+                    BorderThickness="5,2,1,2"
+                    Content="DrawAxis" />
+                <CheckBox
+                    x:Name="DrawTeaPot_CheckBox"
+                    Width="83"
+                    Margin="4,2,3,2"
+                    HorizontalAlignment="Left"
+                    BorderBrush="#FFEA0909"
+                    BorderThickness="5,2,1,2"
+                    Content="TeaPot" />
+                <CheckBox
+                    x:Name="Orthographic_CheckBox"
+                    Width="83"
+                    Margin="4,2,3,2"
+                    HorizontalAlignment="Left"
+                    BorderBrush="#FFEA0909"
+                    BorderThickness="5,2,1,2"
+                    Content="Orthographic" />
+                <CheckBox
+                    x:Name="AxisDrawMe_CheckBox_Copy2"
+                    Width="83"
+                    Margin="4,2,3,2"
+                    HorizontalAlignment="Left"
+                    BorderBrush="#FFEA0909"
+                    BorderThickness="5,2,1,2"
+                    Content="CheckBox" />
+                <CheckBox
+                    x:Name="AxisDrawMe_CheckBox_Copy3"
+                    Width="83"
+                    Margin="4,2,3,2"
+                    HorizontalAlignment="Left"
+                    BorderBrush="#FFEA0909"
+                    BorderThickness="5,2,1,2"
+                    Content="CheckBox" />
+                <CheckBox
+                    x:Name="AxisDrawMe_CheckBox_Copy4"
+                    Width="83"
+                    Margin="4,2,3,2"
+                    HorizontalAlignment="Left"
+                    BorderBrush="#FFEA0909"
+                    BorderThickness="5,2,1,2"
+                    Content="CheckBox" />
+                <CheckBox
+                    x:Name="AxisDrawMe_CheckBox_Copy5"
+                    Width="83"
+                    Margin="4,2,3,2"
+                    HorizontalAlignment="Left"
+                    BorderBrush="#FFEA0909"
+                    BorderThickness="5,2,1,2"
+                    Content="CheckBox" />
+            </StackPanel>
+            <StackPanel
+                Height="38"
+                Margin="19,8,19,2"
+                VerticalAlignment="Top"
+                Background="#FF613642"
+                Orientation="Horizontal">
+                <Label
+                    x:Name="Draws_Label"
+                    Width="132"
+                    Height="26"
+                    Margin="5,6"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="Draws" />
+                <Label
+                    x:Name="Elapsed_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="elapsed" />
+                <Label
+                    x:Name="FPS_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="FPS" />
+                <Label
+                    x:Name="Buffer_Mode_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="BufferMode" />
+                <Label
+                    x:Name="Perspective_Label_"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="Perspective" />
+                <Label
+                    x:Name="LookAtLabel"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="LookAt" />
+                <Label
+                    x:Name="Label1_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="Label1" />
+                <Label
+                    x:Name="Label2_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="Label2" />
+                <Label
+                    x:Name="Label3_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="Label3" />
+                <Label
+                    x:Name="Label4_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="Label4" />
+                <Label
+                    x:Name="Label5_Label"
+                    Width="61"
+                    Height="27"
+                    Margin="5,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEAD0D0"
+                    BorderThickness="1"
+                    Content="Label5" />
+            </StackPanel>
             <TabControl
-                Width="951"
-                Height="460"
-                Margin="3,81,0,23"
+                Width="948"
+                Height="585"
+                Margin="6,10,4,23"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="#FFF1F1C6">
-                <TabItem x:Name="Eye_and_Camera__TabItem" Header="Eye and Camera">
+                <TabItem
+                    x:Name="Eye_and_Camera__TabItem"
+                    Margin="0,-2,0,0"
+                    Header="Eye and Camera">
                     <Grid
-                        Width="927"
-                        Height="426"
-                        Margin="10,0,8,0"
+                        Width="928"
+                        Height="440"
+                        Margin="8,0,6,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Background="#FFC1DC47">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="131*" />
-                            <RowDefinition Height="137*" />
-                            <RowDefinition Height="91*" />
-                            <RowDefinition Height="67*" />
+                            <RowDefinition Height="105*" />
+                            <RowDefinition Height="87*" />
+                            <RowDefinition Height="71*" />
+                            <RowDefinition Height="177*" />
                         </Grid.RowDefinitions>
                         <local:H_Slider_UserControl1
                             x:Name="Eye_Z_H_Sslider_UserControl"
                             Grid.Row="0"
                             Width="885"
-                            Height="95"
-                            Margin="7,4,0,0"
+                            Height="89"
+                            Margin="7,10,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             BorderBrush="#FFEA2020"
-                            BorderThickness="4" />
+                            BorderThickness="4"
+                            LabelText="Z Eye Coordinate"
+                            SliderMaxValue="100"
+                            SliderMinValue="-100"
+                            SliderValue="-10" />
                         <local:H_Slider_UserControl1
                             x:Name="Eye_X_H_Sslider_UserControl"
                             Grid.Row="1"
-                            Width="882"
-                            Height="96"
-                            Margin="16,23,29,18" />
+                            Width="891"
+                            Height="74"
+                            Margin="7,7,30,0"
+                            VerticalAlignment="Top" />
                         <local:H_Slider_UserControl1
                             x:Name="Eye_Y_H_Sslider_UserControl"
                             Grid.Row="2"
-                            Width="882"
+                            Grid.RowSpan="2"
+                            Width="885"
                             Height="78"
-                            Margin="10,10,0,0"
-                            HorizontalAlignment="Left"
+                            Margin="0,10,36,0"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Top" />
-                        <StackPanel
-                            x:Name="DrawMe_StackPanel"
-                            Grid.Row="3" Orientation="Horizontal"
-                            Width="750"
-                            Height="20"
-                            Margin="16,10,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Background="#FF5D4B5F">
-                            <CheckBox
-                                x:Name="AxisDrawMe_CheckBox"
-                                Width="83"
-                                HorizontalAlignment="Left"
-                                Content="DrawAxis" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
-                            <CheckBox
-                                x:Name="AxisDrawMe_CheckBox_Copy"
-                                Width="83"
-                                HorizontalAlignment="Left"
-                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
-                            <CheckBox
-                                x:Name="AxisDrawMe_CheckBox_Copy1"
-                                Width="83"
-                                HorizontalAlignment="Left"
-                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
-                            <CheckBox
-                                x:Name="AxisDrawMe_CheckBox_Copy2"
-                                Width="83"
-                                HorizontalAlignment="Left"
-                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
-                            <CheckBox
-                                x:Name="AxisDrawMe_CheckBox_Copy3"
-                                Width="83"
-                                HorizontalAlignment="Left"
-                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
-                            <CheckBox
-                                x:Name="AxisDrawMe_CheckBox_Copy4"
-                                Width="83"
-                                HorizontalAlignment="Left"
-                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
-                            <CheckBox
-                                x:Name="AxisDrawMe_CheckBox_Copy5"
-                                Width="83"
-                                HorizontalAlignment="Left"
-                                Content="CheckBox" BorderBrush="#FFEA0909" Margin="4,2,3,2" BorderThickness="5,2,1,2" />
-                        </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Spreadsheet Load file">
+                <TabItem Margin="0" Header="Spreadsheet Load file">
                     <Grid
                         Width="793"
                         Height="143"
@@ -212,11 +358,7 @@
                                 Background="#FF3B9393"
                                 DockPanel.Dock="Top"
                                 TextAlignment="Center"
-                                TextWrapping="Wrap">
-                                <Run>
-                                    Spreadsheet File Name
-                                </Run>
-                            </TextBlock>
+                                TextWrapping="Wrap"><Run Text="Spreadsheet File Name" /></TextBlock>
                             <RichTextBox
                                 x:Name="SpreadsheetDirPath_RichTextBox"
                                 Width="743"
@@ -230,7 +372,7 @@
                                 DockPanel.Dock="Bottom">
                                 <FlowDocument>
                                     <Paragraph>
-                                        <Run></Run>
+                                        <Run />
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -247,7 +389,7 @@
                                 DockPanel.Dock="Bottom">
                                 <FlowDocument>
                                     <Paragraph>
-                                        <Run>UNEP_NATDIS_disasters_2002_2010.xlsx</Run>
+                                        <Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx" />
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -255,7 +397,8 @@
                         <Button
                             x:Name="spreadsheet_load_Button"
                             Margin="6,10,621,108"
-                            Content="load spreadsheet" Click="spreadsheet_load_Button_Click" />
+                            Click="spreadsheet_load_Button_Click"
+                            Content="load spreadsheet" />
                         <Button
                             x:Name="Button2"
                             Width="96"
@@ -267,8 +410,96 @@
                     </Grid>
                 </TabItem>
                 <TabItem
+                    x:Name="LookAt_tabItem"
                     Width="54"
                     Height="20"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Header="LookAt">
+                    <Grid Margin="0,10,0,-14" Background="#FFE5E5E5">
+                        <StackPanel
+                            x:Name="LookAt_StackPanel"
+                            Width="930"
+                            Margin="10,0,0,19"
+                            HorizontalAlignment="Left"
+                            Background="#FFE4E893" Height="547">
+                            <StackPanel
+                                x:Name="LookAtEye"
+                                Height="265"
+                                Margin="0,0,0,6"
+                                Background="#FF721D1D">
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAt_Eye_X_H_Slider_UserControl"
+                                    Width="878"
+                                    Height="84"
+                                    Margin="26,0"
+                                    LabelText="Eye X"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAt_Eye_Y_H_Slider_UserControl"
+                                    Width="878"
+                                    LabelText="Eye Y"
+                                    Height="88" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAt_Eye_Z_H_Slider_UserControl"
+                                    Width="878"
+                                    Height="77"
+                                    LabelText="EyeZ"
+                                    VerticalContentAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel
+                                x:Name="LookAtTarget"
+                                Width="910"
+                                Height="242"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF45C550" Margin="3,0,0,0">
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAtTarget_X_H_Slider_UserControl"
+                                    LabelText="Target X"
+                                    Width="905"
+                                    Height="76"
+                                    Margin="8,1,0,0"
+                                    Padding="5,2,2,1"
+                                    HorizontalAlignment="Left" 
+                                    HorizontalContentAlignment="Center" 
+                                    Grid.IsSharedSizeScope="True" 
+                                    Loaded="LookAtTarget_X_H_Slider_UserControl_Loaded" />
+                                <local:H_Slider_UserControl1 
+                                    x:Name="LookAtTarget_Y_H_Slider_UserControl"
+                                                             LabelText="Target Y"
+                                    Width="905"
+                                    Height="76"
+                                    Margin="8,1,0,0"
+                                    Background="#FFCFA5C1" HorizontalContentAlignment="Center" Padding="5,2,2,2" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left" />
+                                <local:H_Slider_UserControl1 x:Name="LookAtTarget_Z_H_Slider_UserControl"
+                                    Width="905"
+                                    Height="76"
+                                    LabelText="Target Z"
+                                    Margin="8,1,0,0" HorizontalContentAlignment="Center" Padding="5,2,2,2" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left" Loaded="LookAtTarget_Z_H_Slider_UserControl_Loaded" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="909">
+                                <StackPanel Background="#FF7C2121" Height="18" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" Width="366" Margin="5,0,0,0">
+                                    <RadioButton x:Name="UseOrthographic_Viewing_Transform_radioButton" Content="Orthographic                                         " Width="100"/>
+                                    <RadioButton Content="LookAt"/>
+                                    <RadioButton Content="Frustrum"/>
+                                    <RadioButton Content="RadioButton"/>
+                                </StackPanel>
+                                <StackPanel Background="#FF7C2121" Height="18" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="85,0,564,0" HorizontalAlignment="Center">
+                                    <RadioButton x:Name="LookAt_X_Up_RadioButton" Content="X Up" Width="73" Margin="11,0,9,0" HorizontalContentAlignment="Left" Background="#FF7DA083" BorderBrush="#FFB66666" BorderThickness="3" SnapsToDevicePixels="True"/>
+                                    <RadioButton x:Name="LookAt_Y_Up_RadioButton" Content="Y Up" Margin="11,0,9,0" Background="#FF7DA083" BorderBrush="#FFB66666" BorderThickness="3" SnapsToDevicePixels="True"/>
+                                    <RadioButton x:Name="LookAt_Z_Up_RadioButton" Content="Z Up" Margin="11,0,9,0" Background="#FF7DA083" BorderBrush="#FFB66666" BorderThickness="3" SnapsToDevicePixels="True"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    Width="54"
+                    Height="20"
+                    Margin="0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="TabItem">
@@ -277,14 +508,7 @@
                 <TabItem
                     Width="54"
                     Height="20"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Header="TabItem">
-                    <Grid Background="#FFE5E5E5" />
-                </TabItem>
-                <TabItem
-                    Width="54"
-                    Height="20"
+                    Margin="0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="TabItem">

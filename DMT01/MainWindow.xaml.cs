@@ -58,15 +58,20 @@ namespace DMT01
 			gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 			// Move Left And Into The Screen
 			gl.LoadIdentity();
-			//gl.Translate(0.0f, 0.0f, -6.0f);
-			gl.Translate(0.0f, 0.0f, -Eye_Z_H_Sslider_UserControl.SliderValue);
 
+			//gl.Translate(0.0f, 0.0f, -6.0f);
+
+			LookAt(gl);
+
+			gl.Translate(Eye_X_H_Sslider_UserControl.SliderValue, Eye_Y_H_Sslider_UserControl.SliderValue, Eye_Z_H_Sslider_UserControl.SliderValue);
 
 			gl.Rotate(rotation, 0.0f, 1.0f, 0.0f);
 
-			Teapot tp = new Teapot();
-			tp.Draw(gl, 14, 1, OpenGL.GL_FILL);
-
+			if (DrawTeaPot_CheckBox.IsChecked.GetValueOrDefault())
+			{
+				Teapot tp = new Teapot();
+				tp.Draw(gl, 14, 1, OpenGL.GL_FILL);
+			}
 			rotation += 3.0f;
 			if (AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
 			{
@@ -75,7 +80,22 @@ namespace DMT01
 			Draws_Label.Content = String.Format("Draw Count: {0}", Draws);
 			Draws++;
 		}
+		private void LookAt(OpenGL gl)
+		{
+			float x_up = 0.0f;
+			float y_up = 1.0f;
+			float z_up = 0.0f;
 
+			if (LookAt_X_Up_RadioButton.IsChecked.GetValueOrDefault()) { x_up = 1.0f; } else { x_up = 0.0f; }
+			if (LookAt_Y_Up_RadioButton.IsChecked.GetValueOrDefault()) { y_up = 1.0f; } else { y_up = 0.0f; }
+			if (LookAt_Z_Up_RadioButton.IsChecked.GetValueOrDefault()) { z_up = 1.0f; } else { z_up = 0.0f; }
+
+			gl.LookAt(LookAt_Eye_X_H_Slider_UserControl.SliderValue, LookAt_Eye_Y_H_Slider_UserControl.SliderValue, LookAt_Eye_Z_H_Slider_UserControl.SliderValue,
+					  LookAtTarget_X_H_Slider_UserControl.SliderValue, LookAtTarget_Y_H_Slider_UserControl.SliderValue, LookAtTarget_Z_H_Slider_UserControl.SliderValue,
+					  x_up,y_up,z_up);
+		}
+
+		
 		private void myOpenGLControl_OpenGLInitialized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
 
@@ -114,16 +134,19 @@ namespace DMT01
             TextRange tr1 = new TextRange(SpreadsheetDirPath_RichTextBox.Document.ContentStart, SpreadsheetDirPath_RichTextBox.Document.ContentEnd);
             TextRange tr2 = new TextRange(SpreadsheetFileName_RichTextBox.Document.ContentStart, SpreadsheetFileName_RichTextBox.Document.ContentEnd);
             String Path = String.Format(@"{0}\{1}", tr1.Text.Trim(), tr2.Text.Trim());
-            var a = DMT01.Properties.Resources.UNEP_NATDIS_disasters_2002_2010;
 
+			const String scratchy = "Scratcheroo";
+
+			var a = DMT01.Properties.Resources.UNEP_NATDIS_disasters_2002_2010;
+			System.IO.File.WriteAllBytes(scratchy, a);
             
             
-             myReoGridControl.Load(Path, unvell.ReoGrid.IO.FileFormat.Excel2007);
+             myReoGridControl.Load(scratchy, unvell.ReoGrid.IO.FileFormat.Excel2007);
            
 
         }
 
-        private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
+		private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
 
 			//  Get the OpenGL object.

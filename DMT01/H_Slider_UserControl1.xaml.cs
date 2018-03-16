@@ -49,71 +49,78 @@ namespace DMT01
 		{
 			get
 			{
-				return theH_Slider.Maximum;
+				return this.theH_Slider.Maximum;
 			}
 			set
 			{
-				if (theH_Slider.Maximum == value)
+				this.theH_Slider.Maximum = value;
+				if (this.theH_Slider.Maximum == value)
 				{
 					return;
 				}
 
-				theH_Slider.Maximum = value;
+				this.theH_Slider.Maximum = value;
 			}
 		}
 		public Double SliderMinValue
 		{
 			get
 			{
-				return theH_Slider.Minimum;
+				return this.theH_Slider.Minimum;
 			}
 			set
 			{
-				if (theH_Slider.Minimum == value)
+				if (this.theH_Slider.Minimum == value)
 				{
 					return;
 				}
 
-				theH_Slider.Minimum = value;
+				this.theH_Slider.Minimum = value;
 			}
 		}
 		public String LabelText
 		{
 			get
 			{
-				return HSliderControlClusterMain_Label.Content as String;
+				return this.HSliderControlClusterMain_Label.Content as String;
 			}
 			set
 			{
-				if (HSliderControlClusterMain_Label.Content as String == value)
+				if (this.HSliderControlClusterMain_Label.Content as String == value)
 				{
 					return;
 				}
 
-				HSliderControlClusterMain_Label.Content = value;
+				this.HSliderControlClusterMain_Label.Content = value;
 			}
 		}
 
-		private static void Slider_Low_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+		private  void Slider_Low_TextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 
 			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_TextChanged)));
 
 		}
 
-		private static void Slider_Low_TextBox_TextInput(object sender, TextCompositionEventArgs e)
+		private  void Slider_Low_TextBox_TextInput(object sender, TextCompositionEventArgs e)
 		{
 			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_TextInput)));
 
 		}
 
-		private static void Slider_Low_TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
+		private  void Slider_Low_TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
 		{
 			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_MouseWheel)));
 			TextBox TB = sender as TextBox;
 			int Low = 0;
 			if (int.TryParse(TB.Text, out Low)) { } else { };
-				
+
+		}
+
+		private  void theH_Slider_MouseWheel(object sender, MouseWheelEventArgs e)
+		{
+
+			Debug.WriteLine(String.Format("{0}", nameof(theH_Slider_MouseWheel)));
 
 		}
 	}

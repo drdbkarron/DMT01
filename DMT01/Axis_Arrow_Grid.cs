@@ -105,7 +105,7 @@ namespace Axis_Arrow_Grid
             float[] Green = { 0f, 1f, 0f, 1f };
             float[] Blue = { 0f, 0f, 1f, 1f };
             float[] Origin = { 0f, 0f, 0f };
-            //  Draw the axies and annotate the ends.
+            //  Draw the axis and annotate the ends.
 
             gl.Color(Red);
             gl.Begin(SharpGL.OpenGL.GL_LINES);
