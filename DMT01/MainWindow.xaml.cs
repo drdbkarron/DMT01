@@ -63,17 +63,22 @@ namespace DMT01
 
 			//gl.Translate(0.0f, 0.0f, -6.0f);
 
-			LookAt(gl);
+			if(UseLookAtViewingTransform_RadioButton.IsChecked.GetValueOrDefault()) LookAt(gl);
 
 
 			//(double fovy, double aspect, double zNear, double zFar)
-			gl.Perspective()
+			if (UsePerspectiveViewingTransform_RadioButton.IsChecked.GetValueOrDefault()) Perspective(gl);
 
-			gl.Translate(Eye_X_H_Sslider_UserControl.SliderValue, Eye_Y_H_Sslider_UserControl.SliderValue, Eye_Z_H_Sslider_UserControl.SliderValue);
+			//gl.Translate(Eye_X_H_Sslider_UserControl.SliderValue, Eye_Y_H_Sslider_UserControl.SliderValue, Eye_Z_H_Sslider_UserControl.SliderValue);
 
 			gl.Rotate(rotation, 0.0f, 1.0f, 0.0f);
 
 			gl.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
+
+			if (AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
+			{
+				Axis_Arrow_Grid.Axis_Class.MyGlobalAxis(gl);
+			}
 
 			if (DrawTeaPot_CheckBox.IsChecked.GetValueOrDefault())
 			{
@@ -81,10 +86,6 @@ namespace DMT01
 				tp.Draw(gl, 14, 1, OpenGL.GL_FILL);
 			}
 			rotation += 3.0f;
-			if (AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
-			{
-				Axis_Arrow_Grid.Axis_Class.MyGlobalAxis(gl);
-			}
 			Draws_Label.Content = String.Format("Draw Count: {0}", Draws);
 			Draws++;
 		}
@@ -103,7 +104,10 @@ namespace DMT01
 					  x_up,y_up,z_up);
 		}
 
-		
+		private void Perspective(OpenGL gl)
+		{
+
+		}
 		private void myOpenGLControl_OpenGLInitialized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
 

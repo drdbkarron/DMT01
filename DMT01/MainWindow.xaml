@@ -28,11 +28,11 @@
     mc:Ignorable="d">
     <StackPanel
         x:Name="TopStackPanel"
-        Width="982"
+        Width="1049"
         Height="1015"
-        Margin="43,38,33,10"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
+        Margin="4,4,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
         Background="#FFE2DECD"
         CanHorizontallyScroll="True"
         CanVerticallyScroll="True"
@@ -40,7 +40,7 @@
         ScrollViewer.HorizontalScrollBarVisibility="Visible"
         UseLayoutRounding="True">
         <StackPanel
-            Width="961"
+            Width="1036"
             Height="312"
             Margin="0,7,0,0"
             HorizontalAlignment="Center"
@@ -68,38 +68,36 @@
             </ReoGrid:ReoGridControl>
             <WPF:OpenGLControl
                 x:Name="myOpenGLControl"
-                Width="504"
-                Height="302"
-                Margin="-7,1,1,0"
-                Padding="3"
+                Width="574"
+                Height="310"
+                Margin="1,1,0,0"
+                Padding="0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                HorizontalContentAlignment="Right"
+                HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 BorderThickness="3,3,2,2"
                 IsHitTestVisible="False"
                 OpenGLDraw="myOpenGLControl_OpenGLDraw"
                 OpenGLInitialized="myOpenGLControl_OpenGLInitialized"
                 OpenGLVersion="OpenGL2_0"
-                RenderTransformOrigin="0.375,0.493"
+                RenderTransformOrigin="0.5,0.5"
                 Resized="myOpenGLControl_Resized"
-                ScrollViewer.CanContentScroll="True"
-                ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                TabIndex="2147483644" />
+                TabIndex="2147483644" ScrollViewer.VerticalScrollBarVisibility="Disabled" DrawFPS="True" />
         </StackPanel>
         <StackPanel
             x:Name="BottomStackPanel"
-            Width="962"
+            Width="1029"
             Height="675"
-            Margin="10,10,0,16"
+            Margin="9,5,0,16"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Background="#FF1A319B">
+            Background="#FF1A319B" ScrollViewer.HorizontalScrollBarVisibility="Visible">
             <StackPanel
                 x:Name="DrawMe_StackPanel"
-                Width="639"
+                Width="921"
                 Height="20"
-                Margin="19,7,304,0"
+                Margin="19,7,89,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="#FF5D4B5F"
@@ -121,31 +119,7 @@
                     BorderThickness="5,2,1,2"
                     Content="TeaPot" />
                 <CheckBox
-                    x:Name="Orthographic_CheckBox"
-                    Width="83"
-                    Margin="4,2,3,2"
-                    HorizontalAlignment="Left"
-                    BorderBrush="#FFEA0909"
-                    BorderThickness="5,2,1,2"
-                    Content="Orthographic" />
-                <CheckBox
-                    x:Name="AxisDrawMe_CheckBox_Copy2"
-                    Width="83"
-                    Margin="4,2,3,2"
-                    HorizontalAlignment="Left"
-                    BorderBrush="#FFEA0909"
-                    BorderThickness="5,2,1,2"
-                    Content="CheckBox" />
-                <CheckBox
                     x:Name="AxisDrawMe_CheckBox_Copy3"
-                    Width="83"
-                    Margin="4,2,3,2"
-                    HorizontalAlignment="Left"
-                    BorderBrush="#FFEA0909"
-                    BorderThickness="5,2,1,2"
-                    Content="CheckBox" />
-                <CheckBox
-                    x:Name="AxisDrawMe_CheckBox_Copy4"
                     Width="83"
                     Margin="4,2,3,2"
                     HorizontalAlignment="Left"
@@ -160,6 +134,24 @@
                     BorderBrush="#FFEA0909"
                     BorderThickness="5,2,1,2"
                     Content="CheckBox" />
+                <RadioButton x:Name="UseLookAtViewingTransform_RadioButton" Content="UseLookAt"/>
+                <RadioButton x:Name="UsePerspectiveViewingTransform_RadioButton" Content="Use Perspective"/>
+                <StackPanel
+                    Width="366"
+                    Height="18"
+                    Margin="5,0,0,2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="#FF7C2121"
+                    Orientation="Horizontal">
+                    <RadioButton
+                        x:Name="UseOrthographic_Viewing_Transform_radioButton"
+                        Width="100"
+                        Content="Orthographic                                         " GroupName="ViewingTransformRadioButtonGroup" />
+                    <RadioButton x:Name="UseLookAtViewingTransform_RadioButton1" Content="LookAt" GroupName="ViewingTransformRadioButtonGroup" />
+                    <RadioButton Content="Frustrum" GroupName="ViewingTransformRadioButtonGroup" Width="79" />
+                    <RadioButton x:Name="UsePerspetiveViewingTransform" Content="Perspective" GroupName="ViewingTransformRadioButtonGroup" />
+                </StackPanel>
             </StackPanel>
             <StackPanel
                 Height="38"
@@ -281,10 +273,144 @@
             <TabControl
                 Width="948"
                 Height="585"
-                Margin="6,10,4,23"
+                Margin="4,5,4,23"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="#FFF1F1C6">
+                <TabItem
+                    x:Name="LookAt_tabItem"
+                    Width="54"
+                    Height="20"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Header="LookAt">
+                    <Grid Margin="0,10,0,-14" Background="#FFE5E5E5">
+                        <StackPanel
+                            x:Name="LookAt_StackPanel"
+                            Width="930"
+                            Height="534"
+                            Margin="5,1,0,6"
+                            HorizontalAlignment="Left"
+                            Background="#FFE4E893" VerticalAlignment="Top">
+                            <StackPanel
+                                x:Name="LookAtEye"
+                                Height="265"
+                                Margin="0,0,0,4"
+                                Background="#FF721D1D" Width="935" VerticalAlignment="Top">
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAt_Eye_X_H_Slider_UserControl"
+                                    Width="917"
+                                    Height="84"
+                                    Margin="5,4,14,0"
+                                    SliderMinValue="-100"
+                                    SliderMaxValue="100"
+                                    SliderValue="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    LabelText="LookAt Eye X" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAt_Eye_Y_H_Slider_UserControl"
+                                    Width="917"
+                                    Height="88"
+                                    SliderMinValue="-100"
+                                    SliderValue="0"
+                                    SliderMaxValue="100"
+                                    LabelText="LookAt Eye Y" Margin="5,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAt_Eye_Z_H_Slider_UserControl"
+                                    Width="917"
+                                    Height="77"
+                                    SliderMinValue="-100" SliderValue="-10" SliderMaxValue="10"
+                                    VerticalContentAlignment="Center"
+                                    LabelText="LookAt EyeZ" Margin="5,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            </StackPanel>
+                            <StackPanel
+                                x:Name="LookAtTarget"
+                                Width="910"
+                                Height="236"
+                                Margin="3,0,0,2"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF45C550">
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAtTarget_X_H_Slider_UserControl"
+                                    Width="Auto"
+                                    Height="80"
+                                    Margin="8,0,1,0"
+                                    Padding="5,2,2,1"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Center"
+                                    Grid.IsSharedSizeScope="True"
+                                    SliderValue="0"
+                                    SliderMaxValue="100"
+                                    SliderMinValue="-100"
+                                    LabelText="LookAt Target X" Background="#FFCF5EAB" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAtTarget_Y_H_Slider_UserControl"
+                                    Width="905"
+                                    Height="76"
+                                    Margin="8,0,1,0"
+                                    Padding="5,2,2,2"
+                                    HorizontalAlignment="Left"
+                                    HorizontalContentAlignment="Center"
+                                    Background="#FFCFA5C1"
+                                    Grid.IsSharedSizeScope="True" SliderMaxValue="100" SliderMinValue="-100" SliderValue="0"
+                                    LabelText="LookAt Target Y" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="LookAtTarget_Z_H_Slider_UserControl"
+                                    Width="905"
+                                    Height="76"
+                                    Margin="8,0,1,0"
+                                    Padding="5,2,2,2"
+                                    HorizontalAlignment="Left"
+                                    HorizontalContentAlignment="Center"
+                                    Grid.IsSharedSizeScope="True" SliderMaxValue="100" SliderMinValue="-100" SliderValue="0"
+                                    LabelText="LookAt Target Z" />
+                            </StackPanel>
+                            <StackPanel
+                                Width="909"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+                                <StackPanel
+                                    Height="18"
+                                    Margin="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="#FFF0681B"
+                                    Orientation="Horizontal" Width="909" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <RadioButton
+                                        x:Name="LookAt_X_Up_RadioButton"
+                                        Width="73" 
+                                        Margin="11,0,9,0"
+                                        HorizontalContentAlignment="Left"
+                                        Background="#FF7DA083"
+                                        BorderBrush="#FFB66666"
+                                        BorderThickness="3"
+                                        Content="X Up"
+                                        SnapsToDevicePixels="True" GroupName="LookAtUp_RadioButton_Group" IsChecked="True" />
+                                    <RadioButton
+                                        x:Name="LookAt_Y_Up_RadioButton"
+                                        Margin="11,0,9,0"
+                                        Background="#FF7DA083"
+                                        BorderBrush="#FFB66666"
+                                        BorderThickness="3"
+                                        Content="Y Up"
+                                        SnapsToDevicePixels="True" GroupName="LookAtUp_RadioButton_Group" IsChecked="True" />
+                                    <RadioButton
+                                        x:Name="LookAt_Z_Up_RadioButton"
+                                        Margin="11,0,9,0"
+                                        Background="#FF7DA083"
+                                        BorderBrush="#FFB66666"
+                                        BorderThickness="3"
+                                        Content="Z Up"
+                                        SnapsToDevicePixels="True" GroupName="LookAtUp_RadioButton_Group" IsChecked="True" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
                 <TabItem
                     x:Name="Eye_and_Camera__TabItem"
                     Margin="0,-2,0,0"
@@ -410,146 +536,6 @@
                     </Grid>
                 </TabItem>
                 <TabItem
-                    x:Name="LookAt_tabItem"
-                    Width="54"
-                    Height="20"
-                    Margin="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Header="LookAt">
-                    <Grid Margin="0,10,0,-14" Background="#FFE5E5E5">
-                        <StackPanel
-                            x:Name="LookAt_StackPanel"
-                            Width="930"
-                            Height="547"
-                            Margin="10,0,0,19"
-                            HorizontalAlignment="Left"
-                            Background="#FFE4E893">
-                            <StackPanel
-                                x:Name="LookAtEye"
-                                Height="265"
-                                Margin="0,0,0,6"
-                                Background="#FF721D1D">
-                                <local:H_Slider_UserControl1
-                                    x:Name="LookAt_Eye_X_H_Slider_UserControl"
-                                    Width="878"
-                                    Height="84"
-                                    Margin="26,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    LabelText="Eye X" />
-                                <local:H_Slider_UserControl1
-                                    x:Name="LookAt_Eye_Y_H_Slider_UserControl"
-                                    Width="878"
-                                    Height="88"
-                                    LabelText="Eye Y" />
-                                <local:H_Slider_UserControl1
-                                    x:Name="LookAt_Eye_Z_H_Slider_UserControl"
-                                    Width="878"
-                                    Height="77"
-                                    VerticalContentAlignment="Center"
-                                    LabelText="EyeZ" />
-                            </StackPanel>
-                            <StackPanel
-                                x:Name="LookAtTarget"
-                                Width="910"
-                                Height="242"
-                                Margin="3,0,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FF45C550">
-                                <local:H_Slider_UserControl1
-                                    x:Name="LookAtTarget_X_H_Slider_UserControl"
-                                    Width="905"
-                                    Height="76"
-                                    Margin="8,1,0,0"
-                                    Padding="5,2,2,1"
-                                    HorizontalAlignment="Left"
-                                    HorizontalContentAlignment="Center"
-                                    Grid.IsSharedSizeScope="True"
-                                    LabelText="Target X" />
-                                <local:H_Slider_UserControl1
-                                    x:Name="LookAtTarget_Y_H_Slider_UserControl"
-                                    Width="905"
-                                    Height="76"
-                                    Margin="8,1,0,0"
-                                    Padding="5,2,2,2"
-                                    HorizontalAlignment="Left"
-                                    HorizontalContentAlignment="Center"
-                                    Background="#FFCFA5C1"
-                                    Grid.IsSharedSizeScope="True"
-                                    LabelText="Target Y" />
-                                <local:H_Slider_UserControl1
-                                    x:Name="LookAtTarget_Z_H_Slider_UserControl"
-                                    Width="905"
-                                    Height="76"
-                                    Margin="8,1,0,0"
-                                    Padding="5,2,2,2"
-                                    HorizontalAlignment="Left"
-                                    HorizontalContentAlignment="Center"
-                                    Grid.IsSharedSizeScope="True"
-                                    LabelText="Target Z" />
-                            </StackPanel>
-                            <StackPanel
-                                Width="909"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Orientation="Horizontal">
-                                <StackPanel
-                                    Width="366"
-                                    Height="18"
-                                    Margin="5,0,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Background="#FF7C2121"
-                                    Orientation="Horizontal">
-                                    <RadioButton
-                                        x:Name="UseOrthographic_Viewing_Transform_radioButton"
-                                        Width="100"
-                                        Content="Orthographic                                         " />
-                                    <RadioButton Content="LookAt" />
-                                    <RadioButton Content="Frustrum" />
-                                    <RadioButton Content="RadioButton" />
-                                </StackPanel>
-                                <StackPanel
-                                    Height="18"
-                                    Margin="85,0,564,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
-                                    Background="#FF7C2121"
-                                    Orientation="Horizontal">
-                                    <RadioButton
-                                        x:Name="LookAt_X_Up_RadioButton"
-                                        Width="73"
-                                        Margin="11,0,9,0"
-                                        HorizontalContentAlignment="Left"
-                                        Background="#FF7DA083"
-                                        BorderBrush="#FFB66666"
-                                        BorderThickness="3"
-                                        Content="X Up"
-                                        SnapsToDevicePixels="True" />
-                                    <RadioButton
-                                        x:Name="LookAt_Y_Up_RadioButton"
-                                        Margin="11,0,9,0"
-                                        Background="#FF7DA083"
-                                        BorderBrush="#FFB66666"
-                                        BorderThickness="3"
-                                        Content="Y Up"
-                                        SnapsToDevicePixels="True" />
-                                    <RadioButton
-                                        x:Name="LookAt_Z_Up_RadioButton"
-                                        Margin="11,0,9,0"
-                                        Background="#FF7DA083"
-                                        BorderBrush="#FFB66666"
-                                        BorderThickness="3"
-                                        Content="Z Up"
-                                        SnapsToDevicePixels="True" />
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </TabItem>
-                <TabItem
                     x:Name="___TabItem___Perspective_"
                     Width="86"
                     Height="20"
@@ -583,12 +569,14 @@
                                 Width="902"
                                 Height="80"
                                 Margin="10,5,0,0"
+                                LabelText="Perspective fovy"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top" />
                             <local:H_Slider_UserControl1
                                 Grid.Row="1"
                                 Width="902"
                                 Height="80"
+                                LabelText="Perspective aspect"
                                 Margin="10,10,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top" />
@@ -596,13 +584,16 @@
                                 Grid.Row="2"
                                 Width="902"
                                 Height="80"
+                                LabelText="Perspetive zNear"
                                 Margin="10,24,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top" />
                             <local:H_Slider_UserControl1
                                 Width="902"
+                                LabelText="Perspextive zFar"
                                 Height="Auto"
-                                Margin="10,10,0,0" Grid.Row="4"
+                                Margin="10,10,0,0" 
+                                Grid.Row="4"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Stretch" />
                         </Grid>
