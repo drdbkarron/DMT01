@@ -7,31 +7,33 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="H_Slider_UserControl"
     Width="834.32"
-    Height="80"
+    Height="69"
     Padding="2"
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     Background="#FFCD98BC"
     mc:Ignorable="d">
     <Grid
+        x:Name="H_Slider_UserControl_Grid"
         Width="826"
-        Height="75"
+        Height="67"
         Margin="2,0,3,0"
         HorizontalAlignment="Center"
         VerticalAlignment="Top"
         Background="#FF2D3A39">
         <DockPanel
+            x:Name="H_Slider_UserControl_DockPanel"
             Width="826"
-            Height="54"
+            Height="43"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Background="#FFF78513"
             LastChildFill="False">
             <Slider
                 x:Name="theH_Slider"
-                Width="821"
+                Width="824"
                 Height="40"
-                Margin="0,4,0,6"
+                Margin="1,1,1,1"
                 Padding="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -42,16 +44,17 @@
                 Maximum="100"
                 Minimum="-200"
                 MouseWheel="theH_Slider_MouseWheel"
-                SmallChange="0"
+                SmallChange="1"
+                LargeChange="10"
                 TickFrequency="10"
                 TickPlacement="BottomRight"
                 Value="0" />
         </DockPanel>
         <TextBox
             x:Name="Slider_Value_TextBox"
-            Width="27"
+            Width="33"
             Height="20"
-            Margin="498,2,301,0"
+            Margin="498,2,295,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Text="{Binding ElementName=theH_Slider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -70,11 +73,13 @@
             Content="Eye Coordinates" />
         <TextBox
             x:Name="Slider_Low_TextBox"
-            Width="29"
+            Width="39"
             Height="22"
-            Margin="10,0,0,53"
+            Margin="2,2,8,-1"
             HorizontalAlignment="Left"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Background="#FF608EDE"
             MouseWheel="Slider_Low_TextBox_MouseWheel"
             Text="{Binding Minimum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -83,11 +88,13 @@
             TextWrapping="Wrap" />
         <TextBox
             x:Name="Slider_Hi_TextBox"
-            Width="30"
+            Width="39"
             Height="22"
-            Margin="0,-1,7,54"
+            Margin="2,1,3,0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Background="#FFC90C0C"
             Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 

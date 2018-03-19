@@ -17,6 +17,8 @@ using System.Windows.Resources;
 using System.Windows.Shapes;
 using SharpGL.SceneGraph.Primitives;
 using SharpGL.SceneGraph;
+using WpfScreenHelper;
+
 
 namespace DMT01
 {
@@ -28,9 +30,19 @@ namespace DMT01
 		static long Draws=0, Resizes = 0;
         public MainWindow()
         {
-            InitializeComponent();
+            
 
-			Debug.WriteLine(String.Format("{0}", nameof(MainWindow)));
+            foreach(Screen s in WpfScreenHelper.Screen.AllScreens)
+            {
+
+                Debug.WriteLine(String.Format("{0} {1}",s.DeviceName, s.Bounds.Left));
+
+            }
+            this.Left = -1290;
+            this.Top = 0;
+
+            InitializeComponent();
+            Debug.WriteLine(String.Format("{0}", nameof(MainWindow)));
 
 		}
 
@@ -63,19 +75,24 @@ namespace DMT01
 
 			//gl.Translate(0.0f, 0.0f, -6.0f);
 
-			if(UseLookAtViewingTransform_RadioButton.IsChecked.GetValueOrDefault()) LookAt(gl);
+			if(UseLookAtViewingTransform_RadioButton.IsChecked.GetValueOrDefault())
+            {
+                LookAt(gl);
+            }
+
+            if (UsePerspetiveViewingTransform.IsChecked.GetValueOrDefault())
+            {
+                Perspective(gl);
+            }
+
+            //gl.Translate(Eye_X_H_Sslider_UserControl.SliderValue, Eye_Y_H_Sslider_UserControl.SliderValue, Eye_Z_H_Sslider_UserControl.SliderValue);
 
 
-			//(double fovy, double aspect, double zNear, double zFar)
-			if (UsePerspectiveViewingTransform_RadioButton.IsChecked.GetValueOrDefault()) Perspective(gl);
-
-			//gl.Translate(Eye_X_H_Sslider_UserControl.SliderValue, Eye_Y_H_Sslider_UserControl.SliderValue, Eye_Z_H_Sslider_UserControl.SliderValue);
+            gl.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
 
 			gl.Rotate(rotation, 0.0f, 1.0f, 0.0f);
 
-			gl.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
-
-			if (AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
+            if (AxisDrawMe_CheckBox.IsChecked.GetValueOrDefault())
 			{
 				Axis_Arrow_Grid.Axis_Class.MyGlobalAxis(gl);
 			}
@@ -99,16 +116,25 @@ namespace DMT01
 			if (LookAt_Y_Up_RadioButton.IsChecked.GetValueOrDefault()) { y_up = 1.0f; } else { y_up = 0.0f; }
 			if (LookAt_Z_Up_RadioButton.IsChecked.GetValueOrDefault()) { z_up = 1.0f; } else { z_up = 0.0f; }
 
-			gl.LookAt(LookAt_Eye_X_H_Slider_UserControl.SliderValue, LookAt_Eye_Y_H_Slider_UserControl.SliderValue, LookAt_Eye_Z_H_Slider_UserControl.SliderValue,
-					  LookAtTarget_X_H_Slider_UserControl.SliderValue, LookAtTarget_Y_H_Slider_UserControl.SliderValue, LookAtTarget_Z_H_Slider_UserControl.SliderValue,
-					  x_up,y_up,z_up);
-		}
+            gl.LookAt(
+                LookAt_Eye_X_H_Slider_UserControl.SliderValue, 
+                LookAt_Eye_Y_H_Slider_UserControl.SliderValue, 
+                LookAt_Eye_Z_H_Slider_UserControl.SliderValue,
+                LookAtTarget_X_H_Slider_UserControl.SliderValue, 
+                LookAtTarget_Y_H_Slider_UserControl.SliderValue, 
+                LookAtTarget_Z_H_Slider_UserControl.SliderValue,
+                x_up, y_up, z_up);
+        }
 
-		private void Perspective(OpenGL gl)
+        private void Perspective(OpenGL gl)
 		{
-
-		}
-		private void myOpenGLControl_OpenGLInitialized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
+            //(double fovy, double aspect, double zNear, double zFar)
+            gl.Perspective(Perspective_FOVY_H_Slider_UserControl.SliderValue,
+                Perspective_ASPECT_H_Slider_UserControl.SliderValue,
+                Perspective_Z_NEAR_H_Slider_UserControl.SliderValue,
+                Perspective_Z_FAR_H_Slider_UserControl.SliderValue);
+        }
+        private void myOpenGLControl_OpenGLInitialized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
 
 			//  Get the OpenGL object.
@@ -137,6 +163,7 @@ namespace DMT01
 			gl.Enable(OpenGL.GL_LIGHT0);
 
 			gl.ShadeModel(OpenGL.GL_SMOOTH);
+
 			Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLInitialized)));
 		}
 
@@ -158,7 +185,14 @@ namespace DMT01
 
         }
 
-		private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
+        private void LookAt_Eye_X_H_Slider_UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Debug.WriteLine(String.Format("{0}", nameof(LookAt_Eye_X_H_Slider_UserControl_Loaded)));
+
+        }
+
+        private void myOpenGLControl_Resized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
 		{
 
 			//  Get the OpenGL object.
