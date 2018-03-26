@@ -689,9 +689,9 @@
                 </TabItem>
                 <TabItem
                     x:Name="ProjectionAndModeling_TabItem"
-                    Width="85"
-                    Height="20"
-                    Margin="0,0,-31,0"
+                    Width="176"
+                    Height="21"
+                    Margin="0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="Projection and Modeling">
@@ -707,51 +707,89 @@
                             Loaded="Projection_DataGrid_Loaded" />
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="Lighting" Header="Lights" >
-                    <Grid x:Name="Lightig_Grid" Margin="9,5,9,-2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="586" Width="956">
+                <TabItem x:Name="Lighting" Header="Lights">
+                    <Grid
+                        x:Name="Lightig_Grid"
+                        Width="956"
+                        Height="586"
+                        Margin="9,5,9,-2"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
                         <Grid.Background>
                             <RadialGradientBrush>
-                                <GradientStop Color="Black" Offset="0"/>
-                                <GradientStop Color="#FF57463B" Offset="1"/>
+                                <GradientStop Offset="0" Color="Black" />
+                                <GradientStop Offset="1" Color="#FF57463B" />
                             </RadialGradientBrush>
                         </Grid.Background>
-                        <TabControl HorizontalAlignment="Left" Height="373" Margin="120,93,0,0" VerticalAlignment="Top" Width="619">
+                        <TabControl
+                            Width="619"
+                            Height="373"
+                            Margin="120,93,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
                             <TabItem Header="LIGHT0">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                             <TabItem Header="LIGHT1">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                             <TabItem Header="LIGHT2">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                             <TabItem Header="LIGHT3">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                             <TabItem Header="LIGHT4">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                             <TabItem Header="LIGHT5">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                             <TabItem Header="LIGHT6">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                             <TabItem Header="LIGHT7">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5" />
                             </TabItem>
                         </TabControl>
                     </Grid>
                 </TabItem>
-                <TabItem Header="LIGHTING_MODEL" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem
+                    Width="54"
+                    Height="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Header="LIGHTING_MODEL">
+                    <Grid Background="#FFE5E5E5" />
                 </TabItem>
-                <TabItem Header="MATERIALs" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+                <TabItem
+                    Width="54"
+                    Height="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Header="MATERIALs">
                     <Grid Background="#FFE5E5E5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="512*"/>
+                            <ColumnDefinition Width="512*" />
                         </Grid.ColumnDefinitions>
                     </Grid>
+                </TabItem>
+                <TabItem
+                    Width="54"
+                    Margin="-2,-2,0,3"
+                    HorizontalAlignment="Left"
+                    Header="Axis">
+                    <Grid Background="#FF82DABE" Height="572" Width="955" >
+                        <StackPanel HorizontalAlignment="Left" Height="204" Margin="76,246,0,0" VerticalAlignment="Top" Width="446"/>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    Width="54"
+                    Height="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Header="Grid">
+                    <Grid Background="#FFE5E5E5" />
                 </TabItem>
             </TabControl>
         </StackPanel>
