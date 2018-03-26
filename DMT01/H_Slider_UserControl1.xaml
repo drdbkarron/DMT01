@@ -41,11 +41,11 @@
                 Background="#FF56529B"
                 BorderBrush="#FFE20D0D"
                 BorderThickness="3"
+                LargeChange="10"
                 Maximum="100"
                 Minimum="-200"
                 MouseWheel="theH_Slider_MouseWheel"
                 SmallChange="1"
-                LargeChange="10"
                 TickFrequency="10"
                 TickPlacement="BottomRight"
                 Value="0" />
@@ -97,6 +97,15 @@
             VerticalContentAlignment="Center"
             Background="#FFC90C0C"
             Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Button
+            x:Name="ResetValue"
+            Width="75"
+            Height="20"
+            Margin="179,2,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ResetValue_Click"
+            Content="Reset" />
 
     </Grid>
 </UserControl>

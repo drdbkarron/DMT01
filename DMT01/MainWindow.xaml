@@ -21,17 +21,21 @@
     Background="#FF5D7C75"
     BorderBrush="#FFDE0A0A"
     BorderThickness="3"
-    Left="-1920"
+    Initialized="DMTWindow_Initialized"
+    Left="-1800"
+    Loaded="DMTWindow_Loaded"
     ScrollViewer.CanContentScroll="True"
     ScrollViewer.HorizontalScrollBarVisibility="Visible"
+    Top="1"
     UseLayoutRounding="True"
-    WindowStartupLocation="CenterScreen"
+    WindowStartupLocation="Manual"
+    WindowState="Normal"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
     <StackPanel
         x:Name="TopStackPanel"
         Width="1049"
-        Height="1015"
+        Height="1050"
         Margin="4,4,0,0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
@@ -92,7 +96,7 @@
         <StackPanel
             x:Name="BottomStackPanel"
             Width="1029"
-            Height="675"
+            Height="714"
             Margin="9,5,0,16"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -114,7 +118,8 @@
                     HorizontalAlignment="Left"
                     BorderBrush="#FFEA0909"
                     BorderThickness="5,2,1,2"
-                    Content="DrawAxis" />
+                    Content="DrawAxis"
+                    IsChecked="True" />
                 <CheckBox
                     x:Name="DrawTeaPot_CheckBox"
                     Width="83"
@@ -122,7 +127,8 @@
                     HorizontalAlignment="Left"
                     BorderBrush="#FFEA0909"
                     BorderThickness="5,2,1,2"
-                    Content="TeaPot" />
+                    Content="TeaPot"
+                    IsChecked="True" />
                 <CheckBox
                     x:Name="AxisDrawMe_CheckBox_Copy3"
                     Width="83"
@@ -285,8 +291,8 @@
             </StackPanel>
             <TabControl
                 Width="988"
-                Height="585"
-                Margin="4,5"
+                Height="624"
+                Margin="22,5,19,5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="#FFF1F1C6">
@@ -330,10 +336,10 @@
                                     VerticalAlignment="Top"
                                     LabelText="LookAt X"
                                     SliderMaxValue="100"
-                                    SliderMinValue="-100" 
-                                    />
+                                    SliderMinValue="-100"
+                                    SliderValue="0" />
                                 <local:H_Slider_UserControl1
-                                    x:Name="LookAt_Eye_Y_H_Slider_UserControl"     
+                                    x:Name="LookAt_Eye_Y_H_Slider_UserControl"
                                     Width="960"
                                     Height="82"
                                     Margin="5,4,0,0"
@@ -342,8 +348,7 @@
                                     LabelText="LookAt Eye Y"
                                     SliderMaxValue="100"
                                     SliderMinValue="-100"
-                                    SliderValue="0" 
-                                    />
+                                    SliderValue="0" />
                                 <local:H_Slider_UserControl1
                                     x:Name="LookAt_Eye_Z_H_Slider_UserControl"
                                     Width="960"
@@ -412,7 +417,8 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 Orientation="Horizontal">
-                                <StackPanel x:Name="LookAt_WhatAxisIsUp_StackPanel"
+                                <StackPanel
+                                    x:Name="LookAt_WhatAxisIsUp_StackPanel"
                                     Width="246"
                                     Height="20"
                                     Margin="0"
@@ -463,24 +469,24 @@
                     Margin="0,-2,0,0"
                     Header="Eye and Camera">
                     <Grid
-                        Width="928"
-                        Height="440"
-                        Margin="8,0,6,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
+                        x:Name="SceneTranslate_Grid"
+                        Width="965"
+                        Height="332"
+                        Margin="8,7,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
                         Background="#FFC1DC47">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="105*" />
-                            <RowDefinition Height="87*" />
-                            <RowDefinition Height="71*" />
-                            <RowDefinition Height="177*" />
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="100*" />
                         </Grid.RowDefinitions>
-                        <!--<local:H_Slider_UserControl1
+                        <local:H_Slider_UserControl1
                             x:Name="Eye_Z_H_Sslider_UserControl"
                             Grid.Row="0"
-                            Width="885"
-                            Height="89"
-                            Margin="7,10,0,0"
+                            Width="941"
+                            Height="81"
+                            Margin="9,8,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             BorderBrush="#FFEA2020"
@@ -492,22 +498,44 @@
                         <local:H_Slider_UserControl1
                             x:Name="Eye_X_H_Sslider_UserControl"
                             Grid.Row="1"
-                            Width="891"
-                            Height="74"
-                            Margin="7,7,30,0"
-                            VerticalAlignment="Top" />
+                            Width="941"
+                            Height="82"
+                            Margin="9,8,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            LabelText="X Eye Coordinate"
+                            SliderMaxValue="100"
+                            SliderMinValue="-100"
+                            SliderValue="0" />
                         <local:H_Slider_UserControl1
                             x:Name="Eye_Y_H_Sslider_UserControl"
                             Grid.Row="2"
-                            Grid.RowSpan="2"
-                            Width="885"
-                            Height="78"
-                            Margin="0,10,36,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top" />-->
+                            Width="941"
+                            Height="81"
+                            Margin="9,8,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            LabelText="Y Eye Coordinate"
+                            SliderMaxValue="100"
+                            SliderMinValue="-100"
+                            SliderValue="0" />
+                        <Grid
+                            x:Name="Rotate_Grid"
+                            Grid.Row="2"
+                            Width="961"
+                            Height="193"
+                            Margin="4,123,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="#FF197280" />
                     </Grid>
+
+
                 </TabItem>
-                <TabItem Margin="0" Header="Spreadsheet Load file">
+                <TabItem
+                    x:Name="SpreadsheetSupport_TabItem"
+                    Margin="0"
+                    Header="Spreadsheet Load file">
                     <Grid
                         Width="793"
                         Height="143"
@@ -611,31 +639,32 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="113*" />
                             </Grid.RowDefinitions>
-                            <local:H_Slider_UserControl1 x:Name="Perspective_FOVY_H_Slider_UserControl"
+                            <local:H_Slider_UserControl1
+                                x:Name="Perspective_FOVY_H_Slider_UserControl"
                                 Grid.Row="0"
                                 Width="902"
                                 Height="111"
                                 Margin="0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                LabelText="Perspective fovy" 
-                                SliderValue="30"
+                                LabelText="Perspective fovy"
                                 SliderMaxValue="90"
                                 SliderMinValue="5"
-                                />
-                            <local:H_Slider_UserControl1 x:Name="Perspective_ASPECT_H_Slider_UserControl"
+                                SliderValue="30" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Perspective_ASPECT_H_Slider_UserControl"
                                 Grid.Row="1"
                                 Width="902"
                                 Height="111"
                                 Margin="0,10,0,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                LabelText="Perspective aspect" 
-                                SliderValue="1"
+                                LabelText="Perspective aspect"
                                 SliderMaxValue="10"
                                 SliderMinValue=".1"
-                                />
-                            <local:H_Slider_UserControl1 x:Name="Perspective_Z_NEAR_H_Slider_UserControl"
+                                SliderValue="1" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Perspective_Z_NEAR_H_Slider_UserControl"
                                 Grid.Row="2"
                                 Width="902"
                                 Height="111"
@@ -643,29 +672,86 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 LabelText="Perspetive zNear" />
-                            <local:H_Slider_UserControl1 x:Name="Perspective_Z_FAR_H_Slider_UserControl"
+                            <local:H_Slider_UserControl1
+                                x:Name="Perspective_Z_FAR_H_Slider_UserControl"
                                 Grid.Row="4"
                                 Width="902"
                                 Height="111"
                                 Margin="0,10,0,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                LabelText="Perspective zFar" 
-                                SliderValue="0"
+                                LabelText="Perspective zFar"
                                 SliderMaxValue="100"
                                 SliderMinValue="-100"
-                                />
+                                SliderValue="0" />
                         </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem
+                    x:Name="ProjectionAndModeling_TabItem"
                     Width="85"
                     Height="20"
                     Margin="0,0,-31,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Header="TabItem">
-                    <Grid Background="#FFE5E5E5" />
+                    Header="Projection and Modeling">
+                    <Grid Background="#FFE5E5E5">
+                        <DataGrid
+                            x:Name="ProjectionMatrix_DataGrid"
+                            Width="461"
+                            Height="311"
+                            Margin="116,56,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Initialized="Projection_DataGrid_Initialized"
+                            Loaded="Projection_DataGrid_Loaded" />
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="Lighting" Header="Lights" >
+                    <Grid x:Name="Lightig_Grid" Margin="9,5,9,-2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="586" Width="956">
+                        <Grid.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#FF57463B" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Grid.Background>
+                        <TabControl HorizontalAlignment="Left" Height="373" Margin="120,93,0,0" VerticalAlignment="Top" Width="619">
+                            <TabItem Header="LIGHT0">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Header="LIGHT1">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Header="LIGHT2">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Header="LIGHT3">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Header="LIGHT4">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Header="LIGHT5">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Header="LIGHT6">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Header="LIGHT7">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="LIGHTING_MODEL" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Header="MATERIALs" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="512*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </StackPanel>

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace DMT01
 {
 	/// <summary>
@@ -44,6 +45,7 @@ namespace DMT01
 				theH_Slider.Value = value;
 			}
 		}
+        public static float SliderDefaultValue;
 
 		public Double SliderMaxValue
 		{
@@ -154,5 +156,10 @@ namespace DMT01
             Debug.WriteLine(String.Format("{0} {1} {2}", nameof(theH_Slider_MouseWheel), delta, sign, theH_Slider.Value));
 
 		}
-	}
+
+        public void ResetValue_Click ( object sender , RoutedEventArgs e )
+        {
+            SliderValue = SliderDefaultValue;
+        }
+    }
 }
