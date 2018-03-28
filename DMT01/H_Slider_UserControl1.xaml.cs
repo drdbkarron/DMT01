@@ -13,16 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System . Xml;
+using System . Xml . Serialization;
+using System . IO;
 
 
 namespace DMT01
 {
-	/// <summary>
-	/// Interaction logic for UserControl1.xaml
-	/// </summary>
-	public partial class H_Slider_UserControl1 : UserControl
-	{
-		public H_Slider_UserControl1()
+    /// <summary>
+    /// Interaction logic for UserControl1.xaml
+    /// </summary>
+    public partial class H_Slider_UserControl1 : UserControl
+    {
+ 		public H_Slider_UserControl1()
 		{
 			InitializeComponent();
 
@@ -44,6 +47,7 @@ namespace DMT01
 				}
 				theH_Slider.Value = value;
 			}
+            
 		}
         public static float SliderDefaultValue;
 
@@ -160,6 +164,36 @@ namespace DMT01
         public void ResetValue_Click ( object sender , RoutedEventArgs e )
         {
             SliderValue = SliderDefaultValue;
+        }
+   
+        private void Save0_Button_Click ( object sender , RoutedEventArgs e )
+        {
+            double f=theH_Slider.Value;
+            String fs=f.ToString("000000.000000");
+            var p=new classSliderState ();
+            p . MaxValue = ( float ) theH_Slider . Maximum;
+            p . MinValue = ( float ) theH_Slider . Minimum;
+            p . ResetValue = ( float ) theH_Slider . Value;
+            p . SliderName = this . Name;
+
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
+            XmlWriter w=XmlWriter.Create("boobiblie.xml");
+            w . WriteStartElement ( nameof ( Save0_Button_Click ) );
+            w . WriteStartAttribute ( nameof ( Save0_Button_Click ) );
+            x . Serialize ( w , p );
+            w . Close ( );
+            
+
+        
+        }
+        public class classSliderState
+        {
+            
+            public String SliderName=String.Empty;
+                public String SliderClass=nameof(H_Slider_UserControl1);
+        public float MaxValue=(float)-1.1;
+        public float MinValue;
+        public float ResetValue;
         }
     }
 }
