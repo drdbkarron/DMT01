@@ -8,7 +8,7 @@
     xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
     xmlns:local="clr-namespace:DMT01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="DMTWindow"
+    x:Name="DMT_Main_Window"
     Title="DMT_MainWindow"
     Width="1072"
     Height="1100"
@@ -22,8 +22,9 @@
     BorderBrush="#FFDE0A0A"
     BorderThickness="3"
     Initialized="DMTWindow_Initialized"
-    Left="-1800"
+    Left="845"
     Loaded="DMTWindow_Loaded"
+    LocationChanged="DMT_Main_Window_LocationChanged"
     ScrollViewer.CanContentScroll="True"
     ScrollViewer.HorizontalScrollBarVisibility="Visible"
     Top="1"
@@ -105,7 +106,7 @@
             <StackPanel
                 x:Name="DrawMe_StackPanel"
                 Width="921"
-                Height="20"
+                Height="24"
                 Margin="19,7,89,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -130,47 +131,64 @@
                     Content="TeaPot"
                     IsChecked="True" />
                 <CheckBox
-                    x:Name="AxisDrawMe_CheckBox_Copy3"
+                    x:Name="Do_Orbit_CheckBox"
                     Width="83"
                     Margin="4,2,3,2"
                     HorizontalAlignment="Left"
                     BorderBrush="#FFEA0909"
                     BorderThickness="5,2,1,2"
-                    Content="CheckBox" />
+                    Content="Do Orbit" />
                 <CheckBox
-                    x:Name="AxisDrawMe_CheckBox_Copy5"
+                    x:Name="Spredsheet_Grid_CheckBox"
                     Width="83"
                     Margin="4,2,3,2"
                     HorizontalAlignment="Left"
                     BorderBrush="#FFEA0909"
                     BorderThickness="5,2,1,2"
-                    Content="CheckBox" />
+                    IsChecked="True"
+                    Content="Draw Spreadsheet Grid" />
                 <StackPanel
+                    x:Name="RadioButton_StackPanel"
                     Width="366"
                     Height="18"
-                    Margin="5,0,0,2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    Margin="5,3,3,2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
                     Background="#FF7C2121"
                     Orientation="Horizontal">
                     <RadioButton
                         x:Name="UseOrthographic_Viewing_Transform_radioButton"
                         Width="100"
+                        IsChecked="False"
                         Content="Orthographic"
-                        GroupName="ViewingTransformRadioButtonGroup" />
+                        GroupName="ViewingTransformRadioButtonGroup" Click="UseOrthographic_Viewing_Transform_radioButton_Click" />
                     <RadioButton
                         x:Name="UseLookAtViewingTransform_RadioButton"
                         Content="LookAt"
-                        GroupName="ViewingTransformRadioButtonGroup" />
-                    <RadioButton
+                        IsChecked="True"
+                        GroupName="ViewingTransformRadioButtonGroup" Click="UseLookAtViewingTransform_RadioButton_Click" />
+                    <RadioButton x:Name="Use_Viewing_Frustrum_RadioButton"
                         Width="79"
                         Content="Frustrum"
-                        GroupName="ViewingTransformRadioButtonGroup" />
+                        IsChecked="false"
+                        GroupName="ViewingTransformRadioButtonGroup" Click="Use_Viewing_Frustrum_RadioButton_Click" />
                     <RadioButton
                         x:Name="UsePerspetiveViewingTransform"
                         Content="Perspective"
-                        GroupName="ViewingTransformRadioButtonGroup" />
+                        GroupName="ViewingTransformRadioButtonGroup" Click="UsePerspetiveViewingTransform_Click" />
                 </StackPanel>
+                <Button
+                    x:Name="Save0_Button"
+                    Width="76"
+                    Margin="1,2,0,2"
+                    Click="Save0_Button_Click"
+                    Content="Save0" />
+                <Button
+                    x:Name="load_Button"
+                    Width="75"
+                    Margin="2,2,0,2"
+                    Click="load_Button_Click"
+                    Content="Button" />
             </StackPanel>
             <StackPanel
                 Height="38"
@@ -239,17 +257,19 @@
                     BorderThickness="1"
                     Content="LookAt" />
                 <Label
-                    x:Name="Label1_Label"
-                    Width="61"
-                    Height="27"
-                    Margin="5,1"
+                    x:Name="Orbit_Label"
+                    Width="94"
+                    Height="26"
+                    Margin="5,6"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="Label1" />
+                    Content="{Binding ElementName=Orbit_Rotation_H_Slider_UserControl1, Path=SliderValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+
+                </Label>
                 <Label
-                    x:Name="Label2_Label"
+                    x:Name="Orbit_Delta_Label"
                     Width="61"
                     Height="27"
                     Margin="5,1"
@@ -257,7 +277,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="Label2" />
+                    Content="{Binding ElementName=Orbit_Delta_H_Slider_UserControl1, Path=SliderValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Label
                     x:Name="Label3_Label"
                     Width="61"
@@ -267,7 +287,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="Label3" />
+                    Content="Not Used" />
                 <Label
                     x:Name="Label4_Label"
                     Width="61"
@@ -523,20 +543,51 @@
                             x:Name="Rotate_Grid"
                             Grid.Row="2"
                             Width="961"
-                            Height="193"
-                            Margin="4,123,0,0"
+                            Height="235"
+                            Margin="4,123,0,-247"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Background="#FF197280" />
+                            VerticalAlignment="Top">
+                            <Grid.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0" Color="#FF345B66" />
+                                    <GradientStop Offset="1" Color="#FFFF3E3E" />
+                                </RadialGradientBrush>
+                            </Grid.Background>
+                            <local:H_Slider_UserControl1
+                                x:Name="Orbit_Rotation_H_Slider_UserControl1"
+                                Width="941"
+                                Height="80"
+                                Margin="10,7,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF1CCD00"
+                                LabelText="Orbit Rotation Angle"
+                                SliderMaxValue="1000"
+                                SliderMinValue="-1000"
+                                SliderValue="0.0" >
+                            </local:H_Slider_UserControl1>
+                            <local:H_Slider_UserControl1
+                                x:Name="Orbit_Delta_H_Slider_UserControl1"
+                                Width="941"
+                                Height="80"
+                                Margin="10,92,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF3F7CD4"
+                                LabelText="Orbit Delta"
+                                SliderMaxValue="10"
+                                SliderMinValue="-10"
+                                SliderValue="3.0">
+                            </local:H_Slider_UserControl1>
+                        </Grid>
                     </Grid>
-
-
                 </TabItem>
                 <TabItem
                     x:Name="SpreadsheetSupport_TabItem"
                     Margin="0"
                     Header="Spreadsheet Load file">
                     <Grid
+                        x:Name="SpreadsheetFileName_Grid"
                         Width="793"
                         Height="143"
                         Margin="30,0,0,0"
@@ -559,7 +610,10 @@
                                 Background="#FF3B9393"
                                 DockPanel.Dock="Top"
                                 TextAlignment="Center"
-                                TextWrapping="Wrap"><Run Text="Spreadsheet File Name" /></TextBlock>
+                                TextWrapping="Wrap">
+                                <Run Text="Spreadsheet File Name">
+                                </Run>
+                            </TextBlock>
                             <RichTextBox
                                 x:Name="SpreadsheetDirPath_RichTextBox"
                                 Width="743"
@@ -776,11 +830,19 @@
                 </TabItem>
                 <TabItem
                     Width="54"
-                    Margin="-2,-2,0,3"
+                    Margin="-2,0,0,1"
                     HorizontalAlignment="Left"
                     Header="Axis">
-                    <Grid Background="#FF82DABE" Height="572" Width="955" >
-                        <StackPanel HorizontalAlignment="Left" Height="204" Margin="76,246,0,0" VerticalAlignment="Top" Width="446"/>
+                    <Grid
+                        Width="955"
+                        Height="572"
+                        Background="#FF82DABE">
+                        <StackPanel
+                            Width="446"
+                            Height="204"
+                            Margin="76,246,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top" />
                     </Grid>
                 </TabItem>
                 <TabItem
@@ -790,6 +852,17 @@
                     VerticalAlignment="Top"
                     Header="Grid">
                     <Grid Background="#FFE5E5E5" />
+                </TabItem>
+                <TabItem x:Name="Orthographics_Viewing_TabItem" Header="Orthographics Viewing" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="54">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem x:Name="Viewing_Frustrum_TabItem" Header="Viewing Frustrum" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="54">
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="829*"/>
+                            <ColumnDefinition Width="153*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </StackPanel>

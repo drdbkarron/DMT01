@@ -25,7 +25,19 @@ namespace DMT01
     /// </summary>
     public partial class H_Slider_UserControl1 : UserControl
     {
- 		public H_Slider_UserControl1()
+        #region Persistance_classes1
+        public class H_Slider_UserControl1_SaveState_Class
+        {
+            public String ControlClass = nameof ( H_Slider_UserControl1 );
+            public String ControlName = String . Empty;
+            public string StateFileName = String . Empty;
+            public float MaxValue = ( float ) -1.1;
+            public float MinValue = -2.2f;
+            public float ResetValue = -3.3f;
+        }
+       public  static H_Slider_UserControl1_SaveState_Class H_Slider_Static;
+        #endregion Persistant_classes
+        public H_Slider_UserControl1 ()
 		{
 			InitializeComponent();
 
@@ -49,7 +61,7 @@ namespace DMT01
 			}
             
 		}
-        public static float SliderDefaultValue;
+        //public static float SliderDefaultValue;
 
 		public Double SliderMaxValue
 		{
@@ -163,37 +175,48 @@ namespace DMT01
 
         public void ResetValue_Click ( object sender , RoutedEventArgs e )
         {
-            SliderValue = SliderDefaultValue;
+            SliderValue = H_Slider_Static . ResetValue;
         }
-   
-        private void Save0_Button_Click ( object sender , RoutedEventArgs e )
-        {
-            double f=theH_Slider.Value;
-            String fs=f.ToString("000000.000000");
-            var p=new classSliderState ();
-            p . MaxValue = ( float ) theH_Slider . Maximum;
-            p . MinValue = ( float ) theH_Slider . Minimum;
-            p . ResetValue = ( float ) theH_Slider . Value;
-            p . SliderName = this . Name;
 
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
-            XmlWriter w=XmlWriter.Create("boobiblie.xml");
-            w . WriteStartElement ( nameof ( Save0_Button_Click ) );
-            w . WriteStartAttribute ( nameof ( Save0_Button_Click ) );
-            x . Serialize ( w , p );
-            w . Close ( );
-            
-
-        
-        }
-        public class classSliderState
+    private void Save0_Button_Click ( object sender , RoutedEventArgs e )
         {
-            
-            public String SliderName=String.Empty;
-                public String SliderClass=nameof(H_Slider_UserControl1);
-        public float MaxValue=(float)-1.1;
-        public float MinValue;
-        public float ResetValue;
+
+        Button t = sender as Button;
+        DependencyObject ttt = t . Parent;
+        Grid G = ttt as Grid;
+        DependencyObject gg = G . Parent;
+        H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
+        Seralize_H__Slider_UserControl1_SaveState ( ttyy );
+
         }
-    }
+    private void Seralize_H__Slider_UserControl1_SaveState ( H_Slider_UserControl1 ttyy )
+        {
+        string ControlName = ttyy . Name;
+        String StateFileName = String . Format ( "{0}.xml" , ControlName );
+        Seralize_H__Slider_UserControl1_SaveState ( ControlName: ControlName , StateFileName: StateFileName , ttyy: ttyy );
+        }
+
+    private void Seralize_H__Slider_UserControl1_SaveState ( string ControlName , String StateFileName , H_Slider_UserControl1 ttyy )
+        {
+            var p =new H_Slider_UserControl1_SaveState_Class ();
+        p . ControlClass = nameof ( H_Slider_UserControl1 );
+        p . ControlName = ControlName;
+        p . StateFileName = StateFileName;
+        p . ResetValue = ( float ) theH_Slider . Value;
+        p . MaxValue = ( float ) theH_Slider . Maximum;
+        p . MinValue = ( float ) theH_Slider . Minimum;
+
+        System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
+
+        XmlWriterSettings s = new XmlWriterSettings();
+        s . Indent = true;
+        s . NewLineOnAttributes = true;
+        s . OmitXmlDeclaration = true;
+        XmlWriter w=XmlWriter.Create(StateFileName,s);
+            
+        x . Serialize ( w , p );
+        w . Close ( );
+       
+        }
+     }
 }
