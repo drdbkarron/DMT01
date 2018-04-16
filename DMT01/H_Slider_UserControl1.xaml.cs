@@ -28,6 +28,7 @@ namespace DMT01
         #region Persistance_classes1
         public class H_Slider_UserControl1_SaveState_Class
         {
+            public DMT01.MainWindow.SeralizeControlCommonFields SSC = new DMT01 . MainWindow . SeralizeControlCommonFields ( );
             public String ControlClass = nameof ( H_Slider_UserControl1 );
             public String ControlName = String . Empty;
             public string StateFileName = String . Empty;
@@ -35,11 +36,14 @@ namespace DMT01
             public float MinValue = -2.2f;
             public float ResetValue = -3.3f;
         }
-       public  static H_Slider_UserControl1_SaveState_Class H_Slider_Static;
+        //public  static H_Slider_UserControl1_SaveState_Class H_Slider_Static;
         #endregion Persistant_classes
         public H_Slider_UserControl1 ()
 		{
-			InitializeComponent();
+            
+            InitializeComponent ();
+
+            H_Slider_UserControl1_SaveState_Class SS = new H_Slider_UserControl1_SaveState_Class ( );
 
 			Debug.WriteLine(String.Format("{0} {1}", nameof(H_Slider_UserControl1), this.Name));
 																										
@@ -47,22 +51,23 @@ namespace DMT01
 
 		public float SliderValue
 		{
-			get
-			{
+            get
+          	{
 				return (float)theH_Slider.Value;
 			}
+
 			set
 			{
 				if (theH_Slider.Value == value)
 				{
 					return;
 				}
+
 				theH_Slider.Value = value;
 			}
             
 		}
-        //public static float SliderDefaultValue;
-
+        
 		public Double SliderMaxValue
 		{
 			get
@@ -71,7 +76,6 @@ namespace DMT01
 			}
 			set
 			{
-				theH_Slider.Maximum = value;
 				if (theH_Slider.Maximum == value)
 				{
 					return;
@@ -80,12 +84,14 @@ namespace DMT01
 				theH_Slider.Maximum = value;
 			}
 		}
-		public Double SliderMinValue
+
+        public Double SliderMinValue
 		{
 			get
 			{
 				return theH_Slider.Minimum;
 			}
+
 			set
 			{
 				if (theH_Slider.Minimum == value)
@@ -96,12 +102,14 @@ namespace DMT01
 				theH_Slider.Minimum = value;
 			}
 		}
-		public String LabelText
+
+        public String LabelText
 		{
 			get
 			{
 				return HSliderControlClusterMain_Label.Content as String;
 			}
+
 			set
 			{
 				if (HSliderControlClusterMain_Label.Content as String == value)
@@ -175,36 +183,48 @@ namespace DMT01
 
         public void ResetValue_Click ( object sender , RoutedEventArgs e )
         {
-            SliderValue = H_Slider_Static . ResetValue;
-        }
 
-    private void Save0_Button_Click ( object sender , RoutedEventArgs e )
-        {
-
-        Button t = sender as Button;
-        DependencyObject ttt = t . Parent;
-        Grid G = ttt as Grid;
-        DependencyObject gg = G . Parent;
-        H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
-        Seralize_H__Slider_UserControl1_SaveState ( ttyy );
+            Debug . WriteLine ( String . Format ( "{0}" , nameof( ResetValue_Click ) ) );
 
         }
-    private void Seralize_H__Slider_UserControl1_SaveState ( H_Slider_UserControl1 ttyy )
+
+        private void Save0_Button_Click ( object sender , RoutedEventArgs e )
+            {
+
+            Button t = sender as Button;
+            DependencyObject ttt = t . Parent;
+            Grid G = ttt as Grid;
+            DependencyObject gg = G . Parent;
+            H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
+            Seralize_H__Slider_UserControl1_SaveState ( ttyy );
+
+            }
+
+        public static void Seralize_H__Slider_UserControl1_SaveState ( UIElement e )
+            {
+            H_Slider_UserControl1 HS = e as H_Slider_UserControl1;
+            if ( HS == null )
+                return;
+
+            Seralize_H__Slider_UserControl1_SaveState ( HS );
+
+            }
+    public static void Seralize_H__Slider_UserControl1_SaveState ( H_Slider_UserControl1 ttyy )
         {
         string ControlName = ttyy . Name;
         String StateFileName = String . Format ( "{0}.xml" , ControlName );
         Seralize_H__Slider_UserControl1_SaveState ( ControlName: ControlName , StateFileName: StateFileName , ttyy: ttyy );
         }
 
-    private void Seralize_H__Slider_UserControl1_SaveState ( string ControlName , String StateFileName , H_Slider_UserControl1 ttyy )
+    public static void Seralize_H__Slider_UserControl1_SaveState ( string ControlName , String StateFileName , H_Slider_UserControl1 ttyy )
         {
-            var p =new H_Slider_UserControl1_SaveState_Class ();
-        p . ControlClass = nameof ( H_Slider_UserControl1 );
-        p . ControlName = ControlName;
-        p . StateFileName = StateFileName;
-        p . ResetValue = ( float ) theH_Slider . Value;
-        p . MaxValue = ( float ) theH_Slider . Maximum;
-        p . MinValue = ( float ) theH_Slider . Minimum;
+        var p =new H_Slider_UserControl1_SaveState_Class ();
+            p . ControlClass = nameof ( H_Slider_UserControl1 );
+            p . ControlName = ControlName;
+            p . StateFileName = StateFileName;
+            p . ResetValue = ttyy. SliderValue;
+            p . MaxValue = ( float ) ttyy . SliderMaxValue;
+            p . MinValue = ( float ) ttyy. SliderMinValue;
 
         System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
 
@@ -215,8 +235,7 @@ namespace DMT01
         XmlWriter w=XmlWriter.Create(StateFileName,s);
             
         x . Serialize ( w , p );
-        w . Close ( );
-       
+        w . Close ( );     
         }
      }
 }

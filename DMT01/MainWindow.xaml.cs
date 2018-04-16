@@ -94,6 +94,8 @@ namespace DMT01
         }
         public static SharpGL.SceneGraph.Matrix ProjectionMatrix=new SharpGL.SceneGraph.Matrix(4,4);
         public static SharpGL.SceneGraph.Matrix  ModelingMatrix=new SharpGL.SceneGraph.Matrix(4,4);
+        public static float aspect = -1.1f;
+
         #endregion Persistance_classes
 
         public MainWindow ( )
@@ -279,10 +281,18 @@ namespace DMT01
             return M;
         }
 
+        private void DoAspect ( )
+            {
+            float width = ( float ) myOpenGLControl . Width;
+            float height = ( float ) myOpenGLControl . Height;
+            aspect = width / height;
+            }
         private void myOpenGLControl_OpenGLInitialized ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
         {
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_OpenGLInitialized ) ) );
 
+            DoAspect ( );
+            
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl.OpenGL;
 
@@ -370,7 +380,8 @@ namespace DMT01
         private void Projection_DataGrid_Loaded ( object sender , RoutedEventArgs e )
         {
 
-            Debug . WriteLine ( String . Format ( "{0}" , "snippy" ) );
+            Debug . WriteLine ( String . Format ( "{0}" , nameof( Projection_DataGrid_Loaded ) ) );
+
             DataGrid DG=ProjectionMatrix_DataGrid;
             DG . Items . Add ( ProjectionMatrix [ 0 , 0 ] );
             DG . Items . Add ( ProjectionMatrix [ 0 , 1 ] );
@@ -385,17 +396,51 @@ namespace DMT01
 
             DataGrid DG=ProjectionMatrix_DataGrid;
 
-
         }
 
         private void Save0_Button_Click ( object sender , RoutedEventArgs e )
         {
             WalkVisualTree ( );
         }
+
+        private struct SavedControl
+            {
+            public int MainWindows;
+            public int H_Sliders;
+            public int CheckButtons;
+            public int RadioButtons;
+            public int OtherControls;
+            public int MaxDepth;
+            public int MaxPeers;
+            };
+
+        private static SavedControl SC;
+
         public void WalkVisualTree ( )
         {
+            SC . MainWindows = 0;
+            SC . H_Sliders = 0;
+            SC . CheckButtons = 0;
+            SC . RadioButtons = 0;
+            SC . OtherControls = 0;
+            SC . MaxDepth = -1;
+            SC . MaxPeers = -1;
+
+
             WalkVisualTree ( DMT_Main_Window , 0 , 0 );
-        }
+
+
+            Debug . WriteLine ( String . Format ( "{0}" , nameof( WalkVisualTree ) ) );
+
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MainWindows ) , SC . MainWindows ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . H_Sliders ) , SC . H_Sliders ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . CheckButtons ) , SC . CheckButtons ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . RadioButtons ) , SC . RadioButtons ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . OtherControls ) , SC . OtherControls ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxDepth ) , SC . MaxDepth ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxPeers ) , SC . MaxPeers ) );
+
+            }
 
         private void WalkVisualTree ( UIElement e , int Depth , int Peer )
         {
@@ -404,54 +449,71 @@ namespace DMT01
                 return;
             }
 
-
             var n=VisualTreeHelper . GetChildrenCount ( e );
             for ( int i = 0 ; i < n ; i++ )
             {
-                DependencyObject o = VisualTreeHelper.GetChild(e, i);
+                DependencyObject o = VisualTreeHelper . GetChild ( e , i );
 
                 UIElement E=o as UIElement;
                 WalkVisualTree ( E , Depth + 1 , i );
 
             }
 
-            String NameString=GetName(e);
-            String TypeString= e.GetType().ToString();
+            Boolean baah=IsControlStateSavable ( e , Depth, Peer);
+
+            if ( Depth > SC . MaxDepth )
+                SC . MaxDepth = Depth;
+            if ( n > SC . MaxPeers )
+                SC . MaxPeers = n;
+
+            }
+
+        private Boolean IsControlStateSavable ( UIElement e , int Depth, int Peer)
+            {
+            String NameString = GetName ( e );
+            String TypeString = e . GetType ( ) . ToString ( );
 
             if ( NameString . EndsWith ( nameof ( DMT_Main_Window ) ) )
-            {
+                {
                 DMT_Main_Window_SaveState_Deseralize ( NameString );
-                return;
-            }
+                SC . MainWindows++;
+                return true;
+                }
 
-            if ( TypeString . EndsWith ( nameof ( H_Slider_UserControl1 ) ))
-            {
-
-            }
+            if ( TypeString . EndsWith ( nameof ( H_Slider_UserControl1 ) ) )
+                {
+                H_Slider_UserControl1 . Seralize_H__Slider_UserControl1_SaveState (  e );
+                SC . H_Sliders++;
+                return true;
+                }
 
             if ( TypeString . EndsWith ( "CheckBox" ) )
-            {
+                {
                 CheckBoxSerialize ( NameString , e );
-                return;
-            }
+                SC . CheckButtons++;
+                return true;
+                }
 
             if ( TypeString . EndsWith ( "RadioButton" ) )
-            {
+                {
                 RadioButtonSerialize ( NameString , e );
-                return;
-            }
+                SC . RadioButtons++;
+                return true;
+                }
 
 
             Debug . WriteLine ( String . Format (
-                "{0} {1} {2} {3} {4} " ,
+                "{0} {1} {2} {3} {4} {5} " ,
                 nameof ( WalkVisualTree ) ,
+                SC.OtherControls.ToString("000"),
                 Depth . ToString ( "00" ) ,
                 Peer . ToString ( "00" ) ,
                 NameString ,
                 TypeString
                 ) );
-
-        }
+            SC . OtherControls++;
+            return false;
+            }
 
         private void RadioButtonSerialize ( string nameString , UIElement e )
         {
@@ -615,8 +677,6 @@ namespace DMT01
 
         }
 
-
-
         private void load_Button_Click ( object sender , RoutedEventArgs e )
         {
             String[] Xmls=System.IO.Directory.GetFiles(@".\",@"*.xml",System.IO.SearchOption.TopDirectoryOnly);
@@ -644,16 +704,15 @@ namespace DMT01
                 r . Close ( );
             }
         }
-
+ 
         void reshape (OpenGL gl, int width, int height)
-        {  // GLsizei for non-negative integer
-           // Compute aspect ratio of the new window
-            if (height == 0)
-            {
-                height = 1;                // To prevent divide by 0
-            }
+        {
 
-            float aspect = (float)width / (float)height;
+
+            Debug . WriteLine ( String . Format ( "{0}" , nameof(reshape) ));
+
+            // GLsizei for non-negative integer
+            DoAspect ( );
 
             // Set the viewport to cover the new window
             gl.Viewport(0, 0, width, height);
@@ -668,22 +727,21 @@ namespace DMT01
         private void UseLookAtViewingTransform_RadioButton_Click ( object sender , RoutedEventArgs e )
             {
             LookAt_tabItem . IsSelected = true;
-            LookAt_tabItem . Visibility = Visibility.Visible;
             }
 
         private void UsePerspetiveViewingTransform_Click ( object sender , RoutedEventArgs e )
             {
-            ___TabItem___Perspective_ . IsSelected = true;
+             Perspective_TabItem . IsSelected = true;
             }
 
         private void UseOrthographic_Viewing_Transform_radioButton_Click ( object sender , RoutedEventArgs e )
             {
-
+            Orthographics_Viewing_TabItem . IsSelected = true;
             }
 
         private void Use_Viewing_Frustrum_RadioButton_Click ( object sender , RoutedEventArgs e )
             {
-
+            Viewing_Frustrum_TabItem . IsSelected = true;
             }
         }
 }
