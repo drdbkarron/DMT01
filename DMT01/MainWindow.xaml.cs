@@ -37,13 +37,15 @@ namespace DMT01
         [ Serializable]
         public class SeralizeControlCommonFields
         {
-            public SeralizeControlCommonFields ( )
-            {
-                ControlClass = string . Empty; ;
-            }
             public String ControlClass;
             public String ControlName;
             public String SaveStateFileName;
+            public SeralizeControlCommonFields ( )
+            {
+                ControlClass = string . Empty; ;
+                ControlName = string . Empty;
+                SaveStateFileName = string . Empty;
+            }
 
         }
         [Serializable]
@@ -88,7 +90,7 @@ namespace DMT01
         public class BaseSavedStateClass
         {
             public DMT_Main_Window_SaveState a;
-            public H_Slider_UserControl1 . H_Slider_UserControl1_SaveState_Class h;
+            public H_Slider_UserControl1_SaveState_Class h;
             public RadioCheckBoxTempSaveState aa;
             public CheckBoxTempSaveState bb;
         }
@@ -427,6 +429,7 @@ namespace DMT01
             SC . MaxPeers = -1;
 
 
+            Debug . WriteLine ( String . Format ( "{0} Starting " , nameof ( WalkVisualTree ) ) );
             WalkVisualTree ( DMT_Main_Window , 0 , 0 );
 
 
@@ -439,6 +442,7 @@ namespace DMT01
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . OtherControls ) , SC . OtherControls ) );
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxDepth ) , SC . MaxDepth ) );
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxPeers ) , SC . MaxPeers ) );
+            Debug . WriteLine ( String . Format ( "{0} completed " , nameof ( WalkVisualTree ) ) );
 
             }
 
@@ -502,7 +506,8 @@ namespace DMT01
                 }
 
 
-            Debug . WriteLine ( String . Format (
+            if(false)
+                Debug . WriteLine ( String . Format (
                 "{0} {1} {2} {3} {4} {5} " ,
                 nameof ( WalkVisualTree ) ,
                 SC.OtherControls.ToString("000"),
@@ -511,6 +516,7 @@ namespace DMT01
                 NameString ,
                 TypeString
                 ) );
+
             SC . OtherControls++;
             return false;
             }
@@ -678,36 +684,154 @@ namespace DMT01
         }
 
         private void load_Button_Click ( object sender , RoutedEventArgs e )
-        {
-            String[] Xmls=System.IO.Directory.GetFiles(@".\",@"*.xml",System.IO.SearchOption.TopDirectoryOnly);
+            {
+            LoadEm ( );
+            }
 
-            foreach(String F in Xmls )
+        private void LoadEm ( )
             {
 
-                Debug . WriteLine ( String . Format ( "{0} {1}" , nameof( load_Button_Click ) , F ) );
-                System.IO.StreamReader r = new StreamReader(F);
-                XmlReaderSettings xx=new XmlReaderSettings();
-                DtdProcessing dtd=xx . DtdProcessing;
-                XmlReader XR=XmlReader.Create(r, xx);
-                XmlNameTable Nt=XR.NameTable;
-                bool b=XR . EOF;
-                XR . MoveToFirstAttribute ( );
-                while ( b ) {
-                    var n=XR . Name;
-                    var rs=XR . ReadState;
-                    var SC=XR . ReadContentAsString ( );
-                    XR . ReadToNextSibling ( "Left" );
+            String [ ] Xmls = System . IO . Directory . GetFiles ( @".\" , @"*.xml" , System . IO . SearchOption . TopDirectoryOnly );
+
+
+            Debug . WriteLine ( String . Format ( "{0} loaded {1}" , nameof ( LoadEm ) , Xmls . Count ( ) ) );
+
+            LoadEm ( Xmls );
+            }
+
+        private void LoadEm ( String [ ] Xmls )
+            {
+            foreach ( String F in Xmls )
+                {
+                Load_Each ( F );
+                }
+             }
+
+        private void Load_Each ( string XmlFileName )
+            {
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( Load_Each ) , XmlFileName ) );
+
+            String XmlFileContents = System . IO . File . ReadAllText ( XmlFileName );
+
+            StringReader XmlStringReader = new StringReader ( XmlFileContents );
+
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings ( );
+            xmlReaderSettings . IgnoreComments = true;
+            xmlReaderSettings . IgnoreProcessingInstructions = true;
+            xmlReaderSettings . IgnoreWhitespace = false;
+
+            XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
+
+             WalkXmlReader ( xmlReader );
+
+            }
+
+        private void WalkXmlReader ( XmlReader xmlReader )
+            {
+            if ( xmlReader == null )
+                {
+                return;
+                }
+
+            xmlReader . ReadStartElement ( );
+
+            while ( !xmlReader . EOF )
+                {
+
+                var NT = xmlReader . NodeType;
+                switch ( NT )
+                    {
+                    case XmlNodeType . Attribute:
+                        continue;
+                        break;
+
+                    case XmlNodeType . CDATA:
+                        continue;
+                        break;
+
+                    case XmlNodeType . Comment:
+                        continue;
+                        break;
+
+                    case XmlNodeType . Document:
+                        break;
+
+                    case XmlNodeType . DocumentFragment:
+                        break;
+
+                    case XmlNodeType . DocumentType:
+                        break;
+
+                    case XmlNodeType . Element:
+
+                        switch ( xmlReader . Name )
+                            {
+                            case "ControlClass":// how to process with which seralier
+                                break;
+
+                            default:
+                                break;
+                            }
+
+                        Debug . WriteLine ( String . Format ( "NodeType:Element {0}" ,
+                            xmlReader . Name ) );
+                        xmlReader . Read ( );
+                        Debug . WriteLine ( String . Format ( "{0}" ,
+                             xmlReader . ReadContentAsString ( ) ) );
+                        xmlReader . MoveToContent ( );
+                        continue;
+                        break;
+
+                    case XmlNodeType . EndElement:
+                        Debug . WriteLine ( String . Format ( "NodeType:EndElement {0}" ,
+                            xmlReader . Name ) );
+                        xmlReader . Read ( );
+                        break;
+
+                    case XmlNodeType . EndEntity:
+                        break;
+
+                    case XmlNodeType . Entity:
+                        break;
+
+                    case XmlNodeType . EntityReference:
+                        break;
+
+                    case XmlNodeType . None:
+                        continue;
+                        break;
+
+                    case XmlNodeType . Notation:
+                        continue;
+                        break;
+
+                    case XmlNodeType . ProcessingInstruction:
+                        continue;
+                        break;
+
+                    case XmlNodeType . SignificantWhitespace:
+                        continue;
+                        break;
+
+                    case XmlNodeType . Text:
+                        break;
+                    case XmlNodeType . Whitespace:
+                        xmlReader . MoveToContent ( );
+                        continue;
+                        break;
+
+                    case XmlNodeType . XmlDeclaration:
+                        break;
+                    default:
+                        break;
                     }
 
-                XmlSerializer x = new XmlSerializer(typeof (BaseSavedStateClass));
-                BaseSavedStateClass newBase = ( BaseSavedStateClass ) x . Deserialize ( r );
-                r . Close ( );
+                Boolean State = xmlReader . Read ( );
+                }
             }
-        }
- 
+
         void reshape (OpenGL gl, int width, int height)
         {
-
 
             Debug . WriteLine ( String . Format ( "{0}" , nameof(reshape) ));
 

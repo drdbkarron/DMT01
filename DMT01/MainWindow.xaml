@@ -191,7 +191,7 @@
                     Width="75"
                     Margin="2,2,0,2"
                     Click="load_Button_Click"
-                    Content="Button" />
+                    Content="Load0" />
             </StackPanel>
             <StackPanel
                 Height="38"

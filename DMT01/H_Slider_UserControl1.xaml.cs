@@ -17,37 +17,32 @@ using System . Xml;
 using System . Xml . Serialization;
 using System . IO;
 
-
 namespace DMT01
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class H_Slider_UserControl1 : UserControl
-    {
         #region Persistance_classes1
-        public class H_Slider_UserControl1_SaveState_Class
+    public class H_Slider_UserControl1_SaveState_Class
         {
             public DMT01.MainWindow.SeralizeControlCommonFields SSC = new DMT01 . MainWindow . SeralizeControlCommonFields ( );
-            public String ControlClass = nameof ( H_Slider_UserControl1 );
-            public String ControlName = String . Empty;
-            public string StateFileName = String . Empty;
-            public float MaxValue = ( float ) -1.1;
-            public float MinValue = -2.2f;
+            public float MaxValue =   -1.1f;
+            public float MinValue =   -2.2f;
             public float ResetValue = -3.3f;
         }
-        //public  static H_Slider_UserControl1_SaveState_Class H_Slider_Static;
         #endregion Persistant_classes
-        public H_Slider_UserControl1 ()
-		{
-            
+    public partial class H_Slider_UserControl1 : UserControl
+    {
+         public H_Slider_UserControl1 ()
+		 {
+             
             InitializeComponent ();
 
-            H_Slider_UserControl1_SaveState_Class SS = new H_Slider_UserControl1_SaveState_Class ( );
+            //H_Slider_UserControl1_SaveState_Class SS = new H_Slider_UserControl1_SaveState_Class ( );
 
-			Debug.WriteLine(String.Format("{0} {1}", nameof(H_Slider_UserControl1), this.Name));
-																										
-		}
+           // Debug . WriteLine ( String . Format ( "{0} {1} {3}" , this.Name , this . LabelText, this.HSliderControlClusterMain_Label ) );
+				
+         }
 
 		public float SliderValue
 		{
@@ -119,19 +114,6 @@ namespace DMT01
 
 				HSliderControlClusterMain_Label.Content = value;
 			}
-		}
-
-		private  void Slider_Low_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-		{
-
-			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_TextChanged)));
-
-		}
-
-		private  void Slider_Low_TextBox_TextInput(object sender, TextCompositionEventArgs e)
-		{
-			Debug.WriteLine(String.Format("{0}", nameof(Slider_Low_TextBox_TextInput)));
-
 		}
 
 		private  void Slider_Low_TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -219,9 +201,9 @@ namespace DMT01
     public static void Seralize_H__Slider_UserControl1_SaveState ( string ControlName , String StateFileName , H_Slider_UserControl1 ttyy )
         {
         var p =new H_Slider_UserControl1_SaveState_Class ();
-            p . ControlClass = nameof ( H_Slider_UserControl1 );
-            p . ControlName = ControlName;
-            p . StateFileName = StateFileName;
+            p . SSC. ControlClass = nameof ( H_Slider_UserControl1 );
+            p . SSC. ControlName = ControlName;
+            p . SSC. SaveStateFileName = StateFileName;
             p . ResetValue = ttyy. SliderValue;
             p . MaxValue = ( float ) ttyy . SliderMaxValue;
             p . MinValue = ( float ) ttyy. SliderMinValue;
