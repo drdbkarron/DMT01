@@ -31,10 +31,12 @@ namespace DMT01
     public partial class MainWindow : Window
     {
         #region Persistance_classes2
+
         static long Draws = 0;
         static long Resizes = 0;
 
-        [ Serializable]
+ 
+        [Serializable()]
         public class SeralizeControlCommonFields
         {
             public String ControlClass;
@@ -48,17 +50,15 @@ namespace DMT01
             }
 
         }
-        [Serializable]
-        public class DMT_Main_Window_SaveState
+        [Serializable()]
+        public class DMT_Main_Window_Control_SaveState
         {
-            public DMT_Main_Window_SaveState ( )
+            public DMT_Main_Window_Control_SaveState ( )
             {
                 CommonFields = new SeralizeControlCommonFields ( ); ;
             }
-
+            [XmlElement( "SeralizeControlCommonFields" )]
             public SeralizeControlCommonFields CommonFields;
-            //public String ControlName;
-            //public String SaveStateFileName;
             public double Left;
             public double Top;
         }
@@ -68,6 +68,7 @@ namespace DMT01
             public CheckBoxTempSaveState ( ) {
                 CommonFields = new SeralizeControlCommonFields ( );
             }
+            [XmlElement ( "SeralizeControlCommonFields" )]
             public SeralizeControlCommonFields CommonFields;
             public Boolean CheckBoxState;
             public String CheckBoxName;
@@ -80,31 +81,34 @@ namespace DMT01
                 {
                 CommonFields = new SeralizeControlCommonFields ( );
                 }
+            [XmlElement ( "SeralizeControlCommonFields" )]
             public SeralizeControlCommonFields CommonFields;
             public Boolean RadioCheckBoxState;
             public String RadioCheckBoxName;
             public String RadioGroupName;
         }
 
-        [Serializable]
-        public class BaseSavedStateClass
-        {
-            public DMT_Main_Window_SaveState a;
-            public H_Slider_UserControl1_SaveState_Class h;
-            public RadioCheckBoxTempSaveState aa;
-            public CheckBoxTempSaveState bb;
-        }
         public static SharpGL.SceneGraph.Matrix ProjectionMatrix=new SharpGL.SceneGraph.Matrix(4,4);
         public static SharpGL.SceneGraph.Matrix  ModelingMatrix=new SharpGL.SceneGraph.Matrix(4,4);
         public static float aspect = -1.1f;
 
+        private struct SavedControl
+            {
+            public int MainWindows;
+            public int H_Sliders;
+            public int CheckButtons;
+            public int RadioButtons;
+            public int OtherControls;
+            public int Calls;
+            public int MaxDepth;
+            };
+
+        private static SavedControl SC;
         #endregion Persistance_classes
 
         public MainWindow ( )
         {
-
-                       InitializeComponent ( );
-
+            InitializeComponent ( );
         }
 
         private String Stringify ( Rect bounds )
@@ -150,7 +154,7 @@ namespace DMT01
 
 
 
-            if ( UsePerspetiveViewingTransform . IsChecked . GetValueOrDefault ( ) )
+            if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
             {
                 M = M * Perspective ( gl );
             }
@@ -402,35 +406,27 @@ namespace DMT01
 
         private void Save0_Button_Click ( object sender , RoutedEventArgs e )
         {
-            WalkVisualTree ( );
+            //WalkVisualTree ( );
+            WalkLogicalTree ( );
         }
 
-        private struct SavedControl
+        private void InitalizeSavedControl ( )
             {
-            public int MainWindows;
-            public int H_Sliders;
-            public int CheckButtons;
-            public int RadioButtons;
-            public int OtherControls;
-            public int MaxDepth;
-            public int MaxPeers;
-            };
-
-        private static SavedControl SC;
-
-        public void WalkVisualTree ( )
-        {
             SC . MainWindows = 0;
             SC . H_Sliders = 0;
             SC . CheckButtons = 0;
             SC . RadioButtons = 0;
             SC . OtherControls = 0;
+            SC . Calls = 0;
             SC . MaxDepth = -1;
-            SC . MaxPeers = -1;
+            }
 
+        public void WalkVisualTree ( )
+        {
+            InitalizeSavedControl ( );
 
             Debug . WriteLine ( String . Format ( "{0} Starting " , nameof ( WalkVisualTree ) ) );
-            WalkVisualTree ( DMT_Main_Window , 0 , 0 );
+            WalkVisualTree ( DMT_Main_Window_Control as FrameworkElement , 0 , 0 );
 
 
             Debug . WriteLine ( String . Format ( "{0}" , nameof( WalkVisualTree ) ) );
@@ -441,17 +437,46 @@ namespace DMT01
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . RadioButtons ) , SC . RadioButtons ) );
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . OtherControls ) , SC . OtherControls ) );
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxDepth ) , SC . MaxDepth ) );
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxPeers ) , SC . MaxPeers ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . Calls ) , SC . Calls ) );
             Debug . WriteLine ( String . Format ( "{0} completed " , nameof ( WalkVisualTree ) ) );
+
+            }
+
+        public void WalkLogicalTree ( )
+            {
+
+            InitalizeSavedControl ( );
+
+            Debug . WriteLine ( String . Format ( "{0} Starting " , nameof ( WalkLogicalTree ) ) );
+            WalkLogicalTree ( DMT_Main_Window_Control as FrameworkElement , 0);
+
+
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( WalkLogicalTree ) ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MainWindows ) , SC . MainWindows ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . H_Sliders ) ,   SC . H_Sliders ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . CheckButtons ) , SC . CheckButtons ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . RadioButtons ) , SC . RadioButtons ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . OtherControls ) , SC . OtherControls ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxDepth ) ,    SC . MaxDepth ) );
+            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . Calls ) ,       SC . Calls ) );
+            Debug . WriteLine ( String . Format ( "{0} completed " , nameof ( WalkLogicalTree ) ) );
 
             }
 
         private void WalkVisualTree ( UIElement e , int Depth , int Peer )
         {
+            SC . Calls++;
             if ( e == null )
             {
                 return;
             }
+
+            if ( true )
+                {
+                    String NameString = GetName ( e );
+                    String TypeString = e . GetType ( ) . ToString ( );
+                    Debug . WriteLine ( String . Format ( "{0} UIElement {1} {2} {3} {4}" ,nameof(WalkVisualTree) , SC.Calls, Depth, Peer, TypeString, NameString ) );
+                }
 
             var n=VisualTreeHelper . GetChildrenCount ( e );
             for ( int i = 0 ; i < n ; i++ )
@@ -459,6 +484,8 @@ namespace DMT01
                 DependencyObject o = VisualTreeHelper . GetChild ( e , i );
 
                 UIElement E=o as UIElement;
+                FrameworkElement FE = o as FrameworkElement;
+
                 WalkVisualTree ( E , Depth + 1 , i );
 
             }
@@ -467,26 +494,57 @@ namespace DMT01
 
             if ( Depth > SC . MaxDepth )
                 SC . MaxDepth = Depth;
-            if ( n > SC . MaxPeers )
-                SC . MaxPeers = n;
-
+ 
             }
 
-        private Boolean IsControlStateSavable ( UIElement e , int Depth, int Peer)
+        private void WalkLogicalTree ( FrameworkElement f , int Depth)
+            {
+            SC . Calls++;
+            if ( Depth > SC . MaxDepth )
+                SC . MaxDepth = Depth;
+
+            if ( f == null )
+                {
+                return;
+                }
+
+            if ( false )
+                {
+                String NameString = GetName ( f );
+                String TypeString = f . GetType ( ) . ToString ( );
+                Debug . WriteLine ( String . Format ( "{0} Framework Element {1} {2} {3} {4}" , 
+                    nameof ( WalkLogicalTree ) , SC . Calls , Depth , TypeString , NameString ) );
+                }
+
+            var children = LogicalTreeHelper . GetChildren (f );
+            foreach (var child in children)
+                {
+ 
+                FrameworkElement FE = child as FrameworkElement;
+
+                WalkLogicalTree ( FE , Depth + 1 );
+
+                }
+
+            Boolean baah = IsControlStateSavable ( f , Depth);
+            
+            }
+
+        private Boolean IsControlStateSavable ( UIElement e , int Depth  )
             {
             String NameString = GetName ( e );
             String TypeString = e . GetType ( ) . ToString ( );
 
-            if ( NameString . EndsWith ( nameof ( DMT_Main_Window ) ) )
+            if ( NameString . EndsWith ( nameof ( DMT_Main_Window_Control ) ) )
                 {
-                DMT_Main_Window_SaveState_Deseralize ( NameString );
+                DMT_Main_Window_Control_SaveState_Deseralize ( NameString );
                 SC . MainWindows++;
                 return true;
                 }
 
             if ( TypeString . EndsWith ( nameof ( H_Slider_UserControl1 ) ) )
                 {
-                H_Slider_UserControl1 . Seralize_H__Slider_UserControl1_SaveState (  e );
+                H_Slider_UserControl1 . Seralize_H__Slider_UserControl1_SaveState ( e );
                 SC . H_Sliders++;
                 return true;
                 }
@@ -505,17 +563,6 @@ namespace DMT01
                 return true;
                 }
 
-
-            if(false)
-                Debug . WriteLine ( String . Format (
-                "{0} {1} {2} {3} {4} {5} " ,
-                nameof ( WalkVisualTree ) ,
-                SC.OtherControls.ToString("000"),
-                Depth . ToString ( "00" ) ,
-                Peer . ToString ( "00" ) ,
-                NameString ,
-                TypeString
-                ) );
 
             SC . OtherControls++;
             return false;
@@ -567,7 +614,6 @@ namespace DMT01
 
         }
 
-      
         private void RadioCheckBoxSerialize ( string nameString , UIElement E )
         {
             RadioButton CB=E as RadioButton;
@@ -594,16 +640,16 @@ namespace DMT01
             w . Close ( );
         }
 
-        private void DMT_Main_Window_SaveState_Deseralize ( String name )
+        private void DMT_Main_Window_Control_SaveState_Deseralize ( String name )
         {
             String StateFileName=String.Format("{0}.xml",Name);
 
-            var p=new DMT_Main_Window_SaveState ();
+            var p=new DMT_Main_Window_Control_SaveState ();
             p . CommonFields . ControlClass = nameof ( Window );
-            p . CommonFields . ControlName = DMT_Main_Window . Name;
+            p . CommonFields . ControlName = DMT_Main_Window_Control . Name;
             p . CommonFields . SaveStateFileName = StateFileName;
-            p . Left = DMT_Main_Window . Left;
-            p . Top = DMT_Main_Window . Top; ;
+            p . Left = DMT_Main_Window_Control . Left;
+            p . Top = DMT_Main_Window_Control . Top; ;
 
 
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
@@ -645,6 +691,7 @@ namespace DMT01
                 }
             }
         }
+
         public IEnumerable<DependencyObject> FindInputElements ( DependencyObject parent )
         {
             if ( parent == null )
@@ -665,7 +712,7 @@ namespace DMT01
             yield return parent;
         }
 
-        private void DMT_Main_Window_LocationChanged ( object sender , EventArgs e )
+        private void DMT_Main_Window_Control_LocationChanged ( object sender , EventArgs e )
         {
             Window W=sender as Window;
             if ( W == null )
@@ -674,7 +721,7 @@ namespace DMT01
             }
 
             Debug . WriteLine ( String . Format ( "{0} {1} {2} {3} {4} {5}" ,
-                nameof ( DMT_Main_Window_LocationChanged ) ,
+                nameof ( DMT_Main_Window_Control_LocationChanged ) ,
                 W . WindowStartupLocation ,
                 W . Left ,
                 W . Top ,
@@ -694,7 +741,7 @@ namespace DMT01
             String [ ] Xmls = System . IO . Directory . GetFiles ( @".\" , @"*.xml" , System . IO . SearchOption . TopDirectoryOnly );
 
 
-            Debug . WriteLine ( String . Format ( "{0} loaded {1}" , nameof ( LoadEm ) , Xmls . Count ( ) ) );
+            Debug . WriteLine ( String . Format ( "{0} loaded {1} .xml files" , nameof ( LoadEm ) , Xmls . Count ( ) ) );
 
             LoadEm ( Xmls );
             }
@@ -707,18 +754,20 @@ namespace DMT01
                 }
              }
 
+        static String XmlFileContents;
+
         private void Load_Each ( string XmlFileName )
             {
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( Load_Each ) , XmlFileName ) );
 
-            String XmlFileContents = System . IO . File . ReadAllText ( XmlFileName );
+            XmlFileContents = System . IO . File . ReadAllText ( XmlFileName );
 
             StringReader XmlStringReader = new StringReader ( XmlFileContents );
 
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings ( );
             xmlReaderSettings . IgnoreComments = true;
             xmlReaderSettings . IgnoreProcessingInstructions = true;
-            xmlReaderSettings . IgnoreWhitespace = false;
+            xmlReaderSettings . IgnoreWhitespace = true;
 
             XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
 
@@ -733,12 +782,20 @@ namespace DMT01
                 return;
                 }
 
-            xmlReader . ReadStartElement ( );
-
+            //xmlReader . ReadStartElement ( );
+            IXmlLineInfo xmlInfo = ( IXmlLineInfo ) xmlReader;
+            int lineNumber = xmlInfo . LineNumber;
+            int linePosition = xmlInfo . LinePosition;
+            
             while ( !xmlReader . EOF )
                 {
 
                 var NT = xmlReader . NodeType;
+
+                var HA = xmlReader . HasAttributes;
+                Debug . WriteLine ( String . Format ( @"NodeType:Element {0} at [{1},{2}] Attributes?? {3}" ,
+                    xmlReader . Name , lineNumber , linePosition, HA ) );
+
                 switch ( NT )
                     {
                     case XmlNodeType . Attribute:
@@ -763,29 +820,29 @@ namespace DMT01
                         break;
 
                     case XmlNodeType . Element:
+                        Debug . WriteLine ( String . Format ( @"NodeType:Element {0} at [{1},{2}] Attributes? {3}" ,  
+                             xmlReader . Name , lineNumber,linePosition, HA) );
 
-                        switch ( xmlReader . Name )
+                        if( HA)
                             {
-                            case "ControlClass":// how to process with which seralier
-                                break;
-
-                            default:
-                                break;
+                            int AC = xmlReader . AttributeCount;
+                            BlomblisieAttributes ( xmlReader , AC , lineNumber, linePosition);
                             }
 
-                        Debug . WriteLine ( String . Format ( "NodeType:Element {0}" ,
-                            xmlReader . Name ) );
-                        xmlReader . Read ( );
-                        Debug . WriteLine ( String . Format ( "{0}" ,
-                             xmlReader . ReadContentAsString ( ) ) );
-                        xmlReader . MoveToContent ( );
-                        continue;
-                        break;
+                        IXmlLineInfo Li = ( IXmlLineInfo ) xmlReader;
+                        lineNumber = Li . LineNumber;
+                        linePosition = Li . LinePosition;
 
+                        if ( xmlReader . Name . EndsWith ( "CommonFields" ) )
+                            {
+                            ParseControlClass ( xmlReader );
+                            } 
+                            
+                        break;
+   
                     case XmlNodeType . EndElement:
                         Debug . WriteLine ( String . Format ( "NodeType:EndElement {0}" ,
                             xmlReader . Name ) );
-                        xmlReader . Read ( );
                         break;
 
                     case XmlNodeType . EndEntity:
@@ -798,7 +855,6 @@ namespace DMT01
                         break;
 
                     case XmlNodeType . None:
-                        continue;
                         break;
 
                     case XmlNodeType . Notation:
@@ -830,6 +886,109 @@ namespace DMT01
                 }
             }
 
+        private void BlomblisieAttributes ( XmlReader xR , int AC , int ln, int lp )
+            {
+            String NT = xR . NodeType . ToString ( );
+            String NN = xR . Name;
+            //String CT = xmlReader . ReadContentAsString ( );
+           
+            for ( int i = 0 ; i < AC ; i++ )
+                {
+                xR . MoveToAttribute ( i );
+                var n = xR . Name;
+                var v = xR . Value;
+                IXmlLineInfo xmlInfo = ( IXmlLineInfo ) xR;
+                int lineNumber = xmlInfo . LineNumber;
+                int linePosition = xmlInfo . LinePosition;
+
+                Debug . WriteLine ( String . Format ( "NodeType {0} {1} {3} Attribute of {2} at [{4},{5}] <<{6}>> = <<{7}>>" , 
+                 NT ,  NN, AC, i , lineNumber , linePosition, n,v ) );
+
+                }
+            }
+
+        private void ParseControlClass ( XmlReader xR )
+            {
+            
+            do
+                {
+                var D = xR . Depth;
+                switch ( xR . NodeType )
+                    {
+                    case XmlNodeType . Element:
+                        var n= xR . Name;
+
+                        XmlReader pp = xR . ReadSubtree ( );
+                        DumpSubtree ( pp );
+                        //string uuu = xR . ReadOuterXml ( );
+                        //string ppp = xR . ReadInnerXml ( );
+                        //var xxx = typeof ( SeralizeControlCommonFields );
+                        //StringReader sr = new StringReader ( uuu );
+
+                        //XmlReader zz = XmlReader.Create ( sr );
+                        //XmlSerializer seralizer = new XmlSerializer ( xxx );
+                        //Boolean can= seralizer . CanDeserialize ( zz );
+                        break;
+
+                    case XmlNodeType . Text:
+                        var t = xR . Value;
+                        break;
+
+                    case XmlNodeType . EndElement:
+                        var e = xR . Name;
+                        break;
+
+                    default:
+                        break;
+                    }
+                } while ( xR . Read());
+
+
+
+            //
+            //StringReader xx = new StringReader ( XmlFileContents );
+            //XmlReader x =  XmlReader.Create ( xx );
+            //SeralizeControlCommonFields des = ( SeralizeControlCommonFields ) seralizer . Deserialize ( x );
+
+
+            }
+
+        private void DumpSubtree ( XmlReader xR )
+            {
+            xR . MoveToContent ( );
+            do
+                {
+
+                IXmlLineInfo xmlInfo = ( IXmlLineInfo ) xR;
+                int lineNumber = xmlInfo . LineNumber;
+                int linePosition = xmlInfo . LinePosition;
+                var D = xR . Depth;
+                switch ( xR . NodeType )
+                    {
+                    case XmlNodeType . Element:
+                        var n = xR . Name;
+                        xR . Read ( );
+                        var v = xR . Value;
+                        break;
+
+                    case XmlNodeType . Text:
+                        xR . Read ( );
+                        var t = xR . Value;
+                        break;
+
+                    case XmlNodeType . EndElement:
+                        xR . Read ( );
+                        var e = xR . Name;
+                        break;
+
+                    default:
+                        xR . Read ( );
+                        break;
+                    }
+
+                } while ( !xR . EOF );
+            }
+
         void reshape (OpenGL gl, int width, int height)
         {
 
@@ -848,7 +1007,7 @@ namespace DMT01
             gl.Perspective(45.0f, aspect, 0.1f, 100.0f);
         }
 
-        private void UseLookAtViewingTransform_RadioButton_Click ( object sender , RoutedEventArgs e )
+        private void UseLookAtViewingTransform_RadioButton_Control_Click ( object sender , RoutedEventArgs e )
             {
             LookAt_tabItem . IsSelected = true;
             }
@@ -858,7 +1017,7 @@ namespace DMT01
              Perspective_TabItem . IsSelected = true;
             }
 
-        private void UseOrthographic_Viewing_Transform_radioButton_Click ( object sender , RoutedEventArgs e )
+        private void UseOrthographic_Viewing_Transform_radioButton_Control_Click ( object sender , RoutedEventArgs e )
             {
             Orthographics_Viewing_TabItem . IsSelected = true;
             }

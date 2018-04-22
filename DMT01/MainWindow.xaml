@@ -8,7 +8,7 @@
     xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
     xmlns:local="clr-namespace:DMT01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="DMT_Main_Window"
+    x:Name="DMT_Main_Window_Control"
     Title="DMT_MainWindow"
     Width="1072"
     Height="1100"
@@ -24,7 +24,7 @@
     Initialized="DMTWindow_Initialized"
     Left="845"
     Loaded="DMTWindow_Loaded"
-    LocationChanged="DMT_Main_Window_LocationChanged"
+    LocationChanged="DMT_Main_Window_Control_LocationChanged"
     ScrollViewer.CanContentScroll="True"
     ScrollViewer.HorizontalScrollBarVisibility="Visible"
     Top="1"
@@ -157,9 +157,9 @@
                     Background="#FF7C2121"
                     Orientation="Horizontal">
                     <RadioButton
-                        x:Name="UseOrthographic_Viewing_Transform_radioButton"
+                        x:Name="UseOrthographic_Viewing_Transform_radioButton_Control"
                         Width="100"
-                        Click="UseOrthographic_Viewing_Transform_radioButton_Click"
+                        Click="UseOrthographic_Viewing_Transform_radioButton_Control_Click"
                         Content="Orthographic"
                         GroupName="ViewingOrthographicFrustrumRadioButtonGroup"
                         IsChecked="False" />
@@ -171,12 +171,12 @@
                         GroupName="ViewingOrthographicFrustrumRadioButtonGroup"
                         IsChecked="false" />
                     <RadioButton
-                        x:Name="UsePerspetiveViewingTransform"
+                        x:Name="UsePerspetiveViewingTransform_RadioButton_Control"
                         Click="UsePerspetiveViewingTransform_Click"
                         Content="Perspective" />
                     <RadioButton
                         x:Name="UseLookAtViewingTransform_RadioButton"
-                        Click="UseLookAtViewingTransform_RadioButton_Click"
+                        Click="UseLookAtViewingTransform_RadioButton_Control_Click"
                         Content="LookAt"
                         IsChecked="True" />
                 </StackPanel>

@@ -25,7 +25,7 @@ namespace DMT01
         #region Persistance_classes1
     public class H_Slider_UserControl1_SaveState_Class
         {
-            public DMT01.MainWindow.SeralizeControlCommonFields SSC = new DMT01 . MainWindow . SeralizeControlCommonFields ( );
+            public DMT01.MainWindow.SeralizeControlCommonFields CommonFields = new DMT01 . MainWindow . SeralizeControlCommonFields ( );
             public float MaxValue =   -1.1f;
             public float MinValue =   -2.2f;
             public float ResetValue = -3.3f;
@@ -201,19 +201,19 @@ namespace DMT01
     public static void Seralize_H__Slider_UserControl1_SaveState ( string ControlName , String StateFileName , H_Slider_UserControl1 ttyy )
         {
         var p =new H_Slider_UserControl1_SaveState_Class ();
-            p . SSC. ControlClass = nameof ( H_Slider_UserControl1 );
-            p . SSC. ControlName = ControlName;
-            p . SSC. SaveStateFileName = StateFileName;
+            p . CommonFields. ControlClass = nameof ( H_Slider_UserControl1 );
+            p . CommonFields . ControlName = ControlName;
+            p . CommonFields . SaveStateFileName = StateFileName;
             p . ResetValue = ttyy. SliderValue;
             p . MaxValue = ( float ) ttyy . SliderMaxValue;
             p . MinValue = ( float ) ttyy. SliderMinValue;
 
-        System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
+            XmlSerializer x = new XmlSerializer ( p.GetType());
 
         XmlWriterSettings s = new XmlWriterSettings();
         s . Indent = true;
         s . NewLineOnAttributes = true;
-        s . OmitXmlDeclaration = true;
+        s . OmitXmlDeclaration = false;
         XmlWriter w=XmlWriter.Create(StateFileName,s);
             
         x . Serialize ( w , p );
