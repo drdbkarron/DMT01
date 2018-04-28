@@ -744,8 +744,8 @@
                                 </LinearGradientBrush>
                             </Grid.Background>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="111*" />
-                                <RowDefinition Height="Auto" MinHeight="97" />
+                                <RowDefinition Height="91*" />
+                                <RowDefinition Height="141*" />
                                 <RowDefinition Height="118*" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="113*" />
@@ -767,8 +767,8 @@
                                 x:Name="Perspective_ASPECT_H_Slider_UserControl"
                                 Grid.Row="1"
                                 Width="902"
-                                Height="71"
-                                Margin="10,50,10,0"
+                                Height="70"
+                                Margin="10,60,10,11"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 LabelText="Perspective aspect"
@@ -779,17 +779,17 @@
                                 x:Name="Perspective_Z_NEAR_H_Slider_UserControl"
                                 Grid.Row="2"
                                 Width="902"
-                                Height="111"
-                                Margin="0,24,0,0"
+                                Height="110"
+                                Margin="10,16,10,105"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                LabelText="Perspetive zNear" />
+                                LabelText="Perspetive zNear" Grid.RowSpan="3" />
                             <local:H_Slider_UserControl1
                                 x:Name="Perspective_Z_FAR_H_Slider_UserControl"
                                 Grid.Row="4"
                                 Width="902"
                                 Height="111"
-                                Margin="0,10,0,0"
+                                Margin="10,6,10,-4"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 LabelText="Perspective zFar"
@@ -924,7 +924,82 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="Orthographics Viewing">
-                    <Grid Background="#FFE5E5E5" />
+                    <Grid Background="#FFE5E5E5" VerticalAlignment="Center" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="95*"/>
+                            <RowDefinition Height="77*"/>
+                            <RowDefinition Height="75*"/>
+                            <RowDefinition Height="80*"/>
+                            <RowDefinition Height="70*"/>
+                            <RowDefinition Height="146*"/>
+                        </Grid.RowDefinitions>
+                        <local:H_Slider_UserControl1
+                            x:Name="Orthographic_Left_H_Slider_UserControl"
+                            Width="902"
+                            Height="70"
+                            Margin="10,19,73,6"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            LabelText="Left"
+                            SliderMaxValue="10"
+                            SliderMinValue=".1"
+                            SliderValue="1" />
+                        <local:H_Slider_UserControl1
+                            x:Name="Orthographic_Right_H_Slider_UserControl"
+                            Width="902"
+                            Height="70"
+                            Margin="10,3,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            LabelText="Right"
+                            SliderMaxValue="5"
+                            SliderMinValue="-5"
+                            SliderValue="1" Grid.Row="2" />
+                        <local:H_Slider_UserControl1
+                            x:Name="Orthographic_Top_H_Slider_UserControl"
+                            Width="902"
+                            Height="70"
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            LabelText="Left"
+                            SliderMaxValue="10"
+                            SliderMinValue=".1"
+                            SliderValue="1" Grid.Row="3" />
+                        <local:H_Slider_UserControl1
+                            x:Name="Orthographic_Bottom_H_Slider_UserControl"
+                            Width="902"
+                            Height="70"
+                            Margin="10,2,73,8"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            LabelText="Bottom"
+                            SliderMaxValue="10"
+                            SliderMinValue=".1"
+                            SliderValue="1" Grid.Row="4" />
+                        <local:H_Slider_UserControl1
+                            x:Name="Orthographic_Near_H_Slider_UserControl"
+                            Width="902"
+                            Height="70"
+                            Margin="10,2,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            LabelText="Near"
+                            SliderMaxValue="10"
+                            SliderMinValue=".1"
+                            SliderValue="1" Grid.Row="5" />
+                        <local:H_Slider_UserControl1
+                            x:Name="Orthographic_Far_H_Slider_UserControl"
+                            Width="902"
+                            Height="70"
+                            Margin="10,2,0,5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            LabelText="Far"
+                            SliderMaxValue="10"
+                            SliderMinValue=".1"
+                            SliderValue="1" Grid.Row="6" />
+                    </Grid>
                 </TabItem>
                 <TabItem
                     x:Name="Viewing_Frustrum_TabItem"

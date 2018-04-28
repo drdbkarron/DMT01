@@ -187,6 +187,16 @@ namespace DMT01
 
             GlmSharp.mat4 M=GlmSharp.mat4.Identity;
 
+            if ( UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                gl . Ortho ( left: Orthographic_Left_H_Slider_UserControl . SliderValue ,
+                            right: Orthographic_Right_H_Slider_UserControl . SliderValue ,
+                            bottom: Orthographic_Bottom_H_Slider_UserControl . SliderValue ,
+                            top: Orthographic_Top_H_Slider_UserControl . SliderValue ,
+                            zNear: Orthographic_Near_H_Slider_UserControl . SliderValue ,
+                            zFar: Orthographic_Far_H_Slider_UserControl.SliderValue
+                            );
+                }
 
             if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
             {
