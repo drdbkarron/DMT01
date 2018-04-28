@@ -349,7 +349,7 @@
                     BorderThickness="1"
                     Content="{Binding Source={x:Static local:MainWindow.aspect}, StringFormat=Aspect \{0:00.00\}, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-            <TabControl
+            <TabControl x:Name="Viewing_Transform_TabControl"
                 Width="991"
                 Height="598"
                 Margin="4,5,21,5"
@@ -1038,11 +1038,15 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="Viewing Frustrum">
-                    <Grid Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="829*" />
-                            <ColumnDefinition Width="153*" />
-                        </Grid.ColumnDefinitions>
+                    <Grid x:Name="Viewing_frustrum_TabItem_Grid" Background="#FFE5E5E5" MinWidth="2">
+                        <StackPanel>
+                            <local:H_Slider_UserControl1 x:Name="Frustum_Left_H_Slider_UserControl" SliderValue="10" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
+                            <local:H_Slider_UserControl1 x:Name="Frustum_Right_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
+                            <local:H_Slider_UserControl1 x:Name="Frustum_Bottom_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
+                            <local:H_Slider_UserControl1 x:Name="Frustum_Top_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
+                            <local:H_Slider_UserControl1 x:Name="Frustum_zNear_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
+                            <local:H_Slider_UserControl1 x:Name="Frustum_zFar_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
+                        </StackPanel>
                     </Grid>
                 </TabItem>
             </TabControl>

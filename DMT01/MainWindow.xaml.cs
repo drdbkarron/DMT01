@@ -198,6 +198,16 @@ namespace DMT01
                             );
                 }
 
+            if ( Use_Viewing_Frustrum_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                gl . Frustum ( left: Frustum_Left_H_Slider_UserControl . SliderValue ,
+                    right: Frustum_Right_H_Slider_UserControl . SliderValue ,
+                    bottom: Frustum_Bottom_H_Slider_UserControl . SliderValue ,
+                    top: Frustum_Top_H_Slider_UserControl.SliderValue ,
+                    zNear: Frustum_zNear_H_Slider_UserControl .SliderValue,
+                    zFar: Frustum_zFar_H_Slider_UserControl . SliderValue );
+                }
+
             if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
             {
 
@@ -276,10 +286,10 @@ namespace DMT01
                 tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
             }
 
-            if( Do_Orbit_CheckBox_Control .IsChecked.GetValueOrDefault(true))
+            if( Do_Orbit_CheckBox_Control .IsChecked.GetValueOrDefault())
                 {
-                gl . Rotate ( Orbit_Rotation_H_Slider_UserControl.SliderValue , 0.0f , 1.0f , 0.0f );
-                Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_H_Slider_UserControl . SliderValue;
+                gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl.SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
+                Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
                 }
 
             gl . Flush ( );
