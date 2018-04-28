@@ -23,6 +23,17 @@ using System . Xml;
 using System . IO;
 using System . Xml . Serialization;
 
+namespace System . Windows . Controls
+    {
+    public static class MyExt
+        {
+        public static void PerformClick ( this Button btn )
+            {
+            btn . RaiseEvent ( new RoutedEventArgs ( Button . ClickEvent ) );
+            }
+        }
+    }
+
 namespace DMT01
 {
     /// <summary>
@@ -35,21 +46,24 @@ namespace DMT01
         static long Draws = 0;
         static long Resizes = 0;
 
- 
-        [Serializable()]
+         [Serializable()]
         public class SeralizeControlCommonFields
         {
             public String ControlClass;
             public String ControlName;
             public String SaveStateFileName;
+            public Boolean UpdatedFromXmlFiles;
+            //public Object Parent;
             public SeralizeControlCommonFields ( )
-            {
-                ControlClass = string . Empty; ;
+                {
+                ControlClass = string . Empty;
                 ControlName = string . Empty;
                 SaveStateFileName = string . Empty;
+                UpdatedFromXmlFiles = false;
+                UpdatedFromXmlFiles = false;
+                }
             }
 
-        }
         [Serializable()]
         public class DMT_Main_Window_Control_SaveState
         {
@@ -62,10 +76,11 @@ namespace DMT01
             public double Left;
             public double Top;
         }
+
         [Serializable]
-        public class CheckBoxTempSaveState
+        public class CheckBoxControlSaveState
         {
-            public CheckBoxTempSaveState ( ) {
+            public CheckBoxControlSaveState ( ) {
                 CommonFields = new SeralizeControlCommonFields ( );
             }
             [XmlElement ( "SeralizeControlCommonFields" )]
@@ -75,9 +90,9 @@ namespace DMT01
         }
 
         [Serializable]
-        public class RadioCheckBoxTempSaveState
+        public class RadioCheckBoxSaveState
         {
-            public RadioCheckBoxTempSaveState ( )
+            public RadioCheckBoxSaveState ( )
                 {
                 CommonFields = new SeralizeControlCommonFields ( );
                 }
@@ -111,6 +126,26 @@ namespace DMT01
             InitializeComponent ( );
         }
 
+        private void DMTWindow_Initialized ( object sender , EventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Initialized ) ) );
+
+            }
+
+        private void DMTWindow_Loaded ( object sender , RoutedEventArgs e )
+            {
+            if ( LaunchSavedStateOnInitalization_RadioButton_Control .IsChecked.GetValueOrDefault())
+                {
+                load_Button . PerformClick ( );
+                }
+            if ( LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                spreadsheet_load_Button . PerformClick ( );
+                }
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Loaded ) ) );
+            }
+
         private String Stringify ( Rect bounds )
         {
 
@@ -138,7 +173,7 @@ namespace DMT01
         private void myOpenGLControl_OpenGLDraw ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
         {
 
-            //Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLDraw)));
+            Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLDraw)));
 
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl.OpenGL;
@@ -153,47 +188,92 @@ namespace DMT01
             GlmSharp.mat4 M=GlmSharp.mat4.Identity;
 
 
-
             if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
             {
-                M = M * Perspective ( gl );
+
+                Debug . WriteLine ( String . Format ( "{0}" , nameof(UsePerspetiveViewingTransform_RadioButton_Control )) );
+                gl  . Perspective ( 
+                    fovy: Perspective_FOVY_H_Slider_UserControl . SliderValue ,
+                    aspect: Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
+                    zNear: Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
+                    zFar: Perspective_Z_FAR_H_Slider_UserControl . SliderValue  );
+
+                //M = M * Perspective ( gl );
             }
 
 
             if ( UseLookAtViewingTransform_RadioButton . IsChecked . GetValueOrDefault ( ) )
-            {
-                M = M * LookAt ( gl );
+                {
+                float x_up = 0.0f;
+                float y_up = 1.0f;
+                float z_up = 0.0f;
+
+                if ( LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                    {
+                    x_up = 1.0f;
+                    }
+                else
+                    {
+                    x_up = 0.0f;
+                    }
+                if ( LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                    {
+                    y_up = 1.0f;
+                    }
+                else
+                    {
+                    y_up = 0.0f;
+                    }
+                if ( LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                    {
+                    z_up = 1.0f;
+                    }
+                else
+                    {
+                    z_up = 0.0f;
+                    }
+
+                gl . LookAt (
+                    eyex: LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
+                    eyey: LookAt_Eye_Y_H_Slider_UserControl . SliderValue ,
+                    eyez: LookAt_Eye_Z_H_Slider_UserControl . SliderValue ,
+                    centerx: LookAtTarget_X_H_Slider_UserControl . SliderValue ,
+                    centery: LookAtTarget_Y_H_Slider_UserControl . SliderValue ,
+                    centerz: LookAtTarget_Z_H_Slider_UserControl . SliderValue ,
+                    upx: x_up , upy: y_up , upz: z_up );
+
+
+
+                //M = M * LookAt ( gl );
             }
 
-            LoadMatrix ( gl , M );
-
+            //LoadMatrix ( gl , M );
             
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
             gl . LoadIdentity ( );
 
-            gl . Translate ( Eye_X_H_Sslider_UserControl . SliderValue , Eye_Y_H_Sslider_UserControl . SliderValue , Eye_Z_H_Sslider_UserControl . SliderValue );
+            gl . Translate ( Eye_X_H_Slider_UserControl . SliderValue , Eye_Y_H_Slider_UserControl . SliderValue , Eye_Z_H_Slider_UserControl . SliderValue );
 
 
-            if ( AxisDrawMe_CheckBox . IsChecked . GetValueOrDefault ( ) )
+            if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
             {
                 Axis_Arrow_Grid . Axis_Class . MyGlobalAxis ( gl );
             }
 
-            if ( DrawTeaPot_CheckBox . IsChecked . GetValueOrDefault ( ) )
+            if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
             {
                 Teapot tp = new Teapot();
                 tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
             }
 
-
-
-            if( Do_Orbit_CheckBox .IsChecked.GetValueOrDefault(true))
+            if( Do_Orbit_CheckBox_Control .IsChecked.GetValueOrDefault(true))
                 {
-                gl . Rotate ( Orbit_Rotation_H_Slider_UserControl1.SliderValue , 0.0f , 1.0f , 0.0f );
-                Orbit_Rotation_H_Slider_UserControl1 . SliderValue += Orbit_Delta_H_Slider_UserControl1 . SliderValue;
+                gl . Rotate ( Orbit_Rotation_H_Slider_UserControl.SliderValue , 0.0f , 1.0f , 0.0f );
+                Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_H_Slider_UserControl . SliderValue;
                 }
 
             gl . Flush ( );
+            DoAspect ( );
             Draws_Label . Content = String . Format ( "Draw Count: {0}" , Draws );
             Draws++;
         }
@@ -232,9 +312,9 @@ namespace DMT01
             float y_up = 1.0f;
             float z_up = 0.0f;
 
-            if ( LookAt_X_Up_RadioButton . IsChecked . GetValueOrDefault ( ) ) { x_up = 1.0f; } else { x_up = 0.0f; }
-            if ( LookAt_Y_Up_RadioButton . IsChecked . GetValueOrDefault ( ) ) { y_up = 1.0f; } else { y_up = 0.0f; }
-            if ( LookAt_Z_Up_RadioButton . IsChecked . GetValueOrDefault ( ) ) { z_up = 1.0f; } else { z_up = 0.0f; }
+            if ( LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) ) { x_up = 1.0f; } else { x_up = 0.0f; }
+            if ( LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) ) { y_up = 1.0f; } else { y_up = 0.0f; }
+            if ( LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) ) { z_up = 1.0f; } else { z_up = 0.0f; }
 
             GlmSharp . vec3 eye = new GlmSharp . vec3 (
                 LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
@@ -348,20 +428,6 @@ namespace DMT01
             myReoGridControl . Load ( scratchy , unvell . ReoGrid . IO . FileFormat . Excel2007 );
         }
 
-        private void DMTWindow_Initialized ( object sender , EventArgs e )
-        {
-
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Initialized ) ) );
-
-        }
-
-        private void DMTWindow_Loaded ( object sender , RoutedEventArgs e )
-        {
-
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Loaded ) ) );
-
-        }
-
         private void myOpenGLControl_Resized ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
         {
 
@@ -406,10 +472,10 @@ namespace DMT01
 
         private void Save0_Button_Click ( object sender , RoutedEventArgs e )
         {
-            //WalkVisualTree ( );
-            WalkLogicalTree ( );
+              WalkLogicalTree ( );
         }
 
+        #region Serializers
         private void InitalizeSavedControl ( )
             {
             SC . MainWindows = 0;
@@ -421,35 +487,12 @@ namespace DMT01
             SC . MaxDepth = -1;
             }
 
-        public void WalkVisualTree ( )
-        {
-            InitalizeSavedControl ( );
-
-            Debug . WriteLine ( String . Format ( "{0} Starting " , nameof ( WalkVisualTree ) ) );
-            WalkVisualTree ( DMT_Main_Window_Control as FrameworkElement , 0 , 0 );
-
-
-            Debug . WriteLine ( String . Format ( "{0}" , nameof( WalkVisualTree ) ) );
-
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MainWindows ) , SC . MainWindows ) );
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . H_Sliders ) , SC . H_Sliders ) );
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . CheckButtons ) , SC . CheckButtons ) );
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . RadioButtons ) , SC . RadioButtons ) );
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . OtherControls ) , SC . OtherControls ) );
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MaxDepth ) , SC . MaxDepth ) );
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . Calls ) , SC . Calls ) );
-            Debug . WriteLine ( String . Format ( "{0} completed " , nameof ( WalkVisualTree ) ) );
-
-            }
-
         public void WalkLogicalTree ( )
             {
-
             InitalizeSavedControl ( );
 
             Debug . WriteLine ( String . Format ( "{0} Starting " , nameof ( WalkLogicalTree ) ) );
             WalkLogicalTree ( DMT_Main_Window_Control as FrameworkElement , 0);
-
 
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( WalkLogicalTree ) ) );
             Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( SC . MainWindows ) , SC . MainWindows ) );
@@ -463,41 +506,7 @@ namespace DMT01
 
             }
 
-        private void WalkVisualTree ( UIElement e , int Depth , int Peer )
-        {
-            SC . Calls++;
-            if ( e == null )
-            {
-                return;
-            }
-
-            if ( true )
-                {
-                    String NameString = GetName ( e );
-                    String TypeString = e . GetType ( ) . ToString ( );
-                    Debug . WriteLine ( String . Format ( "{0} UIElement {1} {2} {3} {4}" ,nameof(WalkVisualTree) , SC.Calls, Depth, Peer, TypeString, NameString ) );
-                }
-
-            var n=VisualTreeHelper . GetChildrenCount ( e );
-            for ( int i = 0 ; i < n ; i++ )
-            {
-                DependencyObject o = VisualTreeHelper . GetChild ( e , i );
-
-                UIElement E=o as UIElement;
-                FrameworkElement FE = o as FrameworkElement;
-
-                WalkVisualTree ( E , Depth + 1 , i );
-
-            }
-
-            Boolean baah=IsControlStateSavable ( e , Depth, Peer);
-
-            if ( Depth > SC . MaxDepth )
-                SC . MaxDepth = Depth;
- 
-            }
-
-        private void WalkLogicalTree ( FrameworkElement f , int Depth)
+         private void WalkLogicalTree ( FrameworkElement f , int Depth)
             {
             SC . Calls++;
             if ( Depth > SC . MaxDepth )
@@ -508,6 +517,7 @@ namespace DMT01
                 return;
                 }
 
+#pragma warning disable CS0162 // Unreachable code detected
             if ( false )
                 {
                 String NameString = GetName ( f );
@@ -515,6 +525,7 @@ namespace DMT01
                 Debug . WriteLine ( String . Format ( "{0} Framework Element {1} {2} {3} {4}" , 
                     nameof ( WalkLogicalTree ) , SC . Calls , Depth , TypeString , NameString ) );
                 }
+#pragma warning restore CS0162 // Unreachable code detected
 
             var children = LogicalTreeHelper . GetChildren (f );
             foreach (var child in children)
@@ -526,46 +537,45 @@ namespace DMT01
 
                 }
 
-            Boolean baah = IsControlStateSavable ( f , Depth);
+            IsControlStateSavable ( f);
             
             }
 
-        private Boolean IsControlStateSavable ( UIElement e , int Depth  )
+        private void IsControlStateSavable ( UIElement e)
             {
             String NameString = GetName ( e );
-            String TypeString = e . GetType ( ) . ToString ( );
 
             if ( NameString . EndsWith ( nameof ( DMT_Main_Window_Control ) ) )
                 {
-                DMT_Main_Window_Control_SaveState_Deseralize ( NameString );
+                DMT_Main_Window_Control_SaveState_Seralize ( NameString );
                 SC . MainWindows++;
-                return true;
+                return;
                 }
+
+            String TypeString = e . GetType ( ) . ToString ( );
 
             if ( TypeString . EndsWith ( nameof ( H_Slider_UserControl1 ) ) )
                 {
                 H_Slider_UserControl1 . Seralize_H__Slider_UserControl1_SaveState ( e );
                 SC . H_Sliders++;
-                return true;
+                return ;
                 }
 
             if ( TypeString . EndsWith ( "CheckBox" ) )
                 {
                 CheckBoxSerialize ( NameString , e );
                 SC . CheckButtons++;
-                return true;
+                return;
                 }
 
             if ( TypeString . EndsWith ( "RadioButton" ) )
                 {
                 RadioButtonSerialize ( NameString , e );
                 SC . RadioButtons++;
-                return true;
+                return;
                 }
 
-
             SC . OtherControls++;
-            return false;
             }
 
         private void RadioButtonSerialize ( string nameString , UIElement e )
@@ -578,35 +588,58 @@ namespace DMT01
 
             String StateFileName = String . Format ( "{0}.xml" , nameString );
 
-            var p = new RadioCheckBoxTempSaveState ( );
+            var p = new RadioCheckBoxSaveState ( );
             p . CommonFields . SaveStateFileName = StateFileName;
             p . CommonFields . ControlClass = nameof ( RadioButton );
             p . CommonFields . ControlName = RB . Name;
+            p . CommonFields . UpdatedFromXmlFiles = true;
+           
             p . RadioCheckBoxState = RB . IsChecked . GetValueOrDefault ( );
             p . RadioCheckBoxName = RB . Name;
             p . RadioGroupName = RB . GroupName;
+
+            XmlSerializer x = new XmlSerializer ( p . GetType ( ) );
+
+            XmlWriterSettings s = new XmlWriterSettings
+                {
+                Indent = true ,
+                NewLineOnAttributes = true ,
+                OmitXmlDeclaration = true
+                };
+            XmlWriter w = XmlWriter . Create ( StateFileName , s );
+
+            x . Serialize ( w , p );
+            w . Close ( );
 
             }
 
         private void CheckBoxSerialize ( string nameString , UIElement E )
         {
             CheckBox CB=E as CheckBox;
-            if ( CB == null ) return;
+            if ( CB == null )
+                {
+                return;
+                }
+
             String StateFileName=String.Format("{0}.xml",nameString);
 
-            var p=new CheckBoxTempSaveState ();
+            var p=new CheckBoxControlSaveState ();
             p . CommonFields.SaveStateFileName = StateFileName;
             p . CommonFields . ControlClass = nameof ( CheckBox );
             p . CommonFields . ControlName = CB . Name;
+            p . CommonFields . UpdatedFromXmlFiles = true;
+            
             p . CheckBoxState = CB . IsChecked . GetValueOrDefault ( );
             p . CheckBoxName = CB . Name;
 
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
+            XmlSerializer x = new XmlSerializer ( p.GetType());
 
-            XmlWriterSettings s = new XmlWriterSettings();
-            s . Indent = true;
-            s . NewLineOnAttributes = true;
-            s . OmitXmlDeclaration = true;
+            XmlWriterSettings s = new XmlWriterSettings
+                {
+                Indent = true ,
+                NewLineOnAttributes = true ,
+                OmitXmlDeclaration = true
+                };
             XmlWriter w=XmlWriter.Create(StateFileName,s);
 
             x . Serialize ( w , p );
@@ -616,31 +649,39 @@ namespace DMT01
 
         private void RadioCheckBoxSerialize ( string nameString , UIElement E )
         {
-            RadioButton CB=E as RadioButton;
-            if ( CB == null ) return;
+            RadioButton RB=E as RadioButton;
+            if ( RB == null )
+                {
+                return;
+                }
+
             String StateFileName=String.Format("{0}.xml",nameString);
 
-            var p=new RadioCheckBoxTempSaveState ();
+            var p=new RadioCheckBoxSaveState ();
             p . CommonFields.SaveStateFileName = StateFileName;
-            p . CommonFields . ControlName = CB . Name;
+            p . CommonFields . ControlName = RB . Name;
             p . CommonFields . ControlClass = nameof ( RadioButton );
-            p . RadioCheckBoxState = CB . IsChecked . GetValueOrDefault ( );
-            p . RadioCheckBoxName = CB . Name;
-            p . RadioCheckBoxName = CB . GroupName;
+            p . CommonFields . UpdatedFromXmlFiles = true;
+            
+            p . RadioCheckBoxState = RB . IsChecked . GetValueOrDefault ( );
+            p . RadioCheckBoxName = RB . Name;
+            p . RadioGroupName = RB . GroupName;
 
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
+            XmlSerializer x = new XmlSerializer ( p.GetType());
 
-            XmlWriterSettings s = new XmlWriterSettings();
-            s . Indent = true;
-            s . NewLineOnAttributes = true;
-            s . OmitXmlDeclaration = true;
+            XmlWriterSettings s = new XmlWriterSettings
+                {
+                Indent = true ,
+                NewLineOnAttributes = true ,
+                OmitXmlDeclaration = true
+                };
             XmlWriter w=XmlWriter.Create(StateFileName,s);
 
             x . Serialize ( w , p );
             w . Close ( );
         }
 
-        private void DMT_Main_Window_Control_SaveState_Deseralize ( String name )
+        private void DMT_Main_Window_Control_SaveState_Seralize ( String name )
         {
             String StateFileName=String.Format("{0}.xml",Name);
 
@@ -648,21 +689,23 @@ namespace DMT01
             p . CommonFields . ControlClass = nameof ( Window );
             p . CommonFields . ControlName = DMT_Main_Window_Control . Name;
             p . CommonFields . SaveStateFileName = StateFileName;
+            p . CommonFields . UpdatedFromXmlFiles = true;
+            
             p . Left = DMT_Main_Window_Control . Left;
             p . Top = DMT_Main_Window_Control . Top; ;
 
+            XmlSerializer x = new XmlSerializer ( p.GetType());
 
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(p.GetType());
-
-            XmlWriterSettings s = new XmlWriterSettings();
-            s . Indent = true;
-            s . NewLineOnAttributes = true;
-            s . OmitXmlDeclaration = true;
+            XmlWriterSettings s = new XmlWriterSettings
+                {
+                Indent = true ,
+                NewLineOnAttributes = true ,
+                OmitXmlDeclaration = true
+                };
             XmlWriter w=XmlWriter.Create(StateFileName,s);
 
             x . Serialize ( w , p );
             w . Close ( );
-
         }
 
         private String GetName ( UIElement E )
@@ -692,26 +735,7 @@ namespace DMT01
             }
         }
 
-        public IEnumerable<DependencyObject> FindInputElements ( DependencyObject parent )
-        {
-            if ( parent == null )
-            {
-                yield break;
-            }
-
-            for ( int i = 0 ; i < VisualTreeHelper . GetChildrenCount ( parent ) ; i++ )
-            {
-                DependencyObject o = VisualTreeHelper.GetChild(parent, i);
-
-                foreach ( DependencyObject obj in FindInputElements ( o ) )
-                {
-                    yield return ( UIElement ) obj;
-                }
-            }
-
-            yield return parent;
-        }
-
+        #endregion Serializers
         private void DMT_Main_Window_Control_LocationChanged ( object sender , EventArgs e )
         {
             Window W=sender as Window;
@@ -735,13 +759,12 @@ namespace DMT01
             LoadEm ( );
             }
 
+        #region Deserializers
         private void LoadEm ( )
             {
+            String [ ] Xmls = System . IO . Directory . GetFiles ( @".\" , @"*Control.xml" , System . IO . SearchOption . TopDirectoryOnly );
 
-            String [ ] Xmls = System . IO . Directory . GetFiles ( @".\" , @"*.xml" , System . IO . SearchOption . TopDirectoryOnly );
-
-
-            Debug . WriteLine ( String . Format ( "{0} loaded {1} .xml files" , nameof ( LoadEm ) , Xmls . Count ( ) ) );
+            Debug . WriteLine ( String . Format ( "{0} loaded {1} *Control.xml files" , nameof ( LoadEm ) , Xmls . Count ( ) ) );
 
             LoadEm ( Xmls );
             }
@@ -755,22 +778,25 @@ namespace DMT01
              }
 
         static String XmlFileContents;
+        static String XmlFileName;
 
-        private void Load_Each ( string XmlFileName )
+        private void Load_Each ( string F )
             {
-            Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( Load_Each ) , XmlFileName ) );
+            //Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( Load_Each ) , F ) );
 
-            XmlFileContents = System . IO . File . ReadAllText ( XmlFileName );
+            XmlFileContents = System . IO . File . ReadAllText ( F );
 
             StringReader XmlStringReader = new StringReader ( XmlFileContents );
 
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings ( );
-            xmlReaderSettings . IgnoreComments = true;
-            xmlReaderSettings . IgnoreProcessingInstructions = true;
-            xmlReaderSettings . IgnoreWhitespace = true;
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
+                {
+                IgnoreComments = true ,
+                IgnoreProcessingInstructions = true ,
+                IgnoreWhitespace = true
+                };
 
             XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
-
+            XmlFileName = F;
              WalkXmlReader ( xmlReader );
 
             }
@@ -782,32 +808,17 @@ namespace DMT01
                 return;
                 }
 
-            //xmlReader . ReadStartElement ( );
-            IXmlLineInfo xmlInfo = ( IXmlLineInfo ) xmlReader;
-            int lineNumber = xmlInfo . LineNumber;
-            int linePosition = xmlInfo . LinePosition;
-            
             while ( !xmlReader . EOF )
                 {
-
-                var NT = xmlReader . NodeType;
-
-                var HA = xmlReader . HasAttributes;
-                Debug . WriteLine ( String . Format ( @"NodeType:Element {0} at [{1},{2}] Attributes?? {3}" ,
-                    xmlReader . Name , lineNumber , linePosition, HA ) );
-
-                switch ( NT )
+                 switch ( xmlReader . NodeType )
                     {
                     case XmlNodeType . Attribute:
-                        continue;
                         break;
 
                     case XmlNodeType . CDATA:
-                        continue;
                         break;
 
                     case XmlNodeType . Comment:
-                        continue;
                         break;
 
                     case XmlNodeType . Document:
@@ -820,29 +831,48 @@ namespace DMT01
                         break;
 
                     case XmlNodeType . Element:
-                        Debug . WriteLine ( String . Format ( @"NodeType:Element {0} at [{1},{2}] Attributes? {3}" ,  
-                             xmlReader . Name , lineNumber,linePosition, HA) );
+                        //BlufbelsePrettyPrintElements ( xmlReader );
 
-                        if( HA)
-                            {
-                            int AC = xmlReader . AttributeCount;
-                            BlomblisieAttributes ( xmlReader , AC , lineNumber, linePosition);
-                            }
+                        //Debug . WriteLine ( String . Format ( @"{0} at [{1},{2}] NodeType:{3} {4} {5} Attributes?? {6}" ,
+                        //      XmlFileName ,
+                        //      ( ( IXmlLineInfo ) xmlReader ). LineNumber ,
+                        //      ( ( IXmlLineInfo ) xmlReader )  . LinePosition , 
+                        //      xmlReader . NodeType . ToString(), 
+                        //      xmlReader . Name , 
+                        //      xmlReader.Depth,
+                        //      xmlReader . HasAttributes
+                        //      ) );
 
-                        IXmlLineInfo Li = ( IXmlLineInfo ) xmlReader;
-                        lineNumber = Li . LineNumber;
-                        linePosition = Li . LinePosition;
+                        //if( false || HA)
+                        //    {
+                        //    int AC = xmlReader . AttributeCount;
+                        //    BlomblisieAttributes ( xmlReader , AC , lineNumber, linePosition);
+                        //    }
+
+                        //IXmlLineInfo Li = ( IXmlLineInfo ) xmlReader;
+                        //lineNumber = Li . LineNumber;
+                        //linePosition = Li . LinePosition;
 
                         if ( xmlReader . Name . EndsWith ( "CommonFields" ) )
                             {
-                            ParseControlClass ( xmlReader );
-                            } 
-                            
+                            XmlReader pp = xmlReader . ReadSubtree ( );
+                            DumpSubtree ( pp );
+                            }
+
                         break;
    
                     case XmlNodeType . EndElement:
-                        Debug . WriteLine ( String . Format ( "NodeType:EndElement {0}" ,
-                            xmlReader . Name ) );
+                        //BlufbelsePrettyPrintElements ( xmlReader );
+
+                        //Debug . WriteLine ( String . Format ( @"{0} at [{3},{4}] NodeType:{1} {2} Attributes? {5} {6}" ,
+                        //       XmlFileName ,
+                        //        ( ( IXmlLineInfo ) xmlReader ) . LineNumber ,
+                        //        ( ( IXmlLineInfo ) xmlReader ) . LinePosition , 
+                        //       xmlReader . NodeType . ToString ( ) , 
+                        //       xmlReader . Name , 
+                        //       xmlReader . HasAttributes ,
+                        //       xmlReader.Depth
+                        //       ) );
                         break;
 
                     case XmlNodeType . EndEntity:
@@ -858,26 +888,35 @@ namespace DMT01
                         break;
 
                     case XmlNodeType . Notation:
-                        continue;
                         break;
 
                     case XmlNodeType . ProcessingInstruction:
-                        continue;
                         break;
 
                     case XmlNodeType . SignificantWhitespace:
-                        continue;
                         break;
 
                     case XmlNodeType . Text:
+                        //BlufbelsePrettyPrintElements ( xmlReader );
+
+                        //Debug . WriteLine ( String . Format ( @"{0} at [{1},{2}] NodeType:{3} {4} Attributes?? {5} {6} {7} {8}" ,
+                        //      XmlFileName ,
+                        //       ( ( IXmlLineInfo ) xmlReader ) . LineNumber ,
+                        //      ( ( IXmlLineInfo ) xmlReader ) . LinePosition , 
+                        //      xmlReader . NodeType . ToString ( ) , 
+                        //      xmlReader . Name , 
+                        //      xmlReader . HasAttributes , 
+                        //      xmlReader . ValueType , 
+                        //      xmlReader . Value, 
+                        //      xmlReader.Depth ) );
                         break;
+
                     case XmlNodeType . Whitespace:
-                        xmlReader . MoveToContent ( );
-                        continue;
                         break;
 
                     case XmlNodeType . XmlDeclaration:
                         break;
+
                     default:
                         break;
                     }
@@ -886,13 +925,72 @@ namespace DMT01
                 }
             }
 
-        private void BlomblisieAttributes ( XmlReader xR , int AC , int ln, int lp )
+        private void BlufbelsePrettyPrintElements ( XmlReader xmlReader )
+            {
+            Debug . Write ( String . Format ( @"{0}" , XmlFileName ) );
+            Debug . Write ( String . Format ( @" at [{0},{1}]" ,
+                ( ( IXmlLineInfo ) xmlReader ) . LineNumber . ToString ( "00" ), 
+                ( ( IXmlLineInfo ) xmlReader ) . LinePosition.ToString("00") ) );
+
+            for ( int i = 0 ; i < xmlReader . Depth ;i++ )
+                Debug . Write ( " " );
+
+            switch ( xmlReader.NodeType  )
+                {
+                case XmlNodeType . Element:
+                    Debug . Write ( String . Format ( @"<" ) );
+                    break;
+                    
+                case XmlNodeType . EndElement:
+                    Debug . Write ( String . Format ( @"<\" ) );
+                    break;
+
+                default:
+                    break;
+                }
+
+
+            if ( xmlReader . HasValue )
+                {
+                Debug . Write ( String . Format ( @"{0}" , xmlReader . Value ) );
+                 }
+            else
+                {
+                Debug . Write ( String . Format ( @"{0}" , xmlReader . Name ) );
+                }
+
+            switch ( xmlReader . NodeType )
+                {
+                case XmlNodeType . Element:
+            if ( xmlReader . HasAttributes )
+                {
+                BlomblisieAttributes ( xmlReader );
+                }
+                    Debug . Write ( String . Format ( @">" ) );
+                    break;
+
+                case XmlNodeType . EndElement:
+                    Debug . Write ( String . Format ( @">" ) );
+                    break;
+
+                default:
+                    break;
+                }
+
+            Debug . WriteLine ("" );
+            }
+
+        private void BlomblisieAttributes ( XmlReader xR  )
+            {
+            BlomblisieAttributes (xR, xR.AttributeCount, ( ( IXmlLineInfo ) xR ) . LineNumber , ( ( IXmlLineInfo ) xR ) . LinePosition );
+            }
+        private void BlomblisieAttributes ( XmlReader xR , int AttributeCount , int LineNumber , int LinePosition )
             {
             String NT = xR . NodeType . ToString ( );
             String NN = xR . Name;
             //String CT = xmlReader . ReadContentAsString ( );
            
-            for ( int i = 0 ; i < AC ; i++ )
+            for ( int i = 0 ; i < AttributeCount ; i++ )
                 {
                 xR . MoveToAttribute ( i );
                 var n = xR . Name;
@@ -901,94 +999,211 @@ namespace DMT01
                 int lineNumber = xmlInfo . LineNumber;
                 int linePosition = xmlInfo . LinePosition;
 
-                Debug . WriteLine ( String . Format ( "NodeType {0} {1} {3} Attribute of {2} at [{4},{5}] <<{6}>> = <<{7}>>" , 
-                 NT ,  NN, AC, i , lineNumber , linePosition, n,v ) );
-
+                Debug . Write ( String . Format ( @" {0}=""{1}""" , n, v ) );
                 }
             }
 
-        private void ParseControlClass ( XmlReader xR )
+        private void DumpSubtree ( XmlReader xmlReader )
             {
-            
-            do
+            while ( !xmlReader . EOF )
                 {
-                var D = xR . Depth;
-                switch ( xR . NodeType )
+                switch ( xmlReader . NodeType )
                     {
-                    case XmlNodeType . Element:
-                        var n= xR . Name;
-
-                        XmlReader pp = xR . ReadSubtree ( );
-                        DumpSubtree ( pp );
-                        //string uuu = xR . ReadOuterXml ( );
-                        //string ppp = xR . ReadInnerXml ( );
-                        //var xxx = typeof ( SeralizeControlCommonFields );
-                        //StringReader sr = new StringReader ( uuu );
-
-                        //XmlReader zz = XmlReader.Create ( sr );
-                        //XmlSerializer seralizer = new XmlSerializer ( xxx );
-                        //Boolean can= seralizer . CanDeserialize ( zz );
+                    case XmlNodeType . Attribute:
                         break;
 
-                    case XmlNodeType . Text:
-                        var t = xR . Value;
+                    case XmlNodeType . CDATA:
+                        break;
+
+                    case XmlNodeType . Comment:
+                        break;
+
+                    case XmlNodeType . Document:
+                        break;
+
+                    case XmlNodeType . DocumentFragment:
+                        break;
+
+                    case XmlNodeType . DocumentType:
+                        break;
+
+                    case XmlNodeType . Element:
+                        //Blufbelse ( xmlReader );
+                        SeralizeControlCommonFields p = new SeralizeControlCommonFields ( );
+                        XmlSerializer x = new XmlSerializer ( p . GetType ( ) );
+                        var o=x . Deserialize ( xmlReader  );
+                        p = ( SeralizeControlCommonFields ) o;
+                        switch ( p . ControlClass )
+                            {
+                            case nameof ( Window ):
+                                WindowControlDeseralizer ( p );
+                                break;
+
+                            case nameof ( CheckBox ):
+                                CheckBoxControlDeseralizer ( p );
+                            break;
+
+                            case nameof ( RadioButton ):
+                                RadioButtonControlDeseralizer ( p );
+                                break;
+
+                            case nameof ( H_Slider_UserControl1 ):
+                                H_SliderUserControlDeseralizer ( p );
+                                break;
+
+                            default:
+                                 Debug . WriteLine ( String . Format ( "{0}" , p.ControlClass ) );
+                                break;
+                            }
+                        xmlReader . Close ( );
+                        return;
+
+                    case XmlNodeType . EndEntity:
                         break;
 
                     case XmlNodeType . EndElement:
-                        var e = xR . Name;
+                        BlufbelsePrettyPrintElements ( xmlReader );
+                        break;
+
+                    case XmlNodeType . Entity:
+                        break;
+
+                    case XmlNodeType . EntityReference:
+                        break;
+
+                    case XmlNodeType . None:
+                        break;
+
+                    case XmlNodeType . Notation:
+                        break;
+
+                    case XmlNodeType . ProcessingInstruction:
+                        break;
+
+                    case XmlNodeType . SignificantWhitespace:
+                        break;
+
+                    case XmlNodeType . Text:
+                        BlufbelsePrettyPrintElements ( xmlReader );
+                        break;
+
+                    case XmlNodeType . Whitespace:
+                        break;
+
+                    case XmlNodeType . XmlDeclaration:
                         break;
 
                     default:
                         break;
                     }
-                } while ( xR . Read());
-
-
-
-            //
-            //StringReader xx = new StringReader ( XmlFileContents );
-            //XmlReader x =  XmlReader.Create ( xx );
-            //SeralizeControlCommonFields des = ( SeralizeControlCommonFields ) seralizer . Deserialize ( x );
-
-
+                xmlReader . Read ( );
+                }
             }
 
-        private void DumpSubtree ( XmlReader xR )
+        private void H_SliderUserControlDeseralizer ( SeralizeControlCommonFields p )
             {
-            xR . MoveToContent ( );
-            do
+            H_Slider_UserControl1 HC =LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) as H_Slider_UserControl1;
+
+            H_Slider_UserControl1_SaveState_Class pp = new H_Slider_UserControl1_SaveState_Class ( );
+            XmlSerializer x = new XmlSerializer ( pp . GetType ( ) );
+            StringReader XmlStringReader = new StringReader ( XmlFileContents);
+
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
                 {
+                IgnoreComments = true ,
+                IgnoreProcessingInstructions = true ,
+                IgnoreWhitespace = true
+                };
 
-                IXmlLineInfo xmlInfo = ( IXmlLineInfo ) xR;
-                int lineNumber = xmlInfo . LineNumber;
-                int linePosition = xmlInfo . LinePosition;
-                var D = xR . Depth;
-                switch ( xR . NodeType )
-                    {
-                    case XmlNodeType . Element:
-                        var n = xR . Name;
-                        xR . Read ( );
-                        var v = xR . Value;
-                        break;
+            XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
 
-                    case XmlNodeType . Text:
-                        xR . Read ( );
-                        var t = xR . Value;
-                        break;
 
-                    case XmlNodeType . EndElement:
-                        xR . Read ( );
-                        var e = xR . Name;
-                        break;
+            var o = x . Deserialize ( xmlReader );
 
-                    default:
-                        xR . Read ( );
-                        break;
-                    }
+            pp = ( H_Slider_UserControl1_SaveState_Class ) o;
+            HC . SliderValue=pp.ResetValue;
 
-                } while ( !xR . EOF );
             }
 
+        private void RadioButtonControlDeseralizer ( SeralizeControlCommonFields p )
+            {
+            RadioButton RB = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) as RadioButton;
+
+            RadioCheckBoxSaveState pp = new RadioCheckBoxSaveState ( );
+
+            XmlSerializer x = new XmlSerializer ( pp . GetType ( ) );
+
+            StringReader XmlStringReader = new StringReader ( XmlFileContents );
+
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
+                {
+                IgnoreComments = true ,
+                IgnoreProcessingInstructions = true ,
+                IgnoreWhitespace = true
+                };
+
+            XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
+
+            var o = x . Deserialize ( xmlReader );
+
+            pp = ( RadioCheckBoxSaveState ) o;
+            RB . IsChecked = pp . RadioCheckBoxState;
+
+            }
+
+        private void CheckBoxControlDeseralizer ( SeralizeControlCommonFields p )
+            {
+            CheckBox CB = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) as CheckBox;
+
+            CheckBoxControlSaveState pp = new CheckBoxControlSaveState ( );
+
+            XmlSerializer x = new XmlSerializer ( pp . GetType ( ) );
+
+            StringReader XmlStringReader = new StringReader ( XmlFileContents );
+
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
+                {
+                IgnoreComments = true ,
+                IgnoreProcessingInstructions = true ,
+                IgnoreWhitespace = true
+                };
+
+            XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
+
+            Object o = x . Deserialize ( xmlReader );
+
+            pp = ( CheckBoxControlSaveState ) o;
+            CB . IsChecked = pp . CheckBoxState;
+            }
+
+        private void WindowControlDeseralizer ( SeralizeControlCommonFields p )
+            {
+            Window C = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) as Window;
+
+            DMT_Main_Window_Control_SaveState pp = new DMT_Main_Window_Control_SaveState ( );
+
+            XmlSerializer x = new XmlSerializer ( pp . GetType ( ) );
+
+            StringReader XmlStringReader = new StringReader ( XmlFileContents );
+
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
+                {
+                IgnoreComments = true ,
+                IgnoreProcessingInstructions = true ,
+                IgnoreWhitespace = true
+                };
+
+            XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
+
+            Object o = x . Deserialize ( xmlReader );
+
+            pp = ( DMT_Main_Window_Control_SaveState ) o;
+            C . Left = pp . Left;
+            C . Top = pp . Top;
+
+            }
+
+#endregion Deseralizers
         void reshape (OpenGL gl, int width, int height)
         {
 
@@ -1026,5 +1241,6 @@ namespace DMT01
             {
             Viewing_Frustrum_TabItem . IsSelected = true;
             }
+
         }
 }

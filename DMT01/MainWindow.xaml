@@ -96,24 +96,25 @@
         </StackPanel>
         <StackPanel
             x:Name="BottomStackPanel"
-            Width="1029"
+            Width="1033"
             Height="714"
             Margin="9,5,0,16"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Background="#FF1A319B"
             ScrollViewer.HorizontalScrollBarVisibility="Visible">
+
             <StackPanel
                 x:Name="DrawMe_StackPanel"
-                Width="921"
+                Width="1000"
                 Height="24"
-                Margin="19,7,89,0"
-                HorizontalAlignment="Center"
+                Margin="10,13,0,0"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="#FF5D4B5F"
                 Orientation="Horizontal">
                 <CheckBox
-                    x:Name="AxisDrawMe_CheckBox"
+                    x:Name="AxisDrawMe_CheckBox_Control"
                     Width="83"
                     Margin="4,2,3,2"
                     HorizontalAlignment="Left"
@@ -122,7 +123,7 @@
                     Content="DrawAxis"
                     IsChecked="True" />
                 <CheckBox
-                    x:Name="DrawTeaPot_CheckBox"
+                    x:Name="DrawTeaPot_CheckBox_Control"
                     Width="83"
                     Margin="4,2,3,2"
                     HorizontalAlignment="Left"
@@ -131,7 +132,7 @@
                     Content="TeaPot"
                     IsChecked="True" />
                 <CheckBox
-                    x:Name="Do_Orbit_CheckBox"
+                    x:Name="Do_Orbit_CheckBox_Control"
                     Width="83"
                     Margin="4,2,3,2"
                     HorizontalAlignment="Left"
@@ -139,7 +140,7 @@
                     BorderThickness="5,2,1,2"
                     Content="Do Orbit" />
                 <CheckBox
-                    x:Name="Spredsheet_Grid_CheckBox"
+                    x:Name="Spreadsheet_Grid_CheckBox_Control"
                     Width="83"
                     Margin="4,2,3,2"
                     HorizontalAlignment="Left"
@@ -149,9 +150,9 @@
                     IsChecked="True" />
                 <StackPanel
                     x:Name="RadioButton_StackPanel"
-                    Width="366"
+                    Width="554"
                     Height="18"
-                    Margin="5,3,3,2"
+                    Margin="5,3,3,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Background="#FF7C2121"
@@ -164,7 +165,7 @@
                         GroupName="ViewingOrthographicFrustrumRadioButtonGroup"
                         IsChecked="False" />
                     <RadioButton
-                        x:Name="Use_Viewing_Frustrum_RadioButton"
+                        x:Name="Use_Viewing_Frustrum_RadioButton_Control"
                         Width="79"
                         Click="Use_Viewing_Frustrum_RadioButton_Click"
                         Content="Frustrum"
@@ -176,26 +177,64 @@
                         Content="Perspective" />
                     <RadioButton
                         x:Name="UseLookAtViewingTransform_RadioButton"
+                        Width="68"
                         Click="UseLookAtViewingTransform_RadioButton_Control_Click"
                         Content="LookAt"
                         IsChecked="True" />
+                    <RadioButton
+                        x:Name="UseOrtho3D_RadioButton_Control"
+                        Width="79"
+                        Content="LookAt"
+                        IsChecked="False" />
                 </StackPanel>
-                <Button
-                    x:Name="Save0_Button"
-                    Width="76"
-                    Margin="1,2,0,2"
-                    Click="Save0_Button_Click"
-                    Content="Save0" />
-                <Button
-                    x:Name="load_Button"
-                    Width="75"
-                    Margin="2,2,0,2"
-                    Click="load_Button_Click"
-                    Content="Load0" />
             </StackPanel>
             <StackPanel
+                Width="992"
+                Height="22"
+                Margin="12,7,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+                <StackPanel.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0" Color="#FF9E6969" />
+                        <GradientStop Offset="1" Color="#FFFB5454" />
+                    </RadialGradientBrush>
+                </StackPanel.Background>
+                <Button
+                    x:Name="load_Button"
+                    Width="54"
+                    Height="20"
+                    Margin="2,1,0,0"
+                    HorizontalAlignment="Left"
+                    Click="load_Button_Click"
+                    Content="Load0" />
+                <Button
+                    x:Name="Save0_Button"
+                    Width="84"
+                    Height="20"
+                    Margin="12,1,21,1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="Save0_Button_Click"
+                    Content="Save0" />
+                <RadioButton
+                    x:Name="LaunchSavedStateOnInitalization_RadioButton_Control"
+                    Width="119"
+                    Height="15"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="#FFEADDDD"
+                    Content="Load Saved On Init"
+                    IsChecked="True" />
+            </StackPanel>
+            <StackPanel
+                x:Name="Status_Label_StackPanel"
+                Width="998"
                 Height="38"
-                Margin="19,8,19,2"
+                Margin="10,6,0,0"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="#FF613642"
                 Orientation="Horizontal">
@@ -268,7 +307,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="{Binding ElementName=Orbit_Rotation_H_Slider_UserControl1, Path=SliderValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Content="{Binding SliderValue, ElementName=Orbit_Rotation_H_Slider_UserControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Label
                     x:Name="Orbit_Delta_Label"
                     Width="61"
@@ -278,7 +317,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="{Binding ElementName=Orbit_Delta_H_Slider_UserControl1, Path=SliderValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Content="{Binding SliderValue, ElementName=Orbit_Delta_H_Slider_UserControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Label
                     x:Name="OpenGL_Height_Label"
                     Width="61"
@@ -288,7 +327,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="{Binding ElementName=myOpenGLControl, Path=Height, UpdateSourceTrigger=PropertyChanged}" />
+                    Content="{Binding Height, ElementName=myOpenGLControl, UpdateSourceTrigger=PropertyChanged}" />
                 <Label
                     x:Name="OpenGl_Width_Label"
                     Width="61"
@@ -298,7 +337,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="{Binding ElementName=myOpenGLControl, Path=Width, UpdateSourceTrigger=PropertyChanged}" />
+                    Content="{Binding Width, ElementName=myOpenGLControl, UpdateSourceTrigger=PropertyChanged}" />
                 <Label
                     x:Name="Aspect_Label"
                     Width="61"
@@ -311,9 +350,9 @@
                     Content="{Binding Source={x:Static local:MainWindow.aspect}, StringFormat=Aspect \{0:00.00\}, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <TabControl
-                Width="988"
-                Height="624"
-                Margin="22,5,19,5"
+                Width="991"
+                Height="572"
+                Margin="4,5,21,5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="#FFF1F1C6">
@@ -449,7 +488,7 @@
                                     Orientation="Horizontal"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                     <RadioButton
-                                        x:Name="LookAt_X_Up_RadioButton"
+                                        x:Name="LookAt_X_Up_RadioButton_Control"
                                         Width="73"
                                         Margin="11,0,9,0"
                                         HorizontalContentAlignment="Left"
@@ -461,7 +500,7 @@
                                         IsChecked="True"
                                         SnapsToDevicePixels="True" />
                                     <RadioButton
-                                        x:Name="LookAt_Y_Up_RadioButton"
+                                        x:Name="LookAt_Y_Up_RadioButton_Control"
                                         Margin="11,0,9,0"
                                         Background="#FF7DA083"
                                         BorderBrush="#FFB66666"
@@ -471,7 +510,7 @@
                                         IsChecked="True"
                                         SnapsToDevicePixels="True" />
                                     <RadioButton
-                                        x:Name="LookAt_Z_Up_RadioButton"
+                                        x:Name="LookAt_Z_Up_RadioButton_Control"
                                         Margin="11,0,9,0"
                                         Background="#FF7DA083"
                                         BorderBrush="#FFB66666"
@@ -503,7 +542,7 @@
                             <RowDefinition Height="100*" />
                         </Grid.RowDefinitions>
                         <local:H_Slider_UserControl1
-                            x:Name="Eye_Z_H_Sslider_UserControl"
+                            x:Name="Eye_Z_H_Slider_UserControl"
                             Grid.Row="0"
                             Width="941"
                             Height="81"
@@ -517,7 +556,7 @@
                             SliderMinValue="-100"
                             SliderValue="-10" />
                         <local:H_Slider_UserControl1
-                            x:Name="Eye_X_H_Sslider_UserControl"
+                            x:Name="Eye_X_H_Slider_UserControl"
                             Grid.Row="1"
                             Width="941"
                             Height="82"
@@ -529,7 +568,7 @@
                             SliderMinValue="-100"
                             SliderValue="0" />
                         <local:H_Slider_UserControl1
-                            x:Name="Eye_Y_H_Sslider_UserControl"
+                            x:Name="Eye_Y_H_Slider_UserControl"
                             Grid.Row="2"
                             Width="941"
                             Height="81"
@@ -555,7 +594,7 @@
                                 </RadialGradientBrush>
                             </Grid.Background>
                             <local:H_Slider_UserControl1
-                                x:Name="Orbit_Rotation_H_Slider_UserControl1"
+                                x:Name="Orbit_Rotation_H_Slider_UserControl"
                                 Width="941"
                                 Height="80"
                                 Margin="10,7,0,0"
@@ -567,7 +606,7 @@
                                 SliderMinValue="-1000"
                                 SliderValue="0.0" />
                             <local:H_Slider_UserControl1
-                                x:Name="Orbit_Delta_H_Slider_UserControl1"
+                                x:Name="Orbit_Delta_H_Slider_UserControl"
                                 Width="941"
                                 Height="80"
                                 Margin="10,92,0,0"
@@ -587,79 +626,99 @@
                     Header="Spreadsheet Load file">
                     <Grid
                         x:Name="SpreadsheetFileName_Grid"
-                        Width="793"
-                        Height="143"
-                        Margin="30,0,0,0"
+                        Height="343"
+                        Margin="6,17,0,0"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
+                        VerticalAlignment="Top"
                         Background="#FFC1DC47">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="46*" />
+                            <RowDefinition Height="297*" />
+                        </Grid.RowDefinitions>
                         <DockPanel
-                            Width="777"
-                            Height="93"
-                            Margin="6,0,0,10"
+                            x:Name="file_and_dir_spreadsheet_DockPanel"
+                            Grid.Row="1"
+                            Width="776"
+                            Height="142"
+                            Margin="6,11,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Top"
                             Background="#FF393E47">
                             <TextBlock
+                                x:Name="Spreadsheet_File_Name_TextBlock"
                                 Width="743"
                                 Height="21"
-                                Margin="10,7,0,0"
+                                Margin="10,9,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Background="#FF3B9393"
                                 DockPanel.Dock="Top"
                                 TextAlignment="Center"
-                                TextWrapping="Wrap">
-                                <Run Text="Spreadsheet File Name" />
-                            </TextBlock>
-                            <RichTextBox
-                                x:Name="SpreadsheetDirPath_RichTextBox"
-                                Width="743"
-                                Height="23"
-                                Margin="10,0,0,4"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                VerticalContentAlignment="Bottom"
-                                Background="#FF975959"
-                                DockPanel.Dock="Bottom">
-                                <FlowDocument>
-                                    <Paragraph>
-                                        <Run />
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
+                                TextWrapping="Wrap"><Run Text="Spreadsheet File Name" /></TextBlock>
                             <RichTextBox
                                 x:Name="SpreadsheetFileName_RichTextBox"
                                 Width="743"
                                 Height="24"
-                                Margin="10,0,0,4"
+                                Margin="8,5,0,0"
                                 Padding="0"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                VerticalContentAlignment="Bottom"
+                                VerticalAlignment="Top"
                                 Background="#FFF0EB87"
-                                DockPanel.Dock="Bottom">
+                                DockPanel.Dock="Top">
                                 <FlowDocument>
                                     <Paragraph>
                                         <Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx" />
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
+                            <TextBlock
+                                x:Name="Spreadsheet_directory_Name_TextBlock"
+                                Width="743"
+                                Height="21"
+                                Margin="11,6,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF3B9393"
+                                DockPanel.Dock="Top"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap">
+                                <Run>Spreadsheet Directory Name</Run>
+                            </TextBlock>
+                            <RichTextBox
+                                x:Name="SpreadsheetDirPath_RichTextBox"
+                                Width="743"
+                                Height="23"
+                                Margin="10,12,0,0"
+                                Padding="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF975959"
+                                DockPanel.Dock="Top">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        <Run>./</Run>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
                         </DockPanel>
                         <Button
                             x:Name="spreadsheet_load_Button"
-                            Margin="6,10,621,108"
+                            Width="138"
+                            Height="25"
+                            Margin="11,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
                             Click="spreadsheet_load_Button_Click"
                             Content="load spreadsheet" />
-                        <Button
-                            x:Name="Button2"
-                            Width="96"
-                            Height="25"
-                            Margin="177,10,0,0"
+                        <CheckBox
+                            x:Name="LoadSpreadsheetAtInitalization_CheckBox_Control"
+                            Height="17"
+                            Margin="170,0,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Content="Button" />
+                            VerticalAlignment="Center"
+                            Background="#FFEC8F8F"
+                            Content="Load Spreadsheet At Initalization"
+                            IsChecked="false" />
                     </Grid>
                 </TabItem>
                 <TabItem
