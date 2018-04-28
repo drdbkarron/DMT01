@@ -351,13 +351,13 @@
             </StackPanel>
             <TabControl
                 Width="991"
-                Height="572"
+                Height="598"
                 Margin="4,5,21,5"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 Background="#FFF1F1C6">
                 <TabItem
-                    x:Name="LookAt_tabItem"
+                    x:Name="LookAt_TabItem"
                     Width="54"
                     Height="20"
                     Margin="0"
@@ -380,7 +380,7 @@
                             VerticalAlignment="Top"
                             Background="#FFE4E893">
                             <StackPanel
-                                x:Name="LookAtEye"
+                                x:Name="LookAtEye_XYZ_StackPanel"
                                 Width="972"
                                 Height="262"
                                 Margin="0,4"
@@ -395,8 +395,8 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     LabelText="LookAt X"
-                                    SliderMaxValue="100"
-                                    SliderMinValue="-100"
+                                    SliderMaxValue="50"
+                                    SliderMinValue="-50"
                                     SliderValue="0" />
                                 <local:H_Slider_UserControl1
                                     x:Name="LookAt_Eye_Y_H_Slider_UserControl"
@@ -406,8 +406,8 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     LabelText="LookAt Eye Y"
-                                    SliderMaxValue="100"
-                                    SliderMinValue="-100"
+                                    SliderMaxValue="50"
+                                    SliderMinValue="-50"
                                     SliderValue="0" />
                                 <local:H_Slider_UserControl1
                                     x:Name="LookAt_Eye_Z_H_Slider_UserControl"
@@ -418,12 +418,12 @@
                                     VerticalAlignment="Top"
                                     VerticalContentAlignment="Center"
                                     LabelText="LookAt EyeZ"
-                                    SliderMaxValue="10"
-                                    SliderMinValue="-100"
-                                    SliderValue="-10" />
+                                    SliderMaxValue="50"
+                                    SliderMinValue="-50"
+                                    SliderValue="0" />
                             </StackPanel>
                             <StackPanel
-                                x:Name="LookAtTarget"
+                                x:Name="LookAtTarget_XYZ_StackPanel"
                                 Width="972"
                                 Height="236"
                                 Margin="0,4,0,2"
@@ -441,8 +441,8 @@
                                     Background="#FFCF5EAB"
                                     Grid.IsSharedSizeScope="True"
                                     LabelText="LookAt Target X"
-                                    SliderMaxValue="100"
-                                    SliderMinValue="-100"
+                                    SliderMaxValue="50"
+                                    SliderMinValue="-50"
                                     SliderValue="0" />
                                 <local:H_Slider_UserControl1
                                     x:Name="LookAtTarget_Y_H_Slider_UserControl"
@@ -528,96 +528,114 @@
                     x:Name="Eye_and_Camera__TabItem"
                     Margin="0"
                     Header="Eye and Camera">
-                    <Grid
-                        x:Name="SceneTranslate_Grid"
-                        Width="965"
-                        Height="332"
-                        Margin="8,7,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Background="#FFC1DC47">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="100*" />
-                            <RowDefinition Height="100*" />
-                            <RowDefinition Height="100*" />
-                        </Grid.RowDefinitions>
-                        <local:H_Slider_UserControl1
-                            x:Name="Eye_Z_H_Slider_UserControl"
-                            Grid.Row="0"
-                            Width="941"
-                            Height="81"
-                            Margin="9,8,0,0"
+                    <Grid Height="555">
+                        <StackPanel
+                            Width="973"
+                            Height="557"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            BorderBrush="#FFEA2020"
-                            BorderThickness="4"
-                            LabelText="Z Eye Coordinate"
-                            SliderMaxValue="100"
-                            SliderMinValue="-100"
-                            SliderValue="-10" />
-                        <local:H_Slider_UserControl1
-                            x:Name="Eye_X_H_Slider_UserControl"
-                            Grid.Row="1"
-                            Width="941"
-                            Height="82"
-                            Margin="9,8,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            LabelText="X Eye Coordinate"
-                            SliderMaxValue="100"
-                            SliderMinValue="-100"
-                            SliderValue="0" />
-                        <local:H_Slider_UserControl1
-                            x:Name="Eye_Y_H_Slider_UserControl"
-                            Grid.Row="2"
-                            Width="941"
-                            Height="81"
-                            Margin="9,8,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            LabelText="Y Eye Coordinate"
-                            SliderMaxValue="100"
-                            SliderMinValue="-100"
-                            SliderValue="0" />
-                        <Grid
-                            x:Name="Rotate_Grid"
-                            Grid.Row="2"
-                            Width="961"
-                            Height="235"
-                            Margin="4,123,0,-247"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
-                            <Grid.Background>
-                                <RadialGradientBrush>
-                                    <GradientStop Offset="0" Color="#FF345B66" />
-                                    <GradientStop Offset="1" Color="#FFFF3E3E" />
-                                </RadialGradientBrush>
-                            </Grid.Background>
-                            <local:H_Slider_UserControl1
-                                x:Name="Orbit_Rotation_H_Slider_UserControl"
-                                Width="941"
-                                Height="80"
-                                Margin="10,7,0,0"
+                            Orientation="Vertical">
+                            <Grid
+                                x:Name="Orbit_Distance_and_Rotate_Grid"
+                                Width="961"
+                                Height="264"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="28*" />
+                                    <RowDefinition Height="31*" />
+                                    <RowDefinition Height="29*" />
+                                </Grid.RowDefinitions>
+                                <Grid.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="0" Color="#FF345B66" />
+                                        <GradientStop Offset="1" Color="#FFFF3E3E" />
+                                    </RadialGradientBrush>
+                                </Grid.Background>
+                                <local:H_Slider_UserControl1
+                                    x:Name="Orbit_Rotation_H_Slider_UserControl"
+                                    Width="933"
+                                    Height="66"
+                                    Margin="10,10,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderBrush="#FFF01515"
+                                    LabelText="Orbit Total Rotation Angle"
+                                    SliderMaxValue="1000"
+                                    SliderMinValue="-1000"
+                                    SliderValue="0.0">
+                                    <local:H_Slider_UserControl1.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Offset="0" Color="Black" />
+                                            <GradientStop Offset="1" Color="White" />
+                                        </LinearGradientBrush>
+                                    </local:H_Slider_UserControl1.Background>
+                                </local:H_Slider_UserControl1>
+                                <local:H_Slider_UserControl1 x:Name="Orbit_Radius_H_Slider_UserControl" Grid.Row="2" LabelText="Orbit Radius" SliderMinValue="-100" SliderValue="10" Margin="5,9,12,9" Width="944" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="Orbit_Delta_Angle_H_Slider_UserControl"
+                                    Grid.Row="1"
+                                    Width="944"
+                                    Margin="5,-4,0,0"
+                                    HorizontalAlignment="Left" LabelText="Rotation Delta Angle" SliderMinValue="-10" SliderMaxValue="10" SliderValue="3"></local:H_Slider_UserControl1>
+                            </Grid>
+                            <Grid
+                                x:Name="SceneTranslate_Grid"
+                                Width="965"
+                                Height="260"
+                                Margin="8,5,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Background="#FF1CCD00"
-                                LabelText="Orbit Rotation Angle"
-                                SliderMaxValue="1000"
-                                SliderMinValue="-1000"
-                                SliderValue="0.0" />
-                            <local:H_Slider_UserControl1
-                                x:Name="Orbit_Delta_H_Slider_UserControl"
-                                Width="941"
-                                Height="80"
-                                Margin="10,92,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FF3F7CD4"
-                                LabelText="Orbit Delta"
-                                SliderMaxValue="10"
-                                SliderMinValue="-10"
-                                SliderValue="3.0" />
-                        </Grid>
+                                Background="#FFC1DC47">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="87*" />
+                                    <RowDefinition Height="88*" />
+                                    <RowDefinition Height="82*" />
+                                </Grid.RowDefinitions>
+                                <local:H_Slider_UserControl1
+                                    x:Name="Eye_Z_H_Slider_UserControl"
+                                    Grid.Row="0"
+                                    Width="941"
+                                    Height="81"
+                                    Margin="3,4,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    d:IsLocked="True"
+                                    BorderBrush="#FFEA2020"
+                                    BorderThickness="4"
+                                    LabelText="Z Eye Coordinate"
+                                    SliderMaxValue="100"
+                                    SliderMinValue="-100"
+                                    SliderValue="-10" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="Eye_X_H_Slider_UserControl"
+                                    Grid.Row="1"
+                                    Width="941"
+                                    Height="82"
+                                    Margin="6,2,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    d:IsLocked="True"
+                                    LabelText="X Eye Coordinate"
+                                    SliderMaxValue="100"
+                                    SliderMinValue="-100"
+                                    SliderValue="0" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="Eye_Y_H_Slider_UserControl"
+                                    Grid.Row="2"
+                                    Width="941"
+                                    Height="81"
+                                    Margin="8,3,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    d:IsLocked="True"
+                                    LabelText="Y Eye Coordinate"
+                                    SliderMaxValue="100"
+                                    SliderMinValue="-100"
+                                    SliderValue="0" />
+                            </Grid>
+
+                        </StackPanel>
                     </Grid>
                 </TabItem>
                 <TabItem
@@ -778,12 +796,13 @@
                             <local:H_Slider_UserControl1
                                 x:Name="Perspective_Z_NEAR_H_Slider_UserControl"
                                 Grid.Row="2"
+                                Grid.RowSpan="3"
                                 Width="902"
                                 Height="110"
                                 Margin="10,16,10,105"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                LabelText="Perspetive zNear" Grid.RowSpan="3" />
+                                LabelText="Perspetive zNear" />
                             <local:H_Slider_UserControl1
                                 x:Name="Perspective_Z_FAR_H_Slider_UserControl"
                                 Grid.Row="4"
@@ -924,81 +943,91 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="Orthographics Viewing">
-                    <Grid Background="#FFE5E5E5" VerticalAlignment="Center" >
+                    <Grid
+                        Width="964"
+                        Margin="13,7,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="95*"/>
-                            <RowDefinition Height="77*"/>
-                            <RowDefinition Height="75*"/>
-                            <RowDefinition Height="80*"/>
-                            <RowDefinition Height="70*"/>
-                            <RowDefinition Height="146*"/>
+                            <RowDefinition Height="95*" />
+                            <RowDefinition Height="77*" />
+                            <RowDefinition Height="75*" />
+                            <RowDefinition Height="80*" />
+                            <RowDefinition Height="70*" />
+                            <RowDefinition Height="146*" />
                         </Grid.RowDefinitions>
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Left_H_Slider_UserControl"
-                            Width="902"
+                            Width="882"
                             Height="70"
                             Margin="10,19,73,6"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            LabelText="Left"
-                            SliderMaxValue="10"
-                            SliderMinValue=".1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            LabelText="Orthographic Left"
+                            SliderMaxValue="5"
+                            SliderMinValue="0"
                             SliderValue="1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Right_H_Slider_UserControl"
-                            Width="902"
+                            Grid.Row="2"
+                            Width="927"
                             Height="70"
                             Margin="10,3,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            LabelText="Right"
-                            SliderMaxValue="5"
+                            VerticalAlignment="Top"
+                            LabelText="orthographic Right"
+                            SliderMaxValue="0"
                             SliderMinValue="-5"
-                            SliderValue="1" Grid.Row="2" />
+                            SliderValue="-1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Top_H_Slider_UserControl"
+                            Grid.Row="3"
                             Width="902"
                             Height="70"
                             Margin="10,0,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             LabelText="Left"
-                            SliderMaxValue="10"
-                            SliderMinValue=".1"
-                            SliderValue="1" Grid.Row="3" />
+                            SliderMaxValue="5"
+                            SliderMinValue="0"
+                            SliderValue="1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Bottom_H_Slider_UserControl"
+                            Grid.Row="4"
                             Width="902"
                             Height="70"
                             Margin="10,2,73,8"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             LabelText="Bottom"
-                            SliderMaxValue="10"
-                            SliderMinValue=".1"
-                            SliderValue="1" Grid.Row="4" />
+                            SliderMaxValue="0"
+                            SliderMinValue="-5"
+                            SliderValue="-1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Near_H_Slider_UserControl"
+                            Grid.Row="5"
                             Width="902"
                             Height="70"
                             Margin="10,2,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             LabelText="Near"
-                            SliderMaxValue="10"
-                            SliderMinValue=".1"
-                            SliderValue="1" Grid.Row="5" />
+                            SliderMaxValue="-5"
+                            SliderMinValue="0"
+                            SliderValue="-1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Far_H_Slider_UserControl"
+                            Grid.Row="6"
                             Width="902"
                             Height="70"
-                            Margin="10,2,0,5"
+                            Margin="10,2,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             LabelText="Far"
-                            SliderMaxValue="10"
-                            SliderMinValue=".1"
-                            SliderValue="1" Grid.Row="6" />
+                            SliderMaxValue="5"
+                            SliderMinValue="0"
+                            SliderValue="1" />
                     </Grid>
                 </TabItem>
                 <TabItem

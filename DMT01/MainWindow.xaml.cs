@@ -194,7 +194,7 @@ namespace DMT01
                             bottom: Orthographic_Bottom_H_Slider_UserControl . SliderValue ,
                             top: Orthographic_Top_H_Slider_UserControl . SliderValue ,
                             zNear: Orthographic_Near_H_Slider_UserControl . SliderValue ,
-                            zFar: Orthographic_Far_H_Slider_UserControl.SliderValue
+                            zFar: Orthographic_Far_H_Slider_UserControl . SliderValue
                             );
                 }
 
