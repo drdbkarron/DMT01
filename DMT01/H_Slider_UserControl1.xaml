@@ -24,9 +24,11 @@
             x:Name="H_Slider_UserControl_DockPanel"
             Width="825"
             Height="37"
+            Margin="2,0,1,2"
             HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             Background="#FFF78513"
-            LastChildFill="False" VerticalAlignment="Bottom" Margin="2,0,1,2">
+            LastChildFill="False">
             <Slider
                 x:Name="theH_Slider"
                 Width="824"

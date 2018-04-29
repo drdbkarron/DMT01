@@ -135,27 +135,16 @@ namespace DMT01
 
         private void DMTWindow_Loaded ( object sender , RoutedEventArgs e )
             {
-            if ( LaunchSavedStateOnInitalization_RadioButton_Control .IsChecked.GetValueOrDefault())
-                {
-                load_Button . PerformClick ( );
-                }
             if ( LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
                 spreadsheet_load_Button . PerformClick ( );
                 }
+            if ( LaunchSavedStateOnInitalization_RadioButton_Control .IsChecked.GetValueOrDefault() )
+                {
+                Load_XML_Saved_Control_States_Button . PerformClick ( );
+                }
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Loaded ) ) );
             }
-
-        private String Stringify ( Rect bounds )
-        {
-
-            String s1 = String.Format("{0}", nameof(bounds.Bottom), bounds.Bottom);
-            String s2 = String.Format("{0}", nameof(bounds.Top), bounds.Top);
-            String s3 = String.Format("{0}", nameof(bounds.Left), bounds.Left);
-            String s4 = String.Format("{0}", nameof(bounds.Right), bounds.Right);
-            String s5 = String.Format("{0}", nameof(bounds.TopRight), bounds.TopRight);
-            return s1 + s2 + s3 + s4 + s5;
-        }
 
         private void myReoGridControl_Loaded ( object sender , RoutedEventArgs e )
         {
@@ -173,7 +162,7 @@ namespace DMT01
         private void myOpenGLControl_OpenGLDraw ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
         {
 
-            Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLDraw)));
+            //Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLDraw)));
 
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl.OpenGL;
@@ -262,8 +251,6 @@ namespace DMT01
                     centerz: LookAtTarget_Z_H_Slider_UserControl . SliderValue ,
                     upx: x_up , upy: y_up , upz: z_up );
 
-
-
                 //M = M * LookAt ( gl );
             }
 
@@ -273,6 +260,12 @@ namespace DMT01
             gl . LoadIdentity ( );
 
             gl . Translate ( Eye_X_H_Slider_UserControl . SliderValue , Eye_Y_H_Slider_UserControl . SliderValue , Eye_Z_H_Slider_UserControl . SliderValue );
+
+            if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
+                Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+                }
 
 
             if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
@@ -286,12 +279,7 @@ namespace DMT01
                 tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
             }
 
-            if( Do_Orbit_CheckBox_Control .IsChecked.GetValueOrDefault())
-                {
-                gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl.SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
-                Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
-                }
-
+           
             gl . Flush ( );
             DoAspect ( );
             Draws_Label . Content = String . Format ( "Draw Count: {0}" , Draws );
@@ -817,8 +805,7 @@ namespace DMT01
 
             XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
             XmlFileName = F;
-             WalkXmlReader ( xmlReader );
-
+            WalkXmlReader ( xmlReader );
             }
 
         private void WalkXmlReader ( XmlReader xmlReader )
@@ -1122,7 +1109,17 @@ namespace DMT01
 
         private void H_SliderUserControlDeseralizer ( SeralizeControlCommonFields p )
             {
-            H_Slider_UserControl1 HC =LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) as H_Slider_UserControl1;
+            if ( p == null )
+                {
+                throw new ArgumentNullException ( nameof ( p ) );
+                }
+
+            Object O = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) ;
+            H_Slider_UserControl1 HC = O as H_Slider_UserControl1;
+            if ( HC == null )
+                {
+                return;
+                }
 
             H_Slider_UserControl1_SaveState_Class pp = new H_Slider_UserControl1_SaveState_Class ( );
             XmlSerializer x = new XmlSerializer ( pp . GetType ( ) );
@@ -1142,12 +1139,16 @@ namespace DMT01
 
             pp = ( H_Slider_UserControl1_SaveState_Class ) o;
             HC . SliderValue=pp.ResetValue;
-
+            HC . SliderMaxValue = pp . MaxValue;
+            HC . SliderMinValue = pp . MinValue;
             }
 
         private void RadioButtonControlDeseralizer ( SeralizeControlCommonFields p )
             {
-            RadioButton RB = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) as RadioButton;
+            Object O = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName );
+            RadioButton RB = O as RadioButton;
+            if ( RB == null )
+                return;
 
             RadioCheckBoxSaveState pp = new RadioCheckBoxSaveState ( );
 
@@ -1173,7 +1174,10 @@ namespace DMT01
 
         private void CheckBoxControlDeseralizer ( SeralizeControlCommonFields p )
             {
-            CheckBox CB = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName ) as CheckBox;
+            Object O = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName );
+            CheckBox CB = O as CheckBox;
+            if ( CB == null )
+                return;
 
             CheckBoxControlSaveState pp = new CheckBoxControlSaveState ( );
 
@@ -1244,7 +1248,7 @@ namespace DMT01
 
         private void UseLookAtViewingTransform_RadioButton_Control_Click ( object sender , RoutedEventArgs e )
             {
-            LookAt_tabItem . IsSelected = true;
+            LookAt_TabItem . IsSelected = true;
             }
 
         private void UsePerspetiveViewingTransform_Click ( object sender , RoutedEventArgs e )

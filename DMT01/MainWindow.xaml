@@ -152,43 +152,38 @@
                     x:Name="RadioButton_StackPanel"
                     Width="554"
                     Height="18"
-                    Margin="5,3,3,0"
+                    Margin="5,3,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Background="#FF7C2121"
                     Orientation="Horizontal">
-                    <RadioButton
+                    <CheckBox
                         x:Name="UseOrthographic_Viewing_Transform_radioButton_Control"
                         Width="100"
                         Click="UseOrthographic_Viewing_Transform_radioButton_Control_Click"
                         Content="Orthographic"
-                        GroupName="ViewingOrthographicFrustrumRadioButtonGroup"
                         IsChecked="False" />
-                    <RadioButton
+                    <CheckBox
                         x:Name="Use_Viewing_Frustrum_RadioButton_Control"
                         Width="79"
                         Click="Use_Viewing_Frustrum_RadioButton_Click"
                         Content="Frustrum"
-                        GroupName="ViewingOrthographicFrustrumRadioButtonGroup"
                         IsChecked="false" />
-                    <RadioButton
+                    <CheckBox
                         x:Name="UsePerspetiveViewingTransform_RadioButton_Control"
                         Click="UsePerspetiveViewingTransform_Click"
-                        Content="Perspective" />
-                    <RadioButton
+                        Content="Perspective"
+                        IsChecked="False" />
+                    <CheckBox
                         x:Name="UseLookAtViewingTransform_RadioButton"
                         Width="68"
                         Click="UseLookAtViewingTransform_RadioButton_Control_Click"
-                        Content="LookAt"
-                        IsChecked="True" />
-                    <RadioButton
-                        x:Name="UseOrtho3D_RadioButton_Control"
-                        Width="79"
                         Content="LookAt"
                         IsChecked="False" />
                 </StackPanel>
             </StackPanel>
             <StackPanel
+                x:Name="State_Save_Restore_StackPanel"
                 Width="992"
                 Height="22"
                 Margin="12,7,0,0"
@@ -202,7 +197,7 @@
                     </RadialGradientBrush>
                 </StackPanel.Background>
                 <Button
-                    x:Name="load_Button"
+                    x:Name="Load_XML_Saved_Control_States_Button"
                     Width="54"
                     Height="20"
                     Margin="2,1,0,0"
@@ -349,13 +344,235 @@
                     BorderThickness="1"
                     Content="{Binding Source={x:Static local:MainWindow.aspect}, StringFormat=Aspect \{0:00.00\}, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-            <TabControl x:Name="Viewing_Transform_TabControl"
+            <TabControl
+                x:Name="Viewing_Transform_TabControl"
                 Width="991"
                 Height="598"
                 Margin="4,5,21,5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Background="#FFF1F1C6">
+                <TabItem
+                    x:Name="SpreadsheetSupport_TabItem"
+                    Margin="0"
+                    Header="Spreadsheet Load file">
+                    <Grid
+                        x:Name="SpreadsheetFileName_Grid"
+                        Height="343"
+                        Margin="6,17,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#FFC1DC47">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="46*" />
+                            <RowDefinition Height="297*" />
+                        </Grid.RowDefinitions>
+                        <DockPanel
+                            x:Name="file_and_dir_spreadsheet_DockPanel"
+                            Grid.Row="1"
+                            Width="776"
+                            Height="142"
+                            Margin="6,11,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="#FF393E47">
+                            <TextBlock
+                                x:Name="Spreadsheet_File_Name_TextBlock"
+                                Width="743"
+                                Height="21"
+                                Margin="10,9,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Background="#FF3B9393"
+                                DockPanel.Dock="Top"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap"><Run Text="Spreadsheet File Name" /></TextBlock>
+                            <RichTextBox
+                                x:Name="SpreadsheetFileName_RichTextBox"
+                                Width="743"
+                                Height="24"
+                                Margin="8,5,0,0"
+                                Padding="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FFF0EB87"
+                                DockPanel.Dock="Top">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        <Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx" />
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+                            <TextBlock
+                                x:Name="Spreadsheet_directory_Name_TextBlock"
+                                Width="743"
+                                Height="21"
+                                Margin="11,6,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF3B9393"
+                                DockPanel.Dock="Top"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap"><Run Text="Spreadsheet Directory Name" /></TextBlock>
+                            <RichTextBox
+                                x:Name="SpreadsheetDirPath_RichTextBox"
+                                Width="743"
+                                Height="23"
+                                Margin="10,12,0,0"
+                                Padding="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FF975959"
+                                DockPanel.Dock="Top">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        <Run Text="./" />
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+                        </DockPanel>
+                        <Button
+                            x:Name="spreadsheet_load_Button"
+                            Width="138"
+                            Height="25"
+                            Margin="11,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Click="spreadsheet_load_Button_Click"
+                            Content="load spreadsheet" />
+                        <CheckBox
+                            x:Name="LoadSpreadsheetAtInitalization_CheckBox_Control"
+                            Height="17"
+                            Margin="170,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="#FFEC8F8F"
+                            Content="Load Spreadsheet At Initalization"
+                            IsChecked="false" />
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    x:Name="Eye_and_Camera_TabItem"
+                    Margin="0"
+                    Header="Camera Eye Orbit">
+                    <Grid Height="555">
+                        <StackPanel
+                            Width="973"
+                            Height="557"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Orientation="Vertical">
+                            <Grid
+                                x:Name="Orbit_Distance_and_Rotate_Grid"
+                                Width="961"
+                                Height="264"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top" Margin="10,7,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="29*" />
+                                    <RowDefinition Height="29*" />
+                                    <RowDefinition Height="29*" />
+                                </Grid.RowDefinitions>
+                                <Grid.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="0" Color="#FF345B66" />
+                                        <GradientStop Offset="1" Color="#FFFF3E3E" />
+                                    </RadialGradientBrush>
+                                </Grid.Background>
+                                <local:H_Slider_UserControl1
+                                    x:Name="Orbit_Rotation_H_Slider_UserControl"
+                                    Width="938"
+                                    Height="80"
+                                    Margin="9,3,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderBrush="#FFF01515"
+                                    LabelText="Orbit Total Rotation Angle"
+                                    SliderMaxValue="1000"
+                                    SliderMinValue="-1000"
+                                    SliderValue="0.0">
+                                    <local:H_Slider_UserControl1.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Offset="0" Color="Black" />
+                                            <GradientStop Offset="1" Color="White" />
+                                        </LinearGradientBrush>
+                                    </local:H_Slider_UserControl1.Background>
+                                </local:H_Slider_UserControl1>
+                                <local:H_Slider_UserControl1
+                                    x:Name="Orbit_Radius_H_Slider_UserControl"
+                                    Grid.Row="2"
+                                    Width="938"
+                                    Margin="9,3,12,9"
+                                    LabelText="Orbit Radius"
+                                    SliderMinValue="-100"
+                                    SliderValue="10" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="Orbit_Delta_Angle_H_Slider_UserControl"
+                                    Grid.Row="1"
+                                    Width="938"
+                                    Margin="9,3,0,0"
+                                    HorizontalAlignment="Left"
+                                    LabelText="Rotation Delta Angle"
+                                    SliderMaxValue="10"
+                                    SliderMinValue="-10"
+                                    SliderValue="3" Height="80" VerticalAlignment="Top" />
+                            </Grid>
+                            <Grid
+                                x:Name="SceneTranslate_Grid"
+                                Width="956"
+                                Height="260"
+                                Margin="3,9,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="#FFC1DC47">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="88*" />
+                                    <RowDefinition Height="88*" />
+                                    <RowDefinition Height="88*" />
+                                </Grid.RowDefinitions>
+                                <local:H_Slider_UserControl1
+                                    x:Name="Eye_Z_H_Slider_UserControl"
+                                    Grid.Row="0"
+                                    Width="941"
+                                    Height="71"
+                                    Margin="11,4,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderBrush="#FFEA2020"
+                                    BorderThickness="4"
+                                    LabelText="Z Eye Coordinate"
+                                    SliderMaxValue="100"
+                                    SliderMinValue="-100"
+                                    SliderValue="-10" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="Eye_X_H_Slider_UserControl"
+                                    Grid.Row="1"
+                                    Width="941"
+                                    Height="71"
+                                    Margin="11,4,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    LabelText="X Eye Coordinate"
+                                    SliderMaxValue="100"
+                                    SliderMinValue="-100"
+                                    SliderValue="0" />
+                                <local:H_Slider_UserControl1
+                                    x:Name="Eye_Y_H_Slider_UserControl"
+                                    Grid.Row="2"
+                                    Width="941"
+                                    Height="71"
+                                    Margin="11,4,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    LabelText="Y Eye Coordinate"
+                                    SliderMaxValue="100"
+                                    SliderMinValue="-100"
+                                    SliderValue="0" />
+                            </Grid>
+
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
                 <TabItem
                     x:Name="LookAt_TabItem"
                     Width="54"
@@ -525,221 +742,6 @@
                     </Grid>
                 </TabItem>
                 <TabItem
-                    x:Name="Eye_and_Camera__TabItem"
-                    Margin="0"
-                    Header="Eye and Camera">
-                    <Grid Height="555">
-                        <StackPanel
-                            Width="973"
-                            Height="557"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Orientation="Vertical">
-                            <Grid
-                                x:Name="Orbit_Distance_and_Rotate_Grid"
-                                Width="961"
-                                Height="264"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="28*" />
-                                    <RowDefinition Height="31*" />
-                                    <RowDefinition Height="29*" />
-                                </Grid.RowDefinitions>
-                                <Grid.Background>
-                                    <RadialGradientBrush>
-                                        <GradientStop Offset="0" Color="#FF345B66" />
-                                        <GradientStop Offset="1" Color="#FFFF3E3E" />
-                                    </RadialGradientBrush>
-                                </Grid.Background>
-                                <local:H_Slider_UserControl1
-                                    x:Name="Orbit_Rotation_H_Slider_UserControl"
-                                    Width="933"
-                                    Height="66"
-                                    Margin="10,10,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    BorderBrush="#FFF01515"
-                                    LabelText="Orbit Total Rotation Angle"
-                                    SliderMaxValue="1000"
-                                    SliderMinValue="-1000"
-                                    SliderValue="0.0">
-                                    <local:H_Slider_UserControl1.Background>
-                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                            <GradientStop Offset="0" Color="Black" />
-                                            <GradientStop Offset="1" Color="White" />
-                                        </LinearGradientBrush>
-                                    </local:H_Slider_UserControl1.Background>
-                                </local:H_Slider_UserControl1>
-                                <local:H_Slider_UserControl1 x:Name="Orbit_Radius_H_Slider_UserControl" Grid.Row="2" LabelText="Orbit Radius" SliderMinValue="-100" SliderValue="10" Margin="5,9,12,9" Width="944" />
-                                <local:H_Slider_UserControl1
-                                    x:Name="Orbit_Delta_Angle_H_Slider_UserControl"
-                                    Grid.Row="1"
-                                    Width="944"
-                                    Margin="5,-4,0,0"
-                                    HorizontalAlignment="Left" LabelText="Rotation Delta Angle" SliderMinValue="-10" SliderMaxValue="10" SliderValue="3"></local:H_Slider_UserControl1>
-                            </Grid>
-                            <Grid
-                                x:Name="SceneTranslate_Grid"
-                                Width="965"
-                                Height="260"
-                                Margin="8,5,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FFC1DC47">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="87*" />
-                                    <RowDefinition Height="88*" />
-                                    <RowDefinition Height="82*" />
-                                </Grid.RowDefinitions>
-                                <local:H_Slider_UserControl1
-                                    x:Name="Eye_Z_H_Slider_UserControl"
-                                    Grid.Row="0"
-                                    Width="941"
-                                    Height="81"
-                                    Margin="3,4,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    d:IsLocked="True"
-                                    BorderBrush="#FFEA2020"
-                                    BorderThickness="4"
-                                    LabelText="Z Eye Coordinate"
-                                    SliderMaxValue="100"
-                                    SliderMinValue="-100"
-                                    SliderValue="-10" />
-                                <local:H_Slider_UserControl1
-                                    x:Name="Eye_X_H_Slider_UserControl"
-                                    Grid.Row="1"
-                                    Width="941"
-                                    Height="82"
-                                    Margin="6,2,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    d:IsLocked="True"
-                                    LabelText="X Eye Coordinate"
-                                    SliderMaxValue="100"
-                                    SliderMinValue="-100"
-                                    SliderValue="0" />
-                                <local:H_Slider_UserControl1
-                                    x:Name="Eye_Y_H_Slider_UserControl"
-                                    Grid.Row="2"
-                                    Width="941"
-                                    Height="81"
-                                    Margin="8,3,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    d:IsLocked="True"
-                                    LabelText="Y Eye Coordinate"
-                                    SliderMaxValue="100"
-                                    SliderMinValue="-100"
-                                    SliderValue="0" />
-                            </Grid>
-
-                        </StackPanel>
-                    </Grid>
-                </TabItem>
-                <TabItem
-                    x:Name="SpreadsheetSupport_TabItem"
-                    Margin="0"
-                    Header="Spreadsheet Load file">
-                    <Grid
-                        x:Name="SpreadsheetFileName_Grid"
-                        Height="343"
-                        Margin="6,17,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Background="#FFC1DC47">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="46*" />
-                            <RowDefinition Height="297*" />
-                        </Grid.RowDefinitions>
-                        <DockPanel
-                            x:Name="file_and_dir_spreadsheet_DockPanel"
-                            Grid.Row="1"
-                            Width="776"
-                            Height="142"
-                            Margin="6,11,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Background="#FF393E47">
-                            <TextBlock
-                                x:Name="Spreadsheet_File_Name_TextBlock"
-                                Width="743"
-                                Height="21"
-                                Margin="10,9,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                Background="#FF3B9393"
-                                DockPanel.Dock="Top"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap"><Run Text="Spreadsheet File Name" /></TextBlock>
-                            <RichTextBox
-                                x:Name="SpreadsheetFileName_RichTextBox"
-                                Width="743"
-                                Height="24"
-                                Margin="8,5,0,0"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FFF0EB87"
-                                DockPanel.Dock="Top">
-                                <FlowDocument>
-                                    <Paragraph>
-                                        <Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx" />
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
-                            <TextBlock
-                                x:Name="Spreadsheet_directory_Name_TextBlock"
-                                Width="743"
-                                Height="21"
-                                Margin="11,6,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FF3B9393"
-                                DockPanel.Dock="Top"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap">
-                                <Run>Spreadsheet Directory Name</Run>
-                            </TextBlock>
-                            <RichTextBox
-                                x:Name="SpreadsheetDirPath_RichTextBox"
-                                Width="743"
-                                Height="23"
-                                Margin="10,12,0,0"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FF975959"
-                                DockPanel.Dock="Top">
-                                <FlowDocument>
-                                    <Paragraph>
-                                        <Run>./</Run>
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
-                        </DockPanel>
-                        <Button
-                            x:Name="spreadsheet_load_Button"
-                            Width="138"
-                            Height="25"
-                            Margin="11,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Click="spreadsheet_load_Button_Click"
-                            Content="load spreadsheet" />
-                        <CheckBox
-                            x:Name="LoadSpreadsheetAtInitalization_CheckBox_Control"
-                            Height="17"
-                            Margin="170,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#FFEC8F8F"
-                            Content="Load Spreadsheet At Initalization"
-                            IsChecked="false" />
-                    </Grid>
-                </TabItem>
-                <TabItem
                     x:Name="Perspective_TabItem"
                     Width="86"
                     Height="20"
@@ -886,15 +888,6 @@
                     </Grid>
                 </TabItem>
                 <TabItem
-                    x:Name="LIGHTING_MODEL_TabItem"
-                    Width="54"
-                    Height="20"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Header="LIGHTING_MODEL">
-                    <Grid Background="#FFE5E5E5" />
-                </TabItem>
-                <TabItem
                     x:Name="MATERIALs_TabItem"
                     Width="54"
                     Height="20"
@@ -943,25 +936,24 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="Orthographics Viewing">
-                    <Grid
-                        Width="964"
-                        Margin="13,7,0,0"
+                    <Grid x:Name="Orthographic_Sliders_Grid"
+                        Margin="2,10,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Background="#FFE5E5E5">
+                        Background="#FFE5E5E5" Height="498" Width="935">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="95*" />
-                            <RowDefinition Height="77*" />
-                            <RowDefinition Height="75*" />
-                            <RowDefinition Height="80*" />
-                            <RowDefinition Height="70*" />
-                            <RowDefinition Height="146*" />
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="100*"/>
                         </Grid.RowDefinitions>
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Left_H_Slider_UserControl"
-                            Width="882"
-                            Height="70"
-                            Margin="10,19,73,6"
+                            Width="Auto"
+                            Height="78"
+                            Margin="2,7,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             LabelText="Orthographic Left"
@@ -970,60 +962,59 @@
                             SliderValue="1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Right_H_Slider_UserControl"
-                            Grid.Row="2"
-                            Width="927"
-                            Height="70"
-                            Margin="10,3,0,0"
+                            Width="Auto"
+                            Height="78"
+                            Margin="2,91,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             LabelText="orthographic Right"
                             SliderMaxValue="0"
                             SliderMinValue="-5"
-                            SliderValue="-1" />
+                            SliderValue="-1" Grid.RowSpan="2"/>
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Top_H_Slider_UserControl"
-                            Grid.Row="3"
-                            Width="902"
-                            Height="70"
-                            Margin="10,0,0,0"
+                            Grid.Row="2"
+                            Width="Auto"
+                            Height="78"
+                            Margin="2,7,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            LabelText="Left"
+                            VerticalAlignment="Top"
+                            LabelText="Top"
                             SliderMaxValue="5"
                             SliderMinValue="0"
                             SliderValue="1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Bottom_H_Slider_UserControl"
-                            Grid.Row="4"
-                            Width="902"
-                            Height="70"
-                            Margin="10,2,73,8"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
+                            Grid.Row="3"
+                            Width="Auto"
+                            Height="78"
+                            Margin="2,1,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
                             LabelText="Bottom"
                             SliderMaxValue="0"
                             SliderMinValue="-5"
                             SliderValue="-1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Near_H_Slider_UserControl"
-                            Grid.Row="5"
-                            Width="902"
-                            Height="70"
-                            Margin="10,2,0,0"
+                            Grid.Row="4"
+                            Width="Auto"
+                            Height="78"
+                            Margin="2,2,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Top"
                             LabelText="Near"
                             SliderMaxValue="-5"
                             SliderMinValue="0"
                             SliderValue="-1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Far_H_Slider_UserControl"
-                            Grid.Row="6"
-                            Width="902"
-                            Height="70"
-                            Margin="10,2,0,0"
+                            Grid.Row="5"
+                            Width="Auto"
+                            Height="78"
+                            Margin="2,5,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Top"
                             LabelText="Far"
                             SliderMaxValue="5"
                             SliderMinValue="0"
@@ -1038,14 +1029,41 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="Viewing Frustrum">
-                    <Grid x:Name="Viewing_frustrum_TabItem_Grid" Background="#FFE5E5E5" MinWidth="2">
-                        <StackPanel>
-                            <local:H_Slider_UserControl1 x:Name="Frustum_Left_H_Slider_UserControl" SliderValue="10" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
-                            <local:H_Slider_UserControl1 x:Name="Frustum_Right_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
-                            <local:H_Slider_UserControl1 x:Name="Frustum_Bottom_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
-                            <local:H_Slider_UserControl1 x:Name="Frustum_Top_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
-                            <local:H_Slider_UserControl1 x:Name="Frustum_zNear_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
-                            <local:H_Slider_UserControl1 x:Name="Frustum_zFar_H_Slider_UserControl" VerticalAlignment="Top" HorizontalAlignment="Left"></local:H_Slider_UserControl1>
+                    <Grid
+                        x:Name="Viewing_frustrum_TabItem_Grid"
+                        Background="#FFE5E5E5" Width="972" Height="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
+                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,7,0,0">
+                            <local:H_Slider_UserControl1
+                                x:Name="Frustum_Left_H_Slider_UserControl"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                LabelText="Left"
+                                SliderValue="10" Margin="5,7,0,0" Width="936" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Frustum_Right_H_Slider_UserControl"
+                                HorizontalAlignment="Left"
+                                LabelText="Right"
+                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Frustum_Bottom_H_Slider_UserControl"
+                                HorizontalAlignment="Left"
+                                LabelText="Bottom"
+                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Frustum_Top_H_Slider_UserControl"
+                                HorizontalAlignment="Left"
+                                LabelText="Top"
+                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Frustum_zNear_H_Slider_UserControl"
+                                HorizontalAlignment="Left"
+                                LabelText="Near"
+                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Frustum_zFar_H_Slider_UserControl"
+                                HorizontalAlignment="Left"
+                                LabelText="Far"
+                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
                         </StackPanel>
                     </Grid>
                 </TabItem>

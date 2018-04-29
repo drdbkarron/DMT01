@@ -33,7 +33,9 @@ namespace Axis_Arrow_Grid
 
 
             if ( ShowLocalAxis )
+                {
                 Axis_Class . LocalAxis ( gl );
+                }
 
             ArrowShaftCylinder ( gl , r_Arrow_shaft_cylinder , cyl_height + .05f , step_radians , zscale );
 
@@ -401,14 +403,20 @@ namespace Axis_Arrow_Grid
             {
                 //  Design time primitives render only in design mode.
                 if ( renderMode != RenderMode . Design )
-                    return;
+                {
+                return;
+                }
 
-                //  If we do not have the display list, we must create it.
-                //  Otherwise, we can simple call the display list.
-                if ( displayList == null )
-                    CreateDisplayList ( gl );
-                else
-                    displayList . Call ( gl );
+            //  If we do not have the display list, we must create it.
+            //  Otherwise, we can simple call the display list.
+            if ( displayList == null )
+                {
+                CreateDisplayList ( gl );
+                }
+            else
+                {
+                displayList . Call ( gl );
+                }
             }
 
             /// <summary>
