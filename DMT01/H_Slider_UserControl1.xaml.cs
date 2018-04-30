@@ -182,7 +182,9 @@ namespace DMT01
             Grid G = ttt as Grid;
             DependencyObject gg = G . Parent;
             H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
+            Debug . WriteLine ( String . Format ( "{0} Seralizing/Saving {1} {2}  " , nameof ( Save0_Button_Click ) , ttyy . SliderValue, ttyy . Name  ) );
             Seralize_H__Slider_UserControl1_SaveState ( ttyy );
+            Debug . WriteLine ( String . Format ( "{0}.xml in {1}" , ttyy.Name, Environment.CurrentDirectory ) );
             }
 
         public static void Seralize_H__Slider_UserControl1_SaveState ( UIElement e )
@@ -293,5 +295,25 @@ namespace DMT01
 
         return null;
         }
-     }
+
+        private void Minus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
+            {
+            theH_Slider . Minimum++;
+            theH_Slider . Maximum--;
+            if ( theH_Slider . Minimum >= theH_Slider . Maximum )
+                {
+                theH_Slider . Maximum = theH_Slider . Minimum + 5.0;
+                }
+            }
+
+        private void Plus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
+            {
+            theH_Slider . Maximum++;
+            theH_Slider . Minimum--;
+            if ( theH_Slider . Maximum >= theH_Slider . Minimum )
+                {
+                theH_Slider . Minimum = theH_Slider . Maximum - 5.0;
+                }
+            }
+        }
 }

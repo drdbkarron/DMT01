@@ -52,25 +52,31 @@
         </DockPanel>
         <TextBox
             x:Name="Slider_Value_TextBox"
-            Width="33"
+            Width="67"
             Height="20"
-            Margin="498,2,295,0"
+            Margin="498,2,261,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Text="{Binding ElementName=theH_Slider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TextWrapping="Wrap" />
         <Label
             x:Name="HSliderControlClusterMain_Label"
-            Width="145"
+            Width="156"
             Height="19"
             Margin="338,2,343,1"
             Padding="1,1,1,1"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
-            Background="#FFCB1E1E"
             BorderBrush="#FF306456"
-            Content="Eye Coordinates" />
+            Content="Describe Slider Here" >
+            <Label.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF84877C" Offset="1"/>
+                    <GradientStop Color="#FF56E69E"/>
+                </RadialGradientBrush>
+            </Label.Background>
+        </Label>
         <TextBox
             x:Name="Slider_Low_TextBox"
             Width="39"
@@ -96,14 +102,21 @@
             Background="#FFC90C0C"
             Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Button
-            x:Name="ResetValue"
+            x:Name="ResetsliderValue_Button"
             Width="75"
             Height="20"
             Margin="179,2,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="ResetValue_Click"
-            Content="Reset" />
+            Content="Reset" >
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF423636" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
         <Button
             x:Name="Save0_Button"
             Width="75"
@@ -120,25 +133,8 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
-        <Label
-            x:Name="___Maximum_Label___Maximum_"
-            Width="46"
-            Height="21"
-            Margin="738,2,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Maximum"
-            FontSize="8"
-            Foreground="#FFF7F3F3" />
-        <Label
-            x:Name="___Minimum_Label___Minimum_"
-            Height="18"
-            Margin="43,3,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Minimum"
-            FontSize="7"
-            Foreground="#FFF3F3F3" />
+        <Button x:Name="Plus_Spread_Min_Max_Button" Content="+++" HorizontalAlignment="Left" Margin="738,2,0,0" VerticalAlignment="Top" Width="29" Click="Plus_Spread_Min_Max_Button_Click" />
+        <Button x:Name="Minus_Spread_Min_Max_Button" Content="---" HorizontalAlignment="Left" Margin="54,2,0,0" VerticalAlignment="Top" Width="27" Click="Minus_Spread_Min_Max_Button_Click" />
 
     </Grid>
 </UserControl>

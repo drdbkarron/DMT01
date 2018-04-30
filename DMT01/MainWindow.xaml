@@ -148,6 +148,12 @@
                     BorderThickness="5,2,1,2"
                     Content="Draw Spreadsheet Grid"
                     IsChecked="True" />
+                <CheckBox
+                    x:Name="Do_Orbit_Pull_Back_CheckBox_Control"
+                    Margin="0,4,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Orbit Pull Back" Click="Do_Orbit_Pull_Back_CheckBox_Control_Click" />
                 <StackPanel
                     x:Name="RadioButton_StackPanel"
                     Width="554"
@@ -160,23 +166,27 @@
                     <CheckBox
                         x:Name="UseOrthographic_Viewing_Transform_radioButton_Control"
                         Width="100"
+                        d:IsLocked="True"
                         Click="UseOrthographic_Viewing_Transform_radioButton_Control_Click"
                         Content="Orthographic"
                         IsChecked="False" />
                     <CheckBox
                         x:Name="Use_Viewing_Frustrum_RadioButton_Control"
                         Width="79"
+                        d:IsLocked="True"
                         Click="Use_Viewing_Frustrum_RadioButton_Click"
                         Content="Frustrum"
                         IsChecked="false" />
                     <CheckBox
                         x:Name="UsePerspetiveViewingTransform_RadioButton_Control"
+                        d:IsLocked="True"
                         Click="UsePerspetiveViewingTransform_Click"
                         Content="Perspective"
                         IsChecked="False" />
                     <CheckBox
                         x:Name="UseLookAtViewingTransform_RadioButton"
                         Width="68"
+                        d:IsLocked="True"
                         Click="UseLookAtViewingTransform_RadioButton_Control_Click"
                         Content="LookAt"
                         IsChecked="False" />
@@ -312,7 +322,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="{Binding SliderValue, ElementName=Orbit_Delta_H_Slider_UserControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Content="{Binding SliderValue, ElementName=Orbit_Delta_Angle_H_Slider_UserControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Label
                     x:Name="OpenGL_Height_Label"
                     Width="61"
@@ -358,7 +368,8 @@
                     Header="Spreadsheet Load file">
                     <Grid
                         x:Name="SpreadsheetFileName_Grid"
-                        Height="343"
+                        Width="946"
+                        Height="430"
                         Margin="6,17,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
@@ -466,8 +477,9 @@
                                 x:Name="Orbit_Distance_and_Rotate_Grid"
                                 Width="961"
                                 Height="264"
+                                Margin="10,7,0,0"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Top" Margin="10,7,0,0">
+                                VerticalAlignment="Top">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="29*" />
                                     <RowDefinition Height="29*" />
@@ -502,20 +514,25 @@
                                     x:Name="Orbit_Radius_H_Slider_UserControl"
                                     Grid.Row="2"
                                     Width="938"
+                                    Height="80"
                                     Margin="9,3,12,9"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
                                     LabelText="Orbit Radius"
                                     SliderMinValue="-100"
-                                    SliderValue="10" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    SliderValue="10" />
                                 <local:H_Slider_UserControl1
                                     x:Name="Orbit_Delta_Angle_H_Slider_UserControl"
                                     Grid.Row="1"
                                     Width="938"
+                                    Height="80"
                                     Margin="9,3,0,0"
                                     HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
                                     LabelText="Rotation Delta Angle"
                                     SliderMaxValue="10"
                                     SliderMinValue="-10"
-                                    SliderValue="3" Height="80" VerticalAlignment="Top" />
+                                    SliderValue="3" />
                             </Grid>
                             <Grid
                                 x:Name="SceneTranslate_Grid"
@@ -570,6 +587,32 @@
                                     SliderValue="0" />
                             </Grid>
 
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    x:Name="Axis_Properties_TabItem"
+                    Width="32"
+                    Margin="-2,0,0,1"
+                    HorizontalAlignment="Left"
+                    Header="Axis">
+                    <Grid
+                        Width="955"
+                        Height="572"
+                        Background="#FF82DABE">
+                        <StackPanel
+                            Margin="8,8,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Vertical"
+                            VerticalAlignment="Top" Height="546" Width="938" >
+                            <local:H_Slider_UserControl1 x:Name="Axis_Length_XYZ_H_Slider_UserControl" HorizontalAlignment="Left" Height="77" Margin="2,2,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Center" SliderMinValue="1" LabelText="Axis overall XYZ"/>
+                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
+                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
+                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
+                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
+                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
+                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
+                            <CheckBox x:Name="Axis_DrawNegativeCheckBox" Content="Draw Minus Legs" Width="122" VerticalAlignment="Top" HorizontalAlignment="Left" Height="27" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></CheckBox>
                         </StackPanel>
                     </Grid>
                 </TabItem>
@@ -901,24 +944,6 @@
                     </Grid>
                 </TabItem>
                 <TabItem
-                    x:Name="Axis_Properties_TabItem"
-                    Width="32"
-                    Margin="-2,0,0,1"
-                    HorizontalAlignment="Left"
-                    Header="Axis">
-                    <Grid
-                        Width="955"
-                        Height="572"
-                        Background="#FF82DABE">
-                        <StackPanel
-                            Width="446"
-                            Height="204"
-                            Margin="76,246,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top" />
-                    </Grid>
-                </TabItem>
-                <TabItem
                     x:Name="Spreadsheet_Grid_TabItem"
                     Width="42"
                     Height="18"
@@ -936,18 +961,21 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Header="Orthographics Viewing">
-                    <Grid x:Name="Orthographic_Sliders_Grid"
+                    <Grid
+                        x:Name="Orthographic_Sliders_Grid"
+                        Width="935"
+                        Height="498"
                         Margin="2,10,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Background="#FFE5E5E5" Height="498" Width="935">
+                        Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="100*" />
                             <RowDefinition Height="100*" />
                             <RowDefinition Height="100*" />
                             <RowDefinition Height="100*" />
                             <RowDefinition Height="100*" />
-                            <RowDefinition Height="100*"/>
+                            <RowDefinition Height="100*" />
                         </Grid.RowDefinitions>
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Left_H_Slider_UserControl"
@@ -962,6 +990,7 @@
                             SliderValue="1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Right_H_Slider_UserControl"
+                            Grid.RowSpan="2"
                             Width="Auto"
                             Height="78"
                             Margin="2,91,0,0"
@@ -970,7 +999,7 @@
                             LabelText="orthographic Right"
                             SliderMaxValue="0"
                             SliderMinValue="-5"
-                            SliderValue="-1" Grid.RowSpan="2"/>
+                            SliderValue="-1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Top_H_Slider_UserControl"
                             Grid.Row="2"
@@ -1004,8 +1033,8 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             LabelText="Near"
-                            SliderMaxValue="-5"
-                            SliderMinValue="0"
+                            SliderMaxValue="0"
+                            SliderMinValue="-5"
                             SliderValue="-1" />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Far_H_Slider_UserControl"
@@ -1031,39 +1060,73 @@
                     Header="Viewing Frustrum">
                     <Grid
                         x:Name="Viewing_frustrum_TabItem_Grid"
-                        Background="#FFE5E5E5" Width="972" Height="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
-                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,7,0,0">
+                        Width="972"
+                        Height="550"
+                        Margin="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#FFE5E5E5">
+                        <StackPanel
+                            Margin="6,7,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_Left_H_Slider_UserControl"
+                                Width="936"
+                                Margin="5,7,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 LabelText="Left"
-                                SliderValue="10" Margin="5,7,0,0" Width="936" />
+                                SliderMaxValue="20"
+                                SliderMinValue="-20"
+                                SliderValue="-10" />
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_Right_H_Slider_UserControl"
+                                Width="936"
+                                Margin="5,7,0,0"
                                 HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
                                 LabelText="Right"
-                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                                SliderMaxValue="20"
+                                SliderMinValue="-20"
+                                SliderValue="10" />
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_Bottom_H_Slider_UserControl"
+                                Width="936"
+                                Margin="5,7,0,0"
                                 HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
                                 LabelText="Bottom"
-                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                                SliderMaxValue="20"
+                                SliderMinValue="-20" 
+                                SliderValue="-10"/>
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_Top_H_Slider_UserControl"
+                                Width="936"
+                                Margin="5,7,0,0" SliderMaxValue="20"
+                                SliderMinValue="-20" 
+                                SliderValue="10"
                                 HorizontalAlignment="Left"
-                                LabelText="Top"
-                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                                VerticalAlignment="Top"
+                                LabelText="Top" />
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_zNear_H_Slider_UserControl"
+                                Width="936"
+                                Margin="5,7,0,0" SliderMaxValue="20"
+                                SliderMinValue="-20" 
+                                SliderValue="-10"
                                 HorizontalAlignment="Left"
-                                LabelText="Near"
-                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                                VerticalAlignment="Top"
+                                LabelText="Near" />
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_zFar_H_Slider_UserControl"
+                                Width="936"
+                                Margin="5,7,0,0"
                                 HorizontalAlignment="Left"
-                                LabelText="Far"
-                                VerticalAlignment="Top" Margin="5,7,0,0" Width="936" />
+                                VerticalAlignment="Top"
+                                LabelText="Far" SliderMaxValue="20"
+                                SliderMinValue="-20" 
+                                SliderValue="10" />
                         </StackPanel>
                     </Grid>
                 </TabItem>

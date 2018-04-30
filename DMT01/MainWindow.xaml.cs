@@ -200,7 +200,7 @@ namespace DMT01
             if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
             {
 
-                Debug . WriteLine ( String . Format ( "{0}" , nameof(UsePerspetiveViewingTransform_RadioButton_Control )) );
+                //Debug . WriteLine ( String . Format ( "{0}" , nameof(UsePerspetiveViewingTransform_RadioButton_Control )) );
                 gl  . Perspective ( 
                     fovy: Perspective_FOVY_H_Slider_UserControl . SliderValue ,
                     aspect: Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
@@ -210,6 +210,12 @@ namespace DMT01
                 //M = M * Perspective ( gl );
             }
 
+        
+
+            //LoadMatrix ( gl , M );
+            
+            gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
+            gl . LoadIdentity ( );
 
             if ( UseLookAtViewingTransform_RadioButton . IsChecked . GetValueOrDefault ( ) )
                 {
@@ -254,15 +260,18 @@ namespace DMT01
                 //M = M * LookAt ( gl );
             }
 
-            //LoadMatrix ( gl , M );
-            
-            gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
-            gl . LoadIdentity ( );
-
-            gl . Translate ( Eye_X_H_Slider_UserControl . SliderValue , Eye_Y_H_Slider_UserControl . SliderValue , Eye_Z_H_Slider_UserControl . SliderValue );
+            if ( Do_Orbit_Pull_Back_CheckBox_Control .IsChecked.GetValueOrDefault())
+                {
+                gl . Translate (  
+                    x: Eye_X_H_Slider_UserControl . SliderValue , 
+                    y: Eye_Y_H_Slider_UserControl . SliderValue , 
+                    z: Eye_Z_H_Slider_UserControl . SliderValue );
+                }
 
             if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
+                gl . Translate (0.0,0.0, Orbit_Radius_H_Slider_UserControl.SliderMaxValue );
+
                 gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
                 Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
                 }
@@ -279,6 +288,33 @@ namespace DMT01
                 tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
             }
 
+            if ( Spreadsheet_Grid_CheckBox_Control . IsChecked.GetValueOrDefault())
+                {
+                var SR=myReoGridControl . CurrentWorksheet . SelectionRange;
+
+                //Debug . WriteLine ( String . Format ( "{0} [{1},{2}:{3},{4}]" , SR.ToString(), SR.StartPos.Row, SR.StartPos.Col, SR.EndPos.Row, SR.EndPos.Col ) );
+                
+                gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+                gl . Vertex ( SR . StartPos . Row , SR . StartPos . Col );
+                gl . Vertex ( SR . StartPos . Row , SR . EndPos . Col );
+
+                gl . Vertex ( SR . StartPos . Row , SR . EndPos . Col );
+                gl . Vertex (0,0 );
+
+                gl . Vertex ( SR . EndPos . Row , SR . StartPos . Col );
+                gl . Vertex ( SR . EndPos . Row , SR . EndPos . Col );
+
+                gl . Vertex ( SR . StartPos . Row , SR . EndPos . Col );
+                gl . Vertex ( 0,0 );
+                gl . End ( );
+
+                for ( int i = SR . StartPos . Row ; i <= SR . EndPos . Row ;i++ )
+                    {
+                    for ( int j = SR . StartPos . Col ; j <= SR . EndPos . Col ;j++ )
+                        {
+                        }
+                    }
+                }
            
             gl . Flush ( );
             DoAspect ( );
@@ -441,14 +477,11 @@ namespace DMT01
 
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_Resized ) ) );
 
-            var x=sender.GetType();
-            var Height=this.ActualHeight;
-            var width=this.ActualWidth;
-            var H=this.Height;
-            var W=this.Width;
 
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl.OpenGL;
+
+            DoAspect ( );
 
             //  Set the projection matrix.
             //gl.MatrixMode(OpenGL.GL_PROJECTION);
@@ -1266,5 +1299,9 @@ namespace DMT01
             Viewing_Frustrum_TabItem . IsSelected = true;
             }
 
+        private void Do_Orbit_Pull_Back_CheckBox_Control_Click ( object sender , RoutedEventArgs e )
+            {
+            Eye_and_Camera_TabItem . IsSelected = true;
+            }
         }
 }
