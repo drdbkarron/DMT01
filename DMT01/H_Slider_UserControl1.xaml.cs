@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System . Xml;
 using System . Xml . Serialization;
 using System . IO;
+using Axis_Arrow_Grid;
 
 namespace DMT01
 {
@@ -166,7 +167,7 @@ namespace DMT01
         {
             Button t = sender as Button;
             DependencyObject ttt = t . Parent;
-            Grid G = ttt as Grid;
+            System . Windows . Controls . Grid G = ttt as System . Windows . Controls . Grid;
             DependencyObject gg = G . Parent;
             H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
             Debug . WriteLine ( String . Format ( "{0} {1} {2} reset to " , nameof( ResetValue_Click ) , ttyy.Name,ttyy.SliderValue) );
@@ -179,7 +180,7 @@ namespace DMT01
             {
             Button t = sender as Button;
             DependencyObject ttt = t . Parent;
-            Grid G = ttt as Grid;
+            System . Windows . Controls . Grid G = ttt as System . Windows . Controls . Grid;
             DependencyObject gg = G . Parent;
             H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
             Debug . WriteLine ( String . Format ( "{0} Seralizing/Saving {1} {2}  " , nameof ( Save0_Button_Click ) , ttyy . SliderValue, ttyy . Name  ) );

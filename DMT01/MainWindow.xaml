@@ -153,7 +153,8 @@
                     Margin="0,4,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="Orbit Pull Back" Click="Do_Orbit_Pull_Back_CheckBox_Control_Click" />
+                    Click="Do_Orbit_Pull_Back_CheckBox_Control_Click"
+                    Content="Orbit Pull Back" />
                 <StackPanel
                     x:Name="RadioButton_StackPanel"
                     Width="554"
@@ -601,18 +602,80 @@
                         Height="572"
                         Background="#FF82DABE">
                         <StackPanel
+                            Width="938"
+                            Height="546"
                             Margin="8,8,0,0"
                             HorizontalAlignment="Left"
-                            Orientation="Vertical"
-                            VerticalAlignment="Top" Height="546" Width="938" >
-                            <local:H_Slider_UserControl1 x:Name="Axis_Length_XYZ_H_Slider_UserControl" HorizontalAlignment="Left" Height="77" Margin="2,2,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Center" SliderMinValue="1" LabelText="Axis overall XYZ"/>
-                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
-                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
-                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
-                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
-                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
-                            <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="69" Margin="2,0,0,0" VerticalAlignment="Top" Width="943" VerticalContentAlignment="Top"/>
-                            <CheckBox x:Name="Axis_DrawNegativeCheckBox" Content="Draw Minus Legs" Width="122" VerticalAlignment="Top" HorizontalAlignment="Left" Height="27" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></CheckBox>
+                            VerticalAlignment="Top"
+                            Orientation="Vertical">
+                            <local:H_Slider_UserControl1
+                                x:Name="Axis_Length_XYZ_H_Slider_UserControl"
+                                Width="943"
+                                Height="77"
+                                Margin="2,2,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Center"
+                                LabelText="Axis overall XYZ"
+                                SliderMinValue="1" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Axis_Ticks_H_Slider_UserControl"
+                                Width="943"
+                                Height="69"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Top"
+                                LabelText="Ticks" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Axis_Linewidth_H_Slider_UserControl"
+                                Width="943"
+                                Height="69"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Top"
+                                LabelText="Linewidth"
+                                SliderMaxValue="5"
+                                SliderMinValue="1" />
+                            <local:H_Slider_UserControl1 x:Name="Axis_TickSize_H_Slider_UserControl"
+                                Width="943"
+                                Height="69"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Top" />
+                            <local:H_Slider_UserControl1 x:Name="Axis_Property1_H_Slider_UserControl"
+                                Width="943"
+                                Height="69"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Top" LabelText="Axis_Property1" />
+                            <local:H_Slider_UserControl1 x:Name="Axis_Property2_H_Slider_UserControl1"
+                                Width="943"
+                                Height="69"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Top" LabelText="Axis_Property2" />
+                            <local:H_Slider_UserControl1 x:Name="Axis_Property3_H_Slider_UserControl"
+                                Width="943"
+                                Height="69"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Top" LabelText="Axis_Property3" />
+                            <CheckBox
+                                x:Name="Axis_DrawNegativeCheckBoxControl"
+                                Width="122"
+                                Height="27"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="Draw Minus Legs" />
+                            
                         </StackPanel>
                     </Grid>
                 </TabItem>
@@ -1097,35 +1160,38 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 LabelText="Bottom"
-                                SliderMaxValue="20"
-                                SliderMinValue="-20" 
-                                SliderValue="-10"/>
+                                SliderMaxValue="0"
+                                SliderMinValue="-20"
+                                SliderValue="-10" />
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_Top_H_Slider_UserControl"
                                 Width="936"
-                                Margin="5,7,0,0" SliderMaxValue="20"
-                                SliderMinValue="-20" 
-                                SliderValue="10"
+                                Margin="5,7,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                LabelText="Top" />
+                                LabelText="Top"
+                                SliderMaxValue="20"
+                                SliderMinValue="0"
+                                SliderValue="10" />
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_zNear_H_Slider_UserControl"
                                 Width="936"
-                                Margin="5,7,0,0" SliderMaxValue="20"
-                                SliderMinValue="-20" 
-                                SliderValue="-10"
+                                Margin="5,7,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                LabelText="Near" />
+                                LabelText="Near"
+                                SliderMaxValue="20"
+                                SliderMinValue="-20"
+                                SliderValue="-10" />
                             <local:H_Slider_UserControl1
                                 x:Name="Frustum_zFar_H_Slider_UserControl"
                                 Width="936"
                                 Margin="5,7,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                LabelText="Far" SliderMaxValue="20"
-                                SliderMinValue="-20" 
+                                LabelText="Far"
+                                SliderMaxValue="20"
+                                SliderMinValue="-20"
                                 SliderValue="10" />
                         </StackPanel>
                     </Grid>

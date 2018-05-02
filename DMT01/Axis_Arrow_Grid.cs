@@ -10,6 +10,8 @@ using SharpGL . SceneGraph . Core;
 using SharpGL . SceneGraph;
 using System . Xml . Serialization;
 using SharpGL . SceneGraph . Primitives;
+using DMT01;
+using XamlGeneratedNamespace;
 
 namespace Axis_Arrow_Grid
 {
@@ -201,68 +203,109 @@ namespace Axis_Arrow_Grid
             rtri += 3.0f;// 0.2f; }
         }
     }
-        public static class Axis_Class
+    public static class Axis_Class
         {
-            public static void MyGlobalAxis ( SharpGL . OpenGL gl )
+        const String AxisLabelFont = "Times New Roman";
+        static readonly float [ ] Origin = { 0f , 0f , 0f };
+        static readonly float [ ] Red = { 1f , 0f , 0f , 1f };
+        static readonly float [ ] Green = { 0f , 1f , 0f , 1f };
+        static readonly float [ ] Blue = { 0f , 0f , 1f , 1f };
+        static readonly float [ ] White = { 1f , 1f , 1f , 1f };
+
+        public static void MyGlobalAxis ( SharpGL . OpenGL gl , int AxesLength , int LineWidth , int Pointsize , Boolean DoMinus ,
+                Boolean TagOrigin = true , Boolean DoXYZAnnotation = true )
             {
-                gl . PushAttrib ( SharpGL . OpenGL . GL_CURRENT_BIT | SharpGL . OpenGL . GL_ENABLE_BIT | SharpGL . OpenGL . GL_LINE_BIT | SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
+            gl . PushAttrib ( SharpGL . OpenGL . GL_CURRENT_BIT | SharpGL . OpenGL . GL_ENABLE_BIT | SharpGL . OpenGL . GL_LINE_BIT | SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
 
-                gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
-                gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
-                gl . DepthFunc ( SharpGL . OpenGL . GL_ALWAYS );
+            gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
+            gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
+            gl . DepthFunc ( SharpGL . OpenGL . GL_ALWAYS );
 
-                gl . LineWidth ( 2f );
+            gl . LineWidth ( LineWidth );
 
-                int AxesLength = 2;
-                String AxisLabelFont = "Times New Roman";
-                float[] Red = { 1f, 0f, 0f, 1f };
-                float[] Green = { 0f, 1f, 0f, 1f };
-                float[] Blue = { 0f, 0f, 1f, 1f };
-                float[] Origin = { 0f, 0f, 0f };
-                float[] White={ 1.0f , 1.0f , 1.0f , 1.0f };
-                //  Draw the axis and annotate the ends.
+            //  Draw the axis and annotate the ends.
 
+            if ( TagOrigin )
+                {
                 gl . Color ( White );
-                gl . PointSize ( 7f );
+                gl . PointSize ( Pointsize );
                 gl . Vertex ( Origin );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"0" );
+                }
 
+            gl . Color ( Red );
+            gl . Begin ( SharpGL . OpenGL . GL_LINES );
+            gl . Vertex ( Origin );
+            gl . Vertex ( AxesLength , 0 , 0 );
+            gl . End ( );
+
+            if ( DoMinus )
+                {
                 gl . Color ( Red );
                 gl . Begin ( SharpGL . OpenGL . GL_LINES );
                 gl . Vertex ( Origin );
-                gl . Vertex ( AxesLength , 0 , 0 );
+                gl . Vertex ( -AxesLength , 0 , 0 );
                 gl . End ( );
+                }
 
+            if ( DoXYZAnnotation )
+                {
                 gl . PushMatrix ( );
                 gl . Translate ( AxesLength , 0 , 0 );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"+X" );
                 gl . PopMatrix ( );
+                }
 
+            gl . Color ( Green );
+            gl . Begin ( SharpGL . OpenGL . GL_LINES );
+            gl . Vertex ( Origin );
+            gl . Vertex ( 0 , AxesLength , 0 );
+            gl . End ( );
+
+            if ( DoMinus )
+                {
                 gl . Color ( Green );
                 gl . Begin ( SharpGL . OpenGL . GL_LINES );
                 gl . Vertex ( Origin );
-                gl . Vertex ( 0 , AxesLength , 0 );
+                gl . Vertex ( 0 , -AxesLength , 0 );
                 gl . End ( );
+                }
 
+            if ( DoXYZAnnotation )
+                {
                 gl . PushMatrix ( );
                 gl . Translate ( 0 , AxesLength , 0 );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"+Y" );
                 gl . PopMatrix ( );
+                }
 
+            gl . Color ( Blue );
+            gl . Begin ( SharpGL . OpenGL . GL_LINES );
+            gl . Vertex ( Origin );
+            gl . Vertex ( 0 , 0 , AxesLength );
+            gl . End ( );
+
+            if ( DoMinus )
+                {
                 gl . Color ( Blue );
                 gl . Begin ( SharpGL . OpenGL . GL_LINES );
                 gl . Vertex ( Origin );
-                gl . Vertex ( 0 , 0 , AxesLength );
+                gl . Vertex ( 0 , 0 , -AxesLength );
                 gl . End ( );
+                }
 
+            if ( DoXYZAnnotation )
+                {
                 gl . PushMatrix ( );
                 gl . Translate ( 0 , 0 , AxesLength );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"+Z" );
                 gl . PopMatrix ( );
+                }
 
-                //  Restore attributes.
-                gl . PopAttrib ( );
+            //  Restore attributes.
+            gl . PopAttrib ( );
             }
+        
             public static void LocalAxis ( OpenGL gl )
             {
                 double[] Reddish = { 0.9, 0.3, 0.4 };

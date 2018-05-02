@@ -88,7 +88,7 @@
             VerticalContentAlignment="Center"
             Background="#FF608EDE"
             MouseWheel="Slider_Low_TextBox_MouseWheel"
-            Text="{Binding Minimum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Minimum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
             TextWrapping="Wrap" />
         <TextBox
             x:Name="Slider_Hi_TextBox"
@@ -100,7 +100,7 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             Background="#FFC90C0C"
-            Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
         <Button
             x:Name="ResetsliderValue_Button"
             Width="75"

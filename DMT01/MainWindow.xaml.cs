@@ -270,7 +270,7 @@ namespace DMT01
 
             if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
-                gl . Translate (0.0,0.0, Orbit_Radius_H_Slider_UserControl.SliderMaxValue );
+                gl . Translate (0.0,0.0, Orbit_Radius_H_Slider_UserControl.SliderValue );
 
                 gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
                 Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
@@ -279,7 +279,16 @@ namespace DMT01
 
             if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
             {
-                Axis_Arrow_Grid . Axis_Class . MyGlobalAxis ( gl );
+                int Al= (int)( ( Axis_Length_XYZ_H_Slider_UserControl . SliderValue ) + 0.5f );
+                Axis_Arrow_Grid . Axis_Class . MyGlobalAxis (
+                    gl: gl , 
+                    AxesLength: Al ,
+                    Pointsize: 3,
+                    LineWidth:3,
+                    DoMinus: Axis_DrawNegativeCheckBox . IsChecked . GetValueOrDefault ( ) );
+
+
+
             }
 
             if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
