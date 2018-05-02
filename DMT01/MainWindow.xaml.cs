@@ -306,7 +306,18 @@ namespace DMT01
                 var SR=myReoGridControl . CurrentWorksheet . SelectionRange;
 
                 //Debug . WriteLine ( String . Format ( "{0} [{1},{2}:{3},{4}]" , SR.ToString(), SR.StartPos.Row, SR.StartPos.Col, SR.EndPos.Row, SR.EndPos.Col ) );
-                
+                // make suggestion of spreadsheet with a b c 1 2 3 col headers and row headers
+
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+                gl . LineWidth ( 1 );
+                gl . Color ( .9f , .9f , .9f );
+                gl . Begin ( SharpGL . Enumerations . BeginMode . QuadStrip );
+                gl . Vertex ( 0 , 0 , 0 );
+                gl . Vertex ( 0 , 0 , 0 );
+                gl . Vertex ( 1 , 1 , 0 );
+                gl . End ( );
+                gl . PopAttrib ( );
+
                 gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
                 gl . Vertex ( SR . StartPos . Row , SR . StartPos . Col );
                 gl . Vertex ( SR . StartPos . Row , SR . EndPos . Col );

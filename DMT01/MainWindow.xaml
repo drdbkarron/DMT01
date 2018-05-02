@@ -167,27 +167,23 @@
                     <CheckBox
                         x:Name="UseOrthographic_Viewing_Transform_radioButton_Control"
                         Width="100"
-                        d:IsLocked="True"
                         Click="UseOrthographic_Viewing_Transform_radioButton_Control_Click"
                         Content="Orthographic"
                         IsChecked="False" />
                     <CheckBox
                         x:Name="Use_Viewing_Frustrum_RadioButton_Control"
                         Width="79"
-                        d:IsLocked="True"
                         Click="Use_Viewing_Frustrum_RadioButton_Click"
                         Content="Frustrum"
                         IsChecked="false" />
                     <CheckBox
                         x:Name="UsePerspetiveViewingTransform_RadioButton_Control"
-                        d:IsLocked="True"
                         Click="UsePerspetiveViewingTransform_Click"
                         Content="Perspective"
                         IsChecked="False" />
                     <CheckBox
-                        x:Name="UseLookAtViewingTransform_RadioButton"
+                        x:Name="UseLookAtViewingTransform_RadioButton_Control"
                         Width="68"
-                        d:IsLocked="True"
                         Click="UseLookAtViewingTransform_RadioButton_Control_Click"
                         Content="LookAt"
                         IsChecked="False" />
