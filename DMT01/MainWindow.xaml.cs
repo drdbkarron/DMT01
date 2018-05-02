@@ -173,7 +173,6 @@ namespace DMT01
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Projection );
 
             gl . LoadIdentity ( );
-
             GlmSharp.mat4 M=GlmSharp.mat4.Identity;
 
             if ( UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . GetValueOrDefault ( ) )
@@ -211,8 +210,9 @@ namespace DMT01
             }
 
         
-
             //LoadMatrix ( gl , M );
+
+            //var m=gl . GetProjectionMatrix ( );
             
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
             gl . LoadIdentity ( );
@@ -274,8 +274,15 @@ namespace DMT01
 
                 gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
                 Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+                if ( Orbit_Rotation_H_Slider_UserControl . SliderValue >= Orbit_Rotation_H_Slider_UserControl . SliderMaxValue )
+                    {
+                    Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+                    }
+                else if ( Orbit_Rotation_H_Slider_UserControl . SliderValue <= Orbit_Rotation_H_Slider_UserControl . SliderMinValue )
+                    {
+                    Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+                    }
                 }
-
 
             if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
             {
@@ -285,10 +292,7 @@ namespace DMT01
                     AxesLength: Al ,
                     Pointsize: 3,
                     LineWidth:3,
-                    DoMinus: Axis_DrawNegativeCheckBox . IsChecked . GetValueOrDefault ( ) );
-
-
-
+                    DoMinus: Axis_DrawNegativeCheckBoxControl . IsChecked . GetValueOrDefault ( ) );
             }
 
             if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
@@ -329,12 +333,6 @@ namespace DMT01
             DoAspect ( );
             Draws_Label . Content = String . Format ( "Draw Count: {0}" , Draws );
             Draws++;
-        }
-
-        private void DebugGl ( SharpGL . OpenGL gl , string v )
-        {
-            ProjectionMatrix = gl . GetProjectionMatrix ( );
-            ModelingMatrix = gl . GetProjectionMatrix ( );
         }
 
         private void LoadMatrix ( SharpGL . OpenGL gl , mat4 m4 )
@@ -426,17 +424,16 @@ namespace DMT01
             float height = ( float ) myOpenGLControl . Height;
             aspect = width / height;
             }
+
         private void myOpenGLControl_OpenGLInitialized ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
         {
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_OpenGLInitialized ) ) );
 
-            DoAspect ( );
-            
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl.OpenGL;
 
             //  Set the clear color.
-            gl . ClearColor ( .1f , 0.1f , 0.1f , 0 );
+            gl . ClearColor ( .01f , 0.01f , 0.01f , 0 );
 
             gl . Enable ( OpenGL . GL_DEPTH_TEST );
 
@@ -447,6 +444,7 @@ namespace DMT01
             float[] light0specular = new float[] { 0.8f, 0.8f, 0.8f, 1.0f };
 
             float[] lmodel_ambient = new float[] { 0.2f, 0.2f, 0.2f, 1.0f };
+
             gl . LightModel ( OpenGL . GL_LIGHT_MODEL_AMBIENT , lmodel_ambient );
 
             gl . LightModel ( OpenGL . GL_LIGHT_MODEL_AMBIENT , global_ambient );
@@ -459,8 +457,9 @@ namespace DMT01
 
             gl . ShadeModel ( OpenGL . GL_SMOOTH );
 
-            gl . DrawBuffer ( SharpGL . Enumerations . DrawBufferMode . Front );
+            gl . DrawBuffer ( SharpGL . Enumerations . DrawBufferMode .Back );
 
+            DoAspect ( );
 
         }
 
@@ -485,7 +484,6 @@ namespace DMT01
         {
 
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_Resized ) ) );
-
 
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl.OpenGL;
@@ -1281,11 +1279,11 @@ namespace DMT01
             // Set the viewport to cover the new window
             gl.Viewport(0, 0, width, height);
 
-            // Set the aspect ratio of the clipping volume to match the viewport
-            gl.MatrixMode(OpenGL.GL_PROJECTION);  // To operate on the Projection matrix
-            gl.LoadIdentity();             // Reset
-                                          // Enable perspective projection with fovy, aspect, zNear and zFar
-            gl.Perspective(45.0f, aspect, 0.1f, 100.0f);
+            //// Set the aspect ratio of the clipping volume to match the viewport
+            //gl.MatrixMode(OpenGL.GL_PROJECTION);  // To operate on the Projection matrix
+            //gl.LoadIdentity();             // Reset
+            //                              // Enable perspective projection with fovy, aspect, zNear and zFar
+            //gl.Perspective(45.0f, aspect, 0.1f, 100.0f);
         }
 
         private void UseLookAtViewingTransform_RadioButton_Control_Click ( object sender , RoutedEventArgs e )

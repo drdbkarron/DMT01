@@ -617,12 +617,16 @@
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Center"
                                 LabelText="Axis overall XYZ"
-                                SliderMinValue="1" />
+                                SliderMinValue="1" 
+                                SliderMaxValue="50"/>
                             <local:H_Slider_UserControl1
                                 x:Name="Axis_Ticks_H_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
+                                SliderMaxValue="10"
+                                SliderMinValue="0"
+                                SliderValue="2"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top"
@@ -638,44 +642,84 @@
                                 LabelText="Linewidth"
                                 SliderMaxValue="5"
                                 SliderMinValue="1" />
-                            <local:H_Slider_UserControl1 x:Name="Axis_TickSize_H_Slider_UserControl"
+                            <local:H_Slider_UserControl1
+                                x:Name="Axis_TickSize_H_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top" />
-                            <local:H_Slider_UserControl1 x:Name="Axis_Property1_H_Slider_UserControl"
+                            <local:H_Slider_UserControl1
+                                x:Name="Axis_Property1_H_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                VerticalContentAlignment="Top" LabelText="Axis_Property1" />
-                            <local:H_Slider_UserControl1 x:Name="Axis_Property2_H_Slider_UserControl1"
+                                VerticalContentAlignment="Top"
+                                LabelText="Axis_Property1" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Axis_Property2_H_Slider_UserControl1"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                VerticalContentAlignment="Top" LabelText="Axis_Property2" />
-                            <local:H_Slider_UserControl1 x:Name="Axis_Property3_H_Slider_UserControl"
+                                VerticalContentAlignment="Top"
+                                LabelText="Axis_Property2" />
+                            <local:H_Slider_UserControl1
+                                x:Name="Axis_Property3_H_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                VerticalContentAlignment="Top" LabelText="Axis_Property3" />
-                            <CheckBox
-                                x:Name="Axis_DrawNegativeCheckBoxControl"
-                                Width="122"
-                                Height="27"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Content="Draw Minus Legs" />
-                            
+                                VerticalContentAlignment="Top"
+                                LabelText="Axis_Property3" />
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox
+                                    x:Name="Axis_DrawNegativeCheckBoxControl"
+                                    Width="86"
+                                    Height="17"
+                                    Margin="3,1,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="Draw Minus Legs" />
+                                <CheckBox
+                                    x:Name="AnnotateOrigin_CheckBoxControl"
+                                    Width="86"
+                                    Height="17"
+                                    Margin="3,1,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="TagOrigin" />
+                                <CheckBox
+                                    x:Name="AnnotateAxisXYZ_CheckBoxControl"
+                                    Width="86"
+                                    Height="17"
+                                    Margin="3,1,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="TagAxisXYZ" />
+                                <CheckBox
+                                    x:Name="DoDoTickMarks_CheckBoxControl"
+                                    Width="86"
+                                    Height="17"
+                                    Margin="3,1,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="DoTicks" />
+                                <CheckBox
+                                    x:Name="AnnotateTickMarks_CheckBoxControl"
+                                    Width="86"
+                                    Height="17"
+                                    Margin="3,1,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="AnnotateTicks" />
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </TabItem>
