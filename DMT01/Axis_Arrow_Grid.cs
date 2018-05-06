@@ -13,21 +13,40 @@ using SharpGL . SceneGraph . Primitives;
 using DMT01;
 using XamlGeneratedNamespace;
 
-namespace Axis_Arrow_Grid
-{
-    public static class Arrow_Class
+namespace SharpGL.SceneGraph.Core
     {
+    public class myGl: OpenGL
+    {
+        public void Scale ( float [  ] a)
+            {
+            this. Scale ( a [ 0 ] , a [ 1 ] , a [ 2 ] );
+            }
+
+        //private void private new Scale ( float v1 , float v2 , float v3 )
+        //    {
+        //    double V1 = ( double ) v1;
+        //    double V2 = ( double ) v2;
+        //    double V3 = ( double ) v3;
+        //    this. Scale ( V1 , V2 , V3 );
+        //    }
+        }
+}
+
+namespace Axis_Arrow_Grid
+    {
+    public static class Arrow_Class
+        {
         private static Boolean ShowLocalAxis = true;
         public static void Arrow ( OpenGL gl )
-        {
+            {
             Arrow ( gl , 1 );
-        }
+            }
         public static void Arrow ( OpenGL gl , float zscale )
-        {
+            {
 
             float r_Arrow_shaft_cylinder = 0.09f;
             float r_arrow_head = 0.20f;
-            float step_radians = 30.0f * MySimpleMath.MySimpleMath.degrees_to_radians() ;
+            float step_radians = 30.0f * MySimpleMath . MySimpleMath . degrees_to_radians ( );
             float cyl_height = 0.50f;
             float cone_height = 0.5f;
 
@@ -45,61 +64,61 @@ namespace Axis_Arrow_Grid
 
             ArrowHeadCone ( gl , r_arrow_head , cone_height + 0.05f , step_radians , zscale );
             gl . PopMatrix ( );
-        }
+            }
         static void ArrowHeadCone ( SharpGL . OpenGL gl , float r_arrow_head , float cone_height , float step , float zscale )
-        {
-            double stopper = Math.PI - step;
-            for ( double i = 0.0 ; i < stopper ; i += step )
             {
-                float[] Vertex0 = { r_arrow_head * (float)Math.Sin(i), r_arrow_head * (float)Math.Cos(i), 0.0f };
-                float[] Vertex1 = { 0, 0, cone_height * zscale };
+            double stopper = Math . PI - step;
+            for ( double i = 0.0 ; i < stopper ; i += step )
+                {
+                float [ ] Vertex0 = { r_arrow_head * ( float ) Math . Sin ( i ) , r_arrow_head * ( float ) Math . Cos ( i ) , 0.0f };
+                float [ ] Vertex1 = { 0 , 0 , cone_height * zscale };
 
                 double i0 = i + step;
 
-                float[] Vertex2 = { r_arrow_head * (float)Math.Sin(i0), r_arrow_head * (float)Math.Cos(i0), 0.0f };
-                float[] Vertex3 = { 0, 0, cone_height * zscale };
+                float [ ] Vertex2 = { r_arrow_head * ( float ) Math . Sin ( i0 ) , r_arrow_head * ( float ) Math . Cos ( i0 ) , 0.0f };
+                float [ ] Vertex3 = { 0 , 0 , cone_height * zscale };
                 Triangle . Draw ( gl , Vertex0 , Vertex1 , Vertex2 , true , false );
                 Triangle . Draw ( gl , Vertex1 , Vertex2 , Vertex3 , false , false );
-            }
+                }
 
-        }
+            }
         static void ArrowShaftCylinder ( SharpGL . OpenGL gl , float r_Arrow_shaft_cylinder , float cyl_height , double step , double zscale )
-        {
-            double stopper = Math.PI - step;
-            for ( double i = 0.0 ; i < stopper ; i += step )
             {
-                float x = r_Arrow_shaft_cylinder * (float)Math.Sin(i);
-                float y = r_Arrow_shaft_cylinder * (float)Math.Cos(i);
+            double stopper = Math . PI - step;
+            for ( double i = 0.0 ; i < stopper ; i += step )
+                {
+                float x = r_Arrow_shaft_cylinder * ( float ) Math . Sin ( i );
+                float y = r_Arrow_shaft_cylinder * ( float ) Math . Cos ( i );
                 float z = 0.0f;
 
                 float x0 = x;
                 float y0 = y;
-                float z0 = cyl_height * (float)zscale;
+                float z0 = cyl_height * ( float ) zscale;
 
                 double i0 = i + step;
 
-                float x1 = r_Arrow_shaft_cylinder * (float)Math.Sin(i0);
-                float y1 = r_Arrow_shaft_cylinder * (float)Math.Cos(i0);
+                float x1 = r_Arrow_shaft_cylinder * ( float ) Math . Sin ( i0 );
+                float y1 = r_Arrow_shaft_cylinder * ( float ) Math . Cos ( i0 );
                 float z1 = 0.0f;
 
                 float x2 = x1;
                 float y2 = y1;
-                float z2 = cyl_height * (float)zscale;
+                float z2 = cyl_height * ( float ) zscale;
 
-                float[] Vertex0 = { x, y, z };
-                float[] Vertex1 = { x0, y0, z0 };
-                float[] Vertex2 = { x1, y1, z1 };
-                float[] Vertex3 = { x2, y2, z2 };
+                float [ ] Vertex0 = { x , y , z };
+                float [ ] Vertex1 = { x0 , y0 , z0 };
+                float [ ] Vertex2 = { x1 , y1 , z1 };
+                float [ ] Vertex3 = { x2 , y2 , z2 };
                 Triangle . Draw ( gl , Vertex0 , Vertex1 , Vertex2 , true , false );
                 Triangle . Draw ( gl , Vertex1 , Vertex2 , Vertex3 , false , false );
+                }
             }
         }
-    }
-        public class CubeClass
-    {
-        public float rquad=0;
-        public void DrawCube ( OpenGL gl )
+    public class CubeClass
         {
+        public float rquad = 0;
+        public void DrawCube ( OpenGL gl )
+            {
             gl . PushMatrix ( );
             gl . LoadIdentity ( );
             gl . Translate ( 1.5f , 1.0f , -7.0f );				// Move Right And Into The Screen
@@ -146,18 +165,18 @@ namespace Axis_Arrow_Grid
             gl . Vertex ( 1.0f , -1.0f , -1.0f );			// Bottom Right Of The Quad (Right)
             gl . End ( );						// Done Drawing The Q
             gl . PopMatrix ( );
-        }
+            }
         public void Rotate ( )
-        {
+            {
             rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
 
+            }
         }
-    }
-        public class Tetrahedra_Class
-    {
-        public float rtri=0;
-        public void DrawTetrahedra ( OpenGL gl )
+    public class Tetrahedra_Class
         {
+        public float rtri = 0;
+        public void DrawTetrahedra ( OpenGL gl )
+            {
             gl . PushMatrix ( );
             gl . LoadIdentity ( );					// Reset The View
             gl . Translate ( -1.5f , 0.0f , -10.0f );
@@ -197,12 +216,12 @@ namespace Axis_Arrow_Grid
             gl . End ( );						// Done Drawing The Pyramid
             gl . PopMatrix ( );
 
-        }
+            }
         public void Rotate ( )
-        {
+            {
             rtri += 3.0f;// 0.2f; }
+            }
         }
-    }
     public static class Axis_Class
         {
         const String AxisLabelFont = "Times New Roman";
@@ -212,8 +231,8 @@ namespace Axis_Arrow_Grid
         static readonly float [ ] Blue = { 0f , 0f , 1f , 1f };
         static readonly float [ ] White = { 1f , 1f , 1f , 1f };
 
-        public static void MyGlobalAxis ( SharpGL . OpenGL gl , int AxesLength , int LineWidth , int Pointsize , Boolean DoMinus ,
-                Boolean TagOrigin = true , Boolean DoXYZAnnotation = true )
+        public static void MyGlobalAxis ( SharpGL . OpenGL gl , int AxesLength = 20 , int LineWidth = 2 , int Pointsize = 3 , Boolean DoMinus = true ,
+                Boolean TagOrigin = true , Boolean DoXYZAnnotation = true , Boolean DoMinusXYZAnnotation = true , Boolean DoUnitTicks = true , Boolean DoAnnotateTicks = true )
             {
             gl . PushAttrib ( SharpGL . OpenGL . GL_CURRENT_BIT | SharpGL . OpenGL . GL_ENABLE_BIT | SharpGL . OpenGL . GL_LINE_BIT | SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
 
@@ -254,6 +273,14 @@ namespace Axis_Arrow_Grid
                 gl . Translate ( AxesLength , 0 , 0 );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"+X" );
                 gl . PopMatrix ( );
+
+                if ( DoMinusXYZAnnotation )
+                    {
+                    gl . PushMatrix ( );
+                    gl . Translate ( -AxesLength , 0 , 0 );
+                    gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"-X" );
+                    gl . PopMatrix ( );
+                    }
                 }
 
             gl . Color ( Green );
@@ -277,6 +304,15 @@ namespace Axis_Arrow_Grid
                 gl . Translate ( 0 , AxesLength , 0 );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"+Y" );
                 gl . PopMatrix ( );
+
+
+                if ( DoMinusXYZAnnotation )
+                    {
+                    gl . PushMatrix ( );
+                    gl . Translate ( 0 , -AxesLength , 0 );
+                    gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"-Y" );
+                    gl . PopMatrix ( );
+                    }
                 }
 
             gl . Color ( Blue );
@@ -300,8 +336,51 @@ namespace Axis_Arrow_Grid
                 gl . Translate ( 0 , 0 , AxesLength );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"+Z" );
                 gl . PopMatrix ( );
-                }
+                
 
+                if ( DoMinusXYZAnnotation )
+                    {
+                    gl . PushMatrix ( );
+                    gl . Translate ( 0 , 0 , -AxesLength );
+                    gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"-Z" );
+                    gl . PopMatrix ( );
+                    }
+                }
+            float tick_scale = 0.4f;
+            if (DoUnitTicks )
+                {
+                gl . PointSize(Pointsize );
+                gl . Color(White );
+                for (int i = 0 ; i<AxesLength ; i++ )
+                    {
+                    gl . Begin(SharpGL . Enumerations . BeginMode . Points );
+                    gl . Vertex(i, 0 , 0 );
+                    gl . Vertex( 0 , i , 0 );
+                    gl . Vertex( 0 , 0 , i );
+                    gl . End ( );
+                    if (DoMinus )
+                        {
+                        gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+                        gl . Vertex( -i , 0 , 0 );
+                        gl . Vertex( 0 , -i , 0 );
+                        gl . Vertex( 0 , 0 , -i );
+                        gl . End ( );
+                        }
+                    if ( DoAnnotateTicks )
+                        {
+                        gl . PushMatrix ( );
+                        gl . Translate ( 0 , 0 , i );
+                        gl . Scale ( tick_scale , tick_scale , tick_scale );
+                        gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: i . ToString ( ) );
+                        gl . PopMatrix ( );
+                        gl . PushMatrix ( );
+                        gl . Translate ( 0 , 0 , -i );
+                        gl . Scale ( tick_scale , tick_scale , tick_scale );
+                        gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: (-i) . ToString ( ) );
+                        gl . PopMatrix ( );
+                        }
+                    }
+                }
             //  Restore attributes.
             gl . PopAttrib ( );
             }

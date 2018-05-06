@@ -457,6 +457,31 @@
                             Background="#FFEC8F8F"
                             Content="Load Spreadsheet At Initalization"
                             IsChecked="false" />
+                        <StackPanel
+                            x:Name="Spreadsheet_3dDisplayOptions_StackPanel"
+                            Grid.Row="1"
+                            Width="909"
+                            Height="24"
+                            Margin="10,170,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal" VerticalAlignment="Top">
+                            <StackPanel.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#FFDEB5B5" Offset="0"/>
+                                    <GradientStop Color="#FF2CD31B" Offset="1"/>
+                                </RadialGradientBrush>
+                            </StackPanel.Background>
+                            <CheckBox x:Name="DoDrawSpreadsheetTopBorder_CheckBoxControl" Content="Draw Top Border" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1" />
+                            <CheckBox x:Name="DoDrawSpreadsheetSideBorder_CheckBox_Control" Content="Draw side border" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox x:Name="DoDrawSpreadsheetFocusCell_s_CheckBox_Control" Content="Draw Focus" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox x:Name="DoDrawSpreadsheetSelectedCell_s_CheckBox_Control" Content="Draw Selected" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox x:Name="DoDrawSpreadsheetTextObjects_CheckBox_Control" Content="Draw text" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox x:Name="DoDrawSpreadsheetGrid_CheckBox_Control" Content="Draw Grid" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+
+                        </StackPanel>
                     </Grid>
                 </TabItem>
                 <TabItem
@@ -613,20 +638,20 @@
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Center"
                                 LabelText="Axis overall XYZ"
-                                SliderMinValue="1" 
-                                SliderMaxValue="50"/>
+                                SliderMaxValue="50"
+                                SliderMinValue="1" />
                             <local:H_Slider_UserControl1
                                 x:Name="Axis_Ticks_H_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
-                                SliderMaxValue="10"
-                                SliderMinValue="0"
-                                SliderValue="2"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top"
-                                LabelText="Ticks" />
+                                LabelText="Ticks"
+                                SliderMaxValue="10"
+                                SliderMinValue="0"
+                                SliderValue="2" />
                             <local:H_Slider_UserControl1
                                 x:Name="Axis_Linewidth_H_Slider_UserControl"
                                 Width="943"

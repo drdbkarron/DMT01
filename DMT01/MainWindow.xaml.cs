@@ -35,10 +35,7 @@ namespace System . Windows . Controls
     }
 
 namespace DMT01
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    {
     public partial class MainWindow : Window
     {
         #region Persistance_classes2
@@ -135,14 +132,14 @@ namespace DMT01
 
         private void DMTWindow_Loaded ( object sender , RoutedEventArgs e )
             {
-            if ( LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                spreadsheet_load_Button . PerformClick ( );
-                }
             if ( LaunchSavedStateOnInitalization_RadioButton_Control .IsChecked.GetValueOrDefault() )
                 {
                 Load_XML_Saved_Control_States_Button . PerformClick ( );
                 }
+            //if ( LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    spreadsheet_load_Button . PerformClick ( );
+            //    }
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Loaded ) ) );
             }
 
@@ -217,7 +214,7 @@ namespace DMT01
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
             gl . LoadIdentity ( );
 
-            if ( UseLookAtViewingTransform_RadioButton . IsChecked . GetValueOrDefault ( ) )
+            if ( UseLookAtViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
                 {
                 float x_up = 0.0f;
                 float y_up = 1.0f;
@@ -287,12 +284,19 @@ namespace DMT01
             if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
             {
                 int Al= (int)( ( Axis_Length_XYZ_H_Slider_UserControl . SliderValue ) + 0.5f );
+                int lw = ( int ) ( ( Axis_Linewidth_H_Slider_UserControl . SliderValue )+ 0.5f );
+
+                int ps = ( int ) (( Axis_TickSize_H_Slider_UserControl . SliderValue ) + 0.5f );
+
                 Axis_Arrow_Grid . Axis_Class . MyGlobalAxis (
                     gl: gl , 
                     AxesLength: Al ,
-                    Pointsize: 3,
-                    LineWidth:3,
-                    DoMinus: Axis_DrawNegativeCheckBoxControl . IsChecked . GetValueOrDefault ( ) );
+                    Pointsize: ps,
+                    LineWidth: lw,
+                    DoMinus: Axis_DrawNegativeCheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
+                    TagOrigin: AnnotateOrigin_CheckBoxControl .IsChecked.GetValueOrDefault() ,
+                    DoXYZAnnotation: AnnotateAxisXYZ_CheckBoxControl .IsChecked.GetValueOrDefault(),
+                    DoUnitTicks: DoDoTickMarks_CheckBoxControl.IsChecked.GetValueOrDefault() );
             }
 
             if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
@@ -301,50 +305,245 @@ namespace DMT01
                 tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
             }
 
-            if ( Spreadsheet_Grid_CheckBox_Control . IsChecked.GetValueOrDefault())
+            if ( Spreadsheet_Grid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
-                var SR=myReoGridControl . CurrentWorksheet . SelectionRange;
-
-                //Debug . WriteLine ( String . Format ( "{0} [{1},{2}:{3},{4}]" , SR.ToString(), SR.StartPos.Row, SR.StartPos.Col, SR.EndPos.Row, SR.EndPos.Col ) );
-                // make suggestion of spreadsheet with a b c 1 2 3 col headers and row headers
-
-                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-                gl . LineWidth ( 1 );
-                gl . Color ( .9f , .9f , .9f );
-                gl . Begin ( SharpGL . Enumerations . BeginMode . QuadStrip );
-                gl . Vertex ( 0 , 0 , 0 );
-                gl . Vertex ( 0 , 0 , 0 );
-                gl . Vertex ( 1 , 1 , 0 );
-                gl . End ( );
-                gl . PopAttrib ( );
-
-                gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-                gl . Vertex ( SR . StartPos . Row , SR . StartPos . Col );
-                gl . Vertex ( SR . StartPos . Row , SR . EndPos . Col );
-
-                gl . Vertex ( SR . StartPos . Row , SR . EndPos . Col );
-                gl . Vertex (0,0 );
-
-                gl . Vertex ( SR . EndPos . Row , SR . StartPos . Col );
-                gl . Vertex ( SR . EndPos . Row , SR . EndPos . Col );
-
-                gl . Vertex ( SR . StartPos . Row , SR . EndPos . Col );
-                gl . Vertex ( 0,0 );
-                gl . End ( );
-
-                for ( int i = SR . StartPos . Row ; i <= SR . EndPos . Row ;i++ )
-                    {
-                    for ( int j = SR . StartPos . Col ; j <= SR . EndPos . Col ;j++ )
-                        {
-                        }
-                    }
+                ReoGrid3DSpreadsheet ( gl: gl );
                 }
-           
             gl . Flush ( );
             DoAspect ( );
             Draws_Label . Content = String . Format ( "Draw Count: {0}" , Draws );
             Draws++;
         }
+
+        private void ReoGrid3DSpreadsheet ( OpenGL gl )
+            {
+            float cell_height = 0.499f;
+            float cell_width = 1.0f;
+            int MaxDisplayCols = 20;
+            int MaxDisplayRows = 30;
+            int normal_col_width = 70;
+            int normal_row_height = 20;
+
+            if(DoDrawSpreadsheetSideBorder_CheckBox_Control.IsChecked.GetValueOrDefault())for ( int i = 0 ; i < MaxDisplayRows ; i++ )
+                {
+                gl . PushMatrix ( );
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+                gl . Scale ( x: 1.0 , y: 1.0 , z: 1.0 );
+                gl . Translate ( -cell_width , -i * .5 , 0 );
+                gl . Color ( .4f , .6f , .4f );
+                gl . LineWidth ( 2 );
+                gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                gl . Vertex ( 0 , 0 , 0 );
+                gl . Vertex ( 1 , 0 , 0 );
+                gl . Vertex ( 1 , cell_height , 0 );
+                gl . Vertex ( 0 , cell_height , 0 );
+                gl . End ( );
+                gl . PopAttrib ( );
+
+                gl . PushMatrix ( );
+
+                float [ ] c = GetCentroid ( cell_width , cell_height , 0.0f );
+
+                gl . Translate ( c [ 0 ] - 0.45f , c [ 1 ] - .25 , c [ 2 ] );
+                gl . Scale ( 0.7 , 0.7 , 1.0 );
+                gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: i . ToString ( ) );
+                gl . PopMatrix ( );
+                gl . PopMatrix ( );
+                }
+
+            var CW = myReoGridControl . CurrentWorksheet;
+
+            if ( DoDrawSpreadsheetTopBorder_CheckBoxControl.IsChecked.GetValueOrDefault() )
+                {
+
+                float x0 = 0f;
+                float x1 = 0f;
+                for ( int i = 0 ; i < MaxDisplayCols ; i++ )
+                    {
+                    float col_with0 = CW . GetColumnWidth ( i );
+                    float norm_units = col_with0 / normal_col_width;
+                    x0 = x1;
+                    x1 = i * norm_units;
+                    gl . PushMatrix ( );
+                    gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+                    gl . Color ( .9f , .9f , .9f , 0.001f );
+                    gl . LineWidth ( 2 );
+                    gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                    gl . Vertex ( x0 , 0 , 0 );
+                    gl . Vertex ( x1 , 0 , 0 );
+                    gl . Vertex ( x1 , -cell_height , 0 );
+                    gl . Vertex ( x0 , -cell_height , 0 );
+                    gl . End ( );
+                    gl . PopAttrib ( );
+                    gl . PushMatrix ( );
+
+                    float [ ] c = GetCentroid ( x0 , -cell_height , 0.0f );
+
+                    gl . Translate ( c [ 0 ] - 0.45f , c [ 1 ] - .25 , c [ 2 ] );
+                    gl . Scale ( 0.7 , 0.7 , 1.0 );
+                    gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: IntToLetter ( i ) );
+                    gl . PopMatrix ( );
+                    gl . PopMatrix ( );
+                    }
+                }
+
+            if ( DoDrawSpreadsheetFocusCell_s_CheckBox_Control.IsChecked.GetValueOrDefault())
+                {
+            var FP = myReoGridControl . CurrentWorksheet . FocusPos;
+            gl . PushMatrix ( );
+            gl . LineWidth ( 3 );
+            gl . Color ( .9 , .1 , .1 );
+            gl . Scale ( x: 1.0 , y: -0.50 , z: 1.0 );
+            gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+            gl . Vertex ( FP  . Col , FP . Row );
+            gl . Vertex ( FP .  Col , FP .  Row + 1 );
+            gl . Vertex ( FP .  Col + 1 , FP .  Row + 1 );
+            gl . Vertex ( FP .  Col + 1 , FP .  Row );
+            gl . End ( );
+            gl . PopMatrix ( );
+                }
+
+            if ( DoDrawSpreadsheetSelectedCell_s_CheckBox_Control.IsChecked.GetValueOrDefault()) {
+                var SR = myReoGridControl . CurrentWorksheet . SelectionRange;
+                for ( int i = SR . StartPos . Row ; i <= SR . EndPos . Row ; i++ )
+                    {
+                    for ( int j = SR . StartPos . Col ; j <= SR . EndPos . Col ; j++ )
+                        {
+                        gl . PushMatrix ( );
+                        gl . LineWidth ( 2 );
+                        gl . Color ( .9 , .1 , .1 );
+                        gl . Scale ( x: 1.0 , y: -0.50 , z: 1.0 );
+                        gl . Scale ( x: 0.99 , y: 0.99 , z: 0.99 );
+                        gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                        gl . Vertex ( j , i );
+                        gl . Vertex ( j , i + 1 );
+                        gl . Vertex ( j + 1 , i + 1 );
+                        gl . Vertex ( j + 1 , i );
+                        gl . End ( );
+                        gl . PopMatrix ( );
+                        }
+                    }
+                }
+
+            if ( DoDrawSpreadsheetGrid_CheckBox_Control .IsChecked.GetValueOrDefault())
+                {
+                gl . PushMatrix ( );
+                gl . LineWidth ( 1 );
+                gl . Scale ( x: 1.0 , y: -0.50 , z: 1.0 );
+                float x = 0.0f;
+                for ( int i = 0 ; i < CW . ColumnCount ; i++ )
+                    {
+                    int w = CW . GetColumnWidth ( i );
+
+                    float width_factor = ( float ) w / ( float ) normal_col_width;
+
+                    //Debug . WriteLine ( String . Format ( " GetColumnWidth {0}" , w ) );
+
+                    float y = 0.0f;
+                    for ( int j = 0 ; j < CW . RowCount ; j++ )
+                        {
+                        int r = CW . GetRowHeight ( j );
+
+                        float height_factor = ( float ) r / ( float ) normal_row_height;
+
+                        //Debug . WriteLine ( String . Format ( " GetRowHeight {0}" , r ) );
+
+                        gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                        gl . Vertex ( y , x );
+                        gl . Vertex ( y , x + width_factor );
+                        gl . Vertex ( y + height_factor , x + width_factor );
+                        gl . Vertex ( y + height_factor , x );
+                        gl . End ( );
+                        //gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                        //gl . Vertex ( j , i );
+                        //gl . Vertex ( j , i + 1 );
+                        //gl . Vertex ( j + 1 , i + 1 );
+                        //gl . Vertex ( j + 1 , ( i );
+                        //gl . End ( );
+                        y = y + height_factor;
+                        }
+                    x = x + width_factor;
+                    }
+                gl . PopMatrix ( );
+                }
+            }
+
+        private string IntToLetter ( int i )
+            {
+            if ( i < 0 )
+                return "XXX";
+            switch ( i )
+                {
+                case 0:
+                    return "A";
+                case 1:
+                    return "B";
+                case 2:
+                    return "C";
+                case 3:
+                    return "D";
+                case 4:
+                    return "E";
+                case 5:
+                    return "F";
+                case 6:
+                    return "G";
+                case 7:
+                    return "H";
+                case 8:
+                    return "I";
+                case 9:
+                    return "J";
+                case 10:
+                    return "K";
+                case 11:
+                    return "L";
+                case 12:
+                    return "M";
+                case 13:
+                    return "N";
+                case 15:
+                    return "O";
+                case 16:
+                    return "P";
+                case 17:
+                    return "Q";
+                case 18:
+                    return "R";
+                case 19:
+                    return "S";
+                case 20:
+                    return "T";
+                case 21:
+                    return "U";
+                case 22:
+                    return "V";
+                case 23:
+                    return "W";
+                case 24:
+                    return "X";
+                case 25:
+                    return "Y";
+                case 26:
+                    return "Z";
+                 }
+            return "???";
+            }
+
+        private float[] GetCentroid ( float x , float y, float z )
+            {
+            float [ ] x0 = new float [ ] { x , 0 , z };
+            float [ ] x1 = new float [ ] { 0 , y , z };
+            float [ ] x2 = new float [ ] { x , 0 , z };
+            float [ ] x3 = new float [ ] { x , y , z };
+
+            float [ ] X = new float [ ] {
+                (x0 [ 0 ] + x1 [ 0 ] + x2 [ 0 ] + x3 [ 0 ])/4.0f ,
+                (x0 [ 1 ] + x1 [ 1 ] + x2 [ 1 ] + x3 [ 1 ])/4.0f ,
+                (x0 [ 2 ] + x1 [ 2 ] + x2 [ 2 ] + x3 [ 2 ])/4.0f };
+
+            return X;
+            }
 
         private void LoadMatrix ( SharpGL . OpenGL gl , mat4 m4 )
         {
