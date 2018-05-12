@@ -8,6 +8,7 @@
     xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
     xmlns:local="clr-namespace:DMT01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     x:Name="DMT_Main_Window_Control"
     Title="DMT_MainWindow"
     Width="1072"
@@ -497,12 +498,14 @@
                                 BorderThickness="5,1,1,1"
                                 Content="DoGreyScale_CheckBox_Control" />
                         </StackPanel>
-                        <Button x:Name="SelectDataRangeForNormalization"
+                        <Button
+                            x:Name="SelectDataRangeForNormalization"
                             Width="74"
                             Margin="444,20,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Content="Select Data" Click="SelectDataRangeForNormalization_Click" />
+                            Click="SelectDataRangeForNormalization_Click"
+                            Content="Select Data" />
                     </Grid>
                 </TabItem>
                 <TabItem
@@ -1066,23 +1069,161 @@
                         x:Name="Lightig_Grid"
                         Width="956"
                         Height="586"
-                        Margin="9,5,9,-2"
+                        Margin="9,4,9,-2"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Grid.Background>
                             <RadialGradientBrush>
                                 <GradientStop Offset="0" Color="Black" />
                                 <GradientStop Offset="1" Color="#FF57463B" />
                             </RadialGradientBrush>
                         </Grid.Background>
+                        <StackPanel
+                            Width="922"
+                            Height="17"
+                            Margin="17,3,17,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal">
+                            <StackPanel.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0" Color="#FFF3E2E2" />
+                                    <GradientStop Offset="1" Color="#FF006D7E" />
+                                </RadialGradientBrush>
+                            </StackPanel.Background>
+                            <CheckBox Content="Use 0" />
+                            <CheckBox Content="Use 1" />
+                            <CheckBox Content="Use 2" />
+                            <CheckBox Content="Use 3" />
+                            <CheckBox Content="Use 4" />
+                            <CheckBox Content="Use 5" />
+                            <CheckBox Content="Use 6" />
+                            <CheckBox Content="Use 7" />
+                            <CheckBox Content="CheckBox" />
+                            <CheckBox Content="CheckBox" />
+                            <CheckBox Content="CheckBox" />
+                            <CheckBox Content="CheckBox" />
+                        </StackPanel>
                         <TabControl
-                            Height="527"
-                            Margin="19,10,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top" Width="924">
+                            Grid.Row="1"
+                            Grid.RowSpan="2"
+                            Width="924"
+                            Height="528"
+                            Margin="16,4,16,32"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{x:Null}"
+                            BorderBrush="#FFF70C0C"
+                            BorderThickness="2">
                             <TabItem Header="LIGHT0">
-                                <Grid Background="#FFE5E5E5" Margin="8,24,4,0" >
-                                    <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="87" Margin="10,10,0,0" VerticalAlignment="Top" Width="880" HorizontalContentAlignment="Center"/>
+                                <Grid
+                                    Margin="8,0,4,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Background="#FFE5E5E5"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="26" />
+                                        <RowDefinition Height="Auto" MinHeight="598" />
+                                        <RowDefinition Height="Auto" MinHeight="1" />
+                                        <RowDefinition Height="Auto" MinHeight="1" />
+                                        <RowDefinition Height="Auto" MinHeight="1" />
+                                        <RowDefinition Height="Auto" MinHeight="1" />
+
+                                    </Grid.RowDefinitions>
+                                    <Grid
+                                        Grid.RowSpan="2"
+                                        Grid.Column="1"
+                                        Width="896"
+                                        Height="480"
+                                        Margin="10,9,17,0"
+                                        VerticalAlignment="Top">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <xctk:ColorCanvas x:Name="DoShowLight0InScene_CheckBox_Control"
+                                            Grid.RowSpan="3"
+                                            Width="233"
+                                            Height="276"
+                                            Margin="10,5,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top" R="255" G="255" B="255" A="255" />
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            Width="625"
+                                            Height="23"
+                                            Margin="9,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Orientation="Horizontal">
+                                            <CheckBox Content="Show In Scene" />
+                                            <CheckBox Content="CheckBox" />
+                                            <CheckBox Content="CheckBox" />
+                                            <CheckBox Content="CheckBox" />
+                                            <CheckBox Content="CheckBox" />
+                                            <CheckBox Content="CheckBox" />
+                                            <CheckBox Content="CheckBox" />
+                                            <CheckBox Content="CheckBox" />
+                                        </StackPanel>
+                                        <StackPanel
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Width="625"
+                                            Height="268"
+                                            Margin="6,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top">
+                                            <local:H_Slider_UserControl1
+                                                Width="639"
+                                                Height="89"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                HorizontalContentAlignment="Left"
+                                                RenderTransformOrigin="0.5,0.5"
+                                                ScrollViewer.CanContentScroll="True"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                                UseLayoutRounding="False" />
+                                            <local:H_Slider_UserControl1
+                                                Width="639"
+                                                Height="89"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                HorizontalContentAlignment="Left"
+                                                RenderTransformOrigin="0.5,0.5"
+                                                ScrollViewer.CanContentScroll="True"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                                UseLayoutRounding="False" />
+                                            <local:H_Slider_UserControl1
+                                                Width="639"
+                                                Height="89"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                HorizontalContentAlignment="Left"
+                                                RenderTransformOrigin="0.5,0.5"
+                                                ScrollViewer.CanContentScroll="True"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                                UseLayoutRounding="False" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel
+                                        Grid.Row="5"
+                                        Width="808"
+                                        Height="100"
+                                        Margin="54,11,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top" />
                                 </Grid>
                             </TabItem>
                             <TabItem Header="LIGHT1">
