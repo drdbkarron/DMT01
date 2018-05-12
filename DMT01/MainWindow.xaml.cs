@@ -1736,5 +1736,10 @@ namespace DMT01
             {
             Eye_and_Camera_TabItem . IsSelected = true;
             }
+
+        private void SelectDataRangeForNormalization_Click ( object sender , RoutedEventArgs e )
+            {
+
+            }
         }
 }

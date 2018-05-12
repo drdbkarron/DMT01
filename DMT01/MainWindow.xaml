@@ -434,23 +434,75 @@
                             Height="24"
                             Margin="10,170,0,0"
                             HorizontalAlignment="Left"
-                            Orientation="Horizontal" VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal">
                             <StackPanel.Background>
                                 <RadialGradientBrush>
-                                    <GradientStop Color="#FFDEB5B5" Offset="0"/>
-                                    <GradientStop Color="#FF2CD31B" Offset="1"/>
+                                    <GradientStop Offset="0" Color="#FFDEB5B5" />
+                                    <GradientStop Offset="1" Color="#FF2CD31B" />
                                 </RadialGradientBrush>
                             </StackPanel.Background>
-                            <CheckBox x:Name="DoDrawSpreadsheetTopBorder_CheckBoxControl" Content="Draw Top Border" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1" />
-                            <CheckBox x:Name="DoDrawSpreadsheetSideBorder_CheckBox_Control" Content="Draw side border" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox x:Name="DoDrawSpreadsheetFocusCell_s_CheckBox_Control" Content="Draw Focus" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox x:Name="DoDrawSpreadsheetSelectedCell_s_CheckBox_Control" Content="Draw Selected" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox x:Name="DoDrawSpreadsheetTextObjects_CheckBox_Control" Content="Draw text" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox x:Name="DoDrawSpreadsheetGrid_CheckBox_Control" Content="Draw Grid" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox x:Name="DoDrawAllSpreadsheetData_CheckBox_Control" Content="All Data" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox
+                                x:Name="DoDrawSpreadsheetTopBorder_CheckBoxControl"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="Draw Top Border" />
+                            <CheckBox
+                                x:Name="DoDrawSpreadsheetSideBorder_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="Draw side border" />
+                            <CheckBox
+                                x:Name="DoDrawSpreadsheetFocusCell_s_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="Draw Focus" />
+                            <CheckBox
+                                x:Name="DoDrawSpreadsheetSelectedCell_s_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="Draw Selected" />
+                            <CheckBox
+                                x:Name="DoDrawSpreadsheetTextObjects_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="Draw text" />
+                            <CheckBox
+                                x:Name="DoDrawSpreadsheetGrid_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="Draw Grid" />
+                            <CheckBox
+                                x:Name="DoDrawAllSpreadsheetData_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="All Data" />
+                            <CheckBox
+                                x:Name="DoSelectDataToNormalize_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="CheckBox" />
+                            <CheckBox
+                                x:Name="DoDrawGreyScale_CheckBox_Control"
+                                Background="#FFE8CECE"
+                                BorderBrush="#FFDE2F2F"
+                                BorderThickness="5,1,1,1"
+                                Content="DoGreyScale_CheckBox_Control" />
                         </StackPanel>
+                        <Button x:Name="SelectDataRangeForNormalization"
+                            Width="74"
+                            Margin="444,20,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Select Data" Click="SelectDataRangeForNormalization_Click" />
                     </Grid>
                 </TabItem>
                 <TabItem
@@ -708,7 +760,10 @@
                                     Margin="3,1,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    Content="Annotate Z Ticks" Background="#FF839FFF" BorderBrush="#FF080707" BorderThickness="5,1,1,1" />
+                                    Background="#FF839FFF"
+                                    BorderBrush="#FF080707"
+                                    BorderThickness="5,1,1,1"
+                                    Content="Annotate Z Ticks" />
                                 <CheckBox
                                     x:Name="AnnotateYTickMarks_CheckBoxControl"
                                     Width="118"
@@ -716,7 +771,10 @@
                                     Margin="3,1,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    Content="Annotate Y Ticks" Background="#FF839FFF" BorderBrush="#FF080707" BorderThickness="5,1,1,1" />
+                                    Background="#FF839FFF"
+                                    BorderBrush="#FF080707"
+                                    BorderThickness="5,1,1,1"
+                                    Content="Annotate Y Ticks" />
                                 <CheckBox
                                     x:Name="AnnotateXTickMarks_CheckBoxControl"
                                     Width="118"
@@ -724,18 +782,24 @@
                                     Margin="3,1,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    Content="Annotate X Ticks" Background="#FF839FFF" BorderBrush="#FF080707" BorderThickness="5,1,1,1" />
+                                    Background="#FF839FFF"
+                                    BorderBrush="#FF080707"
+                                    BorderThickness="5,1,1,1"
+                                    Content="Annotate X Ticks" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>
                 </TabItem>
                 <TabItem
                     x:Name="LookAt_TabItem"
+                    Width="112.7"
                     Height="20"
                     Margin="4,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Header="LookAt" Width="112.7" BorderBrush="#FFD41616" BorderThickness="2.4,5,1.9,1">
+                    BorderBrush="#FFD41616"
+                    BorderThickness="2.4,5,1.9,1"
+                    Header="LookAt">
                     <Grid
                         x:Name="LookAtTab_Grid"
                         Margin="0,3,0,-12"
@@ -898,11 +962,14 @@
                 </TabItem>
                 <TabItem
                     x:Name="Perspective_TabItem"
+                    Width="112.7"
                     Height="20"
                     Margin="4,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Header="Perspective" Width="112.7" BorderBrush="#FFD41616" BorderThickness="2.4,5,1.9,1">
+                    BorderBrush="#FFD41616"
+                    BorderThickness="2.4,5,1.9,1"
+                    Header="Perspective">
                     <Grid Background="#FFCB4141">
                         <Grid
                             x:Name="Perspective_Grid"
@@ -1009,13 +1076,14 @@
                             </RadialGradientBrush>
                         </Grid.Background>
                         <TabControl
-                            Width="619"
-                            Height="373"
-                            Margin="120,93,0,0"
+                            Height="527"
+                            Margin="19,10,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top" Width="924">
                             <TabItem Header="LIGHT0">
-                                <Grid Background="#FFE5E5E5" />
+                                <Grid Background="#FFE5E5E5" Margin="8,24,4,0" >
+                                    <local:H_Slider_UserControl1 HorizontalAlignment="Left" Height="87" Margin="10,10,0,0" VerticalAlignment="Top" Width="880" HorizontalContentAlignment="Center"/>
+                                </Grid>
                             </TabItem>
                             <TabItem Header="LIGHT1">
                                 <Grid Background="#FFE5E5E5" />
