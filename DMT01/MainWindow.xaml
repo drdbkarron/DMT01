@@ -447,10 +447,9 @@
                             <CheckBox x:Name="DoDrawSpreadsheetSelectedCell_s_CheckBox_Control" Content="Draw Selected" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
                             <CheckBox x:Name="DoDrawSpreadsheetTextObjects_CheckBox_Control" Content="Draw text" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
                             <CheckBox x:Name="DoDrawSpreadsheetGrid_CheckBox_Control" Content="Draw Grid" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
+                            <CheckBox x:Name="DoDrawAllSpreadsheetData_CheckBox_Control" Content="All Data" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
                             <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
                             <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-                            <CheckBox Content="CheckBox" Background="#FFE8CECE" BorderBrush="#FFDE2F2F" BorderThickness="5,1,1,1"/>
-
                         </StackPanel>
                     </Grid>
                 </TabItem>
@@ -767,7 +766,7 @@
                                     Margin="0,4,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
-                                    LabelText="LookAt X"
+                                    LabelText="LookAt Eye X"
                                     SliderMaxValue="50"
                                     SliderMinValue="-50"
                                     SliderValue="0" />

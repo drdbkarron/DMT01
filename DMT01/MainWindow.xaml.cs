@@ -22,6 +22,8 @@ using GlmSharp;
 using System . Xml;
 using System . IO;
 using System . Xml . Serialization;
+using unvell . ReoGrid . DataFormat;
+using System . Globalization;
 
 namespace System . Windows . Controls
     {
@@ -136,10 +138,10 @@ namespace DMT01
                 {
                 Load_XML_Saved_Control_States_Button . PerformClick ( );
                 }
-            //if ( LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    spreadsheet_load_Button . PerformClick ( );
-            //    }
+            if ( LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                spreadsheet_load_Button . PerformClick ( );
+                }
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Loaded ) ) );
             }
 
@@ -357,22 +359,22 @@ namespace DMT01
 
                     gl . PushMatrix ( );
 
-                    float [ ] c = GetCentroid ( x0,y0,x1,y1 );
+                    float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
 
-                    gl . Translate ( c [ 0 ]-.25 , c [ 1 ] - .15 , c [ 2 ] );
-                    gl . Scale ( 0.6 , 0.6   , 1.0 );
+                    gl . Translate ( c [ 0 ] - .25 , c [ 1 ] - .15 , c [ 2 ] );
+                    gl . Scale ( 0.6 , 0.6 , 1.0 );
                     String iter_string = ( i + 1 ) . ToString ( "00" );
                     gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: iter_string );
                     gl . PopMatrix ( );
                     }
                 }
 
-            if ( DoDrawSpreadsheetTopBorder_CheckBoxControl.IsChecked.GetValueOrDefault() )
+            if ( DoDrawSpreadsheetTopBorder_CheckBoxControl . IsChecked . GetValueOrDefault ( ) )
                 {
                 float x0 = 0f;
                 float x1 = 0f;
                 float y0 = 0f;
-                float y1= cell_height;
+                float y1 = cell_height;
                 for ( int i = 0 ; i < MaxDisplayCols ; i++ )
                     {
                     float col_with0 = CW . GetColumnWidth ( i );
@@ -393,7 +395,7 @@ namespace DMT01
                     gl . PopAttrib ( );
                     gl . PushMatrix ( );
 
-                    float [ ] c = GetCentroid ( x0 , y0 , x1, y1 );
+                    float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
 
                     gl . Translate ( c [ 0 ] - 0.25f , c [ 1 ] - .25 , c [ 2 ] );
                     gl . Scale ( 0.7 , 0.7 , 1.0 );
@@ -402,23 +404,24 @@ namespace DMT01
                     }
                 }
 
-            if ( DoDrawSpreadsheetFocusCell_s_CheckBox_Control.IsChecked.GetValueOrDefault())
+            if ( DoDrawSpreadsheetFocusCell_s_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
-            var FP = myReoGridControl . CurrentWorksheet . FocusPos;
-            gl . PushMatrix ( );
-            gl . LineWidth ( 3 );
-            gl . Color ( .9 , .1 , .1 );
-            gl . Scale ( x: 1.0 , y: -0.50 , z: 1.0 );
-            gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
-            gl . Vertex ( FP  . Col , FP . Row );
-            gl . Vertex ( FP .  Col , FP .  Row + 1 );
-            gl . Vertex ( FP .  Col + 1 , FP .  Row + 1 );
-            gl . Vertex ( FP .  Col + 1 , FP .  Row );
-            gl . End ( );
-            gl . PopMatrix ( );
+                var FP = myReoGridControl . CurrentWorksheet . FocusPos;
+                gl . PushMatrix ( );
+                gl . LineWidth ( 3 );
+                gl . Color ( .9 , .1 , .1 );
+                gl . Scale ( x: 1.0 , y: -0.50 , z: 1.0 );
+                gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                gl . Vertex ( FP . Col , FP . Row );
+                gl . Vertex ( FP . Col , FP . Row + 1 );
+                gl . Vertex ( FP . Col + 1 , FP . Row + 1 );
+                gl . Vertex ( FP . Col + 1 , FP . Row );
+                gl . End ( );
+                gl . PopMatrix ( );
                 }
 
-            if ( DoDrawSpreadsheetSelectedCell_s_CheckBox_Control.IsChecked.GetValueOrDefault()) {
+            if ( DoDrawSpreadsheetSelectedCell_s_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+                {
                 var SR = myReoGridControl . CurrentWorksheet . SelectionRange;
                 for ( int i = SR . StartPos . Row ; i <= SR . EndPos . Row ; i++ )
                     {
@@ -440,46 +443,6 @@ namespace DMT01
                     }
                 }
 
-            if ( DoDrawSpreadsheetGrid_CheckBox_Control .IsChecked.GetValueOrDefault())
-                {
-                gl . PushMatrix ( );
-                gl . LineWidth ( 1 );
-                gl . Scale ( x: 1.0 , y: -0.50 , z: 1.0 );
-
-                float x1 = 0;
-                float x0 = 0;
-                for ( int i = 0 ; i < CW . ColumnCount ; i++ )
-                    {
-                    int w = CW . GetColumnWidth ( i );
-                    float width_factor = ( float ) w / ( float ) normal_col_width;
-                    x0 = x1;
-                    x1 = x1 + width_factor;
-
-                    //Debug . WriteLine ( String . Format ( " GetColumnWidth {0}" , w ) );
-                    
-                    float y0 = 0;
-                    float y1 = 0;
-
-                    for ( int j = 0 ; j < CW . RowCount ; j++ )
-                        {
-                        int r = CW . GetRowHeight ( j );
-                        float height_factor = ( float ) r / ( float ) normal_row_height;
-
-                        y0 = y1;
-                        y1 = y1 + height_factor;
-
-                        //Debug . WriteLine ( String . Format ( " GetRowHeight {0}" , r ) );
-
-                        gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
-                        gl . Vertex ( x0 , y0 );
-                        gl . Vertex ( x0 , y1 );
-                        gl . Vertex ( x1 , y1 );
-                        gl . Vertex ( x1 , y0 );
-                        gl . End ( );
-                        }
-                    }
-                gl . PopMatrix ( );
-                }
             if ( DoDrawSpreadsheetGrid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
                 gl . PushMatrix ( );
@@ -521,8 +484,205 @@ namespace DMT01
                 gl . PopMatrix ( );
                 }
 
-            }
+            if ( DoDrawAllSpreadsheetData_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                gl . LineWidth ( 1 );
 
+                int maxRow;
+                int maxCol;
+                GetActualizedRange ( CW , out maxRow , out maxCol );
+
+                float x1 = 0;
+                float x0 = 0;
+                for ( int i = 0 ; i < maxCol ; i++ )
+                    {
+                    int w = CW . GetColumnWidth ( i );
+                    float width_factor = ( float ) w / ( float ) normal_col_width;
+                    x0 = x1;
+                    x1 = x1 + width_factor;
+
+                    float y0 = 0;
+                    float y1 = 0;
+
+                    for ( int j = 0 ; j < maxRow ; j++ )
+                        {
+                        int r = CW . GetRowHeight ( j );
+                        float height_factor = ( float ) r / ( float ) normal_row_height;
+
+                        y0 = y1;
+                        y1 = y1 - height_factor;
+
+                        gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                        gl . Vertex ( x0 , y0 );
+                        gl . Vertex ( x0 , y1 );
+                        gl . Vertex ( x1 , y1 );
+                        gl . Vertex ( x1 , y0 );
+                        gl . End ( );
+
+
+                        var D = CW . Cells [ j , i ];
+                        if ( D . DataFormat == unvell . ReoGrid . DataFormat . CellDataFormatFlag . Text )
+                            {
+                            String Text = D . DisplayText;
+
+                            gl . PushMatrix ( );
+
+                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                            int len = Text . Length;
+                            if ( len < 10 )
+                                {
+                                gl . Translate ( x: x0 , y: c [ 1 ] - .25 , z: c [ 2 ] );
+                                gl . Scale ( 0.5 , 0.7 , 1.0 );
+                                }
+                            else
+                                {
+                                gl . Translate ( x: x0 , y: c [ 1 ] - .25 , z: c [ 2 ] );
+                                var big_x_scaling = 5.0f / ( float ) len;
+                                gl . Scale ( big_x_scaling , 0.7 , 1.0 );
+                                }
+                            gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: Text );
+                            gl . PopMatrix ( );
+
+                            }
+                        else
+                        if ( D . DataFormat == unvell . ReoGrid . DataFormat . CellDataFormatFlag . Number )
+                            {
+                            object Nuber = D . Data;
+                            float number;
+                            if ( float . TryParse ( s: D . DisplayText , result: out number ) )
+                                {
+                                }
+                            else
+                                {
+                                }
+                            gl . PushMatrix ( );
+
+                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+
+                            gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] );
+                            var big_x_scaling = 2.0f / ( float ) 10;
+                            gl . Scale ( big_x_scaling , 0.7 , 1.0 );
+
+                            gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: number . ToString ( "0,000,000.0" ) );
+                            gl . PopMatrix ( );
+                            }
+                        else
+                        if ( D . DataFormat == CellDataFormatFlag . Percent )
+                            {
+                            object Nuber = D . Data;
+                            float number;
+                            if ( float . TryParse ( s: D . DisplayText , result: out number ) )
+                                {
+                                }
+                            else
+                                {
+                                }
+                            gl . PushMatrix ( );
+
+                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+
+                            gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] );
+                            var big_x_scaling = 2.0f / ( float ) 10;
+                            gl . Scale ( big_x_scaling , 0.7 , 1.0 );
+
+                            gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: number . ToString ( "00.0" ) );
+                            gl . PopMatrix ( );
+                            }
+                        else
+                        if ( D . DataFormat == CellDataFormatFlag . Currency )
+                            {
+                            object Nuber = D . Data;
+                            float number;
+                            if ( float . TryParse ( s: D . DisplayText , result: out number , style: System . Globalization . NumberStyles . Currency ,provider: new CultureInfo ( "en-US" ) ) )
+                                {
+                                }
+                            else
+                                {
+                                }
+                            gl . PushMatrix ( );
+
+                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+
+                            gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] );
+                            var big_x_scaling = 2.0f / ( float ) 10;
+                            gl . Scale ( big_x_scaling , 0.7 , 1.0 );
+
+                            gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: number . ToString ( "00.0" ) );
+                            gl . PopMatrix ( );
+                            }
+                        else
+                            {
+                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                            gl . PointSize ( 5 );
+                            gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+                            gl . Vertex (c );
+                            gl . End ( );
+
+
+                            }
+                        }
+                    }
+                }
+            }
+        private void GetActualizedRange ( unvell . ReoGrid . Worksheet CW, out int maxRow, out int maxCol )
+            {
+            unvell . ReoGrid . RangePosition ColumnCaptionRange = new unvell . ReoGrid . RangePosition ( row: 0 , col: 0 , rows: 1 , cols: CW . ColumnCount );
+            int maxCaptionCol = -1;
+            CW . IterateCells ( range: ColumnCaptionRange , iterator: ( row,col,cell) =>
+                 {
+                     if ( cell . DataFormat == CellDataFormatFlag . Text )
+                         {
+                         string text = cell . GetData<String> ( );
+                         maxCaptionCol = col;
+                         return true;
+                         }
+                     return false;
+                 } 
+             );
+
+            maxCol = maxCaptionCol;
+
+            unvell . ReoGrid . RangePosition RowCaptionRange = new unvell . ReoGrid . RangePosition ( row: 0 , col: 0 , rows: CW.RowCount , cols:1 );
+            int maxCaptionrow = -1;
+            CW . IterateCells ( range: RowCaptionRange , iterator: ( row , col , cell ) =>
+                {
+                    if ( cell . DataFormat == CellDataFormatFlag . Text )
+                        {
+                        string text = cell . GetData<String> ( );
+                        maxCaptionrow = row;
+                        return true;
+                        }
+                    return false;
+                }
+            );
+
+            maxRow = maxCaptionrow;
+
+            return;
+
+#pragma warning disable CS0162 // Unreachable code detected
+            unvell . ReoGrid . RangePosition range = new unvell . ReoGrid . RangePosition (row: 0 , col: 0 , rows:CW.RowCount, cols: CW.ColumnCount );
+
+            maxRow = -1;
+            maxCol = -1;
+            int mRow = maxRow;
+            int mCol = maxCol;
+
+            CW . IterateCells (
+                range: range , iterator: ( row , col , cell ) =>
+                    {
+                        if ( cell . Row > mRow )
+                            mRow = cell . Row;
+                        if ( cell . Column > mCol )
+                            mCol = cell . Column;
+                        // return true to continue iterate, return false to abort
+                        return true;
+                    } 
+                );
+            maxRow = mRow;
+            maxCol = mCol;
+#pragma warning restore CS0162 // Unreachable code detected
+            }
         private float [ ] GetCentroid ( float x0 , float y0 , float x1 , float y1 )
             {
             float z = 0.0f;
