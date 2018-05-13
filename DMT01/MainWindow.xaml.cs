@@ -1861,6 +1861,23 @@ namespace DMT01
         private void InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control_Checked ( object sender , RoutedEventArgs e )
             {
 
+            unvell . ReoGrid . Worksheet Scratcheroo = myReoGridControl . Worksheets [ "scratcheroo" ];
+            if ( Scratcheroo == null )
+                {
+                Scratcheroo = myReoGridControl . NewWorksheet ( name: "scratcheroo" );
+                }
+
+            myReoGridControl . CurrentWorksheet = Scratcheroo;
+            int R, C;
+            GetActualizedRange ( CW: Scratcheroo , maxRow: out R , maxCol: out C );
+            for ( int j = 0 ; j <= R ; j++ )
+                {
+                Scratcheroo . SetCellData ( row: j , col: 0 , data: "XX" );
+                }
+            for ( int i = 0 ; i <= C ; i++ )
+                {
+                Scratcheroo . SetCellData ( row: 0 , col: i , data: "XX" );
+                }
             }
         }
     }
