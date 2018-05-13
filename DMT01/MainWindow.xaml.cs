@@ -1858,5 +1858,9 @@ namespace DMT01
                 }
             }
 
+        private void InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control_Checked ( object sender , RoutedEventArgs e )
+            {
+
+            }
         }
     }

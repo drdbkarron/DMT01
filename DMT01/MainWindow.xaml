@@ -490,13 +490,13 @@
                                 Background="#FFE8CECE"
                                 BorderBrush="#FFDE2F2F"
                                 BorderThickness="5,1,1,1"
-                                Content="CheckBox" />
+                                Content="Select Data to Normalize" />
                             <CheckBox
                                 x:Name="DoDrawGreyScale_CheckBox_Control"
                                 Background="#FFE8CECE"
                                 BorderBrush="#FFDE2F2F"
                                 BorderThickness="5,1,1,1"
-                                Content="DoGreyScale_CheckBox_Control" />
+                                Content="DoGreyScale" Width="137" />
                         </StackPanel>
                         <Button
                             x:Name="SelectDataRangeForNormalization"
@@ -506,7 +506,7 @@
                             VerticalAlignment="Top"
                             Click="SelectDataRangeForNormalization_Click"
                             Content="Select Data" />
-                        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="585,16,0,0" VerticalAlignment="Top"/>
+                        <CheckBox x:Name="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control" Content="Hand Pivot Mode" HorizontalAlignment="Left" Margin="553,22,0,0" VerticalAlignment="Top" Checked="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control_Checked"/>
                     </Grid>
                 </TabItem>
                 <TabItem
