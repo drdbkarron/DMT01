@@ -506,6 +506,7 @@
                             VerticalAlignment="Top"
                             Click="SelectDataRangeForNormalization_Click"
                             Content="Select Data" />
+                        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="585,16,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
                 <TabItem
@@ -1453,6 +1454,7 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
+                <CheckBox Content="CheckBox" Height="100" Width="100"/>
             </TabControl>
         </StackPanel>
     </StackPanel>

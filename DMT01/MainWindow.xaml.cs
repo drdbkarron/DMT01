@@ -488,8 +488,17 @@ namespace DMT01
 
             if ( DoDrawAllSpreadsheetData_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
-                gl . LineWidth ( 1 );
+                gl . PushMatrix ( );
+                gl . PushAttrib (   SharpGL . OpenGL . GL_CURRENT_BIT | 
+                                    SharpGL . OpenGL . GL_ENABLE_BIT | 
+                                    SharpGL . OpenGL . GL_LINE_BIT | 
+                                    SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
 
+                //gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
+                //gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
+
+                gl . LineWidth ( 1 );
+                gl . Scale ( x: .25 , y: 1 , z: 1 );
                 int maxRow;
                 int maxCol;
                 GetActualizedRange ( CW , out maxRow , out maxCol );
@@ -513,15 +522,7 @@ namespace DMT01
 
                         y0 = y1;
                         y1 = y1 - height_factor;
-
-                        gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
-                        gl . Vertex ( x0 , y0 );
-                        gl . Vertex ( x0 , y1 );
-                        gl . Vertex ( x1 , y1 );
-                        gl . Vertex ( x1 , y0 );
-                        gl . End ( );
-
-
+ 
                         var D = CW . Cells [ j , i ];
                         if ( D . DataFormat == unvell . ReoGrid . DataFormat . CellDataFormatFlag . Text )
                             {
@@ -549,24 +550,44 @@ namespace DMT01
                         else
                         if ( D . DataFormat == unvell . ReoGrid . DataFormat . CellDataFormatFlag . Number )
                             {
-                            object Nuber = D . Data;
+                            object CellData = D . Data;
                             float number;
                             if ( float . TryParse ( s: D . DisplayText , result: out number ) )
                                 {
                                 }
                             else
                                 {
+                                Debug . WriteLine ( String . Format ( "TryParse failed on {0}" , D . DisplayText ) );
+                                return;
                                 }
+                            gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
+                            gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
+                            gl . Enable ( SharpGL . OpenGL . GL_ALPHA );
+                            gl . Enable ( SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
                             gl . PushMatrix ( );
+                            gl . Color ( red: number , green: number , blue: number , alpha: 0 );
+                            gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                            //gl . Begin ( SharpGL . Enumerations . BeginMode . Polygon );
+                            gl . Vertex ( x0 , y0 );
+                            gl . Vertex ( x0 , y1 );
+                            gl . Vertex ( x1 , y1 );
+                            gl . Vertex ( x1 , y0 );
+                            gl . End ( );
 
                             float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
 
-                            gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] );
+                            gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] -1.0 );
                             var big_x_scaling = 2.0f / ( float ) 10;
-                            gl . Scale ( big_x_scaling , 0.7 , 1.0 );
+                            gl . Scale ( x: 2 , y: 1 , z: 1 );
+                            gl . Scale ( x: big_x_scaling , y: 0.7 , z:1.0 );
+                            String Text = number . ToString ( "0.00" );
+                            gl . Color ( red: number , green: number , blue: number , alpha: 1 );
 
-                            gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: number . ToString ( "0,000,000.0" ) );
+                            gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 1.0f , extrusion: 0.9f , text: Text );
                             gl . PopMatrix ( );
+                            gl . Enable ( SharpGL . OpenGL . GL_LIGHTING );
+                            gl . Enable ( SharpGL . OpenGL . GL_TEXTURE_2D );
+
                             }
                         else
                         if ( D . DataFormat == CellDataFormatFlag . Percent )
@@ -624,6 +645,8 @@ namespace DMT01
                             }
                         }
                     }
+                gl . PopAttrib ( );
+                gl . PopMatrix ( );
                 }
             }
         private void GetActualizedRange ( unvell . ReoGrid . Worksheet CW , out int maxRow , out int maxCol )
@@ -635,6 +658,16 @@ namespace DMT01
                      if ( cell . DataFormat == CellDataFormatFlag . Text )
                          {
                          string text = cell . GetData<String> ( );
+                         if ( text == null )
+                             return false;
+                         maxCaptionCol = col;
+                         return true;
+                         }
+                     if ( cell . DataFormat == CellDataFormatFlag . General )
+                         {
+                         string text = cell . GetData<String> ( );
+                         if ( text == null )
+                             return false;
                          maxCaptionCol = col;
                          return true;
                          }
@@ -645,20 +678,30 @@ namespace DMT01
             maxCol = maxCaptionCol;
 
             unvell . ReoGrid . RangePosition RowCaptionRange = new unvell . ReoGrid . RangePosition ( row: 0 , col: 0 , rows: CW . RowCount , cols: 1 );
-            int maxCaptionrow = -1;
+            int maxCaptionRow = -1;
             CW . IterateCells ( range: RowCaptionRange , iterator: ( row , col , cell ) =>
                 {
                     if ( cell . DataFormat == CellDataFormatFlag . Text )
                         {
                         string text = cell . GetData<String> ( );
-                        maxCaptionrow = row;
+                        if ( text == null )
+                            return false;
+                        maxCaptionRow = row;
+                        return true;
+                        }
+                    if ( cell . DataFormat == CellDataFormatFlag . General )
+                        {
+                        string text = cell . GetData<String> ( );
+                        if ( text == null )
+                            return false;
+                        maxCaptionRow = row;
                         return true;
                         }
                     return false;
                 }
             );
 
-            maxRow = maxCaptionrow;
+            maxRow = maxCaptionRow;
 
             return;
 
@@ -1763,7 +1806,10 @@ namespace DMT01
 
         private void SelectDataRangeForNormalization_Click ( object sender , RoutedEventArgs e )
             {
+            myReoGridControl . CurrentWorksheet = myReoGridControl . Worksheets [ 0 ];
             var CW = myReoGridControl . CurrentWorksheet;
+            if ( CW . Name == "Scratcheroo" )
+                return;
             int R, C;
             GetActualizedRange ( CW: CW , maxRow: out R , maxCol: out C );
             unvell . ReoGrid . RangePosition DataRange = new unvell . ReoGrid . RangePosition ( row: 1 , col: 1 , rows: R , cols: C );
@@ -1772,20 +1818,44 @@ namespace DMT01
                 {
                 Scratcheroo = myReoGridControl . NewWorksheet ( name: "scratcheroo" );
                 }
-            Scratcheroo . Resize ( rows: R + 10 , cols: C + 10 );
-            CW . SelectionRange = DataRange;
-            //for ( int i = DataRange . StartPos . Row ; i < DataRange . EndPos . Row ; i++ )
-            //    {
-            //    double Sigma = 0;
-            //    double n = 0;
-            //    for ( int j = DataRange . StartPos . Col ; j < DataRange . EndPos . Col ; j++ )
-            //        {
-            //        Sigma += CW . GetCellData<double> ( i , j );
-            //        n++;
-            //        }
-            //    double Norm=n/ Sigma;
-            //    Scratcheroo . SetCellData ( row: DataRange . EndPos . Row + 2 , col: i , data: Norm );
-            //    }
+            
+            myReoGridControl . CurrentWorksheet = Scratcheroo;
+            for ( int j = 0 ; j <= R ; j++ )
+                {
+                Scratcheroo . SetCellData ( row: j , col: 0,data:"XX" );
+                }
+            for ( int i = 0 ; i <= C ; i++ )
+                {
+                Scratcheroo . SetCellData ( row: 0 , col: i , data: "XX" );
+                }
+
+            Scratcheroo . SelectionRange = DataRange;
+
+            for ( int j = DataRange . StartPos . Col ; j <= DataRange . EndPos . Col ; j++ )
+                {
+                double Sigma = 0;
+                double n = 0;
+                for ( int i = DataRange . StartPos . Row ; i <= DataRange . EndPos . Row ; i++ )
+                    {
+                    Sigma += CW . GetCellData<double> ( row: i , col: j );
+                    n++;
+                    }
+                double Norm = n / Sigma;
+                Scratcheroo . SetRangeDataFormat ( range: DataRange , format: CellDataFormatFlag . Number ,
+                    dataFormatArgs: new NumberDataFormatter . NumberFormatArgs ( )
+                        {
+                        DecimalPlaces = 3 ,
+                        UseSeparator = true ,
+                        } );
+                Scratcheroo . SetCellData ( row: DataRange . EndPos . Row+1  , col: j+1 , data: Norm );
+                for ( int i = DataRange . StartPos . Row ; i <= DataRange . EndPos . Row ; i++ )
+                    {
+                    var Val= CW . GetCellData<double> ( row: i , col: j );
+                    double Normalized = Val * Norm;
+
+                    Scratcheroo . SetCellData ( row: i , col: j , data: Normalized );
+                    }
+                }
             }
 
         }
