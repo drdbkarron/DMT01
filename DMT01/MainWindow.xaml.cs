@@ -24,6 +24,12 @@ using System . IO;
 using System . Xml . Serialization;
 using unvell . ReoGrid . DataFormat;
 using System . Globalization;
+using unvell . ReoGrid . CellTypes;
+using unvell . ReoGrid;
+using unvell . ReoGrid . Actions;
+using unvell . ReoGrid . Rendering;
+using unvell . ReoGrid . Graphics;
+using System . Drawing;
 
 namespace System . Windows . Controls
     {
@@ -35,7 +41,41 @@ namespace System . Windows . Controls
             }
         }
     }
+class MyCheckBox : CheckBoxCell
+    {
+    System.Drawing.Image checkedImage, uncheckedImage;
+    BitmapSource bitmapSource = null;
 
+    public MyCheckBox ( )
+        {
+        checkedImage = System . Drawing . Image . FromFile ( @"down-arrow.png" );
+        uncheckedImage = System . Drawing . Image . FromFile ( @"up-arrow.png" );
+        Stream imageStreamSource = new FileStream ( "up-arrow.png" , FileMode . Open , FileAccess . Read , FileShare . Read );
+        PngBitmapDecoder decoder = new PngBitmapDecoder ( imageStreamSource , BitmapCreateOptions . PreservePixelFormat , BitmapCacheOption . Default );
+        this.bitmapSource = decoder . Frames [ 0 ];
+
+        }
+
+    protected override void OnContentPaint ( CellDrawingContext dc )
+        {
+
+       
+        dc . Graphics . DrawImage ( this.bitmapSource , this . ContentBounds );
+        if ( this . IsChecked )
+            {
+            Debug . WriteLine ( String . Format ( "{0}" , nameof(OnContentPaint) ) );
+
+            //dc . Graphics . DrawImage ( checkedImage , this . ContentBounds );
+            }
+        else
+            {
+
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( OnContentPaint ) ) );
+            //ImageSource xx = ( ImageSource ) null;
+            //dc . Graphics . DrawImage ( xx , this . ContentBounds );
+            }
+        }
+    }
 namespace DMT01
     {
     public partial class MainWindow : Window
@@ -649,6 +689,7 @@ namespace DMT01
                 gl . PopMatrix ( );
                 }
             }
+
         private void GetActualizedRange ( unvell . ReoGrid . Worksheet CW , out int maxRow , out int maxCol )
             {
             unvell . ReoGrid . RangePosition ColumnCaptionRange = new unvell . ReoGrid . RangePosition ( row: 0 , col: 0 , rows: 1 , cols: CW . ColumnCount );
@@ -728,6 +769,7 @@ namespace DMT01
             maxCol = mCol;
 #pragma warning restore CS0162 // Unreachable code detected
             }
+
         private float [ ] GetCentroid ( float x0 , float y0 , float x1 , float y1 )
             {
             float z = 0.0f;
@@ -1872,12 +1914,44 @@ namespace DMT01
             GetActualizedRange ( CW: Scratcheroo , maxRow: out R , maxCol: out C );
             for ( int j = 0 ; j <= R ; j++ )
                 {
-                Scratcheroo . SetCellData ( row: j , col: 0 , data: "XX" );
+                //var CBC = new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
+                var CBC = new MyCheckBox ( );
+                CBC .  Click += this . CBC_Click;
+                Scratcheroo . SetCellData ( row: j , col: 0 , data: CBC );
+
                 }
             for ( int i = 0 ; i <= C ; i++ )
                 {
-                Scratcheroo . SetCellData ( row: 0 , col: i , data: "XX" );
+                var CBC=new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
+                CBC . Click += this . CBC_Click;
+                CBC . CheckChanged += this . CBC_CheckChanged;
+
                 }
+            }
+
+        private void CBC_CheckChanged ( object sender , EventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0}" , nameof(CBC_CheckChanged) ) );
+
+            }
+
+        private void CBC_Click ( object sender , EventArgs e )
+            {
+            CheckBoxCell CBC = sender as CheckBoxCell;
+            int R = CBC . Cell . Row;
+            Worksheet Snatcheroo = CBC . Cell . Worksheet;
+            int r = -1;
+            int colMax = -1;
+            GetActualizedRange ( CW: Snatcheroo , maxRow: out r , maxCol: out colMax );
+            RangePosition RR = new RangePosition ( row: R ,col: 1, rows: 1 , cols: colMax );
+            Snatcheroo . InsertRows ( row: R , count: 1 );
+            CellPosition cP = new CellPosition ( row: R , col: 0 );
+            var action0 = new unvell . ReoGrid . Actions . CopyRangeAction ( fromRange: RR , toPosition: cP );
+            
+            myReoGridControl. DoAction ( action0 );
+            var action1 = new unvell . ReoGrid . Actions . RemoveRowsAction ( row: R , rows: 1 );
+            myReoGridControl . DoAction ( action1 ); 
             }
         }
     }

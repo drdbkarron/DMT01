@@ -118,6 +118,11 @@
     <Compile Include="H_Slider_UserControl1.xaml.cs">
       <DependentUpon>H_Slider_UserControl1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -149,11 +154,6 @@
     <Compile Include="MySimpleMath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -191,6 +191,62 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\arrow-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\down-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\up-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_arrow.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\arrow-down-on-black-circular-background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Debug\AnnotateAxisXYZ_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\AnnotateOrigin_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\AnnotateTickMarks_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\AnnotateXTickMarks_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\AnnotateYTickMarks_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\AnnotateZTickMarks_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\AxisDrawMe_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Axis_DrawNegativeCheckBox.xml" />
+    <Resource Include="bin\Debug\Axis_DrawNegativeCheckBoxControl.xml" />
+    <Resource Include="bin\Debug\Axis_Length_XYZ_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Linewidth_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Property1_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Property2_H_Slider_UserControl1.xml" />
+    <Resource Include="bin\Debug\Axis_Property3_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_TickSize_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Ticks_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\DMT_Main_Window_Control.xml" />
+    <Resource Include="bin\Debug\DoDoTickMarks_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\DoDrawAllSpreadsheetData_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawGreyScale_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetFocusCell_s_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetGrid_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetSelectedCell_s_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetSideBorder_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetTextObjects_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetTopBorder_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\DoSelectDataToNormalize_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Do_Orbit_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Do_Orbit_Pull_Back_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DrawTeaPot_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Eye_X_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Eye_Y_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Eye_Z_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Bottom_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Left_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Right_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Top_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_zFar_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_zNear_H_Slider_UserControl.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
