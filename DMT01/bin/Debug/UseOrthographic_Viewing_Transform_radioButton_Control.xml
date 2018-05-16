@@ -1,0 +1,10 @@
+﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>CheckBox</ControlClass>
+    <ControlName>UseOrthographic_Viewing_Transform_radioButton_Control</ControlName>
+    <SaveStateFileName>UseOrthographic_Viewing_Transform_radioButton_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxName>UseOrthographic_Viewing_Transform_radioButton_Control</CheckBoxName>
+</CheckBoxControlSaveState>

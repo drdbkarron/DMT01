@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<H_Slider_UserControl1_SaveState_Class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>H_Slider_UserControl1</ControlClass>
+    <ControlName>Frustum_Right_H_Slider_UserControl</ControlName>
+    <SaveStateFileName>Frustum_Right_H_Slider_UserControl.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <MaxValue>20</MaxValue>
+  <MinValue>-20</MinValue>
+  <ResetValue>10</ResetValue>
+</H_Slider_UserControl1_SaveState_Class>

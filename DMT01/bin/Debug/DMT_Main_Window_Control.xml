@@ -1,0 +1,10 @@
+﻿<DMT_Main_Window_Control_SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>Window</ControlClass>
+    <ControlName>DMT_Main_Window_Control</ControlName>
+    <SaveStateFileName>DMT_Main_Window_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <Left>-1372</Left>
+  <Top>20</Top>
+</DMT_Main_Window_Control_SaveState>

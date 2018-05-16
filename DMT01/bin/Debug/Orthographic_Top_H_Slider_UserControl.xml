@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<H_Slider_UserControl1_SaveState_Class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>H_Slider_UserControl1</ControlClass>
+    <ControlName>Orthographic_Top_H_Slider_UserControl</ControlName>
+    <SaveStateFileName>Orthographic_Top_H_Slider_UserControl.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <MaxValue>5</MaxValue>
+  <MinValue>0</MinValue>
+  <ResetValue>0</ResetValue>
+</H_Slider_UserControl1_SaveState_Class>

@@ -1,0 +1,11 @@
+﻿<RadioCheckBoxSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>RadioButton</ControlClass>
+    <ControlName>LookAt_Y_Up_RadioButton_Control</ControlName>
+    <SaveStateFileName>LookAt_Y_Up_RadioButton_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <RadioCheckBoxState>true</RadioCheckBoxState>
+  <RadioCheckBoxName>LookAt_Y_Up_RadioButton_Control</RadioCheckBoxName>
+  <RadioGroupName>LookAtUp_RadioButton_Group</RadioGroupName>
+</RadioCheckBoxSaveState>

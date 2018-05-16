@@ -1,0 +1,10 @@
+﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>CheckBox</ControlClass>
+    <ControlName>DoDoTickMarks_CheckBoxControl</ControlName>
+    <SaveStateFileName>DoDoTickMarks_CheckBoxControl.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxName>DoDoTickMarks_CheckBoxControl</CheckBoxName>
+</CheckBoxControlSaveState>

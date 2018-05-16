@@ -1,0 +1,10 @@
+﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>CheckBox</ControlClass>
+    <ControlName>UsePerspetiveViewingTransform_RadioButton_Control</ControlName>
+    <SaveStateFileName>UsePerspetiveViewingTransform_RadioButton_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <CheckBoxState>false</CheckBoxState>
+  <CheckBoxName>UsePerspetiveViewingTransform_RadioButton_Control</CheckBoxName>
+</CheckBoxControlSaveState>
