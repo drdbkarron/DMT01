@@ -12,14 +12,16 @@
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     Background="#FFCD98BC"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    >
     <Grid
         x:Name="H_Slider_UserControl_Grid"
         Width="826"
         Height="64"
         Margin="1"
         HorizontalAlignment="Center"
-        Background="#FF2D3A39">
+        Background="#FF2D3A39"
+        >
         <DockPanel
             x:Name="H_Slider_UserControl_DockPanel"
             Width="825"
@@ -28,7 +30,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Background="#FFF78513"
-            LastChildFill="False">
+            LastChildFill="False"
+            >
             <Slider
                 x:Name="theH_Slider"
                 Width="824"
@@ -48,7 +51,8 @@
                 SmallChange="1"
                 TickFrequency="10"
                 TickPlacement="BottomRight"
-                Value="0" />
+                Value="0"
+                />
         </DockPanel>
         <TextBox
             x:Name="Slider_Value_TextBox"
@@ -58,7 +62,8 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Text="{Binding ElementName=theH_Slider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap"
+            />
         <Label
             x:Name="HSliderControlClusterMain_Label"
             Width="156"
@@ -69,11 +74,12 @@
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             BorderBrush="#FF306456"
-            Content="Describe Slider Here" >
+            Content="Describe Slider Here"
+            >
             <Label.Background>
                 <RadialGradientBrush>
-                    <GradientStop Color="#FF84877C" Offset="1"/>
-                    <GradientStop Color="#FF56E69E"/>
+                    <GradientStop Offset="1" Color="#FF84877C" />
+                    <GradientStop Color="#FF56E69E" />
                 </RadialGradientBrush>
             </Label.Background>
         </Label>
@@ -89,7 +95,8 @@
             Background="#FF608EDE"
             MouseWheel="Slider_Low_TextBox_MouseWheel"
             Text="{Binding Minimum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap"
+            />
         <TextBox
             x:Name="Slider_Hi_TextBox"
             Width="39"
@@ -100,7 +107,8 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             Background="#FFC90C0C"
-            Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+            Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+            />
         <Button
             x:Name="ResetsliderValue_Button"
             Width="75"
@@ -109,11 +117,12 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="ResetValue_Click"
-            Content="Reset" >
+            Content="Reset"
+            >
             <Button.Background>
                 <RadialGradientBrush>
-                    <GradientStop Color="#FF423636" Offset="1"/>
-                    <GradientStop Color="White"/>
+                    <GradientStop Offset="1" Color="#FF423636" />
+                    <GradientStop Color="White" />
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
@@ -124,7 +133,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Save0_Button_Click"
-            Content="Save 0">
+            Content="Save 0"
+            >
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Offset="0" Color="Black" />
@@ -133,8 +143,24 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="Plus_Spread_Min_Max_Button" Content="+++" HorizontalAlignment="Left" Margin="738,2,0,0" VerticalAlignment="Top" Width="29" Click="Plus_Spread_Min_Max_Button_Click" />
-        <Button x:Name="Minus_Spread_Min_Max_Button" Content="---" HorizontalAlignment="Left" Margin="54,2,0,0" VerticalAlignment="Top" Width="27" Click="Minus_Spread_Min_Max_Button_Click" />
+        <Button
+            x:Name="Plus_Spread_Min_Max_Button"
+            Width="29"
+            Margin="738,2,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Plus_Spread_Min_Max_Button_Click"
+            Content="+++"
+            />
+        <Button
+            x:Name="Minus_Spread_Min_Max_Button"
+            Width="27"
+            Margin="54,2,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Minus_Spread_Min_Max_Button_Click"
+            Content="---"
+            />
 
     </Grid>
 </UserControl>

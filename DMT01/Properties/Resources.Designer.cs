@@ -63,26 +63,6 @@ namespace DMT01.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap arrow_down_on_black_circular_background {
-            get {
-                object obj = ResourceManager.GetObject("arrow_down_on_black_circular_background", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap arrow_up {
-            get {
-                object obj = ResourceManager.GetObject("arrow_up", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap down_arrow {
             get {
                 object obj = ResourceManager.GetObject("down_arrow", resourceCulture);
@@ -103,9 +83,9 @@ namespace DMT01.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap up_arrow {
+        public static System.Drawing.Bitmap UpArrowBMP {
             get {
-                object obj = ResourceManager.GetObject("up_arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("UpArrowBMP", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

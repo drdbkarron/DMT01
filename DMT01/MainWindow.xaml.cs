@@ -1953,5 +1953,77 @@ namespace DMT01
             var action1 = new unvell . ReoGrid . Actions . RemoveRowsAction ( row: R , rows: 1 );
             myReoGridControl . DoAction ( action1 ); 
             }
+
+        private void Do_Iterate_Resoures_Button_Click ( object sender , RoutedEventArgs e )
+            {
+            Debug . WriteLine ( String.Format("{0}: Manifest resources", nameof( Do_Iterate_Resoures_Button_Click)) );
+
+            System . Reflection . Assembly assembly = System . Reflection . Assembly . GetExecutingAssembly ( );
+            string [ ] names = assembly . GetManifestResourceNames ( );
+
+            foreach ( string name in names )
+                {
+
+                //Debug . WriteLine ( String . Format ( "Resource: {0}" , name ) );
+
+                //using ( Stream stream = assembly . GetManifestResourceStream ( name ) )
+                //    {
+                //    Debug . WriteLine ( "\n\t<<{0}>>\n" ,GetHead ( stream ) );
+
+                    PrintResourceFile ( name );
+                 //   }
+                }
+            }
+
+        private static void PrintResourceFile ( string name )
+            {
+            Debug . WriteLine ( "Items in " + name + ":" );
+
+            System . Resources . ResourceManager rm = new System . Resources . ResourceManager ( baseName: name , assembly: System . Reflection . Assembly . GetExecutingAssembly ( ) );
+            System . Resources . ResourceSet rset = null;
+
+            try
+                {
+                rset = rm . GetResourceSet ( culture: CultureInfo . CurrentUICulture , createIfNotExists: true , tryParents: true );
+                }
+            catch ( Exception e )
+                {
+
+                Debug . WriteLine ( String . Format ( "{0}" , e ) );
+
+                }
+            if ( rset == null )
+                return;
+            foreach ( System . Collections . DictionaryEntry entry in rset )
+                {
+                Debug . WriteLine ( "\t{0}: {1}" , entry . Key , GetStringForValue ( entry . Value ) );
+                }
+            }
+
+        private static string GetStringForValue ( object value )
+            {
+            if ( value == null )
+                return "null";
+            if ( value is Stream )
+                return "Stream: " + GetHead ( ( Stream ) value );
+            return value . ToString ( );
+            }
+
+        private static string GetHead ( Stream stream )
+            {
+            using ( var reader = new StreamReader ( stream ) )
+                {
+                var buffer = new char [ 40 ];
+                int nChars = reader . Read ( buffer , 0 , buffer . Length );
+                string text = new String ( buffer , 0 , nChars );
+
+                if ( !reader . EndOfStream )
+                    text += "...";
+                return text;
+                }
+
+            }
+
         }
     }
+ 
