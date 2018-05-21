@@ -206,7 +206,7 @@
     <None Include="bin\Debug\up-arrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\down_arrow.bmp" />
+    <EmbeddedResource Include="Resources\down_arrowBMP.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\arrow-down-on-black-circular-background.png" />
@@ -253,7 +253,28 @@
     <Resource Include="bin\Debug\Frustum_zNear_H_Slider_UserControl.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\UpArrowBMP.bmp" />
+    <EmbeddedResource Include="Resources\UpArrowBMP.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Debug\LaunchSavedStateOnInitalization_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\LoadSpreadsheetAtInitalization_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\LookAtTarget_X_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_Eye_X_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_Eye_Y_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_Eye_Z_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_X_Up_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\LookAt_Y_Up_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\LookAt_Z_Up_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\Orthographic_Far_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAtTarget_Y_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAtTarget_Z_H_Slider_UserControl.xml" />
+    <Content Include="bin\Debug\Microsoft.Data.Entity.Design.Extensibility.dll" />
+    <Content Include="bin\Debug\Microsoft.Windows.Design.Extensibility.dll" />
+    <Resource Include="bin\Debug\Orbit_Delta_Angle_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orbit_Delta_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orbit_Radius_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orbit_Rotation_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Bottom_H_Slider_UserControl.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

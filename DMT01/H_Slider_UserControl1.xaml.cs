@@ -209,12 +209,12 @@ namespace DMT01
     public static void Seralize_H__Slider_UserControl1_SaveState ( string ControlName , String StateFileName , H_Slider_UserControl1 ttyy )
         {
         var p =new H_Slider_UserControl1_SaveState_Class ();
-            p . SeralizeControlCommonFields . ControlClass = nameof ( H_Slider_UserControl1 );
-            p . SeralizeControlCommonFields . ControlName = ControlName;
-            p . SeralizeControlCommonFields . SaveStateFileName = StateFileName;
-            p . ResetValue = ttyy. SliderValue;
-            p . MaxValue = ( float ) ttyy . SliderMaxValue;
-            p . MinValue = ( float ) ttyy. SliderMinValue;
+        p . SeralizeControlCommonFields . ControlClass = nameof ( H_Slider_UserControl1 );
+        p . SeralizeControlCommonFields . ControlName = ControlName;
+        p . SeralizeControlCommonFields . SaveStateFileName = StateFileName;
+        p . ResetValue = ttyy. SliderValue;
+        p . MaxValue = ( float ) ttyy . SliderMaxValue;
+        p . MinValue = ( float ) ttyy. SliderMinValue;
 
             XmlSerializer x = new XmlSerializer ( p.GetType());
 
@@ -231,83 +231,89 @@ namespace DMT01
     public static H_Slider_UserControl1_SaveState_Class Deseralize_H_Slider_UserControl1 (H_Slider_UserControl1 HC )
             {
             String F = String . Format ( "{0}.xml" , HC . Name );
+            if ( !System . IO . File . Exists ( F ) )
+                return null;
+
             return Deseralize_H_Slider_UserControl1 ( F , HC );
             }
 
-        public static H_Slider_UserControl1_SaveState_Class Deseralize_H_Slider_UserControl1 ( String F , H_Slider_UserControl1 HC )
+    public static H_Slider_UserControl1_SaveState_Class Deseralize_H_Slider_UserControl1 ( String F , H_Slider_UserControl1 HC )
+        {
+        Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( Deseralize_H_Slider_UserControl1 ) , F ) );
+
+        if ( !System . IO . File . Exists ( F ) )
+            return null;
+
+        String XmlFileContents = System . IO . File . ReadAllText ( F );
+
+        StringReader XmlStringReader = new StringReader ( XmlFileContents );
+
+        XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
             {
-            //Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( Load_Each ) , F ) );
+            IgnoreComments = true ,
+            IgnoreProcessingInstructions = true ,
+            IgnoreWhitespace = true
+            };
 
-            String XmlFileContents = System . IO . File . ReadAllText ( F );
-
-            StringReader XmlStringReader = new StringReader ( XmlFileContents );
-
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
+        XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
+        while ( !xmlReader . EOF )
+            {
+            switch ( xmlReader . NodeType )
                 {
-                IgnoreComments = true ,
-                IgnoreProcessingInstructions = true ,
-                IgnoreWhitespace = true
-                };
+                case XmlNodeType . Attribute:
+                case XmlNodeType . CDATA:
+                case XmlNodeType . Comment:
+                case XmlNodeType . Document:
+                case XmlNodeType . DocumentFragment:
+                case XmlNodeType . DocumentType:
 
-            XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
-            while ( !xmlReader . EOF )
-                {
-                switch ( xmlReader . NodeType )
-                    {
-                    case XmlNodeType . Attribute:
-                    case XmlNodeType . CDATA:
-                    case XmlNodeType . Comment:
-                    case XmlNodeType . Document:
-                    case XmlNodeType . DocumentFragment:
-                    case XmlNodeType . DocumentType:
+                case XmlNodeType . Element:
 
-                    case XmlNodeType . Element:
+                H_Slider_UserControl1_SaveState_Class pp = new H_Slider_UserControl1_SaveState_Class ( );
+                XmlSerializer x = new XmlSerializer ( pp . GetType ( ) );
 
-                    H_Slider_UserControl1_SaveState_Class pp = new H_Slider_UserControl1_SaveState_Class ( );
-                    XmlSerializer x = new XmlSerializer ( pp . GetType ( ) );
+                var o = x . Deserialize ( xmlReader );
+                pp = ( H_Slider_UserControl1_SaveState_Class ) o;
 
-                    var o = x . Deserialize ( xmlReader );
-                    pp = ( H_Slider_UserControl1_SaveState_Class ) o;
+                HC . SliderValue = pp . ResetValue;
+                HC . SliderMaxValue = pp . MaxValue;
+                HC . SliderMinValue = pp . MinValue;
+                    return pp;
 
-                    HC . SliderValue = pp . ResetValue;
-                    HC . SliderMaxValue = pp . MaxValue;
-                    HC . SliderMinValue = pp . MinValue;
-                        return pp;
+                case XmlNodeType . EndElement:
+                case XmlNodeType . EndEntity:
+                case XmlNodeType . Entity:
+                case XmlNodeType . EntityReference:
+                case XmlNodeType . None:
+                case XmlNodeType . Notation:
+                case XmlNodeType . ProcessingInstruction:
+                case XmlNodeType . SignificantWhitespace:
+                case XmlNodeType . Text:
+                case XmlNodeType . Whitespace:
+                case XmlNodeType . XmlDeclaration:
+                    break;
 
-                    case XmlNodeType . EndElement:
-                    case XmlNodeType . EndEntity:
-                    case XmlNodeType . Entity:
-                    case XmlNodeType . EntityReference:
-                    case XmlNodeType . None:
-                    case XmlNodeType . Notation:
-                    case XmlNodeType . ProcessingInstruction:
-                    case XmlNodeType . SignificantWhitespace:
-                    case XmlNodeType . Text:
-                    case XmlNodeType . Whitespace:
-                    case XmlNodeType . XmlDeclaration:
-                        break;
-
-                    default:
-                        break;
-                    }
-
-                Boolean State = xmlReader . Read ( );
+                default:
+                    break;
                 }
 
-        return null;
-        }
-
-        private void Minus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
-            {
-            theH_Slider . Minimum++;
-            theH_Slider . Maximum--;
-            if ( theH_Slider . Minimum >= theH_Slider . Maximum )
-                {
-                theH_Slider . Maximum = theH_Slider . Minimum + 5.0;
-                }
+            Boolean State = xmlReader . Read ( );
             }
 
-        private void Plus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
+    return null;
+    }
+
+    private void Minus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
+        {
+        theH_Slider . Minimum++;
+        theH_Slider . Maximum--;
+        if ( theH_Slider . Minimum >= theH_Slider . Maximum )
+            {
+            theH_Slider . Maximum = theH_Slider . Minimum + 5.0;
+            }
+        }
+
+    private void Plus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
             {
             theH_Slider . Maximum++;
             theH_Slider . Minimum--;

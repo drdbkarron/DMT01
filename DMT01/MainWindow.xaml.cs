@@ -30,6 +30,8 @@ using unvell . ReoGrid . Actions;
 using unvell . ReoGrid . Rendering;
 using unvell . ReoGrid . Graphics;
 using System . Drawing;
+using System . Resources;
+using System . Reflection;
 
 namespace System . Windows . Controls
     {
@@ -43,39 +45,62 @@ namespace System . Windows . Controls
     }
 class MyCheckBox : CheckBoxCell
     {
-    System.Drawing.Image checkedImage, uncheckedImage;
-    BitmapSource bitmapSource = null;
+    System . Windows . Media . Imaging . BitmapSource UpArrow = null;
+    System . Windows . Media . Imaging . BitmapSource DownArrow = null;
 
     public MyCheckBox ( )
         {
-        checkedImage = System . Drawing . Image . FromFile ( @"down-arrow.png" );
-        uncheckedImage = System . Drawing . Image . FromFile ( @"up-arrow.png" );
-        Stream imageStreamSource = new FileStream ( "up-arrow.png" , FileMode . Open , FileAccess . Read , FileShare . Read );
-        PngBitmapDecoder decoder = new PngBitmapDecoder ( imageStreamSource , BitmapCreateOptions . PreservePixelFormat , BitmapCacheOption . Default );
-        this.bitmapSource = decoder . Frames [ 0 ];
+        //checkedImage = System . Drawing . Image . FromFile ( @"down-arrow.png" );
+        //uncheckedImage = System . Drawing . Image . FromFile ( @"up-arrow.png" );
+        //Stream imageStreamSource = new FileStream ( "up-arrow.png" , FileMode . Open , FileAccess . Read , FileShare . Read );
+        //PngBitmapDecoder decoder = new PngBitmapDecoder ( imageStreamSource , BitmapCreateOptions . PreservePixelFormat , BitmapCacheOption . Default );
+        //this.bitmapSource = decoder . Frames [ 0 ];
+
+        //Assembly assembly = Assembly . GetExecutingAssembly ( );
+        //ResourceManager resource_manager = new ResourceManager ( baseName: "AppResources" ,assembly: assembly );
+        //UnmanagedMemoryStream UpArrowStream = resource_manager . GetStream ( "up_Arrow" );
+        //BitmapImage UparrowBitmapjImage =new BitmapImage ( );
+        //UparrowBitmapjImage . StreamSource = UpArrowStream;
+        System . Drawing . Bitmap ua = DMT01 . Properties . Resources . UpArrowBMP;
+        UpArrow = ConvertBitmap ( ua );
+        System . Drawing . Bitmap da = DMT01 . Properties . Resources . down_arrowBMP;
+        DownArrow = ConvertBitmap ( da );
+
 
         }
 
     protected override void OnContentPaint ( CellDrawingContext dc )
         {
 
-       
-        dc . Graphics . DrawImage ( this.bitmapSource , this . ContentBounds );
+
         if ( this . IsChecked )
             {
-            Debug . WriteLine ( String . Format ( "{0}" , nameof(OnContentPaint) ) );
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( OnContentPaint ) ) );
 
-            //dc . Graphics . DrawImage ( checkedImage , this . ContentBounds );
+            dc . Graphics . DrawImage ( image: UpArrow , rect: this . ContentBounds );
             }
         else
             {
 
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( OnContentPaint ) ) );
-            //ImageSource xx = ( ImageSource ) null;
-            //dc . Graphics . DrawImage ( xx , this . ContentBounds );
+
+            dc . Graphics . DrawImage ( image: DownArrow , rect: this . ContentBounds );
             }
         }
+
+
+public static BitmapSource ConvertBitmap ( Bitmap source )
+        {
+        BitmapSource xx = System . Windows . Interop . Imaging . CreateBitmapSourceFromHBitmap (
+                      source . GetHbitmap ( ) ,
+                      IntPtr . Zero ,
+                      Int32Rect . Empty ,
+                      BitmapSizeOptions . FromEmptyOptions ( ) );
+        return xx;
+        }
+
     }
+
 namespace DMT01
     {
     public partial class MainWindow : Window
@@ -84,6 +109,9 @@ namespace DMT01
 
         static long Draws = 0;
         static long Resizes = 0;
+        static DateTime StartDateTime;
+        static TimeSpan ElapsedDateTime;
+        static int CurrentWorksheetIndex;
 
         [Serializable ( )]
         public class SeralizeControlCommonFields
@@ -183,6 +211,11 @@ namespace DMT01
             if ( LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
                 spreadsheet_load_Button . PerformClick ( );
+                }
+            StartDateTime = DateTime . Now;
+            if ( Do_Execute_Select_Data_Button_on_Startup_CheckBox_Control .IsChecked.GetValueOrDefault())
+                {
+                DoSelectDataRangeForNormalization_Button . PerformClick ( );
                 }
             Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Loaded ) ) );
             }
@@ -314,7 +347,9 @@ namespace DMT01
                 gl . Translate ( 0.0 , 0.0 , Orbit_Radius_H_Slider_UserControl . SliderValue );
 
                 gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
+
                 Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+
                 if ( Orbit_Rotation_H_Slider_UserControl . SliderValue >= Orbit_Rotation_H_Slider_UserControl . SliderMaxValue )
                     {
                     Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
@@ -328,6 +363,7 @@ namespace DMT01
             if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
                 int Al = ( int ) ( ( Axis_Length_XYZ_H_Slider_UserControl . SliderValue ) + 0.5f );
+
                 int lw = ( int ) ( ( Axis_Linewidth_H_Slider_UserControl . SliderValue ) + 0.5f );
 
                 int ps = ( int ) ( ( Axis_TickSize_H_Slider_UserControl . SliderValue ) + 0.5f );
@@ -538,7 +574,11 @@ namespace DMT01
                 //gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
 
                 gl . LineWidth ( 1 );
-                gl . Scale ( x: .25 , y: 1 , z: 1 );
+                if( Spreadsheet_Aspect_Scale_Hack_checkBox_Control.IsChecked.GetValueOrDefault())
+                    {
+                    gl . Scale ( x: .25 , y: 1 , z: 1 );
+                    }
+
                 int maxRow;
                 int maxCol;
                 GetActualizedRange ( CW , out maxRow , out maxCol );
@@ -580,7 +620,7 @@ namespace DMT01
                             else
                                 {
                                 gl . Translate ( x: x0 , y: c [ 1 ] - .25 , z: c [ 2 ] );
-                                var big_x_scaling = 5.0f / ( float ) len;
+                                var big_x_scaling = 4.0f / ( float ) len;
                                 gl . Scale ( big_x_scaling , 0.7 , 1.0 );
                                 }
                             gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: Text );
@@ -606,8 +646,9 @@ namespace DMT01
                             gl . Enable ( SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
                             gl . PushMatrix ( );
                             gl . Color ( red: number , green: number , blue: number , alpha: 0 );
+
                             gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
-                            //gl . Begin ( SharpGL . Enumerations . BeginMode . Polygon );
+
                             gl . Vertex ( x0 , y0 );
                             gl . Vertex ( x0 , y1 );
                             gl . Vertex ( x1 , y1 );
@@ -616,14 +657,15 @@ namespace DMT01
 
                             float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
 
-                            gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] -1.0 );
-                            var big_x_scaling = 2.0f / ( float ) 10;
-                            gl . Scale ( x: 2 , y: 1 , z: 1 );
-                            gl . Scale ( x: big_x_scaling , y: 0.7 , z:1.0 );
-                            String Text = number . ToString ( "0.00" );
                             gl . Color ( red: number , green: number , blue: number , alpha: 1 );
+                            gl . Translate ( x: x0 + Spreadsheet3DNumericLeftMargin_H_Slider_User_Control.SliderValue , y: c [ 1 ] - .25 , z: c [ 2 ] -1.0 );
+                            String Text = number . ToString ( "#,###,##0.##" );
+                            float len = Text . Length;
+                            var big_x_scaling = Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control.SliderValue / len;
+                            gl . Scale ( x: big_x_scaling , y: 0.7 , z:1.0 );
 
                             gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 1.0f , extrusion: 0.9f , text: Text );
+
                             gl . PopMatrix ( );
                             gl . Enable ( SharpGL . OpenGL . GL_LIGHTING );
                             gl . Enable ( SharpGL . OpenGL . GL_TEXTURE_2D );
@@ -954,9 +996,30 @@ namespace DMT01
 
         private void DoAspect ( )
             {
+            //Debug . WriteLine ( String . Format ( "{0}" , nameof ( DoAspect ) ) );
+
+            var VW=SharpGLandReoGridBig_Grid . Width;
+            Boolean Vis = myReoGridControl . IsVisible;
+
+            if ( Vis )
+                {
+                myOpenGLControl . Width = 604;
+                }
+            else
+                {
+                myOpenGLControl . Width = VW;
+                }
+            if ( double . IsNaN ( myOpenGLControl . Width ) )
+                {
+                myOpenGLControl . Width = 604;
+                }
+
             float width = ( float ) myOpenGLControl . Width;
             float height = ( float ) myOpenGLControl . Height;
             aspect = width / height;
+
+            //Debug . WriteLine ( String . Format ( "{0}: {1}/{2}={3}" , nameof ( DoAspect ), width,height,aspect) );
+
             }
 
         private void myOpenGLControl_OpenGLInitialized ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
@@ -1925,7 +1988,6 @@ namespace DMT01
                 var CBC=new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
                 CBC . Click += this . CBC_Click;
                 CBC . CheckChanged += this . CBC_CheckChanged;
-
                 }
             }
 
@@ -1938,21 +2000,44 @@ namespace DMT01
 
         private void CBC_Click ( object sender , EventArgs e )
             {
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( CBC_CheckChanged ) ) );
             CheckBoxCell CBC = sender as CheckBoxCell;
-            int R = CBC . Cell . Row;
+            SwapRow ( CBC );
+            }
+
+        void SwapRow ( CheckBoxCell CBC )
+            {
             Worksheet Snatcheroo = CBC . Cell . Worksheet;
+            SwapRow ( Snatcheroo , CBC );
+            }
+
+        void SwapRow ( Worksheet Snatcheroo , CheckBoxCell CBC )
+            {
+            int R = CBC . Cell . Row;
+            SwapRow ( Snatcheroo , CBC , R );
+            }
+
+        void SwapRow ( Worksheet Snatcheroo , CheckBoxCell CBC , int R )
+            {
             int r = -1;
             int colMax = -1;
             GetActualizedRange ( CW: Snatcheroo , maxRow: out r , maxCol: out colMax );
+            SwapRow ( Snatcheroo: Snatcheroo, CBC: CBC, R:R, r: r, colMax: colMax);
+            }
+
+        void SwapRow ( Worksheet Snatcheroo , CheckBoxCell CBC , int R, int r, int colMax)
+            {
             RangePosition RR = new RangePosition ( row: R ,col: 1, rows: 1 , cols: colMax );
+
             Snatcheroo . InsertRows ( row: R , count: 1 );
             CellPosition cP = new CellPosition ( row: R , col: 0 );
+
             var action0 = new unvell . ReoGrid . Actions . CopyRangeAction ( fromRange: RR , toPosition: cP );
-            
             myReoGridControl. DoAction ( action0 );
             var action1 = new unvell . ReoGrid . Actions . RemoveRowsAction ( row: R , rows: 1 );
             myReoGridControl . DoAction ( action1 ); 
             }
+
 
         private void Do_Iterate_Resoures_Button_Click ( object sender , RoutedEventArgs e )
             {
@@ -1963,15 +2048,7 @@ namespace DMT01
 
             foreach ( string name in names )
                 {
-
-                //Debug . WriteLine ( String . Format ( "Resource: {0}" , name ) );
-
-                //using ( Stream stream = assembly . GetManifestResourceStream ( name ) )
-                //    {
-                //    Debug . WriteLine ( "\n\t<<{0}>>\n" ,GetHead ( stream ) );
-
-                    PrintResourceFile ( name );
-                 //   }
+                PrintResourceFile ( name );
                 }
             }
 
@@ -2024,6 +2101,156 @@ namespace DMT01
 
             }
 
+ 
+        private void Elapsed_Label_Initialized ( object sender , EventArgs e )
+            {
+            Label L = sender as Label;
+            UpdateElapsedTime ( L );
+            }
+
+        private void Elapsed_Label_MouseEnter ( object sender , MouseEventArgs e )
+            {
+            Label L = sender as Label;
+            UpdateElapsedTime ( L );
+            }
+
+        private void Elapsed_Label_MouseLeave ( object sender , MouseEventArgs e )
+            {
+            Label L = sender as Label;
+            UpdateElapsedTime ( L );
+            }
+
+        private void UpdateElapsedTime ( Label L )
+            {
+            ElapsedDateTime = DateTime . Now - StartDateTime;
+            L . Content = ElapsedDateTime . ToString ( @"hh\:mm\:ss" );
+            }
+
+        private void myOpenGLControl_MouseMove ( object sender , MouseEventArgs e )
+            {
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_MouseMove ) ) );
+
+            }
+
+        private void myOpenGLControl_MouseWheel ( object sender , MouseWheelEventArgs e )
+            {
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_MouseWheel ) ) );
+
+            }
+
+        private void myOpenGLControl_MouseEnter ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_MouseEnter ) ) );
+
+            }
+
+        private void myOpenGLControl_MouseLeave ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+            }
+
+        private void DoDrawReoGridSpreadsheet_CheckBox_Control_Checked ( object sender , RoutedEventArgs e )
+            {
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DoDrawReoGridSpreadsheet_CheckBox_Control_Checked ) ) );
+            CheckBox CB = sender as CheckBox;
+
+            if ( CB . IsChecked . GetValueOrDefault ( ) )
+                {
+                myReoGridControl . Visibility = Visibility . Visible;
+                }
+            else
+                {
+                myReoGridControl . Visibility = Visibility . Collapsed;
+                }
+            }
+
+        private void DoDrawReoGridSpreadsheet_CheckBox_Control_Click ( object sender , RoutedEventArgs e )
+            {
+            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DoDrawReoGridSpreadsheet_CheckBox_Control_Click ) ) );
+            CheckBox CB = sender as CheckBox;
+
+            if ( CB . IsChecked . GetValueOrDefault ( ) )
+                {
+                myReoGridControl . Visibility = Visibility . Visible;
+                }
+            else
+                {
+                myReoGridControl . Visibility = Visibility . Collapsed;
+                }
+
+            }
+
+        private void Sheet_Number_Label_MouseEnter ( object sender , MouseEventArgs e )
+            {
+            Label L = sender as Label;
+            L . Content = GetCurrentSheetIndex ( );
+            }
+
+        private void Sheet_Number_Label_MouseLeave ( object sender , MouseEventArgs e )
+            {
+            Label L = sender as Label;
+            L . Content = GetCurrentSheetIndex ( );
+            }
+
+        private int GetCurrentSheetIndex ( )
+            {
+            var b = myReoGridControl . CurrentWorksheet . Name;
+            var a = myReoGridControl . GetWorksheetIndex ( b );
+            CurrentWorksheetIndex = a;
+            return a;
+            }
+
+        private void Aspect_Label_MouseEnter ( object sender , MouseEventArgs e )
+            {
+            Label L = sender as Label;
+            DoAspect ( );
+            }
+
+        private void Aspect_Label_MouseLeave ( object sender , MouseEventArgs e )
+            {
+            Label L = sender as Label;
+            DoAspect ( );
+            }
+
+        private void SharpGLandReoGridBig_Grid_MouseEnter ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+            }
+
+        private void SharpGLandReoGridBig_Grid_MouseLeave ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+            }
+
+        private void SharpGLandReoGridBig_Grid_MouseMove ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+            }
+
+        private void TopStackPanel_MouseEnter ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+            }
+
+        private void TopStackPanel_MouseLeave ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+            }
+
+        private void TopStackPanel_MouseMove ( object sender , MouseEventArgs e )
+            {
+
+            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+            }
         }
     }
  

@@ -6,7 +6,7 @@
     <SaveStateFileName>Orthographic_Right_H_Slider_UserControl.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <MaxValue>7</MaxValue>
-  <MinValue>2</MinValue>
-  <ResetValue>7</ResetValue>
+  <MaxValue>20</MaxValue>
+  <MinValue>15</MinValue>
+  <ResetValue>18.7546463</ResetValue>
 </H_Slider_UserControl1_SaveState_Class>

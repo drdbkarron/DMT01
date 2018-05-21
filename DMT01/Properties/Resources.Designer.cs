@@ -63,9 +63,9 @@ namespace DMT01.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap down_arrow {
+        public static System.Drawing.Bitmap down_arrowBMP {
             get {
-                object obj = ResourceManager.GetObject("down_arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("down_arrowBMP", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

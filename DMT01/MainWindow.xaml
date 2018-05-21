@@ -13,8 +13,8 @@
     Title="DMT_MainWindow"
     Width="1072"
     Height="1100"
-    Margin="0"
-    Padding="2"
+    Margin="1"
+    Padding="1"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     HorizontalContentAlignment="Center"
@@ -47,27 +47,33 @@
         CanVerticallyScroll="True"
         Orientation="Vertical"
         ScrollViewer.HorizontalScrollBarVisibility="Visible"
-        UseLayoutRounding="True"
+        UseLayoutRounding="True" MouseEnter="TopStackPanel_MouseEnter" MouseLeave="TopStackPanel_MouseLeave" MouseMove="TopStackPanel_MouseMove"
         >
-        <StackPanel
-            Width="1036"
+        <Grid
+            x:Name="SharpGLandReoGridBig_Grid"
+            Width="1043"
             Height="312"
-            Margin="0,7,0,0"
-            HorizontalAlignment="Center"
+            Margin="1,1,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Panel.ZIndex="2"
             Background="#FFAB79B6"
-            Orientation="Horizontal"
+            IsHitTestVisible="False"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled" MouseEnter="SharpGLandReoGridBig_Grid_MouseEnter" MouseLeave="SharpGLandReoGridBig_Grid_MouseLeave" MouseMove="SharpGLandReoGridBig_Grid_MouseMove"
             >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="610" MinWidth="600" />
+                <ColumnDefinition Width="430" MinWidth="425" />
+            </Grid.ColumnDefinitions>
             <ReoGrid:ReoGridControl
                 x:Name="myReoGridControl"
-                Width="809"
-                Margin="-176,-113,-175,-111"
+                Grid.ColumnSpan="1"
+                Width="784"
+                Margin="-172,-117,0,-119"
                 HorizontalAlignment="Left"
                 Loaded="myReoGridControl_Loaded"
                 RenderTransformOrigin="0.5,0.5"
                 ScrollViewer.CanContentScroll="True"
-                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                Visibility="Visible"
                 >
                 <ReoGrid:ReoGridControl.RenderTransform>
                     <TransformGroup>
@@ -80,26 +86,29 @@
             </ReoGrid:ReoGridControl>
             <WPF:OpenGLControl
                 x:Name="myOpenGLControl"
-                Width="574"
+                Grid.ColumnSpan="2"
+                Width="604"
                 Height="310"
-                Margin="1,1,0,0"
-                Padding="0"
+                Margin="0,1,1,0"
+                Padding="1"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                BorderThickness="3,3,2,2"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Top"
+                BorderThickness="2,2,2,2"
                 DrawFPS="True"
-                IsHitTestVisible="False"
+                IsHitTestVisible="True"
+                MouseEnter="myOpenGLControl_MouseEnter"
+                MouseLeave="myOpenGLControl_MouseLeave"
+                MouseMove="myOpenGLControl_MouseMove"
+                MouseWheel="myOpenGLControl_MouseWheel"
                 OpenGLDraw="myOpenGLControl_OpenGLDraw"
                 OpenGLInitialized="myOpenGLControl_OpenGLInitialized"
                 OpenGLVersion="OpenGL2_0"
-                RenderTransformOrigin="0.5,0.5"
                 Resized="myOpenGLControl_Resized"
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                TabIndex="2147483644"
                 />
-        </StackPanel>
+        </Grid>
         <StackPanel
             x:Name="BottomStackPanel"
             Width="1033"
@@ -121,6 +130,18 @@
                 Background="#FF5D4B5F"
                 Orientation="Horizontal"
                 >
+                <CheckBox
+                    x:Name="DoDrawReoGridSpreadsheet_CheckBox_Control"
+                    Width="83"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Checked="DoDrawReoGridSpreadsheet_CheckBox_Control_Checked"
+                    Click="DoDrawReoGridSpreadsheet_CheckBox_Control_Click"
+                    Content="Draw Reo"
+                    Cursor="Pen"
+                    IsChecked="True"
+                    />
                 <CheckBox
                     x:Name="AxisDrawMe_CheckBox_Control"
                     Width="83"
@@ -284,7 +305,25 @@
                     Background="#FFEAD0D0"
                     BorderThickness="1"
                     Content="elapsed"
+                    Initialized="Elapsed_Label_Initialized"
+                    MouseEnter="Elapsed_Label_MouseEnter"
+                    MouseLeave="Elapsed_Label_MouseLeave"
                     />
+                <Label
+                    x:Name="Sheet_Number_Label"
+                    Width="52"
+                    Margin="0,5,0,7"
+                    Content="{Binding Path=myReoGrid}"
+                    MouseEnter="Sheet_Number_Label_MouseEnter"
+                    MouseLeave="Sheet_Number_Label_MouseLeave"
+                    >
+                    <Label.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="0" Color="#FF978C8E" />
+                            <GradientStop Offset="1" Color="#FFBACDAF" />
+                        </RadialGradientBrush>
+                    </Label.Background>
+                </Label>
                 <Label
                     x:Name="FPS_Label"
                     Width="61"
@@ -350,14 +389,56 @@
                     Background="#FFEAD0D0"
                     BorderThickness="1"
                     Content="{Binding Source={x:Static local:MainWindow.aspect}, StringFormat=Aspect \{0:00.00\}, UpdateSourceTrigger=PropertyChanged}"
+                    MouseEnter="Aspect_Label_MouseEnter"
+                    MouseLeave="Aspect_Label_MouseLeave"
                     />
+                <Label
+                    x:Name="Screen_X_Label"
+                    Width="51"
+                    Margin="1,0,0,0"
+                    HorizontalAlignment="Left"
+                    >
+                    <Label.Background>
+                        <RadialGradientBrush GradientOrigin="1,0.5">
+                            <GradientStop Offset="0" Color="Black" />
+                            <GradientStop Offset="1" Color="#FF868897" />
+                        </RadialGradientBrush>
+                    </Label.Background>
+                </Label>
+                <Label
+                    x:Name="Screen_Y_Label"
+                    Width="41"
+                    Margin="8,0,0,0"
+                    >
+                    <Label.Background>
+                        <RadialGradientBrush GradientOrigin="0,0.5">
+                            <GradientStop Offset="0" Color="Black" />
+                            <GradientStop Offset="1" Color="#FFFBB8B8" />
+                        </RadialGradientBrush>
+                    </Label.Background>
+                </Label>
+                <Label
+                    x:Name="MouseOver_Label"
+                    Width="103"
+                    Margin="2,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Label"
+                    >
+                    <Label.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="0" Color="Black" />
+                            <GradientStop Offset="1" Color="#FFEDEDF1" />
+                        </RadialGradientBrush>
+                    </Label.Background>
+                </Label>
             </StackPanel>
             <TabControl
                 x:Name="Viewing_Transform_TabControl"
-                Width="991"
+                Width="1010"
                 Height="598"
                 Margin="4,5,21,5"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="#FFF1F1C6"
                 >
@@ -368,138 +449,25 @@
                     >
                     <Grid
                         x:Name="SpreadsheetFileName_Grid"
-                        Width="946"
-                        Height="430"
-                        Margin="6,17,0,0"
+                        Width="987"
+                        Height="555"
+                        Margin="6,8,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Background="#FFC1DC47"
                         >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="46*" />
-                            <RowDefinition Height="297*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Button
-                            x:Name="spreadsheet_load_Button"
-                            Width="138"
-                            Height="25"
-                            Margin="11,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Click="spreadsheet_load_Button_Click"
-                            Content="load spreadsheet"
-                            />
-                        <CheckBox
-                            x:Name="LoadSpreadsheetAtInitalization_CheckBox_Control"
-                            Height="17"
-                            Margin="170,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#FFEC8F8F"
-                            Content="Load Spreadsheet At Initalization"
-                            IsChecked="false"
-                            />
-                        <Button
-                            x:Name="SelectDataRangeForNormalization"
-                            Width="74"
-                            Margin="444,20,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Click="SelectDataRangeForNormalization_Click"
-                            Content="Select Data"
-                            />
-                        <CheckBox
-                            x:Name="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control"
-                            Margin="553,22,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Checked="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control_Checked"
-                            Content="Hand Pivot Mode"
-                            />
-                        <Button
-                            x:Name="Do_Iterate_Resoures_Button"
-                            Width="75"
-                            Margin="742,18,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Click="Do_Iterate_Resoures_Button_Click"
-                            Content="Resources"
-                            />
-                        <DockPanel
-                            x:Name="file_and_dir_spreadsheet_DockPanel"
-                            Grid.Row="1"
-                            Width="776"
-                            Height="142"
-                            Margin="6,11,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Background="#FF393E47"
-                            >
-                            <TextBlock
-                                x:Name="Spreadsheet_File_Name_TextBlock"
-                                Width="743"
-                                Height="21"
-                                Margin="10,9,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                Background="#FF3B9393"
-                                DockPanel.Dock="Top"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap"
-                                ><Run Text="Spreadsheet File Name" /></TextBlock>
-                            <RichTextBox
-                                x:Name="SpreadsheetFileName_RichTextBox"
-                                Width="743"
-                                Height="24"
-                                Margin="8,5,0,0"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FFF0EB87"
-                                DockPanel.Dock="Top"
-                                >
-                                <FlowDocument>
-                                    <Paragraph>
-                                        <Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx" />
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
-                            <TextBlock
-                                x:Name="Spreadsheet_directory_Name_TextBlock"
-                                Width="743"
-                                Height="21"
-                                Margin="11,6,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FF3B9393"
-                                DockPanel.Dock="Top"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap"
-                                ><Run Text="Spreadsheet Directory Name" /></TextBlock>
-                            <RichTextBox
-                                x:Name="SpreadsheetDirPath_RichTextBox"
-                                Width="743"
-                                Height="23"
-                                Margin="10,12,0,0"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="#FF975959"
-                                DockPanel.Dock="Top"
-                                >
-                                <FlowDocument>
-                                    <Paragraph>
-                                        <Run Text="./" />
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
-                        </DockPanel>
                         <StackPanel
                             x:Name="Spreadsheet_3dDisplayOptions_StackPanel"
-                            Grid.Row="1"
-                            Width="909"
+                            Width="948"
                             Height="24"
-                            Margin="10,170,0,0"
+                            Margin="10,0,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Orientation="Horizontal"
@@ -574,6 +542,346 @@
                                 BorderThickness="5,1,1,1"
                                 Content="DoGreyScale"
                                 />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="1"
+                            Height="27"
+                            Margin="0,5,0,0"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal"
+                            >
+                            <Button
+                                x:Name="DoSelectDataRangeForNormalization_Button"
+                                Width="79"
+                                Height="25"
+                                Margin="5,2,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Click="SelectDataRangeForNormalization_Click"
+                                Content="Select Data"
+                                />
+                            <CheckBox
+                                x:Name="Do_Execute_Select_Data_Button_on_Startup_CheckBox_Control"
+                                Width="115"
+                                Height="25"
+                                VerticalAlignment="Bottom"
+                                VerticalContentAlignment="Bottom"
+                                Background="#FFC14242"
+                                BorderBrush="#FF0F1959"
+                                Content="&lt;-Execute Startup"
+                                />
+                            <CheckBox
+                                x:Name="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control"
+                                Width="117"
+                                Height="25"
+                                Margin="5,2,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Checked="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control_Checked"
+                                Content="Hand Pivot Mode"
+                                />
+                            <Button
+                                x:Name="Do_Iterate_Resoures_Button"
+                                Width="87"
+                                Height="25"
+                                Margin="5,2,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Click="Do_Iterate_Resoures_Button_Click"
+                                Content="Resources"
+                                />
+                            <CheckBox
+                                x:Name="Spreadsheet_Aspect_Scale_Hack_checkBox_Control"
+                                Width="152"
+                                Height="25"
+                                Margin="5,2,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Spreadsheet Aspect Hack"
+                                />
+                        </StackPanel>
+                        <DockPanel
+                            x:Name="file_and_dir_spreadsheet_DockPanel"
+                            Grid.Row="2"
+                            Width="866"
+                            Height="142"
+                            Margin="6,2,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="#FF393E47"
+                            >
+                            <StackPanel
+                                Width="619"
+                                Height="133"
+                                Margin="1,3,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                >
+                                <TextBlock
+                                    x:Name="Spreadsheet_File_Name_TextBlock"
+                                    Width="607"
+                                    Height="22"
+                                    MinWidth="2"
+                                    Margin="6,9,-513,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Background="#FF3B9393"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap"
+                                    ><Run Text="Spreadsheet File Name" /></TextBlock>
+                                <RichTextBox
+                                    x:Name="SpreadsheetFileName_RichTextBox"
+                                    Width="607"
+                                    Height="22"
+                                    MinWidth="2"
+                                    Margin="6,9,-513,0"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Background="#FFF0EB87"
+                                    >
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx" />
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                                <TextBlock
+                                    x:Name="Spreadsheet_directory_Name_TextBlock"
+                                    Width="607"
+                                    Height="22"
+                                    MinWidth="2"
+                                    Margin="6,9,-513,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Background="#FF3B9393"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap"
+                                    ><Run Text="Spreadsheet Directory Name" /></TextBlock>
+                                <RichTextBox
+                                    x:Name="SpreadsheetDirPath_RichTextBox"
+                                    Width="607"
+                                    Height="22"
+                                    MinWidth="2"
+                                    Margin="6,9,-513,0"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Background="#FF975959"
+                                    >
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Run Text="./" />
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                            </StackPanel>
+                            <StackPanel
+                                Width="225"
+                                Height="119"
+                                VerticalAlignment="Center"
+                                >
+                                <Button
+                                    x:Name="spreadsheet_load_Button"
+                                    Width="109"
+                                    Height="25"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="spreadsheet_load_Button_Click"
+                                    Content="load spreadsheet"
+                                    />
+                                <CheckBox
+                                    x:Name="LoadSpreadsheetAtInitalization_CheckBox_Control"
+                                    Width="199"
+                                    Height="25"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Background="#FFEC8F8F"
+                                    Content="Load Spreadsheet At Initalization"
+                                    Foreground="#FFFFFEFE"
+                                    IsChecked="false"
+                                    />
+                            </StackPanel>
+                        </DockPanel>
+                        <StackPanel
+                            Grid.Row="4"
+                            Height="343"
+                            Margin="0,1,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="#FFC5BCB5"
+                            Orientation="Vertical"
+                            >
+                            <Label
+                                x:Name="Sheet_Specific_Tab_Control_Label"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="Sheet Specific_3D Visualization Settings Sheet 2 is 3d temp"
+                                />
+                            <TabControl
+                                x:Name="tabControl"
+                                Width="964"
+                                Height="313"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                TabStripPlacement="Bottom"
+                                >
+                                <TabItem
+                                    x:Name="Sheet_1__TabItem"
+                                    Width="91"
+                                    Margin="1,-2,1,0"
+                                    HorizontalAlignment="Left"
+                                    Header="1 Sheet"
+                                    >
+                                    <Grid
+                                        Height="231"
+                                        Margin="0,0,-14,0"
+                                        Background="#FFE5E5E5"
+                                        >
+                                        <StackPanel
+                                            Width="974"
+                                            Height="190"
+                                            Margin="10,0,-12,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Orientation="Horizontal"
+                                            >
+                                            <StackPanel
+                                                Height="179"
+                                                Margin="1,1,0,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                Orientation="Vertical"
+                                                >
+                                                <CheckBox
+                                                    x:Name="show_boxel_index1_checkBox_Control"
+                                                    Width="98"
+                                                    Height="30"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    Content="Show Index"
+                                                    />
+                                                <CheckBox
+                                                    x:Name="unused_check_box_1_checkBox_Control"
+                                                    Width="90"
+                                                    Height="30"
+                                                    Padding="-2,1,0,0"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    Content="gird dytiddy"
+                                                    />
+                                                <CheckBox
+                                                    x:Name="show_wompy_3d_seed_cursor_checkBox_Control"
+                                                    Width="98"
+                                                    Height="30"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Content="Show Data"
+                                                    />
+                                                <CheckBox Content="unused 1" />
+                                            </StackPanel>
+                                            <StackPanel
+                                                Height="184"
+                                                Margin="0,0,0,-97"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                Orientation="Vertical"
+                                                >
+                                                <local:H_Slider_UserControl1
+                                                    x:Name="Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control"
+                                                    Width="842"
+                                                    Height="74"
+                                                    Margin="0,10,0,16"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    LabelText="3D Numeral Width FitHack"
+                                                    SliderMaxValue="5"
+                                                    SliderMinValue="1"
+                                                    SliderValue="1"
+                                                    />
+                                                <local:H_Slider_UserControl1
+                                                    x:Name="Spreadsheet3DNumericLeftMargin_H_Slider_User_Control"
+                                                    Width="835"
+                                                    Height="80"
+                                                    Margin="0,1,0,0"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    LabelText="3d left margin numeric"
+                                                    SliderMaxValue="5"
+                                                    SliderMinValue="0"
+                                                    />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem
+                                    x:Name="Sheet_2_TabItem"
+                                    Width="142"
+                                    Margin="1,0,-2,-2"
+                                    Header="2 Sheet"
+                                    >
+                                    <Grid Background="#FFE5E5E5" />
+                                </TabItem>
+                                <TabItem
+                                    Width="100"
+                                    Margin="-2,0,0,-2"
+                                    HorizontalAlignment="Left"
+                                    Header=" 3 Sheet"
+                                    >
+                                    <Grid
+                                        Width="958"
+                                        Margin="0,0,0,-98"
+                                        Background="#FFE5E5E5"
+                                        >
+                                        <StackPanel
+                                            Width="851"
+                                            Height="264"
+                                            Margin="10,20,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            />
+                                    </Grid>
+
+                                </TabItem>
+                                <TabItem
+                                    Width="54"
+                                    Height="20"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Header="TabItem"
+                                    >
+                                    <Grid Background="#FFE5E5E5" />
+                                </TabItem>
+                                <TabItem
+                                    Width="54"
+                                    Height="20"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Header="TabItem"
+                                    >
+                                    <Grid Background="#FFE5E5E5" />
+                                </TabItem>
+                                <TabItem
+                                    Width="54"
+                                    Height="20"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Header="TabItem"
+                                    >
+                                    <Grid Background="#FFE5E5E5" />
+                                </TabItem>
+                                <TabItem
+                                    Width="54"
+                                    Height="20"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Header="TabItem"
+                                    >
+                                    <Grid Background="#FFE5E5E5" />
+                                </TabItem>
+                            </TabControl>
                         </StackPanel>
                     </Grid>
                 </TabItem>
