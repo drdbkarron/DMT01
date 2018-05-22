@@ -22,13 +22,16 @@
     Background="#FF5D7C75"
     BorderBrush="#FFDE0A0A"
     BorderThickness="3"
+    Focusable="False"
     Initialized="DMTWindow_Initialized"
+    IsHitTestVisible="True"
+    IsTabStop="False"
+    Top="1"
     Left="845"
     Loaded="DMTWindow_Loaded"
     LocationChanged="DMT_Main_Window_Control_LocationChanged"
     ScrollViewer.CanContentScroll="True"
     ScrollViewer.HorizontalScrollBarVisibility="Visible"
-    Top="1"
     UseLayoutRounding="True"
     WindowStartupLocation="Manual"
     WindowState="Normal"
@@ -45,9 +48,13 @@
         Background="#FFE2DECD"
         CanHorizontallyScroll="True"
         CanVerticallyScroll="True"
+        Cursor="Hand"
+        MouseEnter="TopStackPanel_MouseEnter"
+        MouseLeave="TopStackPanel_MouseLeave"
+        MouseMove="TopStackPanel_MouseMove"
         Orientation="Vertical"
         ScrollViewer.HorizontalScrollBarVisibility="Visible"
-        UseLayoutRounding="True" MouseEnter="TopStackPanel_MouseEnter" MouseLeave="TopStackPanel_MouseLeave" MouseMove="TopStackPanel_MouseMove"
+        UseLayoutRounding="True"
         >
         <Grid
             x:Name="SharpGLandReoGridBig_Grid"
@@ -57,22 +64,23 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="#FFAB79B6"
-            IsHitTestVisible="False"
-            ScrollViewer.VerticalScrollBarVisibility="Disabled" MouseEnter="SharpGLandReoGridBig_Grid_MouseEnter" MouseLeave="SharpGLandReoGridBig_Grid_MouseLeave" MouseMove="SharpGLandReoGridBig_Grid_MouseMove"
+            MouseEnter="SharpGLandReoGridBig_Grid_MouseEnter"
+            MouseLeave="SharpGLandReoGridBig_Grid_MouseLeave"
+            MouseMove="SharpGLandReoGridBig_Grid_MouseMove"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
             >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="610" MinWidth="600" />
-                <ColumnDefinition Width="430" MinWidth="425" />
+                <ColumnDefinition Width="441" />
+                <ColumnDefinition Width="426" />
             </Grid.ColumnDefinitions>
             <ReoGrid:ReoGridControl
                 x:Name="myReoGridControl"
-                Grid.ColumnSpan="1"
+                Grid.ColumnSpan="2"
                 Width="784"
                 Margin="-172,-117,0,-119"
                 HorizontalAlignment="Left"
                 Loaded="myReoGridControl_Loaded"
                 RenderTransformOrigin="0.5,0.5"
-                ScrollViewer.CanContentScroll="True"
                 Visibility="Visible"
                 >
                 <ReoGrid:ReoGridControl.RenderTransform>
@@ -86,16 +94,15 @@
             </ReoGrid:ReoGridControl>
             <WPF:OpenGLControl
                 x:Name="myOpenGLControl"
-                Grid.ColumnSpan="2"
-                Width="604"
+                Grid.Column="1"
                 Height="310"
-                Margin="0,1,1,0"
+                Margin="1,0,-170,0"
                 Padding="1"
-                HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 HorizontalContentAlignment="Right"
                 VerticalContentAlignment="Top"
                 BorderThickness="2,2,2,2"
+                Cursor="Cross"
                 DrawFPS="True"
                 IsHitTestVisible="True"
                 MouseEnter="myOpenGLControl_MouseEnter"
@@ -105,8 +112,7 @@
                 OpenGLDraw="myOpenGLControl_OpenGLDraw"
                 OpenGLInitialized="myOpenGLControl_OpenGLInitialized"
                 OpenGLVersion="OpenGL2_0"
-                Resized="myOpenGLControl_Resized"
-                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                Resized="myOpenGLControl_Resized" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="Auto"
                 />
         </Grid>
         <StackPanel
@@ -313,7 +319,7 @@
                     x:Name="Sheet_Number_Label"
                     Width="52"
                     Margin="0,5,0,7"
-                    Content="{Binding Path=myReoGrid}"
+                    Content="{Binding myReoGrid}"
                     MouseEnter="Sheet_Number_Label_MouseEnter"
                     MouseLeave="Sheet_Number_Label_MouseLeave"
                     >
