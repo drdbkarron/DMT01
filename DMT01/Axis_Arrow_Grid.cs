@@ -233,9 +233,9 @@ namespace Axis_Arrow_Grid
 
         public static void MyGlobalAxis ( SharpGL . OpenGL gl , int AxesLength = 20 , int LineWidth = 2 , int Pointsize = 3 , Boolean DoMinusTicks = true ,
                 Boolean TagOrigin = true , Boolean DoXYZAnnotation = true , Boolean DoMinusXYZAnnotation = true , Boolean DoUnitTicks = true ,
-                Boolean DoAnnotateZTicks = true , Boolean DoAnnotateYTicks = true ,Boolean DoAnnotateXTicks = true , Boolean  DoPlusTicks=true )
+                Boolean DoAnnotateZTicks = true , Boolean DoAnnotateYTicks = true ,Boolean DoAnnotateXTicks = true , Boolean  DoPlusTicks=true, float tick_annotation_scale = 0.4f )
             {
-            float tick_annotation_scale = 0.4f;
+            gl . PushMatrix ( );
 
             gl . PushAttrib ( SharpGL . OpenGL . GL_CURRENT_BIT | SharpGL . OpenGL . GL_ENABLE_BIT | SharpGL . OpenGL . GL_LINE_BIT | SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
 
@@ -424,6 +424,7 @@ namespace Axis_Arrow_Grid
                 }
             //  Restore attributes.
             gl . PopAttrib ( );
+            gl . PopMatrix ( );
             }
         
             public static void LocalAxis ( OpenGL gl )

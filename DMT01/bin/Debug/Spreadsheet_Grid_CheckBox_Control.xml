@@ -5,6 +5,6 @@
     <SaveStateFileName>Spreadsheet_Grid_CheckBox_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxState>false</CheckBoxState>
   <CheckBoxName>Spreadsheet_Grid_CheckBox_Control</CheckBoxName>
 </CheckBoxControlSaveState>

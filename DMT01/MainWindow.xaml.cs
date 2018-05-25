@@ -174,7 +174,7 @@ namespace DMT01
 
         public static SharpGL . SceneGraph . Matrix ProjectionMatrix = new SharpGL . SceneGraph . Matrix ( 4 , 4 );
         public static SharpGL . SceneGraph . Matrix ModelingMatrix = new SharpGL . SceneGraph . Matrix ( 4 , 4 );
-        public static float aspect = -1.1f;
+        public static float myOpenGLControlViewportAspect = -1.1f;
 
         private struct SavedControl
             {
@@ -188,6 +188,120 @@ namespace DMT01
             };
 
         private static SavedControl SC;
+
+        const String scratchy = "Scratcheroo";
+        int mouse_x, mouse_y;
+        int mouse_corrected_y;
+        int viewport_cursor_x;
+        int viewport_cursor_y;
+        float viewport_width, viewport_height;
+        public class Nsheet
+            {
+            public float [ , ] cells;
+            public int r, c, r0,c0;
+            }
+
+        static Nsheet Sheety;
+
+
+        public class Vertex
+            {
+            public int I, J;
+            public float x, y, z;
+            public int[] c;
+            public float V;
+            public Vertex ( )
+                {
+                c = new int [ 3 ] { 0 , 0 , 0 };
+                }
+            public Vertex ( int i , int j , float v )
+                {
+                c = new int [ 3 ] {i , j , 0 };
+                I = i;
+                J = j;
+                V = v;
+
+                }
+            public Vertex ( int i , int j )
+                {
+                c = new int [ 3 ] {i , j , 0 };
+                I = i;
+                J = j;
+
+
+                }
+            public Vertex ( float [,] v )
+                {
+                if ( c == null )
+                    return;
+
+                V = v [ I, J ];
+                
+                }
+            public Vertex (float x , float y , float z , float v)
+                {
+                this . x = x;
+                this . y = y;
+                this . z = z;
+                this . I = (int)x;
+                this . J = (int)y;
+                this . c =new int [ 3 ] { this . I , this . J , 0 };
+                this . V = v;
+
+                }
+            };
+
+        public class Boxel
+            {
+            public Vertex [ ] V = new Vertex [ 4 ];
+            public Vertex Centroid = new Vertex ( );
+            public int Span=1;
+
+            public Boxel ( )
+                {
+                V = new Vertex [ 4 ];
+      
+                }
+            public Boxel ( int i , int j,float [ , ] c)
+                {
+                this . V [ 0 ] = new Vertex ( i         , j      );
+                this . V [ 1 ] = new Vertex ( i         , j+Span );
+                this . V [ 2 ] = new Vertex ( i +Span   , j+Span );
+                this . V [ 3 ] = new Vertex ( i +Span   , j      );
+
+                LoadValue ( 0 , c );
+                LoadValue ( 1, c );
+                LoadValue ( 2 , c );
+                LoadValue ( 3 , c );
+
+                this . Centroid = LoadCentroid ( );
+                }
+
+            private Vertex LoadCentroid ()
+                {
+                float X = ( this . V [ 0 ] . I + this . V [ 1 ] . I + this . V [ 2 ] . I + this . V [ 3 ] . I ) / 4f;
+                float Y = ( this . V [ 0 ] . J + this . V [ 1 ] . J + this . V [ 2 ] . J + this . V [ 3 ] . J ) / 4f;
+                float V = ( this . V [ 0 ] . V + this . V [ 1 ] . V + this . V [ 2 ] . V + this . V [ 3 ] . V ) / 4f;
+
+                Vertex C = new Vertex ( X , Y , 0.0f , V );
+
+                return C;
+                }
+
+            public void LoadValue (int n , float [ , ] c)
+                {
+                Vertex VV = this . V [ n ];
+
+                int i = VV . I;
+                int j = VV . J;
+                float vv = c [ i , j ];
+                VV . V = vv;
+                //float vvv = this . V [ n ] . V;
+
+                }
+
+            }
+
         #endregion Persistance_classes
 
         public MainWindow ( )
@@ -217,7 +331,8 @@ namespace DMT01
                 {
                 DoSelectDataRangeForNormalization_Button . PerformClick ( );
                 }
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DMTWindow_Loaded ) ) );
+
+            System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
             }
 
         private void myReoGridControl_Loaded ( object sender , RoutedEventArgs e )
@@ -236,7 +351,7 @@ namespace DMT01
         private void myOpenGLControl_OpenGLDraw ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
             {
 
-            //Debug.WriteLine(String.Format("{0}", nameof(myOpenGLControl_OpenGLDraw)));
+            //System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl . OpenGL;
@@ -244,10 +359,10 @@ namespace DMT01
             //  Clear the color and depth buffer.
 
             gl . Clear ( OpenGL . GL_COLOR_BUFFER_BIT | OpenGL . GL_DEPTH_BUFFER_BIT );
-            gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Projection );
+            //GlmSharp . mat4 M = GlmSharp . mat4 . Identity;
 
+            gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Projection );
             gl . LoadIdentity ( );
-            GlmSharp . mat4 M = GlmSharp . mat4 . Identity;
 
             if ( UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . GetValueOrDefault ( ) )
                 {
@@ -260,105 +375,133 @@ namespace DMT01
                             );
                 }
 
-            if ( Use_Viewing_Frustrum_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+
+            if ( DrawMouseScreenSpaceAnnotation_CheckBox_Control.IsChecked.GetValueOrDefault())
                 {
-                gl . Frustum ( left: Frustum_Left_H_Slider_UserControl . SliderValue ,
-                    right: Frustum_Right_H_Slider_UserControl . SliderValue ,
-                    bottom: Frustum_Bottom_H_Slider_UserControl . SliderValue ,
-                    top: Frustum_Top_H_Slider_UserControl . SliderValue ,
-                    zNear: Frustum_zNear_H_Slider_UserControl . SliderValue ,
-                    zFar: Frustum_zFar_H_Slider_UserControl . SliderValue );
+                gl . PushMatrix ( );
+                float fSize = MouseScreenAnnotationFontSize_H_Slider_UserControl . SliderValue + 0.5f;
+                String text = String . Format ( @"{0},{1}" , mouse_x , mouse_y );
+                gl . DrawText ( x: viewport_cursor_x , y: viewport_cursor_y , r: 1f , g: 1f , b: 1f ,
+                    faceName: "Arial" ,
+                    fontSize:fSize ,
+                    text: text );
+                gl . PopMatrix ( );
                 }
 
-            if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            if ( DrawScreenSpaceAnnotationGrid_CheckBox_Control .IsChecked.GetValueOrDefault())
                 {
-
-                //Debug . WriteLine ( String . Format ( "{0}" , nameof(UsePerspetiveViewingTransform_RadioButton_Control )) );
-                gl . Perspective (
-                    fovy: Perspective_FOVY_H_Slider_UserControl . SliderValue ,
-                    aspect: Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
-                    zNear: Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
-                    zFar: Perspective_Z_FAR_H_Slider_UserControl . SliderValue );
-
-                //M = M * Perspective ( gl );
+                gl . PushMatrix ( );
+                int bloppie = 40;
+                float fSize = ScreenAnnotationFont_SizeH_Slider_UserControl . SliderValue;
+                for ( int i = bloppie ; i < viewport_width - bloppie ; i += bloppie )
+                    {
+                    for ( int j = bloppie ; j < viewport_height - bloppie ; j += bloppie )
+                        {
+                        var t = String . Format ( @"{0},{1}" , i , j );
+                        int jy = ( int ) viewport_height - j;
+                        gl . DrawText ( i , jy , 1 , 1 , 1 , "Arial" ,fSize , t );
+                        }
+                    }
+                gl . PopMatrix ( );
                 }
 
+            //if ( Use_Viewing_Frustrum_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    gl . Frustum ( left: Frustum_Left_H_Slider_UserControl . SliderValue ,
+            //        right: Frustum_Right_H_Slider_UserControl . SliderValue ,
+            //        bottom: Frustum_Bottom_H_Slider_UserControl . SliderValue ,
+            //        top: Frustum_Top_H_Slider_UserControl . SliderValue ,
+            //        zNear: Frustum_zNear_H_Slider_UserControl . SliderValue ,
+            //        zFar: Frustum_zFar_H_Slider_UserControl . SliderValue );
+            //    }
 
-            //LoadMatrix ( gl , M );
+            //if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    gl . Perspective (
+            //        fovy: Perspective_FOVY_H_Slider_UserControl . SliderValue ,
+            //        aspect: Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
+            //        zNear: Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
+            //        zFar: Perspective_Z_FAR_H_Slider_UserControl . SliderValue );
 
-            //var m=gl . GetProjectionMatrix ( );
+            //    //M = M * Perspective ( gl );
+            //    }
+
+
+            //////LoadMatrix ( gl , M );
+
+            //////var m=gl . GetProjectionMatrix ( );
 
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
             gl . LoadIdentity ( );
 
-            if ( UseLookAtViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                float x_up = 0.0f;
-                float y_up = 1.0f;
-                float z_up = 0.0f;
+            //if ( UseLookAtViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    float x_up = 0.0f;
+            //    float y_up = 1.0f;
+            //    float z_up = 0.0f;
 
-                if ( LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                    {
-                    x_up = 1.0f;
-                    }
-                else
-                    {
-                    x_up = 0.0f;
-                    }
-                if ( LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                    {
-                    y_up = 1.0f;
-                    }
-                else
-                    {
-                    y_up = 0.0f;
-                    }
-                if ( LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                    {
-                    z_up = 1.0f;
-                    }
-                else
-                    {
-                    z_up = 0.0f;
-                    }
+            //    if ( LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            //        {
+            //        x_up = 1.0f;
+            //        }
+            //    else
+            //        {
+            //        x_up = 0.0f;
+            //        }
+            //    if ( LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            //        {
+            //        y_up = 1.0f;
+            //        }
+            //    else
+            //        {
+            //        y_up = 0.0f;
+            //        }
+            //    if ( LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            //        {
+            //        z_up = 1.0f;
+            //        }
+            //    else
+            //        {
+            //        z_up = 0.0f;
+            //        }
 
-                gl . LookAt (
-                    eyex: LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
-                    eyey: LookAt_Eye_Y_H_Slider_UserControl . SliderValue ,
-                    eyez: LookAt_Eye_Z_H_Slider_UserControl . SliderValue ,
-                    centerx: LookAtTarget_X_H_Slider_UserControl . SliderValue ,
-                    centery: LookAtTarget_Y_H_Slider_UserControl . SliderValue ,
-                    centerz: LookAtTarget_Z_H_Slider_UserControl . SliderValue ,
-                    upx: x_up , upy: y_up , upz: z_up );
+            //    gl . LookAt (
+            //        eyex: LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
+            //        eyey: LookAt_Eye_Y_H_Slider_UserControl . SliderValue ,
+            //        eyez: LookAt_Eye_Z_H_Slider_UserControl . SliderValue ,
+            //        centerx: LookAtTarget_X_H_Slider_UserControl . SliderValue ,
+            //        centery: LookAtTarget_Y_H_Slider_UserControl . SliderValue ,
+            //        centerz: LookAtTarget_Z_H_Slider_UserControl . SliderValue ,
+            //        upx: x_up , upy: y_up , upz: z_up );
 
-                //M = M * LookAt ( gl );
-                }
+            //    //M = M * LookAt ( gl );
+            //    }
 
-            if ( Do_Orbit_Pull_Back_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                gl . Translate (
-                    x: Eye_X_H_Slider_UserControl . SliderValue ,
-                    y: Eye_Y_H_Slider_UserControl . SliderValue ,
-                    z: Eye_Z_H_Slider_UserControl . SliderValue );
-                }
+            //if ( Do_Orbit_Pull_Back_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    gl . Translate (
+            //        x: Eye_X_H_Slider_UserControl . SliderValue ,
+            //        y: Eye_Y_H_Slider_UserControl . SliderValue ,
+            //        z: Eye_Z_H_Slider_UserControl . SliderValue );
+            //    }
 
-            if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                gl . Translate ( 0.0 , 0.0 , Orbit_Radius_H_Slider_UserControl . SliderValue );
+            //if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    gl . Translate ( 0.0 , 0.0 , Orbit_Radius_H_Slider_UserControl . SliderValue );
 
-                gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
+            //    gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
 
-                Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+            //    Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
 
-                if ( Orbit_Rotation_H_Slider_UserControl . SliderValue >= Orbit_Rotation_H_Slider_UserControl . SliderMaxValue )
-                    {
-                    Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
-                    }
-                else if ( Orbit_Rotation_H_Slider_UserControl . SliderValue <= Orbit_Rotation_H_Slider_UserControl . SliderMinValue )
-                    {
-                    Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
-                    }
-                }
+            //    if ( Orbit_Rotation_H_Slider_UserControl . SliderValue >= Orbit_Rotation_H_Slider_UserControl . SliderMaxValue )
+            //        {
+            //        Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+            //        }
+            //    else if ( Orbit_Rotation_H_Slider_UserControl . SliderValue <= Orbit_Rotation_H_Slider_UserControl . SliderMinValue )
+            //        {
+            //        Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+            //        }
+            //    }
 
             if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
@@ -379,23 +522,107 @@ namespace DMT01
                     DoUnitTicks: DoDoTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
                     DoAnnotateZTicks: AnnotateZTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
                     DoAnnotateYTicks: AnnotateYTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
-                    DoAnnotateXTicks: AnnotateXTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) );
+                    DoAnnotateXTicks: AnnotateXTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
+                    tick_annotation_scale: Axis_tick_annotation_scale_H_Slider_UserControl . SliderValue
+                    );
                 }
 
-            if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            if ( true )
                 {
-                Teapot tp = new Teapot ( );
-                tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
+                if ( Sheety == null )
+                    goto scramo;
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+                gl . PushMatrix ( );
+                gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
+                gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
+                gl . Scale ( 1 , -1 , 1 );
+                gl . PointSize (3 );
+
+                for ( int j = Sheety . r0 ; j < Sheety . r ; j++ )
+                    {
+                    for ( int i = Sheety . c0 ; i < Sheety . c ; i++ )
+                        {
+                        Boxel B = new Boxel ( i , j , Sheety . cells );
+
+                        if ( Sheety . cells [ i , j ]>1.0f )
+                            {
+                            float overflow = Sheety . cells [ i , j ];
+                            Sheety . cells [ i , j ] = 1.0f;
+                            }
+                        int [ , ] c = new int [ 4,2 ] { 
+                            { i     , j },
+                            { i + 1 , j } ,
+                            { i+1   , j + 1 } , 
+                            { i     , j + 1 },
+                                };
+                        float [ ] s = new float [ 4 ] {
+                            Sheety . cells [ c[0,0], c[0,1] ],
+                            Sheety . cells [ c[1,0], c[1,1] ],
+                            Sheety . cells [ c[2,0], c[2,1] ],
+                            Sheety . cells [ c[3,0], c[3,1] ],
+                                                 };
+                        float [ ] C = GetCentroid ( c );
+                        float S = GetMean ( s );
+
+                        for ( int k = 0 ; k <4 ; k++ )
+                            {
+                            int m = k % 4;
+                            int n = ( k + 1 ) % 4;
+                            int o = ( k + 2 ) % 4;
+                            gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                            gl . Color ( s [ m ] , s [ m ] , s [ m ] );
+                            gl . Vertex ( c [ m , 0 ] , c [ m , 1 ] , s[m]);
+
+                            gl . Color (S,S,S );
+                            gl . Vertex ( C[0],C[1 ] , S);
+
+                            gl . Color ( s [ n ] , s [ n ] , s [ n ] , s [ n ] );
+                            gl . Vertex ( c [ n , 0 ] , c [ n , 1 ] , s [ n ] );
+                            gl . End ( );
+                            }
+                        }
+                    
+                    }
+                gl . PopMatrix ( );
+                gl . PopAttrib ( );
+scramo:
+                ;
                 }
 
-            if ( Spreadsheet_Grid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                ReoGrid3DSpreadsheet ( gl: gl );
-                }
+            //if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    Teapot tp = new Teapot ( );
+            //    tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
+            //    }
+
+            //if ( Spreadsheet_Grid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            //    {
+            //    ReoGrid3DSpreadsheet ( gl: gl );
+            //    }
+
+            ////DoAspect ( );
+
             gl . Flush ( );
-            DoAspect ( );
+
             Draws_Label . Content = String . Format ( "Draw Count: {0}" , Draws );
             Draws++;
+            }
+
+        private float GetMean ( float [ ] s )
+            {
+            float r = s [ 0 ] + s [ 1 ] + s [ 2 ] + s [ 3 ];
+            float R=r / 4f;
+            return R;
+            }
+
+        private float [ ] GetCentroid ( int [ , ] c )
+            {
+            float r0 = c [ 0 , 0 ] + c [ 1 , 0 ] + c [ 2 , 0 ] + c [ 3 , 0 ];
+            float r1 = c [ 0 , 1 ] + c [ 1 , 1 ] + c [ 2 , 1 ] + c [ 3 , 1 ];
+
+            float [ ] r = new float [ 2 ] { r0/4f , r1/4f };
+            return r;
+
             }
 
         private void ReoGrid3DSpreadsheet ( OpenGL gl )
@@ -742,7 +969,10 @@ namespace DMT01
                          {
                          string text = cell . GetData<String> ( );
                          if ( text == null )
+                             {
                              return false;
+                             }
+
                          maxCaptionCol = col;
                          return true;
                          }
@@ -750,7 +980,10 @@ namespace DMT01
                          {
                          string text = cell . GetData<String> ( );
                          if ( text == null )
+                             {
                              return false;
+                             }
+
                          maxCaptionCol = col;
                          return true;
                          }
@@ -768,7 +1001,10 @@ namespace DMT01
                         {
                         string text = cell . GetData<String> ( );
                         if ( text == null )
+                            {
                             return false;
+                            }
+
                         maxCaptionRow = row;
                         return true;
                         }
@@ -776,7 +1012,10 @@ namespace DMT01
                         {
                         string text = cell . GetData<String> ( );
                         if ( text == null )
+                            {
                             return false;
+                            }
+
                         maxCaptionRow = row;
                         return true;
                         }
@@ -800,9 +1039,14 @@ namespace DMT01
                 range: range , iterator: ( row , col , cell ) =>
                     {
                         if ( cell . Row > mRow )
+                            {
                             mRow = cell . Row;
+                            }
+
                         if ( cell . Column > mCol )
+                            {
                             mCol = cell . Column;
+                            }
                         // return true to continue iterate, return false to abort
                         return true;
                     }
@@ -831,7 +1075,10 @@ namespace DMT01
         private string IntToLetter ( int i )
             {
             if ( i < 0 )
+                {
                 return "XXX";
+                }
+
             switch ( i )
                 {
                 case 0:
@@ -996,30 +1243,33 @@ namespace DMT01
 
         private void DoAspect ( )
             {
-            //Debug . WriteLine ( String . Format ( "{0}" , nameof ( DoAspect ) ) );
 
-            var VW=SharpGLandReoGridBig_Grid . Width;
-            Boolean Vis = myReoGridControl . IsVisible;
+            //System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
-            if ( Vis )
+            int GL_Width1 = 605;
+            int GL_Width0 = 1060;
+
+            Boolean IsReoGridControlVisible = myReoGridControl . IsVisible;
+
+            if ( IsReoGridControlVisible )
                 {
-                myOpenGLControl . Width = 604;
+                myOpenGLControl . SetValue ( System . Windows . Controls . Grid . ColumnSpanProperty , 1 );
+                myOpenGLControl . SetValue ( System . Windows . Controls . Grid . ColumnProperty , 1 );
+                myOpenGLControl . Width = GL_Width1;
                 }
             else
                 {
-                myOpenGLControl . Width = VW;
-                }
-            if ( double . IsNaN ( myOpenGLControl . Width ) )
-                {
-                myOpenGLControl . Width = 604;
+                myOpenGLControl . SetValue ( System . Windows . Controls . Grid . ColumnSpanProperty , 2 );
+                myOpenGLControl . SetValue ( System . Windows . Controls . Grid . ColumnProperty , 0 );
+                myOpenGLControl . Width = GL_Width0;
                 }
 
             float width = ( float ) myOpenGLControl . Width;
             float height = ( float ) myOpenGLControl . Height;
-            aspect = width / height;
 
-            //Debug . WriteLine ( String . Format ( "{0}: {1}/{2}={3}" , nameof ( DoAspect ), width,height,aspect) );
+            myOpenGLControlViewportAspect = width / height;
 
+            //System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
             }
 
         private void myOpenGLControl_OpenGLInitialized ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
@@ -1068,27 +1318,23 @@ namespace DMT01
             TextRange tr2 = new TextRange ( SpreadsheetFileName_RichTextBox . Document . ContentStart , SpreadsheetFileName_RichTextBox . Document . ContentEnd );
             String Path = String . Format ( @"{0}\{1}" , tr1 . Text . Trim ( ) , tr2 . Text . Trim ( ) );
 
-            const String scratchy = "Scratcheroo";
-
+            String FileName = String . Format ( @"{0}{1}" , scratchy , ".xll" );
             var a = DMT01 . Properties . Resources . UNEP_NATDIS_disasters_2002_2010;
-            System . IO . File . WriteAllBytes ( scratchy , a );
+            System . IO . File . WriteAllBytes ( FileName , a );
 
 
-            myReoGridControl . Load ( scratchy , unvell . ReoGrid . IO . FileFormat . Excel2007 );
+            myReoGridControl . Load ( FileName , unvell . ReoGrid . IO . FileFormat . Excel2007 );
             }
 
         private void myOpenGLControl_Resized ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
             {
 
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_Resized ) ) );
+            System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
             //  Get the OpenGL object.
             OpenGL gl = myOpenGLControl . OpenGL;
 
             DoAspect ( );
-
-            //  Set the projection matrix.
-            //gl.MatrixMode(OpenGL.GL_PROJECTION);
 
             Resizes++;
 
@@ -1155,7 +1401,9 @@ namespace DMT01
             {
             SC . Calls++;
             if ( Depth > SC . MaxDepth )
+                {
                 SC . MaxDepth = Depth;
+                }
 
             if ( f == null )
                 {
@@ -1578,7 +1826,9 @@ namespace DMT01
                 ( ( IXmlLineInfo ) xmlReader ) . LinePosition . ToString ( "00" ) ) );
 
             for ( int i = 0 ; i < xmlReader . Depth ; i++ )
+                {
                 Debug . Write ( " " );
+                }
 
             switch ( xmlReader . NodeType )
                 {
@@ -1786,7 +2036,9 @@ namespace DMT01
             Object O = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName );
             RadioButton RB = O as RadioButton;
             if ( RB == null )
+                {
                 return;
+                }
 
             RadioCheckBoxSaveState pp = new RadioCheckBoxSaveState ( );
 
@@ -1815,7 +2067,9 @@ namespace DMT01
             Object O = LogicalTreeHelper . FindLogicalNode ( DMT_Main_Window_Control , p . ControlName );
             CheckBox CB = O as CheckBox;
             if ( CB == null )
+                {
                 return;
+                }
 
             CheckBoxControlSaveState pp = new CheckBoxControlSaveState ( );
 
@@ -1909,19 +2163,28 @@ namespace DMT01
             Eye_and_Camera_TabItem . IsSelected = true;
             }
 
-        private void SelectDataRangeForNormalization_Click ( object sender , RoutedEventArgs e )
+        private void SelectDataRangeForNormalization_DoNormalizationOnScratchSheet_Click ( object sender , RoutedEventArgs e )
             {
             myReoGridControl . CurrentWorksheet = myReoGridControl . Worksheets [ 0 ];
             var CW = myReoGridControl . CurrentWorksheet;
-            if ( CW . Name == "Scratcheroo" )
+            if ( CW . Name == scratchy )
+                {
                 return;
+                }
+
+            var IsThisActualiedRange=CW . UsedRange;
+            var xx = CW . MaxContentCol;
+            var yy = CW . MaxContentRow;
             int R, C;
+
             GetActualizedRange ( CW: CW , maxRow: out R , maxCol: out C );
+
             unvell . ReoGrid . RangePosition DataRange = new unvell . ReoGrid . RangePosition ( row: 1 , col: 1 , rows: R , cols: C );
-            unvell . ReoGrid . Worksheet Scratcheroo = myReoGridControl . Worksheets [ "scratcheroo" ];
+
+            unvell . ReoGrid . Worksheet Scratcheroo = myReoGridControl . Worksheets [ scratchy ];
             if ( Scratcheroo == null )
                 {
-                Scratcheroo = myReoGridControl . NewWorksheet ( name: "scratcheroo" );
+                Scratcheroo = myReoGridControl . NewWorksheet ( name: scratchy );
                 }
             
             myReoGridControl . CurrentWorksheet = Scratcheroo;
@@ -1961,15 +2224,23 @@ namespace DMT01
                     Scratcheroo . SetCellData ( row: i , col: j , data: Normalized );
                     }
                 }
+            unvell . ReoGrid . NamedRange NamedDataRange = 
+                new unvell . ReoGrid . NamedRange ( worksheet: Scratcheroo , name: scratchy , range:DataRange );
+            var exists = Scratcheroo . NamedRanges . Contains ( range: NamedDataRange );
+            if(!exists)
+                {
+                Scratcheroo . NamedRanges . Add ( NamedDataRange );
+                }
+            DoSaveSelectedData_Button . PerformClick ( );
             }
 
         private void InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control_Checked ( object sender , RoutedEventArgs e )
             {
 
-            unvell . ReoGrid . Worksheet Scratcheroo = myReoGridControl . Worksheets [ "scratcheroo" ];
+            unvell . ReoGrid . Worksheet Scratcheroo = myReoGridControl . Worksheets [ scratchy ];
             if ( Scratcheroo == null )
                 {
-                Scratcheroo = myReoGridControl . NewWorksheet ( name: "scratcheroo" );
+                Scratcheroo = myReoGridControl . NewWorksheet ( name: scratchy );
                 }
 
             myReoGridControl . CurrentWorksheet = Scratcheroo;
@@ -2038,7 +2309,6 @@ namespace DMT01
             myReoGridControl . DoAction ( action1 ); 
             }
 
-
         private void Do_Iterate_Resoures_Button_Click ( object sender , RoutedEventArgs e )
             {
             Debug . WriteLine ( String.Format("{0}: Manifest resources", nameof( Do_Iterate_Resoures_Button_Click)) );
@@ -2070,7 +2340,10 @@ namespace DMT01
 
                 }
             if ( rset == null )
+                {
                 return;
+                }
+
             foreach ( System . Collections . DictionaryEntry entry in rset )
                 {
                 Debug . WriteLine ( "\t{0}: {1}" , entry . Key , GetStringForValue ( entry . Value ) );
@@ -2080,9 +2353,15 @@ namespace DMT01
         private static string GetStringForValue ( object value )
             {
             if ( value == null )
+                {
                 return "null";
+                }
+
             if ( value is Stream )
+                {
                 return "Stream: " + GetHead ( ( Stream ) value );
+                }
+
             return value . ToString ( );
             }
 
@@ -2095,12 +2374,14 @@ namespace DMT01
                 string text = new String ( buffer , 0 , nChars );
 
                 if ( !reader . EndOfStream )
+                    {
                     text += "...";
+                    }
+
                 return text;
                 }
 
             }
-
  
         private void Elapsed_Label_Initialized ( object sender , EventArgs e )
             {
@@ -2128,48 +2409,52 @@ namespace DMT01
 
         private void myOpenGLControl_MouseMove ( object sender , MouseEventArgs e )
             {
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_MouseMove ) ) );
-
+            GetMyMouseXYPosition ( );
+            //System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
             }
 
         private void myOpenGLControl_MouseWheel ( object sender , MouseWheelEventArgs e )
             {
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_MouseWheel ) ) );
+
+            System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
             }
 
         private void myOpenGLControl_MouseEnter ( object sender , MouseEventArgs e )
             {
+            GetMyMouseXYPosition ( );
 
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( myOpenGLControl_MouseEnter ) ) );
-
+            //System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
             }
 
         private void myOpenGLControl_MouseLeave ( object sender , MouseEventArgs e )
             {
+            GetMyMouseXYPosition ( );
 
-            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-
+            //System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
             }
 
-        private void DoDrawReoGridSpreadsheet_CheckBox_Control_Checked ( object sender , RoutedEventArgs e )
+        private void GetMyMouseXYPosition ( )
             {
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DoDrawReoGridSpreadsheet_CheckBox_Control_Checked ) ) );
-            CheckBox CB = sender as CheckBox;
+            System . Windows . Point p = Mouse . GetPosition ( myOpenGLControl );
 
-            if ( CB . IsChecked . GetValueOrDefault ( ) )
-                {
-                myReoGridControl . Visibility = Visibility . Visible;
-                }
-            else
-                {
-                myReoGridControl . Visibility = Visibility . Collapsed;
-                }
+            viewport_height = ( int ) myOpenGLControl . ActualHeight;
+            viewport_width = ( int ) myOpenGLControl . ActualWidth;
+
+            mouse_x = ( int ) ( p . X + 0.5d );
+            mouse_y = ( int ) ( p . Y + 0.5d );
+            mouse_corrected_y = ( int ) ( viewport_height - mouse_y );
+            viewport_cursor_x = mouse_x;
+            viewport_cursor_y = mouse_corrected_y;
+
+            //System . Diagnostics . Debug . WriteLine ( String . Format ( "[{0},{1}]", mouse_x, mouse_y ) );
             }
 
         private void DoDrawReoGridSpreadsheet_CheckBox_Control_Click ( object sender , RoutedEventArgs e )
             {
-            Debug . WriteLine ( String . Format ( "{0}" , nameof ( DoDrawReoGridSpreadsheet_CheckBox_Control_Click ) ) );
+
+            System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
             CheckBox CB = sender as CheckBox;
 
             if ( CB . IsChecked . GetValueOrDefault ( ) )
@@ -2180,7 +2465,7 @@ namespace DMT01
                 {
                 myReoGridControl . Visibility = Visibility . Collapsed;
                 }
-
+            myOpenGLControl_Resized ( sender: null , args: null );
             }
 
         private void Sheet_Number_Label_MouseEnter ( object sender , MouseEventArgs e )
@@ -2207,49 +2492,44 @@ namespace DMT01
             {
             Label L = sender as Label;
             DoAspect ( );
+            L . Content = myOpenGLControlViewportAspect . ToString ( "#0.0#");
             }
 
         private void Aspect_Label_MouseLeave ( object sender , MouseEventArgs e )
             {
             Label L = sender as Label;
             DoAspect ( );
+            L . Content = myOpenGLControlViewportAspect.ToString("#0.0#");
             }
 
-        private void SharpGLandReoGridBig_Grid_MouseEnter ( object sender , MouseEventArgs e )
+        private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
             {
+            Worksheet Scratcheroo = myReoGridControl.GetWorksheetByName( scratchy );
+            if ( Scratcheroo == null )
+                {
+                return;
+                }
 
-            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-            }
+            myReoGridControl . CurrentWorksheet = Scratcheroo;
+            Worksheet . ReoGridRangeCollection R=Scratcheroo . Ranges;
+            NamedRange named_ranges = Scratcheroo . NamedRanges[ scratchy ];
 
-        private void SharpGLandReoGridBig_Grid_MouseLeave ( object sender , MouseEventArgs e )
-            {
+            Sheety = new Nsheet ( );
+            Sheety . r0 = named_ranges . StartPos . Row;
+            Sheety . c0 = named_ranges . StartPos . Col;
+            Sheety . r = named_ranges . Rows + Sheety . r0;
+            Sheety . c = named_ranges . Cols + Sheety . c0;
+            Sheety . cells = new float [ Sheety.c+2 , Sheety.r+2 ];
 
-            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-            }
+            System . Diagnostics . Debug . WriteLine ( String . Format ( "named ranged count {0} {1} " , named_ranges , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
-        private void SharpGLandReoGridBig_Grid_MouseMove ( object sender , MouseEventArgs e )
-            {
-
-            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-            }
-
-        private void TopStackPanel_MouseEnter ( object sender , MouseEventArgs e )
-            {
-
-            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-            }
-
-        private void TopStackPanel_MouseLeave ( object sender , MouseEventArgs e )
-            {
-
-            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-            }
-
-        private void TopStackPanel_MouseMove ( object sender , MouseEventArgs e )
-            {
-
-            Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-
+            for ( int j = named_ranges . StartPos . Col ; j < named_ranges . EndPos . Col ; j++ )
+                {
+                for ( int i = named_ranges . StartPos . Row ; i < named_ranges . EndPos . Row ; i++ )
+                    {
+                    Sheety.cells [ j , i ] = named_ranges . Cells [ row: i , col: j ] . GetData<float> ( );
+                    }
+                }
             }
         }
     }

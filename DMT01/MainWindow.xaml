@@ -26,12 +26,12 @@
     Initialized="DMTWindow_Initialized"
     IsHitTestVisible="True"
     IsTabStop="False"
-    Top="1"
     Left="845"
     Loaded="DMTWindow_Loaded"
     LocationChanged="DMT_Main_Window_Control_LocationChanged"
     ScrollViewer.CanContentScroll="True"
     ScrollViewer.HorizontalScrollBarVisibility="Visible"
+    Top="1"
     UseLayoutRounding="True"
     WindowStartupLocation="Manual"
     WindowState="Normal"
@@ -42,19 +42,12 @@
         x:Name="TopStackPanel"
         Width="1049"
         Height="1050"
-        Margin="4,4,0,0"
+        Margin="2,2,0,0"
         HorizontalAlignment="Left"
         VerticalAlignment="Top"
         Background="#FFE2DECD"
-        CanHorizontallyScroll="True"
-        CanVerticallyScroll="True"
         Cursor="Hand"
-        MouseEnter="TopStackPanel_MouseEnter"
-        MouseLeave="TopStackPanel_MouseLeave"
-        MouseMove="TopStackPanel_MouseMove"
         Orientation="Vertical"
-        ScrollViewer.HorizontalScrollBarVisibility="Visible"
-        UseLayoutRounding="True"
         >
         <Grid
             x:Name="SharpGLandReoGridBig_Grid"
@@ -64,14 +57,11 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="#FFAB79B6"
-            MouseEnter="SharpGLandReoGridBig_Grid_MouseEnter"
-            MouseLeave="SharpGLandReoGridBig_Grid_MouseLeave"
-            MouseMove="SharpGLandReoGridBig_Grid_MouseMove"
             ScrollViewer.VerticalScrollBarVisibility="Disabled"
             >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="441" />
-                <ColumnDefinition Width="426" />
+                <ColumnDefinition x:Name="Col0" Width="441" />
+                <ColumnDefinition x:Name="Col1" Width="426" />
             </Grid.ColumnDefinitions>
             <ReoGrid:ReoGridControl
                 x:Name="myReoGridControl"
@@ -95,13 +85,15 @@
             <WPF:OpenGLControl
                 x:Name="myOpenGLControl"
                 Grid.Column="1"
+                Width="605"
                 Height="310"
-                Margin="1,0,-170,0"
+                Margin="0,0,-178,0"
                 Padding="1"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 HorizontalContentAlignment="Right"
                 VerticalContentAlignment="Top"
-                BorderThickness="2,2,2,2"
+                BorderThickness="1,1,1,1"
                 Cursor="Cross"
                 DrawFPS="True"
                 IsHitTestVisible="True"
@@ -112,7 +104,8 @@
                 OpenGLDraw="myOpenGLControl_OpenGLDraw"
                 OpenGLInitialized="myOpenGLControl_OpenGLInitialized"
                 OpenGLVersion="OpenGL2_0"
-                Resized="myOpenGLControl_Resized" ScrollViewer.VerticalScrollBarVisibility="Disabled" Width="Auto"
+                Resized="myOpenGLControl_Resized"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
                 />
         </Grid>
         <StackPanel
@@ -142,7 +135,6 @@
                     Margin="5,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Checked="DoDrawReoGridSpreadsheet_CheckBox_Control_Checked"
                     Click="DoDrawReoGridSpreadsheet_CheckBox_Control_Click"
                     Content="Draw Reo"
                     Cursor="Pen"
@@ -197,7 +189,7 @@
                     />
                 <StackPanel
                     x:Name="RadioButton_StackPanel"
-                    Width="554"
+                    Width="448"
                     Height="18"
                     Margin="5,3,0,0"
                     HorizontalAlignment="Left"
@@ -232,6 +224,14 @@
                         Content="LookAt"
                         IsChecked="False"
                         />
+                    <CheckBox
+                        x:Name="DrawMouseScreenSpaceAnnotation_CheckBox_Control"
+                        Width="76"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Mouse in Screen"
+                        IsChecked="True"
+                        />
                 </StackPanel>
             </StackPanel>
             <StackPanel
@@ -262,7 +262,7 @@
                     x:Name="Save0_Button"
                     Width="84"
                     Height="20"
-                    Margin="12,1,21,1"
+                    Margin="12,1,9,1"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Click="Save0_Button_Click"
@@ -270,14 +270,50 @@
                     />
                 <RadioButton
                     x:Name="LaunchSavedStateOnInitalization_RadioButton_Control"
-                    Width="119"
+                    Width="122"
                     Height="15"
                     Margin="0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Bottom"
                     Background="#FFEADDDD"
                     Content="Load Saved On Init"
                     IsChecked="True"
+                    />
+                <CheckBox
+                    x:Name="DrawScreenSpaceAnnotationGrid_CheckBox_Control"
+                    Width="133"
+                    Margin="6,3,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Draw Screen Numbas"
+                    />
+                <CheckBox
+                    Width="133"
+                    Margin="6,3,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Check Box Unassigned"
+                    />
+                <CheckBox
+                    Width="133"
+                    Margin="6,3,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Check Box Unassigned"
+                    />
+                <CheckBox
+                    Width="133"
+                    Margin="6,3,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Check Box Unassigned"
+                    />
+                <CheckBox
+                    Width="133"
+                    Margin="6,3,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Check Box Unassigned"
                     />
             </StackPanel>
             <StackPanel
@@ -394,7 +430,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="{Binding Source={x:Static local:MainWindow.aspect}, StringFormat=Aspect \{0:00.00\}, UpdateSourceTrigger=PropertyChanged}"
+                    Content="{Binding Source={x:Static local:MainWindow.myOpenGLControlViewportAspect}, StringFormat=myOpenGLControlViewportAspect \{0:00.00\}, UpdateSourceTrigger=PropertyChanged}"
                     MouseEnter="Aspect_Label_MouseEnter"
                     MouseLeave="Aspect_Label_MouseLeave"
                     />
@@ -403,6 +439,7 @@
                     Width="51"
                     Margin="1,0,0,0"
                     HorizontalAlignment="Left"
+                    Content="Mouse X"
                     >
                     <Label.Background>
                         <RadialGradientBrush GradientOrigin="1,0.5">
@@ -415,6 +452,7 @@
                     x:Name="Screen_Y_Label"
                     Width="41"
                     Margin="8,0,0,0"
+                    Content="'"
                     >
                     <Label.Background>
                         <RadialGradientBrush GradientOrigin="0,0.5">
@@ -429,7 +467,7 @@
                     Margin="2,5,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="Label"
+                    Content="Viewport XY"
                     >
                     <Label.Background>
                         <RadialGradientBrush>
@@ -560,10 +598,10 @@
                                 x:Name="DoSelectDataRangeForNormalization_Button"
                                 Width="79"
                                 Height="25"
-                                Margin="5,2,0,0"
+                                Margin="5,0,0,0"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Click="SelectDataRangeForNormalization_Click"
+                                VerticalAlignment="Bottom"
+                                Click="SelectDataRangeForNormalization_DoNormalizationOnScratchSheet_Click"
                                 Content="Select Data"
                                 />
                             <CheckBox
@@ -575,6 +613,13 @@
                                 Background="#FFC14242"
                                 BorderBrush="#FF0F1959"
                                 Content="&lt;-Execute Startup"
+                                />
+                            <Button
+                                x:Name="DoSaveSelectedData_Button"
+                                Width="86"
+                                Margin="7,4,0,2"
+                                Click="DoSaveSelectedData_Button_Click"
+                                Content="Save Selected"
                                 />
                             <CheckBox
                                 x:Name="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control"
@@ -1094,36 +1139,45 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top"
+                                LabelText="Tick Point Size" SliderMaxValue="12" SliderMinValue="1" SliderValue="5"
                                 />
                             <local:H_Slider_UserControl1
-                                x:Name="Axis_Property1_H_Slider_UserControl"
+                                x:Name="Axis_tick_annotation_scale_H_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top"
-                                LabelText="Axis_Property1"
+                                LabelText="Tick Annotation Font Scale "
+                                SliderMaxValue="2"
+                                SliderMinValue=".1"
+                                SliderValue="0.8"
                                 />
                             <local:H_Slider_UserControl1
-                                x:Name="Axis_Property2_H_Slider_UserControl1"
+                                x:Name="ScreenAnnotationFont_SizeH_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top"
-                                LabelText="Axis_Property2"
+                                LabelText="ScreenAnnotationFont"
+                                SliderMaxValue="22"
+                                SliderMinValue="6"
                                 />
                             <local:H_Slider_UserControl1
-                                x:Name="Axis_Property3_H_Slider_UserControl"
+                                x:Name="MouseScreenAnnotationFontSize_H_Slider_UserControl"
                                 Width="943"
                                 Height="69"
                                 Margin="2,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top"
-                                LabelText="Axis_Property3"
+                                LabelText="MouseAnnotationFontSize"
+                                SliderMaxValue="40"
+                                SliderMinValue="8"
+                                SliderValue="10"
                                 />
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox
@@ -1785,10 +1839,10 @@
                             Margin="2,7,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            LabelText="Top"
-                            SliderMaxValue="5"
-                            SliderMinValue="0"
-                            SliderValue="1"
+                            LabelText="Orthographic Top"
+                            SliderMaxValue="200"
+                            SliderMinValue="-1"
+                            SliderValue="0"
                             />
                         <local:H_Slider_UserControl1
                             x:Name="Orthographic_Bottom_H_Slider_UserControl"
@@ -1798,7 +1852,7 @@
                             Margin="2,1,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            LabelText="Bottom"
+                            LabelText="Orthographic Bottom"
                             SliderMaxValue="0"
                             SliderMinValue="-5"
                             SliderValue="-1"
@@ -1811,7 +1865,7 @@
                             Margin="2,2,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            LabelText="Near"
+                            LabelText="Orthographic z Near"
                             SliderMaxValue="0"
                             SliderMinValue="-5"
                             SliderValue="-1"
@@ -1824,7 +1878,7 @@
                             Margin="2,5,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            LabelText="Far"
+                            LabelText="Orthographic z Far"
                             SliderMaxValue="5"
                             SliderMinValue="0"
                             SliderValue="1"
