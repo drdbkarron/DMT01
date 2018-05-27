@@ -1139,7 +1139,10 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 VerticalContentAlignment="Top"
-                                LabelText="Tick Point Size" SliderMaxValue="12" SliderMinValue="1" SliderValue="5"
+                                LabelText="Tick Point Size"
+                                SliderMaxValue="12"
+                                SliderMinValue="1"
+                                SliderValue="5"
                                 />
                             <local:H_Slider_UserControl1
                                 x:Name="Axis_tick_annotation_scale_H_Slider_UserControl"

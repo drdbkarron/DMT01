@@ -122,6 +122,9 @@
     <Compile Include="H_Slider_UserControl1.xaml.cs">
       <DependentUpon>H_Slider_UserControl1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LocalMaths.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,10 +147,10 @@
     <Compile Include="Axis_Arrow_Grid.cs" />
     <Compile Include="DMT_class.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LocalMaths.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Page Include="H_Slider_UserControl1.xaml">
       <SubType>Designer</SubType>

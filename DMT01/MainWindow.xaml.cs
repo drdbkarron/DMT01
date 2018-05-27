@@ -32,6 +32,7 @@ using unvell . ReoGrid . Graphics;
 using System . Drawing;
 using System . Resources;
 using System . Reflection;
+using LocalMaths;
 
 namespace System . Windows . Controls
     {
@@ -103,7 +104,7 @@ public static BitmapSource ConvertBitmap ( Bitmap source )
 
 namespace DMT01
     {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window 
         {
         #region Persistance_classes2
 
@@ -195,13 +196,13 @@ namespace DMT01
         int viewport_cursor_x;
         int viewport_cursor_y;
         float viewport_width, viewport_height;
-        public class Nsheet
+        public class NWorksheety
             {
             public float [ , ] cells;
             public int r, c, r0,c0;
             }
 
-        static Nsheet Sheety;
+        static NWorksheety Sheety;
 
 
         public class Vertex
@@ -251,11 +252,18 @@ namespace DMT01
                 }
             };
 
+        public class Edge
+            {
+            public Vertex [ ] V = new Vertex [ 2 ];
+            }
         public class Boxel
             {
             public Vertex [ ] V = new Vertex [ 4 ];
             public Vertex Centroid = new Vertex ( );
             public int Span=1;
+            public int[]  SortedVertexIndicies=new int [ 4 ] { 0 , 1 , 2 , 3 };
+            public int LargestVertex, SmallestVertex;
+            public Edge [ ] E = new Edge [ 4 ];
 
             public Boxel ( )
                 {
@@ -275,6 +283,53 @@ namespace DMT01
                 LoadValue ( 3 , c );
 
                 this . Centroid = LoadCentroid ( );
+
+                SortVerticies ( );
+
+                //this . E [ 0 ] . V [ 0 ] = V [ 0 ];
+                //this . E [ 0 ] . V [ 1 ] = V [ 1 ];
+                }
+
+            private void SortVerticies ()
+                {
+                Boolean IsSorted = false;
+
+                do
+                    {
+                    for ( int i = 0 ; i < 3 ; i++ )
+                        {
+                        int j = SortedVertexIndicies [ i ];
+                        int k = SortedVertexIndicies [ i + 1 ];
+                        float v0 = V [ j ] . V;
+                        float v1 = V [ k ] . V;
+                        if ( v0 > v1 )
+                            {
+                            int temp0 = SortedVertexIndicies[j];
+                            int temp1 = SortedVertexIndicies[k];
+                            SortedVertexIndicies [ j ] =   temp1;
+                            SortedVertexIndicies [ k  ] =  temp0 ;
+                            IsSorted = false;
+
+                            Debug . WriteLine ( String . Format ( "swapping {0}->{1}" , temp0, temp1) );
+
+                            }
+                        else
+                            {
+                            IsSorted = true;
+                            }
+
+                        string StringerDinger = "0.000";
+                        //Debug . WriteLine ( String . Format ( "{0}{1}{2}{3}" , v0, LocalMaths.LocalMathsClass.ComparisonString(v0,v1), v1 ) );
+                        Debug . WriteLine ( String . Format ( "{0}: 0:{1}->1:{2}->2:{3}->3:{4} {5} {6} {7} {8} {9} {10} {11}" ,
+                            i , SortedVertexIndicies [ 0 ], SortedVertexIndicies [ 1 ], SortedVertexIndicies [ 2 ], SortedVertexIndicies [ 3 ],
+                            V [ SortedVertexIndicies [ 0 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 0 ] ] . V , V [ SortedVertexIndicies [ 1 ] ] . V ) ,
+                            V [ SortedVertexIndicies [ 1 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 1 ] ] . V , V [ SortedVertexIndicies [ 2 ] ] . V ) ,
+                            V [ SortedVertexIndicies [ 2 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 2 ] ] . V , V [ SortedVertexIndicies [ 3 ] ] . V ) ,
+                            V [ SortedVertexIndicies [ 3 ] ] . V . ToString ( StringerDinger ) ) );
+
+
+                        }
+                    } while ( IsSorted == false );
                 }
 
             private Vertex LoadCentroid ()
@@ -561,8 +616,8 @@ namespace DMT01
                             Sheety . cells [ c[2,0], c[2,1] ],
                             Sheety . cells [ c[3,0], c[3,1] ],
                                                  };
-                        float [ ] C = GetCentroid ( c );
-                        float S = GetMean ( s );
+                        float [ ] C =  LocalMaths.LocalMathsClass.GetCentroid ( c );
+                        float S = LocalMaths. LocalMathsClass . GetMean ( s );
 
                         for ( int k = 0 ; k <4 ; k++ )
                             {
@@ -608,23 +663,6 @@ scramo:
             Draws++;
             }
 
-        private float GetMean ( float [ ] s )
-            {
-            float r = s [ 0 ] + s [ 1 ] + s [ 2 ] + s [ 3 ];
-            float R=r / 4f;
-            return R;
-            }
-
-        private float [ ] GetCentroid ( int [ , ] c )
-            {
-            float r0 = c [ 0 , 0 ] + c [ 1 , 0 ] + c [ 2 , 0 ] + c [ 3 , 0 ];
-            float r1 = c [ 0 , 1 ] + c [ 1 , 1 ] + c [ 2 , 1 ] + c [ 3 , 1 ];
-
-            float [ ] r = new float [ 2 ] { r0/4f , r1/4f };
-            return r;
-
-            }
-
         private void ReoGrid3DSpreadsheet ( OpenGL gl )
             {
             float cell_height = 0.499f;
@@ -664,7 +702,7 @@ scramo:
 
                     gl . PushMatrix ( );
 
-                    float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                    float [ ] c = LocalMaths.LocalMathsClass.GetCentroid ( x0 , y0 , x1 , y1 );
 
                     gl . Translate ( c [ 0 ] - .25 , c [ 1 ] - .15 , c [ 2 ] );
                     gl . Scale ( 0.6 , 0.6 , 1.0 );
@@ -700,11 +738,11 @@ scramo:
                     gl . PopAttrib ( );
                     gl . PushMatrix ( );
 
-                    float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                    float [ ] c = LocalMaths.LocalMathsClass.GetCentroid ( x0 , y0 , x1 , y1 );
 
                     gl . Translate ( c [ 0 ] - 0.25f , c [ 1 ] - .25 , c [ 2 ] );
                     gl . Scale ( 0.7 , 0.7 , 1.0 );
-                    gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: IntToLetter ( i ) );
+                    gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: LocalMaths . LocalMathsClass . IntToLetter ( i ) );
                     gl . PopMatrix ( );
                     }
                 }
@@ -837,7 +875,7 @@ scramo:
 
                             gl . PushMatrix ( );
 
-                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                            float [ ] c = LocalMaths.LocalMathsClass.GetCentroid ( x0 , y0 , x1 , y1 );
                             int len = Text . Length;
                             if ( len < 10 )
                                 {
@@ -882,7 +920,7 @@ scramo:
                             gl . Vertex ( x1 , y0 );
                             gl . End ( );
 
-                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                            float [ ] c = LocalMaths . LocalMathsClass . GetCentroid ( x0 , y0 , x1 , y1 );
 
                             gl . Color ( red: number , green: number , blue: number , alpha: 1 );
                             gl . Translate ( x: x0 + Spreadsheet3DNumericLeftMargin_H_Slider_User_Control.SliderValue , y: c [ 1 ] - .25 , z: c [ 2 ] -1.0 );
@@ -911,7 +949,7 @@ scramo:
                                 }
                             gl . PushMatrix ( );
 
-                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                            float [ ] c = LocalMaths.LocalMathsClass.GetCentroid ( x0 , y0 , x1 , y1 );
 
                             gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] );
                             var big_x_scaling = 2.0f / ( float ) 10;
@@ -933,7 +971,7 @@ scramo:
                                 }
                             gl . PushMatrix ( );
 
-                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                            float [ ] c = LocalMaths . LocalMathsClass . GetCentroid ( x0 , y0 , x1 , y1 );
 
                             gl . Translate ( x: x0 + 0.01f , y: c [ 1 ] - .25 , z: c [ 2 ] );
                             var big_x_scaling = 2.0f / ( float ) 10;
@@ -944,7 +982,7 @@ scramo:
                             }
                         else
                             {
-                            float [ ] c = GetCentroid ( x0 , y0 , x1 , y1 );
+                            float [ ] c = LocalMaths . LocalMathsClass . GetCentroid ( x0 , y0 , x1 , y1 );
                             gl . PointSize ( 5 );
                             gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
                             gl . Vertex ( c );
@@ -1056,190 +1094,7 @@ scramo:
 #pragma warning restore CS0162 // Unreachable code detected
             }
 
-        private float [ ] GetCentroid ( float x0 , float y0 , float x1 , float y1 )
-            {
-            float z = 0.0f;
-            float [ ] X0 = new float [ ] { x0 , y0 , z };
-            float [ ] X1 = new float [ ] { x0 , y1 , z };
-            float [ ] X2 = new float [ ] { x1 , y1 , z };
-            float [ ] X3 = new float [ ] { x1 , y0 , z };
 
-            float [ ] X = new float [ ] {
-                (X0 [ 0 ] + X1 [ 0 ] + X2 [ 0 ] + X3 [ 0 ])/4.0F ,
-                (X0 [ 1 ] + X1 [ 1 ] + X2 [ 1 ] + X3 [ 1 ])/4.0F ,
-                (X0 [ 2 ] + X1 [ 2 ] + X2 [ 2 ] + X3 [ 2 ])/4.0F };
-
-            return X;
-            }
-
-        private string IntToLetter ( int i )
-            {
-            if ( i < 0 )
-                {
-                return "XXX";
-                }
-
-            switch ( i )
-                {
-                case 0:
-                    return "A";
-                case 1:
-                    return "B";
-                case 2:
-                    return "C";
-                case 3:
-                    return "D";
-                case 4:
-                    return "E";
-                case 5:
-                    return "F";
-                case 6:
-                    return "G";
-                case 7:
-                    return "H";
-                case 8:
-                    return "I";
-                case 9:
-                    return "J";
-                case 10:
-                    return "K";
-                case 11:
-                    return "L";
-                case 12:
-                    return "M";
-                case 13:
-                    return "N";
-                case 15:
-                    return "O";
-                case 16:
-                    return "P";
-                case 17:
-                    return "Q";
-                case 18:
-                    return "R";
-                case 19:
-                    return "S";
-                case 20:
-                    return "T";
-                case 21:
-                    return "U";
-                case 22:
-                    return "V";
-                case 23:
-                    return "W";
-                case 24:
-                    return "X";
-                case 25:
-                    return "Y";
-                case 26:
-                    return "Z";
-                }
-            return "???";
-            }
-
-        private void LoadMatrix ( SharpGL . OpenGL gl , mat4 m4 )
-            {
-            vec4 c0 = m4 . Column0;
-            vec4 c1 = m4 . Column1;
-            vec4 c2 = m4 . Column2;
-            vec4 c3 = m4 . Column3;
-
-            double [ ] m = new double [ 16 ]{ c0 [ 0 ] , c0 [ 1 ] , c0 [ 2 ] , c0 [ 3 ] ,
-                                       c1 [ 0 ] , c1 [ 1 ] , c1 [ 2 ] , c1 [ 3 ] ,
-                                       c2 [ 0 ] , c2 [ 1 ] , c2 [ 2 ] , c2 [ 3 ] ,
-                                       c3 [ 0 ] , c3 [ 1 ] , c3 [ 2 ] , c3 [ 3 ] };
-
-            gl . LoadMatrix ( m );
-
-
-            //LoadMatrix ( c0 [ 0 ] , c0 [ 1 ] , c0 [ 2 ] , c0 [ 3 ] ,
-            //                           c1 [ 0 ] , c1 [ 1 ] , c1 [ 2 ] , c1 [ 3 ] ,
-            //                           c2 [ 0 ] , c2 [ 1 ] , c2 [ 2 ] , c2 [ 3 ] ,
-            //                           c3 [ 0 ] , c3 [ 1 ] , c3 [ 2 ] , c3 [ 3 ]
-            //                         );
-            }
-
-        private GlmSharp . mat4 LookAt ( OpenGL gl )
-            {
-            float x_up = 0.0f;
-            float y_up = 1.0f;
-            float z_up = 0.0f;
-
-            if ( LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                x_up = 1.0f;
-                }
-            else
-                {
-                x_up = 0.0f;
-                }
-            if ( LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                y_up = 1.0f;
-                }
-            else
-                {
-                y_up = 0.0f;
-                }
-            if ( LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                z_up = 1.0f;
-                }
-            else
-                {
-                z_up = 0.0f;
-                }
-
-            GlmSharp . vec3 eye = new GlmSharp . vec3 (
-                LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
-                LookAt_Eye_Y_H_Slider_UserControl . SliderValue ,
-                LookAt_Eye_Z_H_Slider_UserControl . SliderValue );
-
-            GlmSharp . vec3 target = new GlmSharp . vec3 (
-                LookAtTarget_X_H_Slider_UserControl . SliderValue ,
-                LookAtTarget_Y_H_Slider_UserControl . SliderValue ,
-                LookAtTarget_Z_H_Slider_UserControl . SliderValue );
-
-            GlmSharp . vec3 up = new GlmSharp . vec3 (
-                x_up , y_up , z_up );
-
-            GlmSharp . mat4 M = GlmSharp . mat4 . LookAt ( eye , target , up );
-
-            //gl.LookAt(
-            //    LookAt_Eye_X_H_Slider_UserControl.SliderValue, 
-            //    LookAt_Eye_Y_H_Slider_UserControl.SliderValue, 
-            //    LookAt_Eye_Z_H_Slider_UserControl.SliderValue,
-            //    LookAtTarget_X_H_Slider_UserControl.SliderValue, 
-            //    LookAtTarget_Y_H_Slider_UserControl.SliderValue, 
-            //    LookAtTarget_Z_H_Slider_UserControl.SliderValue,
-            //    x_up, y_up, z_up);
-
-            return M;
-            }
-
-        private mat4 Perspective ( OpenGL gl )
-            {
-            //(double fovy, double aspect, double zNear, double zFar)
-
-            mat4 M = new mat4 ( );
-
-            M = GlmSharp . mat4 . Perspective ( Perspective_FOVY_H_Slider_UserControl . SliderValue ,
-                Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
-                Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
-                Perspective_Z_FAR_H_Slider_UserControl . SliderValue );
-
-            //Perspective ( Perspective_FOVY_H_Slider_UserControl . SliderValue ,
-            //    Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
-            //    Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
-            //    Perspective_Z_FAR_H_Slider_UserControl . SliderValue );
-
-            //gl . Perspective ( Perspective_FOVY_H_Slider_UserControl . SliderValue ,
-            //     Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
-            //     Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
-            //     Perspective_Z_FAR_H_Slider_UserControl . SliderValue );
-
-            return M;
-            }
 
         private void DoAspect ( )
             {
@@ -2499,7 +2354,7 @@ scramo:
             {
             Label L = sender as Label;
             DoAspect ( );
-            L . Content = myOpenGLControlViewportAspect.ToString("#0.0#");
+            L . Content = MainWindow.myOpenGLControlViewportAspect.ToString("#0.0#");
             }
 
         private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
@@ -2514,7 +2369,7 @@ scramo:
             Worksheet . ReoGridRangeCollection R=Scratcheroo . Ranges;
             NamedRange named_ranges = Scratcheroo . NamedRanges[ scratchy ];
 
-            Sheety = new Nsheet ( );
+            Sheety = new NWorksheety ( );
             Sheety . r0 = named_ranges . StartPos . Row;
             Sheety . c0 = named_ranges . StartPos . Col;
             Sheety . r = named_ranges . Rows + Sheety . r0;
