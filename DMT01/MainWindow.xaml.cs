@@ -191,11 +191,14 @@ namespace DMT01
         private static SavedControl SC;
 
         const String scratchy = "Scratcheroo";
-        int mouse_x, mouse_y;
-        int mouse_corrected_y;
-        int viewport_cursor_x;
-        int viewport_cursor_y;
-        float viewport_width, viewport_height;
+
+        static public int mouse_x, mouse_y;
+        static public int mouse_corrected_y;
+        static public int viewport_cursor_x;
+        static public int viewport_cursor_y;
+        static public float viewport_width;
+        static public float viewport_height;
+
         public class NWorksheety
             {
             public float [ , ] cells;
@@ -293,24 +296,33 @@ namespace DMT01
             private void SortVerticies ()
                 {
                 Boolean IsSorted = false;
-
+                int swaps = 0;
+                int passes = 0;
+                string StringerDinger = "0.000";
                 do
                     {
+                    FreshReset: IsSorted = false;
+                    
                     for ( int i = 0 ; i < 3 ; i++ )
                         {
-                        int j = SortedVertexIndicies [ i ];
-                        int k = SortedVertexIndicies [ i + 1 ];
+                        int ii = i % 4;
+                        int iii = ( i + 1 ) % 4;
+                        int j = SortedVertexIndicies [ii ];
+                        int k = SortedVertexIndicies [iii];
                         float v0 = V [ j ] . V;
                         float v1 = V [ k ] . V;
                         if ( v0 > v1 )
                             {
-                            int temp0 = SortedVertexIndicies[j];
-                            int temp1 = SortedVertexIndicies[k];
-                            SortedVertexIndicies [ j ] =   temp1;
-                            SortedVertexIndicies [ k  ] =  temp0 ;
-                            IsSorted = false;
+                            //Burblegiggle ( swaps , "pre -Swap" );
 
-                            Debug . WriteLine ( String . Format ( "swapping {0}->{1}" , temp0, temp1) );
+                            int temp0 = SortedVertexIndicies[ii];
+                            int temp1 = SortedVertexIndicies[iii];
+                            SortedVertexIndicies [ii ] =   temp1;
+                            SortedVertexIndicies [iii  ] =  temp0 ;
+                            IsSorted = false;
+                            swaps++;
+                            //Burblegiggle ( swaps, "post-Swap" );
+                            goto FreshReset;
 
                             }
                         else
@@ -318,18 +330,37 @@ namespace DMT01
                             IsSorted = true;
                             }
 
-                        string StringerDinger = "0.000";
-                        //Debug . WriteLine ( String . Format ( "{0}{1}{2}{3}" , v0, LocalMaths.LocalMathsClass.ComparisonString(v0,v1), v1 ) );
-                        Debug . WriteLine ( String . Format ( "{0}: 0:{1}->1:{2}->2:{3}->3:{4} {5} {6} {7} {8} {9} {10} {11}" ,
-                            i , SortedVertexIndicies [ 0 ], SortedVertexIndicies [ 1 ], SortedVertexIndicies [ 2 ], SortedVertexIndicies [ 3 ],
-                            V [ SortedVertexIndicies [ 0 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 0 ] ] . V , V [ SortedVertexIndicies [ 1 ] ] . V ) ,
-                            V [ SortedVertexIndicies [ 1 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 1 ] ] . V , V [ SortedVertexIndicies [ 2 ] ] . V ) ,
-                            V [ SortedVertexIndicies [ 2 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 2 ] ] . V , V [ SortedVertexIndicies [ 3 ] ] . V ) ,
-                            V [ SortedVertexIndicies [ 3 ] ] . V . ToString ( StringerDinger ) ) );
-
-
-                        }
+                         }
+                    passes++;
                     } while ( IsSorted == false );
+
+                Burblegiggle ( swaps , "Completed" );
+
+                }
+
+            private void Burblegiggle (int swaps, String annotation)
+                {
+                string StringerDinger = "0.000";
+                var TestResults = String . Format ( "{0}{1}{2}" ,
+                      LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 0 ] ] . V , V [ SortedVertexIndicies [ 1 ] ] . V ) ,
+                      LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 1 ] ] . V , V [ SortedVertexIndicies [ 2 ] ] . V ) ,
+                      LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 2 ] ] . V , V [ SortedVertexIndicies [ 3 ] ] . V ) );
+
+                if ( TestResults == "<<<" || TestResults == "==<<" || TestResults == "<==<" || TestResults == "======" )
+                    {
+                    Debug . WriteLine ( String . Format ( "Sorted in {0} swaps {1} {2} << {3}" ,
+                        swaps , TestResults ,
+                        V [ SortedVertexIndicies [ 0 ] ] . V . ToString ( StringerDinger ) , V [ SortedVertexIndicies [ 3 ] ] . V . ToString ( StringerDinger ) ) );
+                    }
+                else
+                    {
+                    Debug . WriteLine ( String . Format ( "{8} {0} swaps {1}{2}{3}{4}{5}{6}{7}" ,
+                         swaps ,
+                         V [ SortedVertexIndicies [ 0 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 0 ] ] . V , V [ SortedVertexIndicies [ 1 ] ] . V ) ,
+                         V [ SortedVertexIndicies [ 1 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 1 ] ] . V , V [ SortedVertexIndicies [ 2 ] ] . V ) ,
+                         V [ SortedVertexIndicies [ 2 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 2 ] ] . V , V [ SortedVertexIndicies [ 3 ] ] . V ) ,
+                         V [ SortedVertexIndicies [ 3 ] ] . V . ToString ( StringerDinger ), annotation ) );
+                    }
                 }
 
             private Vertex LoadCentroid ()
@@ -582,7 +613,7 @@ namespace DMT01
                     );
                 }
 
-            if ( true )
+            if ( YourArmsTooShortToBoxWithHashem.IsChecked.GetValueOrDefault() )
                 {
                 if ( Sheety == null )
                     goto scramo;
@@ -1093,8 +1124,6 @@ scramo:
             maxCol = mCol;
 #pragma warning restore CS0162 // Unreachable code detected
             }
-
-
 
         private void DoAspect ( )
             {
@@ -2131,6 +2160,7 @@ scramo:
             SwapRow ( CBC );
             }
 
+        #region SwapRow
         void SwapRow ( CheckBoxCell CBC )
             {
             Worksheet Snatcheroo = CBC . Cell . Worksheet;
@@ -2163,6 +2193,8 @@ scramo:
             var action1 = new unvell . ReoGrid . Actions . RemoveRowsAction ( row: R , rows: 1 );
             myReoGridControl . DoAction ( action1 ); 
             }
+        
+        #endregion SwapRow
 
         private void Do_Iterate_Resoures_Button_Click ( object sender , RoutedEventArgs e )
             {

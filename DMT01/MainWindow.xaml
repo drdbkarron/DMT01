@@ -5,6 +5,7 @@
     xmlns:ReoGrid="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
     xmlns:WPF="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
     xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
     xmlns:local="clr-namespace:DMT01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -287,12 +288,12 @@
                     VerticalAlignment="Top"
                     Content="Draw Screen Numbas"
                     />
-                <CheckBox
+                <CheckBox x:Name="YourArmsTooShortToBoxWithHashem"
                     Width="133"
                     Margin="6,3,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="Check Box Unassigned"
+                    Content="Run develop code" IsChecked="True"
                     />
                 <CheckBox
                     Width="133"
@@ -430,7 +431,7 @@
                     VerticalAlignment="Center"
                     Background="#FFEAD0D0"
                     BorderThickness="1"
-                    Content="{Binding Source={x:Static local:MainWindow.myOpenGLControlViewportAspect}, StringFormat=myOpenGLControlViewportAspect \{0:00.00\}, UpdateSourceTrigger=PropertyChanged}"
+                    Content="{c:Binding Path=myOpenGLControlViewportAspect, UpdateSourceTrigger=PropertyChanged}"
                     MouseEnter="Aspect_Label_MouseEnter"
                     MouseLeave="Aspect_Label_MouseLeave"
                     />
