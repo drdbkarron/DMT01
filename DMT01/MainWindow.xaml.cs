@@ -257,14 +257,20 @@ namespace DMT01
 
         public class Edge
         {
-            public Vertex [ ] V ;
+            public short EdgeIndex = -1;
+            public Vertex [ ] V =null;
+            public Edge[] SubEdge = null;
+            public short SubEdges = 0;
+            public Vertex [ ] TweenVerte = null;
             public Edge()
             {
-                V = new Vertex [ 2 ];
+                this.V = new Vertex [ 2 ];
             }
-            public Edge( ref Vertex V0 , ref Vertex V1 )
+            public Edge( short EI, Vertex V0 , Vertex V1 )
             {
-                V = new Vertex [ 2 ];
+                this . EdgeIndex = EI;
+                this. V = new Vertex [ 2 ];
+
                 V [ 0 ] = V0;
                 V [ 1 ] = V1;
             }
@@ -282,8 +288,8 @@ namespace DMT01
             public Boxel ( )
                 {
                 V = new Vertex [ 4 ];
-      
                 }
+ 
             public Boxel ( int i , int j,float [ , ] c)
                 {
                 this . V [ 0 ] = new Vertex ( i         , j      );
@@ -291,8 +297,8 @@ namespace DMT01
                 this . V [ 2 ] = new Vertex ( i +Span   , j+Span );
                 this . V [ 3 ] = new Vertex ( i +Span   , j      );
 
-                LoadValue ( 0 , c );
-                LoadValue ( 1, c );
+                this.LoadValue ( 0 , c );
+                LoadValue ( 1 , c );
                 LoadValue ( 2 , c );
                 LoadValue ( 3 , c );
 
@@ -300,9 +306,45 @@ namespace DMT01
 
                 SortVerticies ( );
 
-                //this . E [ 0 ] . V [ 0 ] = V [ 0 ];
-                //this . E [ 0 ] . V [ 1 ] = V [ 1 ];
+                this . E [ 0 ] = new Edge ( 0 , this . V [ 0 ] , this . V [ 1 ] );
+                this . E [ 1 ] = new Edge ( 1 , this . V [ 1 ] , this . V [ 2 ] );
+                this . E [ 2 ] = new Edge ( 2 , this . V [ 2 ] , this . V [ 3 ] );
+                this . E [ 3 ] = new Edge ( 3 , this . V [ 3 ] , this . V [ 0 ] );
+
+                LoadTweenVerts ( );
                 }
+
+            private void LoadTweenVerts()
+            {
+                for ( int e = 0 ; e < 4 ; e++ )
+                {
+                    for ( int v = 1 ; v < 3 ; v++ )
+                    {
+                        if ( IsInBetween ( v , e ) )
+                        {
+                        }
+                    }
+                }
+            }
+
+            private bool IsInBetween( int v , int e )
+            {
+                Vertex V = this . V [ SortedVertexIndicies [ v ] ];
+                Edge E = this . E [ e ];
+                return IsInBetween ( V , E );
+            }
+
+            private bool IsInBetween( Vertex v , Edge e )
+            {
+                return IsInBetween ( e . V [ 0 ] . V , v . V , e . V [ 1 ] . V );
+            }
+
+            private bool IsInBetween( float v1 , float v2 , float v3 )
+            {
+                if ( v1 < v2 && v2 < v3 )
+                    return true;
+                return false;
+            }
 
             private void SortVerticies ()
                 {
