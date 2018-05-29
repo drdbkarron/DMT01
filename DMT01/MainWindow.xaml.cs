@@ -256,9 +256,20 @@ namespace DMT01
             };
 
         public class Edge
+        {
+            public Vertex [ ] V ;
+            public Edge()
             {
-            public Vertex [ ] V = new Vertex [ 2 ];
+                V = new Vertex [ 2 ];
             }
+            public Edge( ref Vertex V0 , ref Vertex V1 )
+            {
+                V = new Vertex [ 2 ];
+                V [ 0 ] = V0;
+                V [ 1 ] = V1;
+            }
+        }
+
         public class Boxel
             {
             public Vertex [ ] V = new Vertex [ 4 ];
@@ -298,10 +309,10 @@ namespace DMT01
                 Boolean IsSorted = false;
                 int swaps = 0;
                 int passes = 0;
-                string StringerDinger = "0.000";
                 do
                     {
-                    FreshReset: IsSorted = false;
+FreshReset:
+                    IsSorted = false;
                     
                     for ( int i = 0 ; i < 3 ; i++ )
                         {
@@ -334,7 +345,7 @@ namespace DMT01
                     passes++;
                     } while ( IsSorted == false );
 
-                Burblegiggle ( swaps , "Completed" );
+                //Burblegiggle ( swaps , "Completed" );
 
                 }
 
@@ -450,18 +461,7 @@ namespace DMT01
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Projection );
             gl . LoadIdentity ( );
 
-            if ( UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . GetValueOrDefault ( ) )
-                {
-                gl . Ortho ( left: Orthographic_Left_H_Slider_UserControl . SliderValue ,
-                            right: Orthographic_Right_H_Slider_UserControl . SliderValue ,
-                            bottom: Orthographic_Bottom_H_Slider_UserControl . SliderValue ,
-                            top: Orthographic_Top_H_Slider_UserControl . SliderValue ,
-                            zNear: Orthographic_Near_H_Slider_UserControl . SliderValue ,
-                            zFar: Orthographic_Far_H_Slider_UserControl . SliderValue
-                            );
-                }
-
-
+  
             if ( DrawMouseScreenSpaceAnnotation_CheckBox_Control.IsChecked.GetValueOrDefault())
                 {
                 gl . PushMatrix ( );
@@ -491,26 +491,37 @@ namespace DMT01
                 gl . PopMatrix ( );
                 }
 
-            //if ( Use_Viewing_Frustrum_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    gl . Frustum ( left: Frustum_Left_H_Slider_UserControl . SliderValue ,
-            //        right: Frustum_Right_H_Slider_UserControl . SliderValue ,
-            //        bottom: Frustum_Bottom_H_Slider_UserControl . SliderValue ,
-            //        top: Frustum_Top_H_Slider_UserControl . SliderValue ,
-            //        zNear: Frustum_zNear_H_Slider_UserControl . SliderValue ,
-            //        zFar: Frustum_zFar_H_Slider_UserControl . SliderValue );
-            //    }
+            if ( UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                gl . Ortho ( left: Orthographic_Left_H_Slider_UserControl . SliderValue ,
+                            right: Orthographic_Right_H_Slider_UserControl . SliderValue ,
+                            bottom: Orthographic_Bottom_H_Slider_UserControl . SliderValue ,
+                            top: Orthographic_Top_H_Slider_UserControl . SliderValue ,
+                            zNear: Orthographic_Near_H_Slider_UserControl . SliderValue ,
+                            zFar: Orthographic_Far_H_Slider_UserControl . SliderValue
+                            );
+            }
 
-            //if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    gl . Perspective (
-            //        fovy: Perspective_FOVY_H_Slider_UserControl . SliderValue ,
-            //        aspect: Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
-            //        zNear: Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
-            //        zFar: Perspective_Z_FAR_H_Slider_UserControl . SliderValue );
+            if ( Use_Viewing_Frustrum_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                gl . Frustum ( left: Frustum_Left_H_Slider_UserControl . SliderValue ,
+                    right: Frustum_Right_H_Slider_UserControl . SliderValue ,
+                    bottom: Frustum_Bottom_H_Slider_UserControl . SliderValue ,
+                    top: Frustum_Top_H_Slider_UserControl . SliderValue ,
+                    zNear: Frustum_zNear_H_Slider_UserControl . SliderValue ,
+                    zFar: Frustum_zFar_H_Slider_UserControl . SliderValue );
+            }
 
-            //    //M = M * Perspective ( gl );
-            //    }
+            if ( UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                gl . Perspective (
+                    fovy: Perspective_FOVY_H_Slider_UserControl . SliderValue ,
+                    aspect: Perspective_ASPECT_H_Slider_UserControl . SliderValue ,
+                    zNear: Perspective_Z_NEAR_H_Slider_UserControl . SliderValue ,
+                    zFar: Perspective_Z_FAR_H_Slider_UserControl . SliderValue );
+
+                //M = M * Perspective ( gl );
+            }
 
 
             //////LoadMatrix ( gl , M );
@@ -520,48 +531,48 @@ namespace DMT01
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
             gl . LoadIdentity ( );
 
-            //if ( UseLookAtViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    float x_up = 0.0f;
-            //    float y_up = 1.0f;
-            //    float z_up = 0.0f;
+            if ( UseLookAtViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                float x_up = 0.0f;
+                float y_up = 1.0f;
+                float z_up = 0.0f;
 
-            //    if ( LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-            //        {
-            //        x_up = 1.0f;
-            //        }
-            //    else
-            //        {
-            //        x_up = 0.0f;
-            //        }
-            //    if ( LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-            //        {
-            //        y_up = 1.0f;
-            //        }
-            //    else
-            //        {
-            //        y_up = 0.0f;
-            //        }
-            //    if ( LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-            //        {
-            //        z_up = 1.0f;
-            //        }
-            //    else
-            //        {
-            //        z_up = 0.0f;
-            //        }
+                if ( LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                    x_up = 1.0f;
+                }
+                else
+                {
+                    x_up = 0.0f;
+                }
+                if ( LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                    y_up = 1.0f;
+                }
+                else
+                {
+                    y_up = 0.0f;
+                }
+                if ( LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+                {
+                    z_up = 1.0f;
+                }
+                else
+                {
+                    z_up = 0.0f;
+                }
 
-            //    gl . LookAt (
-            //        eyex: LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
-            //        eyey: LookAt_Eye_Y_H_Slider_UserControl . SliderValue ,
-            //        eyez: LookAt_Eye_Z_H_Slider_UserControl . SliderValue ,
-            //        centerx: LookAtTarget_X_H_Slider_UserControl . SliderValue ,
-            //        centery: LookAtTarget_Y_H_Slider_UserControl . SliderValue ,
-            //        centerz: LookAtTarget_Z_H_Slider_UserControl . SliderValue ,
-            //        upx: x_up , upy: y_up , upz: z_up );
+                gl . LookAt (
+                    eyex: LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
+                    eyey: LookAt_Eye_Y_H_Slider_UserControl . SliderValue ,
+                    eyez: LookAt_Eye_Z_H_Slider_UserControl . SliderValue ,
+                    centerx: LookAtTarget_X_H_Slider_UserControl . SliderValue ,
+                    centery: LookAtTarget_Y_H_Slider_UserControl . SliderValue ,
+                    centerz: LookAtTarget_Z_H_Slider_UserControl . SliderValue ,
+                    upx: x_up , upy: y_up , upz: z_up );
 
-            //    //M = M * LookAt ( gl );
-            //    }
+                //M = M * LookAt ( gl );
+            }
 
             //if ( Do_Orbit_Pull_Back_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
             //    {
@@ -571,23 +582,23 @@ namespace DMT01
             //        z: Eye_Z_H_Slider_UserControl . SliderValue );
             //    }
 
-            //if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    gl . Translate ( 0.0 , 0.0 , Orbit_Radius_H_Slider_UserControl . SliderValue );
+            if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                gl . Translate ( 0.0 , 0.0 , Orbit_Radius_H_Slider_UserControl . SliderValue );
 
-            //    gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
+                gl . Rotate ( angle: Orbit_Rotation_H_Slider_UserControl . SliderValue , x: 0.0f , y: 1.0f , z: 0.0f );
 
-            //    Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+                Orbit_Rotation_H_Slider_UserControl . SliderValue += Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
 
-            //    if ( Orbit_Rotation_H_Slider_UserControl . SliderValue >= Orbit_Rotation_H_Slider_UserControl . SliderMaxValue )
-            //        {
-            //        Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
-            //        }
-            //    else if ( Orbit_Rotation_H_Slider_UserControl . SliderValue <= Orbit_Rotation_H_Slider_UserControl . SliderMinValue )
-            //        {
-            //        Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
-            //        }
-            //    }
+                if ( Orbit_Rotation_H_Slider_UserControl . SliderValue >= Orbit_Rotation_H_Slider_UserControl . SliderMaxValue )
+                {
+                    Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+                }
+                else if ( Orbit_Rotation_H_Slider_UserControl . SliderValue <= Orbit_Rotation_H_Slider_UserControl . SliderMinValue )
+                {
+                    Orbit_Delta_Angle_H_Slider_UserControl . SliderValue = -Orbit_Delta_Angle_H_Slider_UserControl . SliderValue;
+                }
+            }
 
             if ( AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
                 {
