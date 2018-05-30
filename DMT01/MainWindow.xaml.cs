@@ -322,9 +322,39 @@ namespace DMT01
                     {
                         if ( IsInBetween ( v , e ) )
                         {
+                            float [ ] c = OnEdge ( v , e );
                         }
                     }
                 }
+            }
+
+            private float [ ] OnEdge( int v , int e )
+            {
+                Vertex V = this . V [ SortedVertexIndicies [ v ] ];
+                Edge E = this . E [ e ];
+                return OnEdge ( V , E );
+
+            }
+
+            private float [ ] OnEdge( Vertex v , Edge e )
+            {
+                float ev0 = e . V [ 0 ] . V;
+                float ev1 = e . V [ 1 ] . V;
+                float deltaEdge = ( ev1 - ev0 );
+                float vv  = v . V;
+                float vx  = v . c [ 0 ];
+                float vy  = v . c [ 1 ];
+                float vz  = v . c [ 2 ];
+                float deltaVertex=( vv - ev0 );
+                float linageFraction = deltaVertex / deltaEdge;
+                float x0 = e . V [ 0 ] . I;
+                float y0 = e . V [ 0 ] . J;
+                float z0 = e . V [ 0 ] . c [ 2 ];
+                float x1 = e . V [ 1 ] . I;
+                float y1 = e . V [ 1 ] . J;
+                float z1 = e . V [ 1 ] . c [ 2 ];
+
+                return
             }
 
             private bool IsInBetween( int v , int e )
@@ -341,8 +371,16 @@ namespace DMT01
 
             private bool IsInBetween( float v1 , float v2 , float v3 )
             {
-                if ( v1 < v2 && v2 < v3 )
-                    return true;
+                bool vee = ( v1 <= v2 );
+                if (vee)
+                {
+                    bool bee = v2 <= v3;
+                    if ( bee )
+                    {
+                        return true;
+                    }
+                }
+
                 return false;
             }
 
