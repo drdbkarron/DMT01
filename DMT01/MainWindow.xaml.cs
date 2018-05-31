@@ -206,7 +206,7 @@ namespace DMT01
             }
 
         static NWorksheety Sheety;
-
+        static OpenGL staticGLHook = null;
 
         public class Vertex
             {
@@ -214,6 +214,11 @@ namespace DMT01
             public float x, y, z;
             public int[] c;
             public float V;
+            public float [ ] cf;
+            public Edge E;
+            public Edge[] EE;
+
+
             public Vertex ( )
                 {
                 c = new int [ 3 ] { 0 , 0 , 0 };
@@ -228,7 +233,8 @@ namespace DMT01
                 }
             public Vertex ( int i , int j )
                 {
-                c = new int [ 3 ] {i , j , 0 };
+                c = new int [ 3 ] { i , j , 0 };
+                cf = new float [ 3 ] { i , j , 0 };
                 I = i;
                 J = j;
 
@@ -253,26 +259,92 @@ namespace DMT01
                 this . V = v;
 
                 }
-            };
+
+            public Vertex( float [ ] c1 , float v )
+            {
+                this . cf = new float [ 3 ] { c1[0],c1[1],c1[2] };
+                this . V = v;
+            }
+
+            internal void Draw()
+            {
+                if ( staticGLHook == null )
+                    return;
+                if ( this . cf == null )
+                    return;
+                OpenGL gl = staticGLHook;
+                gl . Begin ( SharpGL . Enumerations . BeginMode . Points );     
+                gl . Vertex ( this . cf );
+                gl . End ( );
+
+            }
+        };
 
         public class Edge
         {
             public short EdgeIndex = -1;
+            public short SubEdgeIndex = -1;
             public Vertex [ ] V =null;
             public Edge[] SubEdge = null;
             public short SubEdges = 0;
             public Vertex [ ] TweenVerte = null;
+            public short TweenVerts = 0;
+   
             public Edge()
             {
                 this.V = new Vertex [ 2 ];
             }
             public Edge( short EI, Vertex V0 , Vertex V1 )
             {
+                this . V = new Vertex [ 2 ];
                 this . EdgeIndex = EI;
                 this. V = new Vertex [ 2 ];
 
                 V [ 0 ] = V0;
                 V [ 1 ] = V1;
+            }
+
+            public Edge( short edgeIndex , short subEdgeIndex , Vertex V0 , Vertex V1 )
+            {
+                this . V = new Vertex [ 2 ];
+                this . EdgeIndex = edgeIndex;
+                this . SubEdgeIndex = subEdgeIndex;
+
+                V [ 0 ] = V0;
+                V [ 1 ] = V1;
+            }
+        }
+        public class IsoEdge : Edge
+        {
+            public float IsoEdgeIsoValue;
+            public Edge E = new Edge ( );
+            private int v1;
+            private int v2;
+            private float vv;
+            private Vertex vV;
+            private Vertex v3;
+
+            public IsoEdge(float IsoValue, Vertex V0, Vertex V1)
+            {
+                IsoEdgeIsoValue = IsoValue;
+                E . V [ 0 ] = V0;
+                E . V [ 1 ] = V1;
+
+            }
+
+            public IsoEdge( short edgeIndex , short subEdgeIndex , Vertex V0 , Vertex V1 ) : base ( edgeIndex , subEdgeIndex , V0 , V1 )
+            {
+               
+            }
+
+            public IsoEdge ( short v1 , short v2 , float IsoValue , Vertex V0 , Vertex V1 )
+            {
+                E . EdgeIndex = v1;
+                E . SubEdgeIndex = v2;
+                IsoEdgeIsoValue = IsoValue;
+                E . V [ 0 ] = V0;
+                E . V [ 1 ] = V1;
+
             }
         }
 
@@ -280,10 +352,12 @@ namespace DMT01
             {
             public Vertex [ ] V = new Vertex [ 4 ];
             public Vertex Centroid = new Vertex ( );
-            public int Span=1;
+            public short Span=1;
             public int[]  SortedVertexIndicies=new int [ 4 ] { 0 , 1 , 2 , 3 };
-            public int LargestVertex, SmallestVertex;
+            public short LargestVertex, SmallestVertex;
             public Edge [ ] E = new Edge [ 4 ];
+            public IsoEdge [ ] IsoEdge = new IsoEdge [ 4 ];
+            public short IsoEdges = 0;
 
             public Boxel ( )
                 {
@@ -297,10 +371,10 @@ namespace DMT01
                 this . V [ 2 ] = new Vertex ( i +Span   , j+Span );
                 this . V [ 3 ] = new Vertex ( i +Span   , j      );
 
-                this.LoadValue ( 0 , c );
-                LoadValue ( 1 , c );
-                LoadValue ( 2 , c );
-                LoadValue ( 3 , c );
+                this . LoadValue ( 0 , c );
+                this . LoadValue ( 1 , c );
+                this . LoadValue ( 2 , c );
+                this . LoadValue ( 3 , c );
 
                 this . Centroid = LoadCentroid ( );
 
@@ -312,7 +386,64 @@ namespace DMT01
                 this . E [ 3 ] = new Edge ( 3 , this . V [ 3 ] , this . V [ 0 ] );
 
                 LoadTweenVerts ( );
+
+                LoadSubEdges ( );
+
+                LoadTriangles ( );
                 }
+
+            private void LoadSubEdges()
+            {
+                for ( int i = 0 ; i < 4 ; i++ )
+                {
+                    LoadSubEdges ( i );
+                }
+            }
+
+            private void LoadSubEdges( int e )
+            {
+            Edge E = this . E [ e ];
+            if ( E . TweenVerts == 0 )
+                {
+                    return;
+                }
+
+            LoadSubEdges ( E );
+            }
+
+            private void LoadSubEdges( Edge E )
+            {
+                Vertex V0 = E . V [ 0 ];
+                Vertex V1 = E . V [ 1 ];
+                if ( E . TweenVerts == 1 )
+                {
+                    Vertex V = E.TweenVerte [ 0 ];
+                    Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V );
+                    Edge SubEdge1 = new Edge ( E . EdgeIndex , 0 , V , V1 );
+                    
+                    E . SubEdges = 2;
+                    E . SubEdge = new Edge [ 2 ] { SubEdge0 , SubEdge1 };
+                }
+
+                if ( E . TweenVerts == 2 )
+                {
+                    Vertex V00 = E . TweenVerte [ 0 ];
+                    Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V00 );
+                    Vertex V01 = E . TweenVerte [ 1 ];
+                    Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V00 , V01 );
+                    Edge SubEdge2 = new Edge ( E . EdgeIndex , 2 , V01 , V1 );
+                    E . SubEdges = 3;
+                    E . SubEdge = new Edge [ 3 ];
+                    E . SubEdge [ 0 ] = SubEdge0;
+                    E . SubEdge [ 1 ] = SubEdge1;
+                    E . SubEdge [ 2 ] = SubEdge2;
+                }
+            }
+
+            private void LoadTriangles()
+            {
+            
+            }
 
             private void LoadTweenVerts()
             {
@@ -322,7 +453,22 @@ namespace DMT01
                     {
                         if ( IsInBetween ( v , e ) )
                         {
-                            float [ ] c = OnEdge ( v , e );
+                            float [ ] cf = OnEdge ( v , e );
+                            Edge E = this . E [ e ];
+                            if ( E . TweenVerte == null )
+                            {
+                                E . TweenVerte = new Vertex [ 2 ];
+                            }
+                            Vertex V = this . V [ v ];
+                            float vv = V . V;
+                            Vertex VV= new Vertex ( cf , vv );
+                            E . TweenVerte [ E . TweenVerts ] = VV;
+                            E . TweenVerts++;
+                            IsoEdge IE = new IsoEdge ( this . IsoEdges , 0 , vv , VV , V );
+                            VV . E = IE;
+                            V . E = IE;
+                            this . IsoEdge [ this . IsoEdges ] = IE;
+                            this . IsoEdges++;
                         }
                     }
                 }
@@ -353,8 +499,14 @@ namespace DMT01
                 float x1 = e . V [ 1 ] . I;
                 float y1 = e . V [ 1 ] . J;
                 float z1 = e . V [ 1 ] . c [ 2 ];
-
-                return
+                float deltax0x1 = x1 - x0;
+                float deltay0y1 = y1 - y0;
+                float deltaz0z1 = z1 - z0;
+                float dx = x0 + linageFraction * ( deltax0x1 );
+                float dy = y0 + linageFraction * ( deltay0y1 );
+                float dz = z0 + linageFraction * ( deltaz0z1 );
+                float [ ] c = new float[3] { dx , dy , dz };
+                return c;
             }
 
             private bool IsInBetween( int v , int e )
@@ -371,10 +523,10 @@ namespace DMT01
 
             private bool IsInBetween( float v1 , float v2 , float v3 )
             {
-                bool vee = ( v1 <= v2 );
+                bool vee = ( v1 < v2 );
                 if (vee)
                 {
-                    bool bee = v2 <= v3;
+                    bool bee = v2 < v3;
                     if ( bee )
                     {
                         return true;
@@ -473,11 +625,68 @@ FreshReset:
                 int j = VV . J;
                 float vv = c [ i , j ];
                 VV . V = vv;
-                //float vvv = this . V [ n ] . V;
-
                 }
 
+            internal void DrawMe()
+            {
+                DrawBoxelOutline ( );
+                DrawVertices ( );
+                DrawEdges ( );
             }
+
+            private void DrawEdges()
+            {
+                for ( int i = 0 ; i < IsoEdges ; i++ )
+                {
+                    IsoEdge IE = this . IsoEdge [ i ];
+                    DrawEdges ( IE );
+
+                }
+            }
+
+            private void DrawEdges ( IsoEdge iE )
+            {
+                OpenGL gl = staticGLHook;
+                gl . LineWidth ( 2 );
+                gl . Color ( 0.1 , 0.9 , 0.1 );
+                gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+                gl . Vertex ( iE . E. V [ 0 ] . cf );
+                gl . Vertex ( iE . E. V [ 1 ] . cf );
+                gl . End ( );
+
+            }
+
+            private void DrawBoxelOutline()
+            {
+                OpenGL gl = staticGLHook;
+                gl . LineWidth ( 1 );
+                gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+
+                for ( int i = 0 ; i < 4 ; i++ )
+                {
+                    gl . Vertex (this.V[i].cf);
+
+                }
+                gl . End ( );
+            }
+
+            private void DrawVertices()
+            {
+                for ( int i = 0 ; i < 4 ; i++ )
+                {
+                    Edge E = this . E [ i ];
+                    Vertex V0 = E . V [ 0 ];
+                    V0 . Draw ( );
+                    for ( int j = 0 ; j < E . TweenVerts ; j++ )
+                    {
+                        Vertex TV = E . TweenVerte [ j ];
+                        TV . Draw ( );
+                    }
+                    Vertex V1 = E . V [ 1 ];
+                    V1 . Draw ( );
+                }
+            }
+        }
 
         #endregion Persistance_classes
 
@@ -531,7 +740,8 @@ FreshReset:
             //System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
             //  Get the OpenGL object.
-            OpenGL gl = myOpenGLControl . OpenGL;
+            OpenGL gl = this . myOpenGLControl . OpenGL;
+            staticGLHook = gl;
 
             //  Clear the color and depth buffer.
 
@@ -544,6 +754,7 @@ FreshReset:
   
             if ( DrawMouseScreenSpaceAnnotation_CheckBox_Control.IsChecked.GetValueOrDefault())
                 {
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
                 gl . PushMatrix ( );
                 float fSize = MouseScreenAnnotationFontSize_H_Slider_UserControl . SliderValue + 0.5f;
                 String text = String . Format ( @"{0},{1}" , mouse_x , mouse_y );
@@ -552,10 +763,12 @@ FreshReset:
                     fontSize:fSize ,
                     text: text );
                 gl . PopMatrix ( );
+                gl . PopAttrib ( );
                 }
 
             if ( DrawScreenSpaceAnnotationGrid_CheckBox_Control .IsChecked.GetValueOrDefault())
                 {
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
                 gl . PushMatrix ( );
                 int bloppie = 40;
                 float fSize = ScreenAnnotationFont_SizeH_Slider_UserControl . SliderValue;
@@ -569,7 +782,8 @@ FreshReset:
                         }
                     }
                 gl . PopMatrix ( );
-                }
+                gl . PopAttrib ( );
+            }
 
             if ( UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . GetValueOrDefault ( ) )
             {
@@ -654,13 +868,13 @@ FreshReset:
                 //M = M * LookAt ( gl );
             }
 
-            //if ( Do_Orbit_Pull_Back_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    gl . Translate (
-            //        x: Eye_X_H_Slider_UserControl . SliderValue ,
-            //        y: Eye_Y_H_Slider_UserControl . SliderValue ,
-            //        z: Eye_Z_H_Slider_UserControl . SliderValue );
-            //    }
+            if ( Do_Orbit_Pull_Back_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                gl . Translate (
+                    x: Eye_X_H_Slider_UserControl . SliderValue ,
+                    y: Eye_Y_H_Slider_UserControl . SliderValue ,
+                    z: Eye_Z_H_Slider_UserControl . SliderValue );
+            }
 
             if ( Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
             {
@@ -718,64 +932,31 @@ FreshReset:
                 for ( int j = Sheety . r0 ; j < Sheety . r ; j++ )
                     {
                     for ( int i = Sheety . c0 ; i < Sheety . c ; i++ )
-                        {
+                    {
                         Boxel B = new Boxel ( i , j , Sheety . cells );
 
-                        if ( Sheety . cells [ i , j ]>1.0f )
-                            {
-                            float overflow = Sheety . cells [ i , j ];
-                            Sheety . cells [ i , j ] = 1.0f;
-                            }
-                        int [ , ] c = new int [ 4,2 ] { 
-                            { i     , j },
-                            { i + 1 , j } ,
-                            { i+1   , j + 1 } , 
-                            { i     , j + 1 },
-                                };
-                        float [ ] s = new float [ 4 ] {
-                            Sheety . cells [ c[0,0], c[0,1] ],
-                            Sheety . cells [ c[1,0], c[1,1] ],
-                            Sheety . cells [ c[2,0], c[2,1] ],
-                            Sheety . cells [ c[3,0], c[3,1] ],
-                                                 };
-                        float [ ] C =  LocalMaths.LocalMathsClass.GetCentroid ( c );
-                        float S = LocalMaths. LocalMathsClass . GetMean ( s );
+                        B . DrawMe ( );
 
-                        for ( int k = 0 ; k <4 ; k++ )
-                            {
-                            int m = k % 4;
-                            int n = ( k + 1 ) % 4;
-                            int o = ( k + 2 ) % 4;
-                            gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
-                            gl . Color ( s [ m ] , s [ m ] , s [ m ] );
-                            gl . Vertex ( c [ m , 0 ] , c [ m , 1 ] , s[m]);
-
-                            gl . Color (S,S,S );
-                            gl . Vertex ( C[0],C[1 ] , S);
-
-                            gl . Color ( s [ n ] , s [ n ] , s [ n ] , s [ n ] );
-                            gl . Vertex ( c [ n , 0 ] , c [ n , 1 ] , s [ n ] );
-                            gl . End ( );
-                            }
-                        }
-                    
+                        //OldDrawWithoutBoxel ( gl , j , i );
                     }
+
+                }
                 gl . PopMatrix ( );
                 gl . PopAttrib ( );
 scramo:
                 ;
                 }
 
-            //if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    Teapot tp = new Teapot ( );
-            //    tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
-            //    }
+            if ( DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                Teapot tp = new Teapot ( );
+                tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
+            }
 
-            //if ( Spreadsheet_Grid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
-            //    {
-            //    ReoGrid3DSpreadsheet ( gl: gl );
-            //    }
+            if ( Spreadsheet_Grid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+            {
+                ReoGrid3DSpreadsheet ( gl: gl );
+            }
 
             ////DoAspect ( );
 
@@ -784,6 +965,46 @@ scramo:
             Draws_Label . Content = String . Format ( "Draw Count: {0}" , Draws );
             Draws++;
             }
+
+        private static void OldDrawWithoutBoxel( OpenGL gl , int j , int i )
+        {
+            if ( Sheety . cells [ i , j ] > 1.0f )
+            {
+                float overflow = Sheety . cells [ i , j ];
+                Sheety . cells [ i , j ] = 1.0f;
+            }
+            int [ , ] c = new int [ 4 , 2 ] {
+                            { i     , j },
+                            { i + 1 , j } ,
+                            { i+1   , j + 1 } ,
+                            { i     , j + 1 },
+                                };
+            float [ ] s = new float [ 4 ] {
+                            Sheety . cells [ c[0,0], c[0,1] ],
+                            Sheety . cells [ c[1,0], c[1,1] ],
+                            Sheety . cells [ c[2,0], c[2,1] ],
+                            Sheety . cells [ c[3,0], c[3,1] ],
+                                                 };
+            float [ ] C = LocalMaths . LocalMathsClass . GetCentroid ( c );
+            float S = LocalMaths . LocalMathsClass . GetMean ( s );
+
+            for ( int k = 0 ; k < 4 ; k++ )
+            {
+                int m = k % 4;
+                int n = ( k + 1 ) % 4;
+                int o = ( k + 2 ) % 4;
+                gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+                gl . Color ( s [ m ] , s [ m ] , s [ m ] );
+                gl . Vertex ( c [ m , 0 ] , c [ m , 1 ] , s [ m ] );
+
+                gl . Color ( S , S , S );
+                gl . Vertex ( C [ 0 ] , C [ 1 ] , S );
+
+                gl . Color ( s [ n ] , s [ n ] , s [ n ] , s [ n ] );
+                gl . Vertex ( c [ n , 0 ] , c [ n , 1 ] , s [ n ] );
+                gl . End ( );
+            }
+        }
 
         private void ReoGrid3DSpreadsheet ( OpenGL gl )
             {
