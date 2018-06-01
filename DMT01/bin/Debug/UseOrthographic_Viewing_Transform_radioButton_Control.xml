@@ -5,6 +5,6 @@
     <SaveStateFileName>UseOrthographic_Viewing_Transform_radioButton_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxState>false</CheckBoxState>
   <CheckBoxName>UseOrthographic_Viewing_Transform_radioButton_Control</CheckBoxName>
 </CheckBoxControlSaveState>

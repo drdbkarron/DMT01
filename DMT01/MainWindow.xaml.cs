@@ -218,7 +218,6 @@ namespace DMT01
             public Edge E;
             public Edge[] EE;
 
-
             public Vertex ( )
                 {
                 c = new int [ 3 ] { 0 , 0 , 0 };
@@ -237,9 +236,8 @@ namespace DMT01
                 cf = new float [ 3 ] { i , j , 0 };
                 I = i;
                 J = j;
-
-
                 }
+
             public Vertex ( float [,] v )
                 {
                 if ( c == null )
@@ -358,6 +356,8 @@ namespace DMT01
             public Edge [ ] E = new Edge [ 4 ];
             public IsoEdge [ ] IsoEdge = new IsoEdge [ 4 ];
             public short IsoEdges = 0;
+            public float z_drawing_hack0=1.0f;
+            public float z_drawing_hack1=1.0f;
 
             public Boxel ( )
                 {
@@ -442,7 +442,9 @@ namespace DMT01
 
             private void LoadTriangles()
             {
-            
+
+                //Debug . WriteLine ( String . Format ( "{0}" , nameof( LoadTriangles ) ) );
+
             }
 
             private void LoadTweenVerts()
@@ -456,9 +458,9 @@ namespace DMT01
                             float [ ] cf = OnEdge ( v , e );
                             Edge E = this . E [ e ];
                             if ( E . TweenVerte == null )
-                            {
+                                {
                                 E . TweenVerte = new Vertex [ 2 ];
-                            }
+                                }
                             Vertex V = this . V [ v ];
                             float vv = V . V;
                             Vertex VV= new Vertex ( cf , vv );
@@ -511,7 +513,8 @@ namespace DMT01
 
             private bool IsInBetween( int v , int e )
             {
-                Vertex V = this . V [ SortedVertexIndicies [ v ] ];
+                int S = SortedVertexIndicies [ v ];
+                Vertex V = this . V [ S ];
                 Edge E = this . E [ e ];
                 return IsInBetween ( V , E );
             }
@@ -633,41 +636,101 @@ FreshReset:
                 DrawVertices ( );
                 DrawEdges ( );
             }
+            internal void DrawMe ( float sliderValue )
+            {
+                z_drawing_hack0 = sliderValue;
+                DrawBoxelOutline ( );
+            }
 
             private void DrawEdges()
             {
-                for ( int i = 0 ; i < IsoEdges ; i++ )
+                DrawPerimeterEdges ( );
+                DrawIsoEdges ( );
+            }
+
+            private void DrawPerimeterEdges ( )
+            {
+                for ( int i = 0 ; i < 4 ; i++ )
+                {
+                    Edge E = this . E [ i ];
+                    DrawPerimeterEdges ( E );
+                }
+            }
+
+            private void DrawPerimeterEdges ( Edge e )
+            {
+                if ( e . SubEdges > 0 )
+                {
+                    if ( e . SubEdge != null )
+                    {
+                    }
+                    DrawPerimeterEdge (e );
+                }
+            }
+
+            public void DrawPerimeterEdge ( Edge e)
+            {
+                OpenGL gl = staticGLHook;
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . AccumBuffer );
+                gl . LineWidth ( 2 );
+                gl . Color ( 0.1 , 0.0 , 0.8 );
+                float [ ] cf0 = e . V [ 0 ] . cf;
+                float [ ] cf1 = e . V [ 1 ] . cf;
+                float z0 = e . V [ 0 ] . V ;
+                float z1 = e . V [ 1 ] . V;
+                gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+                gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
+                gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
+                gl . End ( );
+                gl . PopAttrib ( );
+
+            }
+
+            private void DrawIsoEdges ( )
+            {
+            for ( int i = 0 ; i < IsoEdges ; i++ )
                 {
                     IsoEdge IE = this . IsoEdge [ i ];
-                    DrawEdges ( IE );
+                    DrawIsoEdge ( IE );
 
                 }
             }
 
-            private void DrawEdges ( IsoEdge iE )
+            private void DrawIsoEdge ( IsoEdge iE )
             {
                 OpenGL gl = staticGLHook;
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . AccumBuffer );
                 gl . LineWidth ( 2 );
                 gl . Color ( 0.1 , 0.9 , 0.1 );
+                float [ ] cf0 = iE . E . V [ 0 ] . cf;
+                float [ ] cf1 = iE . E . V [ 1 ] . cf;
+                float z0 = iE . E . V [ 0 ] . V;
+                float z1 = iE . E . V [ 1 ] . V;
                 gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-                gl . Vertex ( iE . E. V [ 0 ] . cf );
-                gl . Vertex ( iE . E. V [ 1 ] . cf );
+                gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
+                gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
                 gl . End ( );
-
-            }
+                gl . PopAttrib ( );
+             }
 
             private void DrawBoxelOutline()
             {
                 OpenGL gl = staticGLHook;
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+                gl . Color ( 0.3 , 0.3 , 0.3 );
                 gl . LineWidth ( 1 );
                 gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
 
                 for ( int i = 0 ; i < 4 ; i++ )
                 {
-                    gl . Vertex (this.V[i].cf);
+                    float [ ] cf = this. V [i ] . cf;
+                   
+                    float z = this. V [ i] . V*z_drawing_hack0;
 
+                    gl . Vertex ( cf [ 0 ] , cf [ 1 ] , z );
                 }
                 gl . End ( );
+                gl . PopAttrib ( );
             }
 
             private void DrawVertices()
@@ -686,6 +749,7 @@ FreshReset:
                     V1 . Draw ( );
                 }
             }
+
         }
 
         #endregion Persistance_classes
@@ -935,7 +999,7 @@ FreshReset:
                     {
                         Boxel B = new Boxel ( i , j , Sheety . cells );
 
-                        B . DrawMe ( );
+                        B . DrawMe ( Z_Fudge_H_Slider_UserControl . SliderValue );
 
                         //OldDrawWithoutBoxel ( gl , j , i );
                     }

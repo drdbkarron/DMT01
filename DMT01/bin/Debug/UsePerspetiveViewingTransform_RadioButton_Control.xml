@@ -5,6 +5,6 @@
     <SaveStateFileName>UsePerspetiveViewingTransform_RadioButton_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <CheckBoxState>false</CheckBoxState>
+  <CheckBoxState>true</CheckBoxState>
   <CheckBoxName>UsePerspetiveViewingTransform_RadioButton_Control</CheckBoxName>
 </CheckBoxControlSaveState>

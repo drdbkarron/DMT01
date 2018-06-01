@@ -13,7 +13,7 @@
     x:Name="DMT_Main_Window_Control"
     Title="DMT_MainWindow"
     Width="1072"
-    Height="1100"
+    Height="1101"
     Margin="1"
     Padding="1"
     HorizontalAlignment="Left"
@@ -112,7 +112,7 @@
         <StackPanel
             x:Name="BottomStackPanel"
             Width="1033"
-            Height="714"
+            Height="727"
             Margin="9,5,0,16"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -481,7 +481,7 @@
             <TabControl
                 x:Name="Viewing_Transform_TabControl"
                 Width="1010"
-                Height="598"
+                Height="607"
                 Margin="4,5,21,5"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -495,7 +495,7 @@
                     <Grid
                         x:Name="SpreadsheetFileName_Grid"
                         Width="987"
-                        Height="555"
+                        Height="568"
                         Margin="6,8,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
@@ -759,8 +759,8 @@
                         </DockPanel>
                         <StackPanel
                             Grid.Row="4"
-                            Height="343"
-                            Margin="0,1,0,0"
+                            Height="358"
+                            Margin="1,1,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Background="#FFC5BCB5"
@@ -775,10 +775,10 @@
                             <TabControl
                                 x:Name="tabControl"
                                 Width="964"
-                                Height="313"
+                                Height="325"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                TabStripPlacement="Bottom"
+                                TabStripPlacement="Bottom" Background="#FFF0DDDD"
                                 >
                                 <TabItem
                                     x:Name="Sheet_1__TabItem"
@@ -788,13 +788,12 @@
                                     Header="1 Sheet"
                                     >
                                     <Grid
-                                        Height="231"
-                                        Margin="0,0,-14,0"
-                                        Background="#FFE5E5E5"
+                                        Margin="0,0,1,0"
+                                        Background="#FFE5E5E5" Height="281"
                                         >
                                         <StackPanel
-                                            Width="974"
-                                            Height="190"
+                                            Width="946"
+                                            Height="273"
                                             Margin="10,0,-12,0"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Top"
@@ -835,7 +834,7 @@
                                                 <CheckBox Content="unused 1" />
                                             </StackPanel>
                                             <StackPanel
-                                                Height="184"
+                                                Height="265"
                                                 Margin="0,0,0,-97"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"
@@ -845,9 +844,9 @@
                                                     x:Name="Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control"
                                                     Width="842"
                                                     Height="74"
-                                                    Margin="0,10,0,16"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
+                                                    Margin="0,1"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
                                                     LabelText="3D Numeral Width FitHack"
                                                     SliderMaxValue="5"
                                                     SliderMinValue="1"
@@ -855,14 +854,14 @@
                                                     />
                                                 <local:H_Slider_UserControl1
                                                     x:Name="Spreadsheet3DNumericLeftMargin_H_Slider_User_Control"
-                                                    Width="835"
+                                                    Width="840"
                                                     Height="80"
-                                                    Margin="0,1,0,0"
+                                                    Margin="1,-2,0,0"
                                                     HorizontalAlignment="Left"
                                                     VerticalAlignment="Top"
                                                     LabelText="3d left margin numeric"
                                                     SliderMaxValue="5"
-                                                    SliderMinValue="0"
+                                                    SliderMinValue="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
                                                     />
                                             </StackPanel>
                                         </StackPanel>
@@ -925,13 +924,27 @@
                                     <Grid Background="#FFE5E5E5" />
                                 </TabItem>
                                 <TabItem
-                                    Width="54"
+                                    Width="118"
                                     Height="20"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
-                                    Header="TabItem"
+                                    Header="Z-HACKS" Margin="-2,0,-61,0" BorderBrush="#FFA41212"
                                     >
-                                    <Grid Background="#FFE5E5E5" />
+                                    <TabItem.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                            <GradientStop Color="#FFD3B9E8" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </TabItem.Background>
+                                    <Grid Background="#FFE9E5F5" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <local:H_Slider_UserControl1 x:Name="Z_Fudge_H_Slider_UserControl0" HorizontalAlignment="Stretch" Height="80" VerticalAlignment="Stretch" Width="853" Margin="1,1,0,0" SliderMaxValue="1" SliderMinValue="0" SliderValue="1" LabelText="Z factor hack 0"/>
+                                        <local:H_Slider_UserControl1 x:Name="Z_Fudge_H_Slider_UserControl1"  VerticalContentAlignment="Center" SliderMaxValue="1" SliderMinValue="0" SliderValue="1" LabelText="Z factor hack 1" Margin="4.34,0,0,1" Grid.Row="1" Height="88" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="855"/>
+                                    </Grid>
                                 </TabItem>
                             </TabControl>
                         </StackPanel>
