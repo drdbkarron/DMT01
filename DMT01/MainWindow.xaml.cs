@@ -207,45 +207,33 @@ namespace DMT01
 
         static NWorksheety Sheety;
         static OpenGL staticGLHook = null;
-
-        public class Vertex
+		#endregion persistance
+		#region DMT_Geometry_Classes
+		public class Vertex
             {
+            public short VertexIndex;
             public int I, J;
             public float x, y, z;
-            public int[] c;
             public float V;
             public float [ ] cf;
-            public Edge E;
-            public Edge[] EE;
+            public IsoEdge E;
+			public Edge NextEdge;
+			public Edge PreviousEdge;
+			public Vertex Next;
+            public Vertex Previous;
 
             public Vertex ( )
                 {
-                c = new int [ 3 ] { 0 , 0 , 0 };
-                }
-            public Vertex ( int i , int j , float v )
-                {
-                c = new int [ 3 ] {i , j , 0 };
-                I = i;
-                J = j;
-                V = v;
-
-                }
-            public Vertex ( int i , int j )
-                {
-                c = new int [ 3 ] { i , j , 0 };
-                cf = new float [ 3 ] { i , j , 0 };
-                I = i;
-                J = j;
                 }
 
-            public Vertex ( float [,] v )
+            public Vertex (short VIndex, int i , int j )
                 {
-                if ( c == null )
-                    return;
-
-                V = v [ I, J ];
-                
+                this . VertexIndex = VIndex;
+                this . cf = new float [ 3 ] { i , j , 0 };
+                this . I = i;
+                this . J = j;
                 }
+
             public Vertex (float x , float y , float z , float v)
                 {
                 this . x = x;
@@ -253,7 +241,6 @@ namespace DMT01
                 this . z = z;
                 this . I = (int)x;
                 this . J = (int)y;
-                this . c =new int [ 3 ] { this . I , this . J , 0 };
                 this . V = v;
 
                 }
@@ -262,6 +249,15 @@ namespace DMT01
             {
                 this . cf = new float [ 3 ] { c1[0],c1[1],c1[2] };
                 this . V = v;
+            }
+
+            public Vertex ( short VIndex , int i , int j , float [ , ] c ) 
+            {
+                this . VertexIndex = VIndex;
+                this . cf = new float [ 3 ] { i , j , 0 };
+                this . I = i;
+                this . J = j;
+                this . V = c [ i , j ];
             }
 
             internal void Draw()
@@ -282,72 +278,86 @@ namespace DMT01
         {
             public short EdgeIndex = -1;
             public short SubEdgeIndex = -1;
-            public Vertex [ ] V =null;
+			public Boolean IsSubEdge=false;
+            public Vertex [ ] V = new Vertex [ 2 ];
             public Edge[] SubEdge = null;
-            public short SubEdges = 0;
+			public SubEdge SubEdges;
+            public short SubEdgeCount = 0;
             public Vertex [ ] TweenVerte = null;
             public short TweenVerts = 0;
+            public Edge Next;
+            public Edge Previous;
+            public float delta_V=0.0f;
+			public float[] delta_cf={0,0,0 };
+			public enum EdgeDirection
+				{
+				 ClockwiseNext,
+				 CounterClockwisePrevious
+				}
    
             public Edge()
             {
-                this.V = new Vertex [ 2 ];
             }
+
             public Edge( short EI, Vertex V0 , Vertex V1 )
             {
-                this . V = new Vertex [ 2 ];
                 this . EdgeIndex = EI;
-                this. V = new Vertex [ 2 ];
+				this . V = new Vertex [ 2 ] { V0 , V1 };
+				this . delta_V = this . V [ 1 ] . V - this . V [ 0 ] . V;
+				this . delta_cf = new float [ 3 ] {
+					this . V [ 1 ] . cf[0] - this . V [ 0 ] . cf[0],
+					this . V [ 1 ] . cf[1] - this . V [ 0 ] . cf[1],
+					this . V [ 1 ] . cf[2] - this . V [ 0 ] . cf[2],
+				};
 
-                V [ 0 ] = V0;
-                V [ 1 ] = V1;
-            }
+			}
 
-            public Edge( short edgeIndex , short subEdgeIndex , Vertex V0 , Vertex V1 )
-            {
-                this . V = new Vertex [ 2 ];
-                this . EdgeIndex = edgeIndex;
+			public Edge( short edgeIndex , short subEdgeIndex , Vertex V0 , Vertex V1 )
+                {
+                new Edge ( edgeIndex , V0 , V1 );
                 this . SubEdgeIndex = subEdgeIndex;
-
-                V [ 0 ] = V0;
-                V [ 1 ] = V1;
-            }
+                }
         }
-        public class IsoEdge : Edge
+
+		public class SubEdge   : Edge
+		{
+			public Edge Parent;
+			public Edge E=new Edge();
+		}
+
+		public class IsoEdge : Edge
         {
             public float IsoEdgeIsoValue;
             public Edge E = new Edge ( );
-            private int v1;
-            private int v2;
-            private float vv;
-            private Vertex vV;
-            private Vertex v3;
-
+ 
             public IsoEdge(float IsoValue, Vertex V0, Vertex V1)
             {
+                //E = new Edge ( );
                 IsoEdgeIsoValue = IsoValue;
                 E . V [ 0 ] = V0;
                 E . V [ 1 ] = V1;
+                this . delta_V = this . V [ 1 ] . V - this . V [ 0 ] . V;
 
-            }
-
-            public IsoEdge( short edgeIndex , short subEdgeIndex , Vertex V0 , Vertex V1 ) : base ( edgeIndex , subEdgeIndex , V0 , V1 )
-            {
-               
             }
 
             public IsoEdge ( short v1 , short v2 , float IsoValue , Vertex V0 , Vertex V1 )
             {
+                E = new Edge ( );
                 E . EdgeIndex = v1;
                 E . SubEdgeIndex = v2;
                 IsoEdgeIsoValue = IsoValue;
-                E . V [ 0 ] = V0;
-                E . V [ 1 ] = V1;
+                this . E . V [ 0 ] = V0;
+                this . E . V [ 1 ] = V1;
+                this . delta_V = this . E. V [ 1 ] . V - this . E. V [ 0 ] . V;   // should be zero
 
             }
         }
 
         public class Boxel
             {
+            public int I;
+            public int J;
+            Boolean IsCritical;
             public Vertex [ ] V = new Vertex [ 4 ];
             public Vertex Centroid = new Vertex ( );
             public short Span=1;
@@ -358,39 +368,95 @@ namespace DMT01
             public short IsoEdges = 0;
             public float z_drawing_hack0=1.0f;
             public float z_drawing_hack1=1.0f;
+			public float threshold_hack1=.5f;
+			public Boolean hack0,hack1,hack2,hack3,hack4;
 
-            public Boxel ( )
-                {
-                V = new Vertex [ 4 ];
-                }
- 
             public Boxel ( int i , int j,float [ , ] c)
                 {
-                this . V [ 0 ] = new Vertex ( i         , j      );
-                this . V [ 1 ] = new Vertex ( i         , j+Span );
-                this . V [ 2 ] = new Vertex ( i +Span   , j+Span );
-                this . V [ 3 ] = new Vertex ( i +Span   , j      );
+                this . I = i;
+                this . J = j;
+                this . V [ 0 ] = new Vertex ( 0 , i         , j      , c );
+                this . V [ 1 ] = new Vertex ( 1 , i         , j+Span , c );
+                this . V [ 2 ] = new Vertex ( 2 , i +Span   , j+Span , c );
+                this . V [ 3 ] = new Vertex ( 3 , i +Span   , j      , c );
 
-                this . LoadValue ( 0 , c );
-                this . LoadValue ( 1 , c );
-                this . LoadValue ( 2 , c );
-                this . LoadValue ( 3 , c );
+                this . V [ 0 ] . Next = V [ 1 ];
+                this . V [ 1 ] . Next = V [ 2 ];
+                this . V [ 2 ] . Next = V [ 3 ];
+                this . V [ 3 ] . Next = V [ 0 ];
+
+                this . V [ 0 ] . Previous = V [ 3 ];
+                this . V [ 1 ] . Previous = V [ 0 ];
+                this . V [ 2 ] . Previous = V [ 1 ];
+                this . V [ 3 ] . Previous = V [ 2 ];
 
                 this . Centroid = LoadCentroid ( );
-
-                SortVerticies ( );
 
                 this . E [ 0 ] = new Edge ( 0 , this . V [ 0 ] , this . V [ 1 ] );
                 this . E [ 1 ] = new Edge ( 1 , this . V [ 1 ] , this . V [ 2 ] );
                 this . E [ 2 ] = new Edge ( 2 , this . V [ 2 ] , this . V [ 3 ] );
                 this . E [ 3 ] = new Edge ( 3 , this . V [ 3 ] , this . V [ 0 ] );
 
-                LoadTweenVerts ( );
+				this . E [ 0 ] . Next = E [ 1 ];
+				this . E [ 1 ] . Next = E [ 2 ];
+				this . E [ 2 ] . Next = E [ 3 ];
+				this . E [ 3 ] . Next = E [ 0 ];
 
-                LoadSubEdges ( );
+				this . E [ 0 ] . Previous = E [ 3 ];
+				this . E [ 1 ] . Previous = E [ 0 ];
+				this . E [ 2 ] . Previous = E [ 1 ];
+				this . E [ 3 ] . Previous = E [ 2 ];
 
-                LoadTriangles ( );
+				this . V [ 0 ] . NextEdge = E [ 0 ];
+				this . V [ 1 ] . NextEdge = E [ 1 ];
+				this . V [ 2 ] . NextEdge = E [ 2 ];
+				this . V [ 3 ] . NextEdge = E [ 3 ];
+
+				this . V [ 0 ] . PreviousEdge = E [ 3 ];
+				this . V [ 1 ] . PreviousEdge = E [ 2 ];
+				this . V [ 2 ] . PreviousEdge = E [ 1 ];
+				this . V [ 3 ] . PreviousEdge = E [ 0 ];
+
+				this . IsThisCritical ( );
+
+                this. SortVerticies ( );
+
+                this. LoadTweenVerts ( );
+
+                this. LoadSubEdges ( );
+
+                this. LoadTriangles ( );
                 }
+
+            private void IsThisCritical ( )
+            {
+                Boolean wiggle0 = (
+                     this . E [ 0 ] . delta_V > 0 &&
+                     this . E [ 1 ] . delta_V < 0 &&
+                     this . E [ 2 ] . delta_V > 0 &&
+                     this . E [ 3 ] . delta_V < 0 );
+
+				if ( wiggle0 )
+				{
+					this . IsCritical = true;
+
+					//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+					return;
+				}
+
+                Boolean wiggle1 = (
+                     this . E [ 0 ] . delta_V < 0 &&
+                     this . E [ 1 ] . delta_V > 0 &&
+                     this . E [ 2 ] . delta_V < 0 &&
+                     this . E [ 3 ] . delta_V > 0 );
+
+				if ( wiggle1 )
+				{
+					this . IsCritical = true;
+					//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+					return;
+				}
+			}
 
             private void LoadSubEdges()
             {
@@ -421,7 +487,7 @@ namespace DMT01
                     Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V );
                     Edge SubEdge1 = new Edge ( E . EdgeIndex , 0 , V , V1 );
                     
-                    E . SubEdges = 2;
+                    E . SubEdgeCount = 2;
                     E . SubEdge = new Edge [ 2 ] { SubEdge0 , SubEdge1 };
                 }
 
@@ -432,7 +498,7 @@ namespace DMT01
                     Vertex V01 = E . TweenVerte [ 1 ];
                     Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V00 , V01 );
                     Edge SubEdge2 = new Edge ( E . EdgeIndex , 2 , V01 , V1 );
-                    E . SubEdges = 3;
+                    E . SubEdgeCount = 3;
                     E . SubEdge = new Edge [ 3 ];
                     E . SubEdge [ 0 ] = SubEdge0;
                     E . SubEdge [ 1 ] = SubEdge1;
@@ -490,17 +556,17 @@ namespace DMT01
                 float ev1 = e . V [ 1 ] . V;
                 float deltaEdge = ( ev1 - ev0 );
                 float vv  = v . V;
-                float vx  = v . c [ 0 ];
-                float vy  = v . c [ 1 ];
-                float vz  = v . c [ 2 ];
+                float vx  = v . cf [ 0 ];
+                float vy  = v . cf [ 1 ];
+                float vz  = v . cf [ 2 ];
                 float deltaVertex=( vv - ev0 );
                 float linageFraction = deltaVertex / deltaEdge;
                 float x0 = e . V [ 0 ] . I;
                 float y0 = e . V [ 0 ] . J;
-                float z0 = e . V [ 0 ] . c [ 2 ];
+                float z0 = e . V [ 0 ] . cf [ 2 ];
                 float x1 = e . V [ 1 ] . I;
                 float y1 = e . V [ 1 ] . J;
-                float z1 = e . V [ 1 ] . c [ 2 ];
+                float z1 = e . V [ 1 ] . cf [ 2 ];
                 float deltax0x1 = x1 - x0;
                 float deltay0y1 = y1 - y0;
                 float deltaz0z1 = z1 - z0;
@@ -584,31 +650,6 @@ FreshReset:
 
                 }
 
-            private void Burblegiggle (int swaps, String annotation)
-                {
-                string StringerDinger = "0.000";
-                var TestResults = String . Format ( "{0}{1}{2}" ,
-                      LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 0 ] ] . V , V [ SortedVertexIndicies [ 1 ] ] . V ) ,
-                      LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 1 ] ] . V , V [ SortedVertexIndicies [ 2 ] ] . V ) ,
-                      LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 2 ] ] . V , V [ SortedVertexIndicies [ 3 ] ] . V ) );
-
-                if ( TestResults == "<<<" || TestResults == "==<<" || TestResults == "<==<" || TestResults == "======" )
-                    {
-                    Debug . WriteLine ( String . Format ( "Sorted in {0} swaps {1} {2} << {3}" ,
-                        swaps , TestResults ,
-                        V [ SortedVertexIndicies [ 0 ] ] . V . ToString ( StringerDinger ) , V [ SortedVertexIndicies [ 3 ] ] . V . ToString ( StringerDinger ) ) );
-                    }
-                else
-                    {
-                    Debug . WriteLine ( String . Format ( "{8} {0} swaps {1}{2}{3}{4}{5}{6}{7}" ,
-                         swaps ,
-                         V [ SortedVertexIndicies [ 0 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 0 ] ] . V , V [ SortedVertexIndicies [ 1 ] ] . V ) ,
-                         V [ SortedVertexIndicies [ 1 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 1 ] ] . V , V [ SortedVertexIndicies [ 2 ] ] . V ) ,
-                         V [ SortedVertexIndicies [ 2 ] ] . V . ToString ( StringerDinger ) , LocalMathsClass . ComparisonString ( V [ SortedVertexIndicies [ 2 ] ] . V , V [ SortedVertexIndicies [ 3 ] ] . V ) ,
-                         V [ SortedVertexIndicies [ 3 ] ] . V . ToString ( StringerDinger ), annotation ) );
-                    }
-                }
-
             private Vertex LoadCentroid ()
                 {
                 float X = ( this . V [ 0 ] . I + this . V [ 1 ] . I + this . V [ 2 ] . I + this . V [ 3 ] . I ) / 4f;
@@ -620,32 +661,204 @@ FreshReset:
                 return C;
                 }
 
-            public void LoadValue (int n , float [ , ] c)
-                {
-                Vertex VV = this . V [ n ];
+            internal void DrawMe ( float z_drawing_hack_0, float z_drawing_hack_1, float threshold_hack_1, 
+				Boolean hack_0=true,Boolean hack_1=true,Boolean hack_2=true, Boolean hack_3=true, Boolean hack_4=true )
+            {
+                z_drawing_hack0 = z_drawing_hack_0;
+				z_drawing_hack1 = z_drawing_hack_1;
+				threshold_hack1 = threshold_hack_1;
+				hack0 = hack_0;
+				hack1 = hack_1;
+				hack2 = hack_2;
+				hack3 = hack_3;
+				hack4 = hack_4;
 
-                int i = VV . I;
-                int j = VV . J;
-                float vv = c [ i , j ];
-                VV . V = vv;
+				//DrawBoxelOutline ( );
+				//DrawBoxelOutlineByZ ( );
+				VerifyCycles ( );
+            }
+
+            private void VerifyCycles ()
+            {
+
+				VerifyEdgeCycles ( NextEdges: hack0 , PreviousEdges: hack1 );
+                //VerifyVertexCycles ( );
+
+            }
+
+			private void VerifyEdgeCycles ( Boolean NextEdges = true, Boolean PreviousEdges=true)
+			{
+				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} " , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+				int largest_index = SortedVertexIndicies [ 0 ];
+				int smallest_index = SortedVertexIndicies [ 3 ];
+				Vertex Vlargest = this . V [ largest_index ];
+				Edge E = Vlargest . NextEdge;
+				Boolean ExitCondition = true;
+				if( NextEdges )
+				{
+					while (ExitCondition)
+					{
+						//System . Diagnostics . Debug . Write  ( String . Format ( "^{0} " , E.EdgeIndex ) );
+						if ( E . SubEdge == null )
+						{
+
+							DrawEdge ( E , Edge . EdgeDirection . ClockwiseNext );
+							E = E . Next;
+							int VI = E . V [ 0 ] . VertexIndex;
+							ExitCondition = !( smallest_index == VI );
+						}
+						else
+						{
+							for ( int i = 0 ; i < E . SubEdgeCount ; i++ )
+							{
+								Edge SE = E . SubEdge [ i ];
+								DrawEdge ( SE , Edge . EdgeDirection . ClockwiseNext );
+							}
+							E = E . Next;
+							int VI = E . V [ 0 ] . VertexIndex;
+							ExitCondition = !( smallest_index == VI );
+						}
+						
+					}
+				}
+
+				E = Vlargest . PreviousEdge;
+				ExitCondition = true;
+
+				if( PreviousEdges )
+				{
+					while ( ExitCondition )
+					{
+						//System . Diagnostics . Debug . Write ( String . Format ( "v{0} " , E . EdgeIndex ) );
+
+						DrawEdge ( E , Edge. EdgeDirection . CounterClockwisePrevious );
+
+						E = E . Previous;
+						int VI = E . V [ 1 ] . VertexIndex;
+						ExitCondition = !( smallest_index == VI );
+					}
+				}
+
+				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Completed" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			}
+
+			private void DrawEdge ( Edge E , Edge . EdgeDirection Direction )
+			{
+				OpenGL gl = staticGLHook;
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 1 );
+				float z_drawing_hack = 1.0f;
+
+				switch ( Direction )
+				{
+					case Edge . EdgeDirection . ClockwiseNext:
+						if ( !hack0 )
+							goto scramo;
+						gl . Color ( 0.1 , 0.9 , 0.1 );
+						z_drawing_hack = z_drawing_hack0;
+						break;
+
+					case Edge . EdgeDirection . CounterClockwisePrevious:
+						if ( !hack1 )
+							goto scramo;
+						gl . Color ( 0.9 , 0.8 , 0.1 );
+						z_drawing_hack = z_drawing_hack1;
+						break;
+					default:break;
+
+				}
+				float [ ] cf0 = E . V [ 0 ] . cf;
+				float [ ] cf1 = E . V [ 1 ] . cf;
+				float z0 = E . V [ 0 ] . V * z_drawing_hack;
+				float z1 = E . V [ 1 ] . V * z_drawing_hack;
+
+				
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
+				gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
+				gl . End ( );
+
+				if ( IsBetween ( E , threshold_hack1 ) )
+					{
+					float V0 = E . V [ 0 ] . V;
+					float [ ] cf = E . V [ 0 ] . cf;
+					float v_fraction =  threshold_hack1;		
+					float [ ] c_th = new float [ ]
+						{
+							cf[0]+(v_fraction)*E.delta_cf[0],
+							cf[1]+(v_fraction)*E.delta_cf[1],
+							cf[2]+(v_fraction)*E.delta_cf[2],
+						};
+					gl . PointSize ( 5 );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+					gl . Vertex ( c_th [ 0 ] , c_th [ 1 ] , c_th[2] );
+					gl . End ( );
+					}
+
+				scramo: gl . PopAttrib ( );
+
+			}
+
+			private bool IsBetween ( Edge e , float v )
+			{
+				float V0 = e . V [ 0 ] . V;
+				float V1 = e . V [ 1 ] . V;
+				return IsBetween(V0,v,V1);
+			}
+
+			private bool IsBetween ( float v0 , float v , float v1 )
+			{
+				if(v0<v)
+				{
+					if ( v < v1 )
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+
+			private void VerifyVertexCycles ( )
+            {
+				if ( this . IsCritical )
+				{
+					System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} [{1},{2}] IsCritical" , nameof( VerifyVertexCycles ) , this.I,this.J ) );
+					return;
+				}
+
+				int largest_index = SortedVertexIndicies [ 0 ];
+                int smallest_index = SortedVertexIndicies [ 3 ];
+                Vertex Vsmallest = this . V [ smallest_index ];
+                int next_smallest_index = Vsmallest . Next . VertexIndex;
+                int previous_smallest_index = Vsmallest . Previous . VertexIndex;
+                
+                Vertex Vlargest = this . V [ largest_index ];
+                Vertex V = Vlargest;
+
+                System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} [{1}.{2}] " ,nameof(VerifyVertexCycles) ,this.I, this.J) );
+
+                Boolean reset_condition = true;
+                Boolean exit_condition = reset_condition;
+                while ( exit_condition )
+                {
+                    System . Diagnostics . Debug . Write ( String . Format ( "^{0}->{1}" , V . VertexIndex , V.Next.VertexIndex) );
+
+                    V = V . Next;
+                    exit_condition =!( V . VertexIndex == next_smallest_index );
+                } 
+
+                V = Vlargest;
+                exit_condition = reset_condition;
+                while ( exit_condition )
+                {
+                    System . Diagnostics . Debug . Write ( String . Format ( "V{0}->{1}" , V . VertexIndex, V.Previous.VertexIndex) );
+
+                    V = V . Previous;
+                    exit_condition =!( V . VertexIndex == previous_smallest_index );
+
                 }
 
-            internal void DrawMe()
-            {
-                DrawBoxelOutline ( );
-                DrawVertices ( );
-                DrawEdges ( );
-            }
-            internal void DrawMe ( float sliderValue )
-            {
-                z_drawing_hack0 = sliderValue;
-                DrawBoxelOutline ( );
-            }
-
-            private void DrawEdges()
-            {
-                DrawPerimeterEdges ( );
-                DrawIsoEdges ( );
+				System . Diagnostics . Debug . WriteLine ( String . Format ( "\n{0} {1} " , "completed" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
             }
 
             private void DrawPerimeterEdges ( )
@@ -659,12 +872,13 @@ FreshReset:
 
             private void DrawPerimeterEdges ( Edge e )
             {
-                if ( e . SubEdges > 0 )
+                if ( e . SubEdgeCount > 0 )
                 {
                     if ( e . SubEdge != null )
                     {
                     }
-                    DrawPerimeterEdge (e );
+
+				DrawPerimeterEdge (e );
                 }
             }
 
@@ -713,7 +927,7 @@ FreshReset:
                 gl . PopAttrib ( );
              }
 
-            private void DrawBoxelOutline()
+            private void DrawBoxelOutline ( )
             {
                 OpenGL gl = staticGLHook;
                 gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
@@ -723,13 +937,36 @@ FreshReset:
 
                 for ( int i = 0 ; i < 4 ; i++ )
                 {
-                    float [ ] cf = this. V [i ] . cf;
-                   
-                    float z = this. V [ i] . V*z_drawing_hack0;
+                    float [ ] cf = this . V [ i ] . cf;
+
+                    float z = this . V [ i ] . V * z_drawing_hack0;
 
                     gl . Vertex ( cf [ 0 ] , cf [ 1 ] , z );
                 }
                 gl . End ( );
+                gl . PopAttrib ( );
+            }
+
+            private void DrawEdgeTrack ( Edge [ ][ ] edgeTrack , int n0 , int n1 )
+            {
+                OpenGL gl = staticGLHook;
+                gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . AccumBuffer );
+                gl . LineWidth ( 2 );
+                for ( int i = 0 ; i < n0 ; i++ )
+                {
+                   Edge E0 = edgeTrack [ 0 ][ i ];
+
+                       gl . Color ( 0.1 , 0.9 , 0.1 );
+                        float [ ] cf0 = E0 . V [ 0 ] . cf;
+                        float [ ] cf1 =E0 . V [ 1 ] . cf;
+                        float z0 = E0 . V [ 0 ] . V;
+                        float z1 = E0 . V [ 1 ] . V;
+                        gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+                        gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
+                        gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
+                        gl . End ( );
+
+                }
                 gl . PopAttrib ( );
             }
 
@@ -752,7 +989,7 @@ FreshReset:
 
         }
 
-        #endregion Persistance_classes
+        #endregion DMT_Geometry_Classes
 
         public MainWindow ( )
             {
@@ -807,15 +1044,15 @@ FreshReset:
             OpenGL gl = this . myOpenGLControl . OpenGL;
             staticGLHook = gl;
 
-            //  Clear the color and depth buffer.
-
+			//  Clear the color and depth buffer.
+			//gl . DrawBuffer ( SharpGL . Enumerations . DrawBufferMode . Front );
+			//gl . Disable ( OpenGL . GL_DOUBLEBUFFER );
             gl . Clear ( OpenGL . GL_COLOR_BUFFER_BIT | OpenGL . GL_DEPTH_BUFFER_BIT );
             //GlmSharp . mat4 M = GlmSharp . mat4 . Identity;
 
             gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Projection );
             gl . LoadIdentity ( );
-
-  
+			//gl . Flush ( );
             if ( DrawMouseScreenSpaceAnnotation_CheckBox_Control.IsChecked.GetValueOrDefault())
                 {
                 gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
@@ -978,8 +1215,9 @@ FreshReset:
                     DoAnnotateZTicks: AnnotateZTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
                     DoAnnotateYTicks: AnnotateYTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
                     DoAnnotateXTicks: AnnotateXTickMarks_CheckBoxControl . IsChecked . GetValueOrDefault ( ) ,
-                    tick_annotation_scale: Axis_tick_annotation_scale_H_Slider_UserControl . SliderValue
-                    );
+                    tick_annotation_scale: Axis_tick_annotation_scale_H_Slider_UserControl . SliderValue ,
+					Draw_Minus_Z_Axis_Leg: Draw_Minus_Z_Axis_Leg_CheckBoxControl . IsChecked.Value
+					);
                 }
 
             if ( YourArmsTooShortToBoxWithHashem.IsChecked.GetValueOrDefault() )
@@ -999,7 +1237,16 @@ FreshReset:
                     {
                         Boxel B = new Boxel ( i , j , Sheety . cells );
 
-                        B . DrawMe ( Z_Fudge_H_Slider_UserControl . SliderValue );
+                        B . DrawMe ( 
+							z_drawing_hack_0: Z_Fudge_H_Slider_0_UserControl . SliderValue, 
+							z_drawing_hack_1: Z_Fudge_H_Slider_1_UserControl.SliderValue,
+							threshold_hack_1: Threshold_Hack_H_Slider_2_UserControl .SliderValue,
+							hack_0: EdgeFactorHack0CheckBoxControl . IsChecked . Value ,
+							hack_1: EdgeFactorHack1CheckBoxControl . IsChecked . Value ,
+							hack_2: EdgeFactorHack2CheckBoxControl . IsChecked . Value ,
+							hack_3: EdgeFactorHack3CheckBoxControl . IsChecked . Value ,
+							hack_4: EdgeFactorHack4CheckBoxControl . IsChecked . Value 
+							);
 
                         //OldDrawWithoutBoxel ( gl , j , i );
                     }
@@ -1024,7 +1271,7 @@ scramo:
 
             ////DoAspect ( );
 
-            gl . Flush ( );
+            //gl . Flush ( );
 
             Draws_Label . Content = String . Format ( "Draw Count: {0}" , Draws );
             Draws++;
@@ -1564,9 +1811,10 @@ scramo:
 
             gl . ShadeModel ( OpenGL . GL_SMOOTH );
 
-            gl . DrawBuffer ( SharpGL . Enumerations . DrawBufferMode . Back );
+			// gl . DrawBuffer ( SharpGL . Enumerations . DrawBufferMode . Back );
+			gl . DrawBuffer ( SharpGL . Enumerations . DrawBufferMode.Front );
 
-            DoAspect ( );
+			DoAspect ( );
 
             }
 

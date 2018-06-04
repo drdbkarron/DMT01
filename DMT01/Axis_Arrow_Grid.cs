@@ -233,8 +233,9 @@ namespace Axis_Arrow_Grid
 
         public static void MyGlobalAxis ( SharpGL . OpenGL gl , int AxesLength = 20 , int LineWidth = 2 , int Pointsize = 3 , Boolean DoMinusTicks = true ,
                 Boolean TagOrigin = true , Boolean DoXYZAnnotation = true , Boolean DoMinusXYZAnnotation = true , Boolean DoUnitTicks = true ,
-                Boolean DoAnnotateZTicks = true , Boolean DoAnnotateYTicks = true ,Boolean DoAnnotateXTicks = true , Boolean  DoPlusTicks=true, float tick_annotation_scale = 0.4f )
-            {
+                Boolean DoAnnotateZTicks = true , Boolean DoAnnotateYTicks = true ,Boolean DoAnnotateXTicks = true , Boolean  DoPlusTicks=true, float tick_annotation_scale = 0.4f ,
+				Boolean Draw_Minus_Z_Axis_Leg=true,Boolean Draw_Minus_Y_Axis_Leg = true , Boolean Draw_Minus_X_Axis_Leg = true )
+		{
             gl . PushMatrix ( );
 
             gl . PushAttrib ( SharpGL . OpenGL . GL_CURRENT_BIT | SharpGL . OpenGL . GL_ENABLE_BIT | SharpGL . OpenGL . GL_LINE_BIT | SharpGL . OpenGL . GL_DEPTH_BUFFER_BIT );
@@ -263,7 +264,7 @@ namespace Axis_Arrow_Grid
             gl . Vertex ( AxesLength , 0 , 0 );
             gl . End ( );
 
-            if ( DoMinusTicks )
+            if ( Draw_Minus_X_Axis_Leg )
                 {
                 gl . Color ( Red );
                 gl . Begin ( SharpGL . OpenGL . GL_LINES );
@@ -294,7 +295,7 @@ namespace Axis_Arrow_Grid
             gl . Vertex ( 0 , AxesLength , 0 );
             gl . End ( );
 
-            if ( DoMinusTicks )
+            if ( Draw_Minus_Y_Axis_Leg )
                 {
                 gl . Color ( Green );
                 gl . Begin ( SharpGL . OpenGL . GL_LINES );
@@ -309,48 +310,51 @@ namespace Axis_Arrow_Grid
                 gl . Translate ( 0 , AxesLength , 0 );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"+Y" );
                 gl . PopMatrix ( );
+                 }
 
-                if ( DoMinusXYZAnnotation )
-                    {
-                    gl . PushMatrix ( );
-                    gl . Translate ( 0 , -AxesLength , 0 );
-                    gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"-Y" );
-                    gl . PopMatrix ( );
-                    }
+			if ( DoMinusXYZAnnotation )
+			{
+				gl . PushMatrix ( );
+				gl . Translate ( 0 , -AxesLength , 0 );
+				gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"-Y" );
+				gl . PopMatrix ( );
+			}
+
+			if ( true)
+				{
+				gl . Color ( Blue );
+				gl . Begin ( SharpGL . OpenGL . GL_LINES );
+				gl . Vertex ( Origin );
+				gl . Vertex ( 0 , 0 , AxesLength );
+				gl . End ( );
                 }
 
-            gl . Color ( Blue );
-            gl . Begin ( SharpGL . OpenGL . GL_LINES );
-            gl . Vertex ( Origin );
-            gl . Vertex ( 0 , 0 , AxesLength );
-            gl . End ( );
-
-            if ( DoMinusTicks )
+            if ( Draw_Minus_Z_Axis_Leg )
                 {
                 gl . Color ( Blue );
                 gl . Begin ( SharpGL . OpenGL . GL_LINES );
                 gl . Vertex ( Origin );
                 gl . Vertex ( 0 , 0 , -AxesLength );
                 gl . End ( );
-                }
+				}
 
             if ( DoXYZAnnotation )
-                {
+				{
                 gl . PushMatrix ( );
                 gl . Translate ( 0 , 0 , AxesLength );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"+Z" );
                 gl . PopMatrix ( );            
-
-                if ( DoMinusXYZAnnotation )
-                    {
-                    gl . PushMatrix ( );
-                    gl . Translate ( 0 , 0 , -AxesLength );
-                    gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"-Z" );
-                    gl . PopMatrix ( );
-                    }
                 }
 
-            if (DoUnitTicks )
+			if ( DoMinusXYZAnnotation && Draw_Minus_Z_Axis_Leg )
+				{
+				gl . PushMatrix ( );
+				gl . Translate ( 0 , 0 , -AxesLength );
+				gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"-Z" );
+				gl . PopMatrix ( );
+				}
+
+			if ( DoUnitTicks )
                 {
                 gl . PointSize(Pointsize );
                 gl . Color(White );
@@ -364,21 +368,25 @@ namespace Axis_Arrow_Grid
                         gl . Vertex( 0 , 0 , i );
                         gl . End ( );
                         }
+
                     if (DoMinusTicks )
                         {
                         gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
                         gl . Vertex( -i , 0 , 0 );
                         gl . Vertex( 0 , -i , 0 );
-                        gl . Vertex( 0 , 0 , -i );
+                        if(Draw_Minus_Z_Axis_Leg )
+							gl . Vertex( 0 , 0 , -i );
                         gl . End ( );
                         }
-                    if ( DoAnnotateZTicks )
+
+                    if ( DoAnnotateZTicks  && Draw_Minus_Z_Axis_Leg )
                         {
                         gl . PushMatrix ( );
                         gl . Translate ( 0 , 0 , i );
                         gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
                         gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: i . ToString ( ) );
                         gl . PopMatrix ( );
+
                         if ( DoMinusTicks )
                             {
                             gl . PushMatrix ( );
