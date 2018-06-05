@@ -276,19 +276,20 @@ namespace DMT01
 
         public class Edge
         {
-            public short EdgeIndex = -1;
-            public short SubEdgeIndex = -1;
-			public Boolean IsSubEdge=false;
+            public short EdgeIndex;
+            public short SubEdgeIndex;
+			public Boolean IsSubEdge;
             public Vertex [ ] V = new Vertex [ 2 ];
-            public Edge[] SubEdge = null;
-			public SubEdge SubEdges;
-            public short SubEdgeCount = 0;
-            public Vertex [ ] TweenVerte = null;
-            public short TweenVerts = 0;
+			public Edge[] SubEdge   ;
+			//public SubEdge SubEdges;
+			public short SubEdgeCount;
+            public Vertex [ ] TweenVerte;
+            public short TweenVerts;
             public Edge Next;
+			public Edge Parent=null;
             public Edge Previous;
-            public float delta_V=0.0f;
-			public float[] delta_cf={0,0,0 };
+            public float delta_V;
+			public float[] delta_cf;
 			public enum EdgeDirection
 				{
 				 ClockwiseNext,
@@ -312,16 +313,25 @@ namespace DMT01
 
 			}
 
-			public Edge( short edgeIndex , short subEdgeIndex , Vertex V0 , Vertex V1 )
+			public Edge( short EI , short subEdgeIndex , Vertex V0 , Vertex V1 )
                 {
-                new Edge ( edgeIndex , V0 , V1 );
-                this . SubEdgeIndex = subEdgeIndex;
+				this . EdgeIndex = EI;
+				this . V [ 0 ] = V0;
+				this . V [ 1 ] = V1;
+				this . delta_V = this . V [ 1 ] . V - this . V [ 0 ] . V;
+				this . delta_cf = new float [ 3 ] {
+					this . V [ 1 ] . cf[0] - this . V [ 0 ] . cf[0],
+					this . V [ 1 ] . cf[1] - this . V [ 0 ] . cf[1],
+					this . V [ 1 ] . cf[2] - this . V [ 0 ] . cf[2]
+					};
+
+				this . SubEdgeIndex = subEdgeIndex;
                 }
         }
 
 		public class SubEdge   : Edge
 		{
-			public Edge Parent;
+			public Edge ParentEdge;
 			public Edge E=new Edge();
 		}
 
@@ -485,25 +495,57 @@ namespace DMT01
                 {
                     Vertex V = E.TweenVerte [ 0 ];
                     Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V );
-                    Edge SubEdge1 = new Edge ( E . EdgeIndex , 0 , V , V1 );
-                    
+                    Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V , V1 );
+					V . Previous = V0;
+					V . Next = V1;
                     E . SubEdgeCount = 2;
                     E . SubEdge = new Edge [ 2 ] { SubEdge0 , SubEdge1 };
-                }
+					SubEdge0 . Previous = E . Previous;
+					SubEdge0 . IsSubEdge = true;
+					SubEdge0 . Parent = E;
+					SubEdge0 . Next = E.SubEdge [ 1 ];
+					SubEdge1 . Previous = E . SubEdge [ 0 ];
+					SubEdge1 . IsSubEdge = true;
+					SubEdge1 . Parent = E;
+					SubEdge1 . Next = E . Next;
 
+					return;
+                }
+				else
                 if ( E . TweenVerts == 2 )
                 {
                     Vertex V00 = E . TweenVerte [ 0 ];
                     Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V00 );
                     Vertex V01 = E . TweenVerte [ 1 ];
+					V00 . Previous = V0;
+					V00 . Next = V01;
+					V01 . Previous = V00;
+					V01 . Next = V1;
                     Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V00 , V01 );
                     Edge SubEdge2 = new Edge ( E . EdgeIndex , 2 , V01 , V1 );
                     E . SubEdgeCount = 3;
-                    E . SubEdge = new Edge [ 3 ];
-                    E . SubEdge [ 0 ] = SubEdge0;
-                    E . SubEdge [ 1 ] = SubEdge1;
-                    E . SubEdge [ 2 ] = SubEdge2;
+                    E . SubEdge = new Edge [ 3 ] { SubEdge0,SubEdge1,SubEdge2};
+
+
+					SubEdge0 . Previous = E . Previous;
+					SubEdge0 . Parent = E;
+					SubEdge0 . IsSubEdge = true;
+					SubEdge0 . Next = SubEdge1;
+					SubEdge1 . Previous = SubEdge0;
+					SubEdge1 . Parent = E;
+					SubEdge1 . IsSubEdge = true;
+					SubEdge1 . Next = SubEdge2;
+					SubEdge2 . Previous = SubEdge1;
+					SubEdge2 . Parent = E;
+					SubEdge2 . IsSubEdge = true;
+					SubEdge2 . Next = E . Next;
+
+
+
+					return;
                 }
+
+				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "What are you doing here?" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
             }
 
             private void LoadTriangles()
@@ -702,23 +744,26 @@ FreshReset:
 						if ( E . SubEdge == null )
 						{
 
-							DrawEdge ( E , Edge . EdgeDirection . ClockwiseNext );
+							//DrawEdge ( E , Edge . EdgeDirection . ClockwiseNext );
 							E = E . Next;
 							int VI = E . V [ 0 ] . VertexIndex;
 							ExitCondition = !( smallest_index == VI );
 						}
 						else
 						{
-							for ( int i = 0 ; i < E . SubEdgeCount ; i++ )
+							Edge SE = E . SubEdge [ 0 ];
+														
+							while (SE.IsSubEdge)
 							{
-								Edge SE = E . SubEdge [ i ];
-								DrawEdge ( SE , Edge . EdgeDirection . ClockwiseNext );
+
+							//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , SE.SubEdgeIndex , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+							DrawEdge ( SE , Edge . EdgeDirection . ClockwiseNext );
+							SE = SE . Next;
+							
 							}
-							E = E . Next;
-							int VI = E . V [ 0 ] . VertexIndex;
-							ExitCondition = !( smallest_index == VI );
+						ExitCondition = false;
 						}
-						
 					}
 				}
 
@@ -730,12 +775,26 @@ FreshReset:
 					while ( ExitCondition )
 					{
 						//System . Diagnostics . Debug . Write ( String . Format ( "v{0} " , E . EdgeIndex ) );
+						if ( E . SubEdge == null )
+						{
+							//DrawEdge ( E , Edge . EdgeDirection . CounterClockwisePrevious );
 
-						DrawEdge ( E , Edge. EdgeDirection . CounterClockwisePrevious );
+							E = E . Previous;
+							int VI = E . V [ 1 ] . VertexIndex;
+							ExitCondition = !( smallest_index == VI );
+						}
+						else
+						{
+							int last_subedge = E . SubEdgeCount - 1;
+							Edge SE = E . SubEdge [ last_subedge ];
 
-						E = E . Previous;
-						int VI = E . V [ 1 ] . VertexIndex;
-						ExitCondition = !( smallest_index == VI );
+							while ( SE . IsSubEdge )
+							{
+								DrawEdge ( SE , Edge . EdgeDirection . CounterClockwisePrevious );
+								SE = SE . Previous;
+							}
+						ExitCondition = false;
+						}
 					}
 				}
 
@@ -752,16 +811,21 @@ FreshReset:
 				switch ( Direction )
 				{
 					case Edge . EdgeDirection . ClockwiseNext:
-						if ( !hack0 )
-							goto scramo;
+						
 						gl . Color ( 0.1 , 0.9 , 0.1 );
 						z_drawing_hack = z_drawing_hack0;
 						break;
 
 					case Edge . EdgeDirection . CounterClockwisePrevious:
-						if ( !hack1 )
-							goto scramo;
+						switch ( E . SubEdgeIndex )
+						{
+							case 0:
+								break;
+
+							default:
 						gl . Color ( 0.9 , 0.8 , 0.1 );
+								break;
+						}
 						z_drawing_hack = z_drawing_hack1;
 						break;
 					default:break;

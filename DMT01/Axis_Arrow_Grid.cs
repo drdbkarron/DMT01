@@ -279,14 +279,14 @@ namespace Axis_Arrow_Grid
                 gl . Translate ( AxesLength , 0 , 0 );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"+X" );
                 gl . PopMatrix ( );
+                }
 
-                if ( DoMinusXYZAnnotation )
-                    {
-                    gl . PushMatrix ( );
-                    gl . Translate ( -AxesLength , 0 , 0 );
-                    gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"-X" );
-                    gl . PopMatrix ( );
-                    }
+            if ( DoMinusXYZAnnotation )
+                {
+                gl . PushMatrix ( );
+                gl . Translate ( -AxesLength , 0 , 0 );
+                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"-X" );
+                gl . PopMatrix ( );
                 }
 
             gl . Color ( Green );
@@ -313,12 +313,12 @@ namespace Axis_Arrow_Grid
                  }
 
 			if ( DoMinusXYZAnnotation )
-			{
+				{
 				gl . PushMatrix ( );
 				gl . Translate ( 0 , -AxesLength , 0 );
 				gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"-Y" );
 				gl . PopMatrix ( );
-			}
+				}
 
 			if ( true)
 				{
@@ -379,22 +379,22 @@ namespace Axis_Arrow_Grid
                         gl . End ( );
                         }
 
-                    if ( DoAnnotateZTicks  && Draw_Minus_Z_Axis_Leg )
+                    if ( DoAnnotateZTicks )
                         {
                         gl . PushMatrix ( );
                         gl . Translate ( 0 , 0 , i );
                         gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
                         gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: i . ToString ( ) );
                         gl . PopMatrix ( );
+                        }
 
-                        if ( DoMinusTicks )
-                            {
-                            gl . PushMatrix ( );
-                            gl . Translate ( 0 , 0 , -i );
-                            gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
-                            gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: ( -i ) . ToString ( ) );
-                            gl . PopMatrix ( );
-                            }
+                    if ( DoMinusTicks && Draw_Minus_Z_Axis_Leg )
+                        {
+                        gl . PushMatrix ( );
+                        gl . Translate ( 0 , 0 , -i );
+                        gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
+                        gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: ( -i ) . ToString ( ) );
+                        gl . PopMatrix ( );
                         }
                     if ( DoAnnotateYTicks )
                         {
@@ -403,15 +403,15 @@ namespace Axis_Arrow_Grid
                         gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
                         gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: i . ToString ( ) );
                         gl . PopMatrix ( );
-                        if ( DoMinusTicks )
-                            {
-                            gl . PushMatrix ( );
-                            gl . Translate ( 0 , -i , 0 );
-                            gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
-                            gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: ( -i ) . ToString ( ) );
-                            gl . PopMatrix ( );
-                            }
                         }
+					if ( DoMinusTicks )
+						{
+						gl . PushMatrix ( );
+						gl . Translate ( 0 , -i , 0 );
+						gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
+						gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: ( -i ) . ToString ( ) );
+						gl . PopMatrix ( );
+						}
                     if ( DoAnnotateXTicks )
                         {
                         gl . PushMatrix ( );
@@ -419,14 +419,14 @@ namespace Axis_Arrow_Grid
                         gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
                         gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: i . ToString ( ) );
                         gl . PopMatrix ( );
-                        if ( DoMinusTicks )
-                            {
-                            gl . PushMatrix ( );
-                            gl . Translate ( -i , 0 , 0 );
-                            gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
-                            gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: ( -i ) . ToString ( ) );
-                            gl . PopMatrix ( );
-                            }
+                        }
+                    if ( DoMinusTicks )
+                        {
+                        gl . PushMatrix ( );
+                        gl . Translate ( -i , 0 , 0 );
+                        gl . Scale ( tick_annotation_scale , tick_annotation_scale , tick_annotation_scale );
+                        gl . DrawText3D ( faceName: AxisLabelFont , fontSize: .1f , deviation: 0.0f , extrusion: 0.05f , text: ( -i ) . ToString ( ) );
+                        gl . PopMatrix ( );
                         }
                     }
                 }
