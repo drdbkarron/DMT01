@@ -1,10 +1,10 @@
 ﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SeralizeControlCommonFields>
     <ControlClass>CheckBox</ControlClass>
-    <ControlName>AnnotateOrigin_CheckBoxControl</ControlName>
-    <SaveStateFileName>AnnotateOrigin_CheckBoxControl.xml</SaveStateFileName>
+    <ControlName>AnnotateOrigin_CheckBox_Control</ControlName>
+    <SaveStateFileName>AnnotateOrigin_CheckBox_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
   <CheckBoxState>false</CheckBoxState>
-  <CheckBoxName>AnnotateOrigin_CheckBoxControl</CheckBoxName>
+  <CheckBoxName>AnnotateOrigin_CheckBox_Control</CheckBoxName>
 </CheckBoxControlSaveState>

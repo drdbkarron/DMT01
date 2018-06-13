@@ -6,7 +6,7 @@
     <SaveStateFileName>LookAt_Eye_Y_H_Slider_UserControl.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <MaxValue>50</MaxValue>
-  <MinValue>-50</MinValue>
-  <ResetValue>-3.34572482</ResetValue>
+  <MaxValue>57</MaxValue>
+  <MinValue>-52</MinValue>
+  <ResetValue>-48.6232948</ResetValue>
 </H_Slider_UserControl1_SaveState_Class>

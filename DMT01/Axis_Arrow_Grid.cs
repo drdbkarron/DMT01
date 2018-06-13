@@ -663,14 +663,14 @@ namespace Axis_Arrow_Grid
                 UVs . Add ( new UV ( 1 , 0 ) );
 
                 //	Add the vertices.
-                Vertices . Add ( new Vertex ( -1 , -1 , -1 ) );
-                Vertices . Add ( new Vertex ( 1 , -1 , -1 ) );
-                Vertices . Add ( new Vertex ( 1 , -1 , 1 ) );
-                Vertices . Add ( new Vertex ( -1 , -1 , 1 ) );
-                Vertices . Add ( new Vertex ( -1 , 1 , -1 ) );
-                Vertices . Add ( new Vertex ( 1 , 1 , -1 ) );
-                Vertices . Add ( new Vertex ( 1 , 1 , 1 ) );
-                Vertices . Add ( new Vertex ( -1 , 1 , 1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , -1 , -1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , -1 , -1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , -1 , 1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , -1 , 1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , 1 , -1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , 1 , -1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , 1 , 1 ) );
+                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , 1 , 1 ) );
 
                 //	Add the faces.
                 Face face = new Face(); //	bottom

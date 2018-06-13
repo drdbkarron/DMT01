@@ -1,10 +1,10 @@
 ﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SeralizeControlCommonFields>
     <ControlClass>CheckBox</ControlClass>
-    <ControlName>AnnotateYTickMarks_CheckBoxControl</ControlName>
-    <SaveStateFileName>AnnotateYTickMarks_CheckBoxControl.xml</SaveStateFileName>
+    <ControlName>AnnotateYTickMarks_CheckBox_Control</ControlName>
+    <SaveStateFileName>AnnotateYTickMarks_CheckBox_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
   <CheckBoxState>true</CheckBoxState>
-  <CheckBoxName>AnnotateYTickMarks_CheckBoxControl</CheckBoxName>
+  <CheckBoxName>AnnotateYTickMarks_CheckBox_Control</CheckBoxName>
 </CheckBoxControlSaveState>

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DMT01</RootNamespace>
     <AssemblyName>DMT01</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>DMT01.App</StartupObject>
@@ -221,15 +223,15 @@
     <None Include="bin\Debug\arrow-down-on-black-circular-background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bin\Debug\AnnotateAxisXYZ_CheckBoxControl.xml" />
-    <Resource Include="bin\Debug\AnnotateOrigin_CheckBoxControl.xml" />
-    <Resource Include="bin\Debug\AnnotateTickMarks_CheckBoxControl.xml" />
-    <Resource Include="bin\Debug\AnnotateXTickMarks_CheckBoxControl.xml" />
-    <Resource Include="bin\Debug\AnnotateYTickMarks_CheckBoxControl.xml" />
-    <Resource Include="bin\Debug\AnnotateZTickMarks_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\AnnotateAxisXYZ_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateOrigin_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateXTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateYTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateZTickMarks_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\AxisDrawMe_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\Axis_DrawNegativeCheckBox.xml" />
-    <Resource Include="bin\Debug\Axis_DrawNegativeCheckBoxControl.xml" />
+    <Resource Include="bin\Debug\Axis_DrawNegativeCheckBox_Control.xml" />
     <Resource Include="bin\Debug\Axis_Length_XYZ_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\Axis_Linewidth_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\Axis_Property1_H_Slider_UserControl.xml" />
@@ -238,7 +240,7 @@
     <Resource Include="bin\Debug\Axis_TickSize_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\Axis_Ticks_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\DMT_Main_Window_Control.xml" />
-    <Resource Include="bin\Debug\DoDoTickMarks_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\DoDoTickMarks_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\DoDrawAllSpreadsheetData_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\DoDrawGreyScale_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\DoDrawSpreadsheetFocusCell_s_CheckBox_Control.xml" />
@@ -246,7 +248,7 @@
     <Resource Include="bin\Debug\DoDrawSpreadsheetSelectedCell_s_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\DoDrawSpreadsheetSideBorder_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\DoDrawSpreadsheetTextObjects_CheckBox_Control.xml" />
-    <Resource Include="bin\Debug\DoDrawSpreadsheetTopBorder_CheckBoxControl.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetTopBorder_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\DoSelectDataToNormalize_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\Do_Orbit_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\Do_Orbit_Pull_Back_CheckBox_Control.xml" />
@@ -265,6 +267,38 @@
     <EmbeddedResource Include="Resources\UpArrowBMP.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bin\Debug\SharpGL.SceneGraph.xml" />
+    <Resource Include="bin\Debug\SharpGL.WPF.xml" />
+    <Resource Include="bin\Debug\SharpGL.xml" />
+    <Resource Include="bin\Debug\unused_check_box_1_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\unvell.ReoGrid.xml" />
+    <Resource Include="bin\Debug\UseLookAtViewingTransform_RadioButton.xml" />
+    <Resource Include="bin\Debug\UseLookAtViewingTransform_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\UseOrtho3D_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\UseOrthographic_Viewing_Transform_radioButton_Control.xml" />
+    <Resource Include="bin\Debug\UsePerspetiveViewingTransform_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\Use_Viewing_Frustrum_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\YourArmsTooShortToBoxWithHashem.xml" />
+    <Resource Include="bin\Debug\Z_Fudge_H_Slider_0_UserControl.xml" />
+    <Resource Include="bin\Debug\Z_Fudge_H_Slider_1_UserControl.xml" />
+    <Resource Include="bin\Debug\Z_Fudge_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\MouseScreenAnnotationFontSize_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Left_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Near_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Right_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Top_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_ASPECT_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_FOVY_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_Z_FAR_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_Z_NEAR_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\ScreenAnnotationFont_SizeH_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\show_boxel_index1_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\show_wompy_3d_seed_cursor_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet3DNumericLeftMargin_H_Slider_User_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet_Aspect_Scale_Hack_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet_Grid_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Threshold_Hack_H_Slider_2_UserControl.xml" />
     <Resource Include="bin\Debug\LaunchSavedStateOnInitalization_RadioButton_Control.xml" />
     <Resource Include="bin\Debug\LoadSpreadsheetAtInitalization_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\LookAtTarget_X_H_Slider_UserControl.xml" />
@@ -277,6 +311,21 @@
     <Resource Include="bin\Debug\Orthographic_Far_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\LookAtTarget_Y_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\LookAtTarget_Z_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack0CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack1CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack2CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack3CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack4CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DrawMouseScreenSpaceAnnotation_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DrawScreenSpaceAnnotationGrid_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Draw_Minus_Z_Axis_Leg_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\GlmSharp.xml" />
+    <Resource Include="bin\Debug\H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Axis_tick_annotation_scale_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\DoDrawReoGridSpreadsheet_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Do_Execute_Select_Data_Button_on_Startup_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DynamicExpresso.Core.xml" />
     <Content Include="bin\Debug\Microsoft.Data.Entity.Design.Extensibility.dll" />
     <Content Include="bin\Debug\Microsoft.Windows.Design.Extensibility.dll" />
     <Resource Include="bin\Debug\Orbit_Delta_Angle_H_Slider_UserControl.xml" />
