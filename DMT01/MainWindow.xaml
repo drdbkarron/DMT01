@@ -854,13 +854,13 @@
 											<RowDefinition x:Name="Row_1" />
 											<RowDefinition x:Name="Row_2" />
 											<RowDefinition x:Name="Row_3" />
-											<RowDefinition />
-											<RowDefinition />
-											<RowDefinition />
-											<RowDefinition />
-											<RowDefinition />
-											<RowDefinition />
-											<RowDefinition />
+											<RowDefinition x:Name="Row_4" />
+											<RowDefinition x:Name="Row_5" />
+											<RowDefinition x:Name="Row_6" />
+											<RowDefinition x:Name="Row_7" />
+											<RowDefinition x:Name="Row_8" />
+											<RowDefinition x:Name="Row_9" />
+											<RowDefinition x:Name="Row_10" />
 										</Grid.RowDefinitions>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition x:Name="Column_0" />
@@ -876,62 +876,59 @@
 											<ColumnDefinition x:Name="Column_10" />
 										</Grid.ColumnDefinitions>
 										<Label
+											x:Name="HackGrid_C0_R0_Label"
 											Grid.Column="0"
-											Margin="1"
 											Content="Col 0" />
 										<Label
+											x:Name="HackGrid_C1_R0_Label"
 											Grid.Column="1"
-											Margin="1"
 											Content="Col 1" />
 										<Label
+											x:Name="HackGrid_C2_R0_Label"
 											Grid.Column="2"
-											Margin="1"
 											Content="Col 2" />
 										<Label
+											x:Name="HackGrid_C3_R0_Label"
 											Grid.Column="3"
-											Margin="1"
 											Content="Col 3" />
 										<Label
+											x:Name="HackGrid_C4_R0_Label"
 											Grid.Column="4"
-											Margin="1"
 											Content="Col 4" />
 										<Label
+											x:Name="HackGrid_C5_R0_Label"
 											Grid.Column="5"
-											Margin="1"
 											Content="Col 5" />
 										<Label
+											x:Name="HackGrid_C6_R0_Label"
 											Grid.Column="6"
-											Margin="1"
 											Content="Col 6" />
 										<Label
+											x:Name="HackGrid_C7_R0_Label"
 											Grid.Column="7"
-											Margin="1"
 											Content="Col 7" />
 										<Label
+											x:Name="HackGrid_C8_R0_Label"
 											Grid.Column="8"
-											Margin="1"
 											Content="Col 8" />
 										<Label
+											x:Name="HackGrid_C9_R0_Label"
 											Grid.Column="9"
-											Margin="1"
 											Content="Col 9" />
 										<Label
+											x:Name="HackGrid_C10_R0_Label"
 											Grid.Column="10"
-											Margin="1"
 											Content="Col 10" />
-										<CheckBox
-											x:Name="HackCheckBox_C0_R1_CheckBox_Control"
+										<Label
+											x:Name="HackGrid_C0_R1_Label"
 											Grid.Row="1"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											x:FieldModifier="public"
-											Content="C0 R1" />
+											Content="Row 1" />
 										<CheckBox
 											x:Name="HackCheckBox_C1_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="1"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C1 R1" />
@@ -939,7 +936,6 @@
 											x:Name="HackCheckBox_C2_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="2"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C2 R1" />
@@ -947,7 +943,6 @@
 											x:Name="HackCheckBox_C3_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="3"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C3 R1" />
@@ -955,7 +950,7 @@
 											x:Name="HackCheckBox_C4_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="4"
-											Margin="1"
+											Padding="0"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C4 R1" />
@@ -963,7 +958,6 @@
 											x:Name="HackCheckBox_C5_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="5"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C5 R1" />
@@ -971,7 +965,6 @@
 											x:Name="HackCheckBox_C6_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="6"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C6 R1" />
@@ -979,7 +972,6 @@
 											x:Name="HackCheckBox_C7_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="7"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C7 R1" />
@@ -987,7 +979,6 @@
 											x:Name="HackCheckBox_C8_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="8"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C8 R1" />
@@ -995,7 +986,6 @@
 											x:Name="HackCheckBox_C9_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="9"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C9 R1" />
@@ -1003,23 +993,23 @@
 											x:Name="HackCheckBox_C10_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="10"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C10 R1" />
 
-										<CheckBox
-											x:Name="HackCheckBox_C0_R2_CheckBox_Control"
+										<Label
+											x:Name="HackGrid_C0_R2_Label"
 											Grid.Row="2"
-											Margin="1"
+											Padding="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C0 R2" />
+											HorizontalContentAlignment="Center"
+											VerticalContentAlignment="Center"
+											Content="Row 2" />
 										<CheckBox
 											x:Name="HackCheckBox_C1_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="1"
-											Margin="5,5,5,5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C1 R2" />
@@ -1027,7 +1017,6 @@
 											x:Name="HackCheckBox_C2_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="2"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C2 R2" />
@@ -1035,7 +1024,6 @@
 											x:Name="HackCheckBox_C3_R2CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="3"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C3 R2" />
@@ -1043,7 +1031,7 @@
 											x:Name="HackCheckBox_C4_R_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="4"
-											Margin="1"
+											Padding="0"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C4 R2" />
@@ -1051,7 +1039,6 @@
 											x:Name="HackCheckBox_C5_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="5"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C5 R2" />
@@ -1059,7 +1046,6 @@
 											x:Name="HackCheckBox_C6_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="6"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C6 R2" />
@@ -1067,7 +1053,6 @@
 											x:Name="HackCheckBox_C7_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="7"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C7 R2" />
@@ -1075,7 +1060,6 @@
 											x:Name="HackCheckBox_C8_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="8"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C8 R2" />
@@ -1083,7 +1067,6 @@
 											x:Name="HackCheckBox_C9_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="9"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C9 R2" />
@@ -1091,22 +1074,19 @@
 											x:Name="HackCheckBox_C10_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="10"
-											Margin="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C10 R2" />
-										<CheckBox
-											x:Name="HackCheckBox_C0_R3_CheckBox_Control"
+										<Label
+											x:Name="HackGrid_C0_R3_Label"
 											Grid.Row="3"
-											Margin="12,6,26,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C0 R3" />
+											Content="Row 3" />
 										<CheckBox
 											x:Name="HackCheckBox_C1_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="2"
-											Margin="16,1,35,11"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C1 R3" />
@@ -1114,7 +1094,6 @@
 											x:Name="HackCheckBox_C2_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="1"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C2 R3" />
@@ -1122,7 +1101,6 @@
 											x:Name="HackCheckBox_C3_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="3"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C3 R3" />
@@ -1130,7 +1108,6 @@
 											x:Name="HackCheckBox_C4_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="4"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C4 R3" />
@@ -1138,7 +1115,6 @@
 											x:Name="HackCheckBox_C5_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="5"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C5 R3" />
@@ -1146,7 +1122,6 @@
 											x:Name="HackCheckBox_C6_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="6"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C6 R3" />
@@ -1154,7 +1129,6 @@
 											x:Name="HackCheckBox_C7_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="7"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C7 R3" />
@@ -1162,7 +1136,6 @@
 											x:Name="HackCheckBox_C8_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="8"
-											Margin="18,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C8 R3" />
@@ -1170,7 +1143,6 @@
 											x:Name="HackCheckBox_C9_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="9"
-											Margin="18.5,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C9 R3" />
@@ -1178,10 +1150,540 @@
 											x:Name="HackCheckBox_C10_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="10"
-											Margin="15,6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
 											Content="C10 R3" />
+										<Label
+											x:Name="HackGrid_C0_R4_Label"
+											Grid.Row="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="Row 4" />
+										<CheckBox
+											x:Name="HackCheckBox_C1_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="1"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C2_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C2 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C3_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="3"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C3 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C4_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C4 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C5_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C5 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C6_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C6 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C7_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C7 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C8_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C8 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C9_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C9 R4" />
+										<CheckBox
+											x:Name="HackCheckBox_C10_R4_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C10 R4" />
+										<Label
+											x:Name="HackGrid_C0_R5_Label"
+											Grid.Row="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="Row 5" />
+										<CheckBox
+											x:Name="HackCheckBox_C1_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="1"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C2_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C2 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C3_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="3"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C3 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C4_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C4 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C5_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C5 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C6_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C6 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C7_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C7 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C8_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C8 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C9_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C9 R5" />
+										<CheckBox
+											x:Name="HackCheckBox_C10_R5_CheckBox_Control"
+											Grid.Row="5"
+											Grid.Column="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C10 R5" />
+										<Label
+											x:Name="HackGrid_C0_R6_Label"
+											Grid.Row="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="Row 6" />
+										<CheckBox
+											x:Name="HackCheckBox_C1_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C2_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="1"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C2 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C3_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="3"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C3 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C4_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C4 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C5_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C5 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C6_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C6 R3" />
+										<CheckBox
+											x:Name="HackCheckBox_C7_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C7 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C8_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C8 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C9_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C9 R6" />
+										<CheckBox
+											x:Name="HackCheckBox_C10_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C10 R6" />
+										<Label
+											x:Name="HackGrid_C0_R7_Label"
+											Grid.Row="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="Row 7" />
+										<CheckBox
+											x:Name="HackCheckBox_C1_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="1"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C2_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C2 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C3_R7CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="3"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C3 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C4_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C4 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C5_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C5 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C6_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C6 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C7_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C7 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C8_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C8 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C9_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C9 R7" />
+										<CheckBox
+											x:Name="HackCheckBox_C10_R7_CheckBox_Control"
+											Grid.Row="7"
+											Grid.Column="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C10 R7" />
+										<Label
+											x:Name="HackGrid_C0_R8_Label"
+											Grid.Row="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="Row 8" />
+										<CheckBox
+											x:Name="HackCheckBox_C1_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="1"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C2_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C2 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C3_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="3"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C3 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C4_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C4 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C5_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C5 R1" />
+										<CheckBox
+											x:Name="HackCheckBox_C6_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C6 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C7_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C7 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C8_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C8 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C9_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C9 R8" />
+										<CheckBox
+											x:Name="HackCheckBox_C10_R8_CheckBox_Control"
+											Grid.Row="8"
+											Grid.Column="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C10 R8" />
+										<Label
+											x:Name="HackGrid_C0_R9_Label"
+											Grid.Row="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="Row 9" />
+										<CheckBox
+											x:Name="HackCheckBox_C1_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="1"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C2_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C2 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C3_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="3"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C3 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C4_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C4 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C5_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C5 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C6_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C6 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C7_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C7 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C8_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C8 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C9_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C9 R9" />
+										<CheckBox
+											x:Name="HackCheckBox_C10_R9_CheckBox_Control"
+											Grid.Row="9"
+											Grid.Column="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C10 R9" />
+										<Label
+											x:Name="HackGrid_C0_R10_Label"
+											Grid.Row="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="Row 10" />
+										<CheckBox
+											x:Name="HackCheckBox_C1_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="1"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C2_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C2 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C3_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="3"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C3 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C4_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="4"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C4 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C5_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="5"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C5 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C6_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="6"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C6 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C7_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="7"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C7 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C8_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="8"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C8 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C9_R10_CheckBox_Control"
+											Grid.Row="10"	Grid.Column="9"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C9 R10" />
+										<CheckBox
+											x:Name="HackCheckBox_C10_R10_CheckBox_Control"
+											Grid.Row="10"
+											Grid.Column="10"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C10 R10" />
 
 									</Grid>
 								</TabItem>
@@ -1276,25 +1778,25 @@
 												Width="88"
 												HorizontalAlignment="Left"
 												VerticalAlignment="Top"
-												Content="Hack 0" />
+												Content="Edge 0" />
 											<CheckBox
 												x:Name="EdgeFactorHack1CheckBox_Control"
 												Width="88"
 												HorizontalAlignment="Left"
 												VerticalAlignment="Top"
-												Content="Hack 1" />
+												Content="Edge 1" />
 											<CheckBox
 												x:Name="EdgeFactorHack2CheckBox_Control"
 												Width="88"
 												HorizontalAlignment="Left"
 												VerticalAlignment="Top"
-												Content="Hack 2" />
+												Content="Edge 2" />
 											<CheckBox
 												x:Name="EdgeFactorHack3CheckBox_Control"
 												Width="88"
 												HorizontalAlignment="Left"
 												VerticalAlignment="Top"
-												Content="Hack 3" />
+												Content="Edge 3" />
 											<CheckBox
 												x:Name="EdgeFactorHack4CheckBox_Control"
 												Width="88"

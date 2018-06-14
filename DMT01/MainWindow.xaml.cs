@@ -929,12 +929,16 @@ FreshReset:
 
 		private void DebugDrawEdge ( Edge E )
 		{
-			if ( MW == null )
+			if ( this . MW == null )
+			{
 				return;
+			}
 
 			OpenGL gl = MW.myOpenGLControl.OpenGL;
 			if ( gl == null )
+			{
 				return;
+			}
 
 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 			gl . LineWidth ( 1 );
@@ -944,7 +948,7 @@ FreshReset:
 			float z0 = E . V [ 0 ] . V * z_drawing_hack0;
 			float z1 = E . V [ 1 ] . V * z_drawing_hack0;
 
-			if (MW.HackCheckBox_C0_R1_CheckBox_Control . IsChecked . Value )
+			if (MW.HackCheckBox_C1_R1_CheckBox_Control . IsChecked . Value )
 			{
 				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
 				gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
@@ -994,7 +998,7 @@ FreshReset:
 			String txt1 = String . Format ( "{0}" , E . V [ 1 ] . V . ToString ( "0.000" ) );
 			String txt2 = String . Format ( "{0}" , E . delta_V . ToString ( "0.000" ) );
 
-			if ( MW. HackCheckBox_C0_R1_CheckBox_Control . IsChecked . Value )
+			if ( MW. HackCheckBox_C1_R1_CheckBox_Control . IsChecked . Value )
 			{
 				gl . PushMatrix ( );
 				gl . Translate ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
