@@ -31,6 +31,7 @@ namespace DMT01
             public float MinValue =   -2.2f;
             public float ResetValue = -3.3f;
         }
+
         #endregion Persistant_classes
     public partial class H_Slider_UserControl1 : UserControl
     {

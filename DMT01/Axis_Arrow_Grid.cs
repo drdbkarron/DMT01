@@ -168,7 +168,7 @@ namespace Axis_Arrow_Grid
             }
         public void Rotate ( )
             {
-            rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
+			this . rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
 
             }
         }
@@ -182,7 +182,7 @@ namespace Axis_Arrow_Grid
             gl . Translate ( -1.5f , 0.0f , -10.0f );
             //gl.Translate(-1.5f, 0.0f, -6.0f);				
 
-            gl . Rotate ( rtri , 0.0f , 1.0f , 0.0f );				// Rotate The Pyramid On It's Y Axis
+            gl . Rotate ( this . rtri , 0.0f , 1.0f , 0.0f );				// Rotate The Pyramid On It's Y Axis
 
             gl . Begin ( OpenGL . GL_TRIANGLES );					// Start Drawing The Pyramid
 
@@ -219,7 +219,7 @@ namespace Axis_Arrow_Grid
             }
         public void Rotate ( )
             {
-            rtri += 3.0f;// 0.2f; }
+			this . rtri += 3.0f;// 0.2f; }
             }
         }
     public static class Axis_Class
@@ -375,8 +375,11 @@ namespace Axis_Arrow_Grid
                         gl . Vertex( -i , 0 , 0 );
                         gl . Vertex( 0 , -i , 0 );
                         if(Draw_Minus_Z_Axis_Leg )
+						{
 							gl . Vertex( 0 , 0 , -i );
-                        gl . End ( );
+						}
+
+						gl . End ( );
                         }
 
                     if ( DoAnnotateZTicks )
@@ -563,7 +566,7 @@ namespace Axis_Arrow_Grid
             /// </summary>
             public Grid ( )
             {
-                Name = "Design Time Grid";
+			this . Name = "Design Time Grid";
             }
 
             /// <summary>
@@ -581,13 +584,13 @@ namespace Axis_Arrow_Grid
 
             //  If we do not have the display list, we must create it.
             //  Otherwise, we can simple call the display list.
-            if ( displayList == null )
+            if ( this . displayList == null )
                 {
                 CreateDisplayList ( gl );
                 }
             else
                 {
-                displayList . Call ( gl );
+				this . displayList . Call ( gl );
                 }
             }
 
@@ -597,12 +600,12 @@ namespace Axis_Arrow_Grid
             /// </summary>
             private void CreateDisplayList ( OpenGL gl )
             {
-                //  Create the display list. 
-                displayList = new DisplayList ( );
+			//  Create the display list. 
+			this . displayList = new DisplayList ( );
 
-                //  Generate the display list and 
-                displayList . Generate ( gl );
-                displayList . New ( gl , DisplayList . DisplayListMode . CompileAndExecute );
+			//  Generate the display list and 
+			this . displayList . Generate ( gl );
+			this . displayList . New ( gl , DisplayList . DisplayListMode . CompileAndExecute );
 
                 //  Push attributes, set the color.
                 gl . PushAttrib ( OpenGL . GL_CURRENT_BIT | OpenGL . GL_ENABLE_BIT |
@@ -645,8 +648,8 @@ namespace Axis_Arrow_Grid
             /// </summary>
             public Cube ( )
             {
-                //  Set the name.
-                Name = "Cube";
+			//  Set the name.
+			this . Name = "Cube";
 
                 //  Create the cube geometry.
                 CreateCubeGeometry ( );
@@ -666,11 +669,11 @@ namespace Axis_Arrow_Grid
                 Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , -1 , -1 ) );
                 Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , -1 , -1 ) );
                 Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , -1 , 1 ) );
-                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , -1 , 1 ) );
+			this . Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , -1 , 1 ) );
                 Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , 1 , -1 ) );
                 Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , 1 , -1 ) );
                 Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , 1 , 1 ) );
-                Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , 1 , 1 ) );
+			this . Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , 1 , 1 ) );
 
                 //	Add the faces.
                 Face face = new Face(); //	bottom

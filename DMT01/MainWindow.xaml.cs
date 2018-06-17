@@ -5,35 +5,40 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Resources;
-using System.Windows.Shapes;
-using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph;
-using WpfScreenHelper;
-using GlmSharp;
+using System . Windows;
+using System . Windows . Controls;
+using System . Windows . Data;
+using System . Windows . Documents;
+using System . Windows . Input;
+using System . Windows . Media;
+using System . Windows . Media . Imaging;
+using System . Windows . Navigation;
+using System . Windows . Resources;
+using System . Windows . Shapes;
+using System . Drawing;
 using System . Xml;
+using System . Resources;
+using System . Reflection;
 using System . IO;
-using System . Xml . Serialization;
-using unvell . ReoGrid . DataFormat;
 using System . Globalization;
+using System . Xml . Serialization;
+using System . Threading;
+using GlmSharp;
+using GlmNet;
+using SharpGL . Enumerations;
+using SharpGL . SceneGraph;
+using SharpGL . SceneGraph . Cameras;
+using SharpGL . SceneGraph . Core;
+using SharpGL . SceneGraph . Primitives;
+using SharpGL . WPF . SceneTree;
+using unvell . ReoGrid . DataFormat;
 using unvell . ReoGrid . CellTypes;
 using unvell . ReoGrid;
 using unvell . ReoGrid . Actions;
 using unvell . ReoGrid . Rendering;
 using unvell . ReoGrid . Graphics;
-using System . Drawing;
-using System . Resources;
-using System . Reflection;
+using WpfScreenHelper;
 using LocalMaths;
-using System . Threading;
 
 namespace System . Windows . Controls
     {
@@ -117,7 +122,6 @@ namespace DMT01
 	{
 		public short VertexIndex;
 		public int I, J;
-		//public float x, y, z;
 		public float V;
 		public float [ ] cf;
 		public IsoEdge E;
@@ -291,8 +295,7 @@ namespace DMT01
 
 	public  class Boxel	
 	{
-		//static OpenGL staticGLHook = null;
-		public MainWindow MW;
+		public DMT01.MainWindow MW;
 		public int I;
 		public int J;
 		public Vertex [ ] V = new Vertex [ 4 ];
@@ -303,9 +306,6 @@ namespace DMT01
 		public Edge [ ] E = new Edge [ 4 ];
 		public IsoEdge [ ] IsoEdge = new IsoEdge [ 4 ];
 		public short IsoEdges = 0;
-		public float z_drawing_hack0=1.0f;
-		public float z_drawing_hack1=1.0f;
-		public float threshold_hack1=.5f;
 		public Boolean IsCritical;
 		public float delta_v;
 		public float max_V;
@@ -783,11 +783,8 @@ FreshReset:
 			return C;
 		}
 
-		internal void DrawMe ( float z_drawing_hack_0 , float z_drawing_hack_1 , float threshold_hack_1)
+		internal void DrawMe ( )
 		{
-			z_drawing_hack0 = z_drawing_hack_0;
-			z_drawing_hack1 = z_drawing_hack_1;
-			threshold_hack1 = threshold_hack_1;
 
 			DrawBoxelEdgeCycles ( );
 
@@ -801,7 +798,7 @@ FreshReset:
 				return;
 			}
 
-			if ( MW.EdgeFactorHack1CheckBox_Control.IsChecked.Value )
+			if ( MW . EdgeFactorHack0CheckBox_Control . IsChecked . Value )
 			{
 				Edge E = this . E [ 0 ];
 				DebugDrawEdge ( E );
@@ -940,26 +937,91 @@ FreshReset:
 				return;
 			}
 
-			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-			gl . LineWidth ( 1 );
 			AnnotateEdge ( gl , E );
+
 			float [ ] cf0 = E . V [ 0 ] . cf;
 			float [ ] cf1 = E . V [ 1 ] . cf;
-			float z0 = E . V [ 0 ] . V * z_drawing_hack0;
-			float z1 = E . V [ 1 ] . V * z_drawing_hack0;
+			float z0 = E . V [ 0 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
+			float z1 = E . V [ 1 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
 
-			if (MW.HackCheckBox_C1_R1_CheckBox_Control . IsChecked . Value )
+			if ( MW . HackCheckBox_C4_R1_CheckBox_Control . IsChecked . Value )
 			{
+				float [ ] cf00 = new float [ ] { cf0 [ 0 ] , cf0 [ 1 ] , z0 };
+				float [ ] ce = new float [ ] { Centroid.cf[0] , Centroid.cf [ 1 ] , z0 };
+
+				float [ ] faaa = subtract ( cf0 , ce );
+				double [ ] faa = ToDoubleArray ( faaa );
+				dvec3 cv = new dvec3( faa );
+				float sc = MW . Hack_H_Slider_03_UserControl . SliderValue;
+
+				if ( MW . HackCheckBox_C7_R1_CheckBox_Control . IsChecked . Value )
+				{
+				double spinner2 =MW . Hack_H_Slider_04_UserControl . SliderValue * 2f * Math . PI;
+				float spinner2f=(float)spinner2;
+				var rotaxis = new GlmNet . vec3 ( 0 , 0 , 1 );
+				GlmNet . mat4 rotation = GlmNet . glm . rotate ( GlmNet . mat4 . identity ( ) ,spinner2f , rotaxis);
+				GlmNet . mat4 translation = GlmNet . glm . translate ( GlmNet . mat4 . identity ( ) , new GlmNet . vec3 ( 0 , 0 , 0 ) );
+				GlmNet . mat4 modelviewMatrix = rotation * translation;
+				GlmNet . mat3 normalMatrix = modelviewMatrix . to_mat3 ( );
+				GlmNet.vec3 noon = new GlmNet . vec3 ( x: 1 , y: 0 , z: 0 );
+				GlmNet . vec3 rotated_noon = normalMatrix * noon;
+				float [ ] ccc = new float [ ] { rotated_noon . x + ce[0], rotated_noon . y+ce[1] , rotated_noon . z +ce[2]};
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( 1 , .2 , .9 );
 				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-				gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
-				gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
+				gl . Vertex ( ce );
+				gl . Vertex ( ccc );
 				gl . End ( );
+				gl . PopAttrib ( );
+				}
+
+				dquat d0q = new dquat ( x: 0 , y: 0 , z: 1 , w: MW . Hack_H_Slider_01_UserControl . SliderValue * 2f*Math . PI );
+				dmat3 mm0 = d0q . ToMat3;
+				dvec3 aa = mm0 * cv;
+				dvec3 rotated0 = Normalize(aa);
+				dvec3 rotatified0 = rotated0 * sc;
+				dvec3 located0 = add( rotatified0 , cf00);
+				float [ ] FA0 = toFloatArray ( located0 );
+
+				dquat d1q = new dquat ( x: 0 , y: 0 , z: -1 , w: MW . Hack_H_Slider_02_UserControl . SliderValue * 4f*Math . PI );
+				dmat3 mm1 = d1q . ToMat3;
+				dvec3 rotated1 = Normalize ( mm1 * cv )*sc;
+				dvec3 located1 = add ( rotated1 , cf00 );
+				float [ ] FA1 = toFloatArray ( located1 );
+
+				if ( MW . HackCheckBox_C5_R1_CheckBox_Control . IsChecked . Value )
+				{
+					gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+					gl . Color ( 0 , .8 , 1 );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+					gl . Vertex ( cf00 );
+					gl . Vertex (FA0  );
+					gl . End ( );
+					gl . PopAttrib ( );
+				}
+				if ( MW . HackCheckBox_C6_R1_CheckBox_Control . IsChecked . Value )
+				{
+					gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+					gl . Color ( 1 , .2 , .9 );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+					gl . Vertex ( cf00 );
+					gl . Vertex ( FA1 );
+					gl . End ( );
+					gl . PopAttrib ( ); }
 			}
 
-
-			if ( MW . HackCheckBox_C2_R1_CheckBox_Control . IsChecked . Value )
+			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+			gl . LineWidth ( 1 );
+			gl . Color ( 0.9 , 0.8 , 0.8 );
+			gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+			gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
+			gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
+			gl . End ( );
+			gl . PopAttrib ( );
+			
+			if ( MW . HackCheckBox_C5_R1_CheckBox_Control . IsChecked . Value )
 			{
-				float u = threshold_hack1;
+				float u = MW.Threshold_Hack_H_Slider_2_UserControl.SliderValue;
 				float x0 = cf0 [ 0 ];
 				float y0 = cf0 [ 1 ];
 
@@ -970,29 +1032,80 @@ FreshReset:
 				float y = ( 1 - u ) * y0 + u * y1;
 				float z = ( 1 - u ) * z0 + u * z1;
 
-				float [ ] c_th = new float [ ]       // this is all wrong here
+				float [ ] c_th = new float [ ]     
 					{
 						x,y,z
 					};
 
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 1 );
 				gl . PointSize ( 5 );
 				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
 				gl . Vertex ( c_th [ 0 ] , c_th [ 1 ] , c_th [ 2 ] );
 				gl . End ( );
+				gl . PopAttrib ( );
 			}
+		}
 
+		private dvec3 Normalize ( dvec3 dvec3 )
+		{
+			double Mag = Magnitude ( dvec3 );
+			dvec3 nal = Divide ( Mag , dvec3 );
+			return nal;
+		}
 
+		private dvec3 Divide ( double mag , dvec3 v )
+		{
+			dvec3 a = new dvec3 ( v . x / mag , v . y / mag , v . z / mag );
+			return a;
+		}
+
+		private double Magnitude ( dvec3 v )
+		{
+			double m = v . x * v . x + v . y * v . y + v . z + v . z;
+			double mr = Math . Sqrt ( m );
+			return mr;
+		}
+
+		private float[] toFloatArray ( dvec3 dv )
+		{
+			float [ ] fa = new float [ ] { (float)dv . x , (float)dv . y , (float)dv . z};
+			return fa;	
+		}
+
+		private dvec3 add ( dvec3 r , float [ ] f )
+		{
+			dvec3 a = new dvec3 ( x: r [ 0 ] + f [ 0 ] , y: r [ 1 ] + f [ 1 ] , z: r [ 2 ] + f [ 2 ] );
+			return a;
+		}
+
+		private double[] ToDoubleArray ( float [ ] v )
+		{
+			double [ ] d = new double [ ] { v [ 0 ] , v [ 1 ], v [ 2 ] };
+			return d;
+		}
+
+		private float [ ] Multiply ( float[] a , float [ ] b )
+		{
+			float [ ] c = new float [ ] { a [ 0 ] * b [ 0 ] , a [ 1 ] * b [ 1 ] , a [ 2 ] * b [ 2 ] };
+			return c;
+		}
+
+		private float[] subtract ( float [ ] a , float [ ] b )
+		{
+			float [ ] c = new float [ ] { b [ 0 ] - a [ 0 ] , b [ 1 ] - a [ 1 ] , b [ 2 ] - a [ 2 ] };
+			return c;
 		}
 
 		public void AnnotateEdge ( OpenGL gl , Edge E )
 		{
 			float [ ] cf0 = E . V [ 0 ] . cf;
 			float [ ] cf1 = E . V [ 1 ] . cf;
-			float z0 = E . V [ 0 ] . V * z_drawing_hack0;
-			float z1 = E . V [ 1 ] . V * z_drawing_hack0;
+			float z0 = E . V [ 0 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
+			float z1 = E . V [ 1 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
 			float ts = 0.4f;
 			string f0 = "Arial";
-			String f1 = "Courrier New";
+			//String f1 = "Courrier New";
 			float [ ] cf = Multiply ( Add ( cf0 , cf1 ) , 0.5f );
 			String txt0 = String . Format ( "{0}" , E . V [ 0 ] . V . ToString ( "0.000" ) );
 			String txt1 = String . Format ( "{0}" , E . V [ 1 ] . V . ToString ( "0.000" ) );
@@ -1007,7 +1120,7 @@ FreshReset:
 				gl . PopMatrix ( );
 			}
 
-			if ( MW.HackCheckBox_C1_R1_CheckBox_Control . IsChecked . Value )
+			if ( MW.HackCheckBox_C2_R1_CheckBox_Control . IsChecked . Value )
 			{
 				gl . PushMatrix ( );
 				gl . Translate ( cf [ 0 ] , cf [ 1 ] , ( z0 + z1 ) * .5d );
@@ -1050,14 +1163,15 @@ FreshReset:
 
 		private void DrawEdge ( Edge E )
 		{
-			OpenGL gl = MainWindow.staticGLHook;
+			OpenGL gl = MW . myOpenGLControl . OpenGL;
+
 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 			gl . LineWidth ( 1 );
 
 			float [ ] cf0 = E . V [ 0 ] . cf;
 			float [ ] cf1 = E . V [ 1 ] . cf;
-			float z0 = E . V [ 0 ] . V * z_drawing_hack0;
-			float z1 = E . V [ 1 ] . V * z_drawing_hack0;
+			float z0 = E . V [ 0 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
+			float z1 = E . V [ 1 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
 
 			AnnotateEdge ( gl , E );
 
@@ -1070,7 +1184,7 @@ FreshReset:
 			gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
 			gl . End ( );
 
-			if ( IsInBetween ( E , threshold_hack1 ) )
+			if ( IsInBetween ( E , MW.Threshold_Hack_H_Slider_2_UserControl.SliderValue) )
 			{
 				//tex:
 				// $$ x = ( 1 - u ) X_{0} + u X_{1} $$
@@ -1094,13 +1208,13 @@ FreshReset:
 				// flip sign again and flip sides to move  $u$ to LHS and we are done
 				// $$ u = ( v - V_{0} ) / ( V_{0} + V_{1} ) $$ 
 				// if v=V_{0}, u=0, 
-				float v = threshold_hack1;
+				float v = MW . Threshold_Hack_H_Slider_2_UserControl . SliderValue;
 
 				float V0 = E . V [ 0 ] . V;
 				float V1 = E . V [ 1 ] . V;
 
 				float u = ( v - V0 ) / ( V0 + V1 );
-				u = threshold_hack1;
+				u = MW . Threshold_Hack_H_Slider_2_UserControl . SliderValue;
 				float x0 = cf0 [ 0 ];
 				float y0 = cf0 [ 1 ];
 
@@ -1139,7 +1253,8 @@ FreshReset:
 
 		private void DrawEdge ( Edge E , Edge . EdgeDirection Direction )
 		{
-			OpenGL gl = MainWindow.staticGLHook;
+			OpenGL gl = this . MW . myOpenGLControl . OpenGL;
+
 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 			gl . LineWidth ( 1 );
 
@@ -1173,8 +1288,8 @@ FreshReset:
 
 			float [ ] cf0 = E . V [ 0 ] . cf;
 			float [ ] cf1 = E . V [ 1 ] . cf;
-			float z0 = E . V [ 0 ] . V * z_drawing_hack0;
-			float z1 = E . V [ 1 ] . V * z_drawing_hack0;
+			float z0 = E . V [ 0 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
+			float z1 = E . V [ 1 ] . V * MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
 
 
 			gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
@@ -1380,6 +1495,79 @@ FreshReset:
 
 	}
 
+	public class Region
+	{
+		public double Max;
+		public double Min;		   
+		public int N;
+		public int Start_Rows;
+		public int End_Rows;
+		public int Start_Cols;
+		public int End_Cols;
+		public float[,] Cells;
+
+		public Region ( float[,] C, int StartRows , int EndRows , int StartCols , int EndCols )
+		{
+			this . Start_Rows = StartRows;
+			this . End_Rows = EndRows;
+			this . Start_Cols = StartCols;
+			this . End_Cols = EndCols;
+			Max = -double . MaxValue;
+			Min = double . MaxValue;
+			this . Cells = C;
+
+			for ( int j = Start_Rows ; j < End_Rows ; j++ )
+			{
+				for ( int i = Start_Cols ; i < End_Cols ; i++ )
+				{
+					double v = Cells[i,j];
+					if (  v > this.Max)
+					{
+						this . Max = v;
+
+						//System . Diagnostics . Debug . WriteLine ( String . Format ( "Max: {0} {1} " , this . Max , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+					}
+					if ( v < 0 )
+					{
+						System . Diagnostics . Debug . WriteLine ( String . Format ( "no negativity please {0} at [{1},{2}] {3} " , v, i, j , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+						Cells [ i , j ] = 0.0f;
+					}
+					else
+					if ( v < this . Min )
+					{
+						this . Min = v;
+
+						//System . Diagnostics . Debug . WriteLine ( String . Format ( "Min: {0} {1} " , this . Min , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+					}
+					this . N++;
+				}
+			}
+
+			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , Display() , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+		}
+
+		private String Display ( )
+		{
+			String Stranger = "00.000";
+			int Rows = End_Rows - Start_Rows;
+			int Cols = End_Cols - Start_Cols;
+			int n = Rows * Cols;
+			if ( n != N )
+			{
+				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "badness heree" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			}
+
+			String a = String . Format ( "{0} in {1}->{2}, {3} Rows; {4}->{5},{6} Cols; Min:{7} Max: {8}" , 
+				N, 
+				this.Start_Rows, this.End_Rows, Rows, 
+				this.Start_Cols, this.End_Cols,	Cols,
+				Min.ToString(Stranger), Max.ToString(Stranger));
+
+			return a;
+		}
+	}
+
 	#endregion DMT_Geometry_Classes
 
 	public partial class MainWindow : Window
@@ -1493,7 +1681,7 @@ FreshReset:
 		public class NWorksheety
 		{
 			public float [ , ] cells;
-			public int r, c, r0,c0;
+			public int r1, c1, r0,c0;
 		}
 
 		static NWorksheety Sheety;
@@ -1783,9 +1971,11 @@ FreshReset:
 			gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
 			gl . Scale ( 1 , -1 , 1 );
 
-			for ( int j = Sheety . r0 ; j < Sheety . r ; j++ )
+			Region Selected_Region = new Region ( C: Sheety.cells, StartRows: Sheety . r0, EndRows: Sheety . r1 , StartCols: Sheety.c0, EndCols: Sheety.c1);
+
+			for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
 			{
-				for ( int i = Sheety . c0 ; i < Sheety . c ; i++ )
+				for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 				{
 					if ( IsInBetween ( 47 , j , 50 ) )
 					{
@@ -1793,11 +1983,7 @@ FreshReset:
 						B . MW = ( DMT01 . MainWindow ) mw;
 						if ( B . IsCritical )
 						{
-						B . DrawMe (
-							z_drawing_hack_0: Z_Fudge_H_Slider_0_UserControl . SliderValue ,
-							z_drawing_hack_1: Z_Fudge_H_Slider_1_UserControl . SliderValue ,
-							threshold_hack_1: Threshold_Hack_H_Slider_2_UserControl . SliderValue 
-							);
+							B . DrawMe ( );
 						}
 					}
 				}
@@ -2772,7 +2958,7 @@ FreshReset:
 				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} not found {1} " , F , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 				return;
 			}
-			Debug . WriteLine ( String . Format ( "{0} {1} {2} {3}" , nameof ( Load_Each ) , LoadEm_Counter , LoadEm_FileCount , F ) );
+			Debug . WriteLine ( String . Format ( "{0} {1} of {2} Loading: {3}" , nameof ( Load_Each ) , LoadEm_Counter , LoadEm_FileCount , F ) );
 
 			LoadEm_Counter++;
 
@@ -3667,9 +3853,9 @@ FreshReset:
 			Sheety = new NWorksheety ( );
 			Sheety . r0 = named_ranges . StartPos . Row;
 			Sheety . c0 = named_ranges . StartPos . Col;
-			Sheety . r = named_ranges . Rows + Sheety . r0;
-			Sheety . c = named_ranges . Cols + Sheety . c0;
-			Sheety . cells = new float [ Sheety . c + 2 , Sheety . r + 2 ];
+			Sheety . r1 = named_ranges . Rows + Sheety . r0;
+			Sheety . c1 = named_ranges . Cols + Sheety . c0;
+			Sheety . cells = new float [ Sheety . c1 + 2 , Sheety . r1 + 2 ];
 
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "named ranged count {0} {1} " , named_ranges , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
