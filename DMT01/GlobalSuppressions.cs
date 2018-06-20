@@ -18,3 +18,4 @@
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE1006:Naming Styles" , Justification = "<Pending>" , Scope = "type" , Target = "~T:SharpGL.SceneGraph.Core.myGl" )]
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE0012:Simplify Names" , Justification = "<Pending>" , Scope = "type" , Target = "~T:Axis_Arrow_Grid.Arrow_Class" )]
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE0012:Simplify Names" , Justification = "<Pending>" , Scope = "type" , Target = "~T:Axis_Arrow_Grid.Axis_Class" )]
+[assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE0012:Simplify Names" , Justification = "<Pending>" , Scope = "member" , Target = "~M:Axis_Arrow_Grid.Grid_Class.MyGrid(SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Int32)" )]

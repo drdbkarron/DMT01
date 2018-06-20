@@ -788,7 +788,173 @@ FreshReset:
 
 			DrawBoxelEdgeCycles ( );
 
+			AnnotateBoxelAtCentroid ( );
+
 			//VerifyCycles ( );
+		}
+
+		private void AnnotateBoxelAtCentroid ( )
+		{
+			if ( this . MW == null )
+			{
+				return;
+			}
+
+			OpenGL gl = MW . myOpenGLControl . OpenGL;
+			if ( gl == null )
+			{
+				return;
+			}
+
+			if ( MW . HackCheckBox_C10_R1_CheckBox_Control . IsChecked . Value )
+			{
+				float ts = 0.3f;
+				string f0 = "Arial";
+				String txt0 = String . Format ( @"[{0},{1}]" , this.I, this.J );
+
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( .9 , .9 , .9 );
+				gl . PushMatrix ( );
+				gl . Translate ( x: this . Centroid . cf [ 0 ] , y: this . Centroid . cf [ 1 ] , z: this . Centroid . cf [ 2 ] );
+				gl . Translate ( x: -.4, y: 0 , z: 0 );
+				gl . Scale ( ts , -ts , ts );
+				gl . DrawText3D ( faceName: f0 , fontSize: 12f , extrusion: .05f , deviation: 0f , text: txt0 );
+				gl . PopMatrix ( );
+
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
+
+			if ( MW . HackCheckBox_C9_R1_CheckBox_Control . IsChecked . Value )
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( .9 , .2 , .2 );
+				gl . PointSize ( 7 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+				gl . Vertex ( this . Centroid . cf );
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
+
+			if ( MW . HackCheckBox_C8_R1_CheckBox_Control . IsChecked . Value )
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( 1 , .2 , .9 );
+				gl . LineWidth ( 1 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				gl . Vertex ( this . V [ 0 ] . cf );
+				gl . Vertex ( this . Centroid . cf );
+				gl . Vertex ( this . V [ 1 ] . cf );
+				gl . Vertex ( this . Centroid . cf );
+				gl . Vertex ( this . V [ 2 ] . cf );
+				gl . Vertex ( this . Centroid . cf );
+				gl . Vertex ( this . V [ 3 ] . cf );
+				gl . Vertex ( this . Centroid . cf );
+				gl . End ( );
+				gl . PopAttrib ( );
+
+			}
+
+			if ( MW . HackCheckBox_C1_R2_CheckBox_Control . IsChecked . Value )
+			{
+				if ( MW . Hack_H_Slider_02_UserControl . SliderValue < 0 )
+					return;
+
+				if ( MW . Hack_H_Slider_02_UserControl . SliderValue > 1 )
+					return;
+
+				float [ ] [ ] [ ] Stinkers = new float [ 4 ] [ ] [ ];
+				Stinkers [ 0 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 0 ] . cf ,
+					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW .Stankey );
+				Stinkers [ 1 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 1 ] . cf ,
+					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
+				Stinkers [2 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 2 ] . cf ,
+					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
+				Stinkers [ 3 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 3 ] . cf ,
+					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
+
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( 1 , .2 , .9 );
+				gl . LineWidth ( 1 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+
+				gl . Vertex ( x: Stinkers [ 0 ] [ 0 ] [ 0 ] , y: Stinkers [ 0 ] [ 0 ] [ 1 ] , z: Stinkers [ 0 ] [ 0 ] [ 2 ] );
+				gl . Vertex ( x: Stinkers [ 0 ] [ 1 ] [ 0 ] , y: Stinkers [ 0 ] [ 1 ] [ 1 ] , z: Stinkers [ 0 ] [ 1 ] [ 2 ] );
+				gl . Vertex ( x: Stinkers [ 1 ] [ 0 ] [ 0 ] , y: Stinkers [ 1 ] [ 0 ] [ 1 ] , z: Stinkers [ 1 ] [ 0 ] [ 2 ] );
+				gl . Vertex ( x: Stinkers [ 1 ] [ 1 ] [ 0 ] , y: Stinkers [ 1 ] [ 1 ] [ 1 ] , z: Stinkers [ 1 ] [ 1 ] [ 2 ] );
+				gl . Vertex ( x: Stinkers [ 2 ] [ 0 ] [ 0 ] , y: Stinkers [ 2 ] [ 0 ] [ 1 ] , z: Stinkers [ 2 ] [ 0 ] [ 2 ] );
+				gl . Vertex ( x: Stinkers [ 2 ] [ 1 ] [ 0 ] , y: Stinkers [ 2 ] [ 1 ] [ 1 ] , z: Stinkers [ 2 ] [ 1 ] [ 2 ] );
+				gl . Vertex ( x: Stinkers [ 3 ] [ 0 ] [ 0 ] , y: Stinkers [ 3 ] [ 0 ] [ 1 ] , z: Stinkers [ 3 ] [ 0 ] [ 2 ] );
+				gl . Vertex ( x: Stinkers [ 3 ] [ 1 ] [ 0 ] , y: Stinkers [ 3 ] [ 1 ] [ 1 ] , z: Stinkers [ 3 ] [ 1 ] [ 2 ] );
+
+				gl . End ( );
+				gl . PopAttrib ( );
+
+			}
+		}
+
+		private float [ ][ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction, MainWindow . LineStinkerModes mode )
+		{
+
+			if ( fraction < 0 )
+				return  null;
+
+			if ( fraction > 1 )
+				return null;
+
+			float [ ] a = new float [ 3 ];
+
+			a= subtract ( cf0 , cf1 );
+
+			float m = magnitude ( a );
+
+			float [ ] n = Divide ( a , m );
+
+			float [ ] v_forward = Multiply ( n , fraction );
+			float [ ] v_reverse = Multiply ( n , -fraction );
+
+			float [ ][ ] stinkey_vertices = new float [ 2 ][];
+
+			float [ ] stinky0 = new float [ 3 ];
+			float [ ] stinky1 = new float [ 3 ];
+			switch ( mode )
+			{
+				case LineStinkerModes . StartAtNearVertex:
+					stinky0= cf0;
+					stinky1 = Add ( v_forward , cf0 );
+					break;
+				case LineStinkerModes . StartAtFarVertex:
+					stinky0= cf1;
+					stinky1 = Add ( v_forward , cf1 );
+					break;
+				case LineStinkerModes . FloatBetweenVerticies:
+					stinky1 = Add ( v_forward , cf0 );
+					stinky0 = Add ( v_reverse, cf0);
+
+
+					break;
+				default:
+					break;
+			}
+
+			stinkey_vertices [ 0 ] = new float [ 3 ] { stinky0 [ 0 ] , stinky0 [ 1 ] , stinky0 [ 2 ] };
+			stinkey_vertices [ 1 ] = new float [ 3 ] { stinky1 [ 0 ] , stinky1 [ 1 ] , stinky1 [ 2 ] };
+
+			return stinkey_vertices;
+		}
+
+		private float [ ] Divide ( float [ ] a , float m )
+		{
+
+			float [ ] d = new float [ 3 ] { a [ 0 ] / m , a [ 1 ] / m , a [ 2 ] / m };
+			return d;
+		}
+
+		private float magnitude ( float [ ] a )
+		{
+			double b = a [ 0 ] * a [ 0 ] + a [ 1 ] * a [ 1 ] + a [ 2 ] * a [ 2 ];
+			float c = (float)Math . Sqrt ( b );
+			return c;
 		}
 
 		private void DrawBoxelEdgeCycles ( )
@@ -956,23 +1122,23 @@ FreshReset:
 
 				if ( MW . HackCheckBox_C7_R1_CheckBox_Control . IsChecked . Value )
 				{
-				double spinner2 =MW . Hack_H_Slider_04_UserControl . SliderValue * 2f * Math . PI;
-				float spinner2f=(float)spinner2;
-				var rotaxis = new GlmNet . vec3 ( 0 , 0 , 1 );
-				GlmNet . mat4 rotation = GlmNet . glm . rotate ( GlmNet . mat4 . identity ( ) ,spinner2f , rotaxis);
-				GlmNet . mat4 translation = GlmNet . glm . translate ( GlmNet . mat4 . identity ( ) , new GlmNet . vec3 ( 0 , 0 , 0 ) );
-				GlmNet . mat4 modelviewMatrix = rotation * translation;
-				GlmNet . mat3 normalMatrix = modelviewMatrix . to_mat3 ( );
-				GlmNet.vec3 noon = new GlmNet . vec3 ( x: 1 , y: 0 , z: 0 );
-				GlmNet . vec3 rotated_noon = normalMatrix * noon;
-				float [ ] ccc = new float [ ] { rotated_noon . x + ce[0], rotated_noon . y+ce[1] , rotated_noon . z +ce[2]};
-				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . Color ( 1 , .2 , .9 );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-				gl . Vertex ( ce );
-				gl . Vertex ( ccc );
-				gl . End ( );
-				gl . PopAttrib ( );
+					double spinner2 =MW . Hack_H_Slider_04_UserControl . SliderValue * 2f * Math . PI;
+					float spinner2f=(float)spinner2;
+					var rotaxis = new GlmNet . vec3 ( 0 , 0 , 1 );
+					GlmNet . mat4 rotation = GlmNet . glm . rotate ( GlmNet . mat4 . identity ( ) ,spinner2f , rotaxis);
+					GlmNet . mat4 translation = GlmNet . glm . translate ( GlmNet . mat4 . identity ( ) , new GlmNet . vec3 ( 0 , 0 , 0 ) );
+					GlmNet . mat4 modelviewMatrix = rotation * translation;
+					GlmNet . mat3 normalMatrix = modelviewMatrix . to_mat3 ( );
+					GlmNet.vec3 noon = new GlmNet . vec3 ( x: 1 , y: 0 , z: 0 );
+					GlmNet . vec3 rotated_noon = normalMatrix * noon;
+					float [ ] ccc = new float [ ] { rotated_noon . x + ce[0], rotated_noon . y+ce[1] , rotated_noon . z +ce[2]};
+					gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+					gl . Color ( 1 , .2 , .9 );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+					gl . Vertex ( ce );
+					gl . Vertex ( ccc );
+					gl . End ( );
+					gl . PopAttrib ( );
 				}
 
 				dquat d0q = new dquat ( x: 0 , y: 0 , z: 1 , w: MW . Hack_H_Slider_01_UserControl . SliderValue * 2f*Math . PI );
@@ -999,6 +1165,7 @@ FreshReset:
 					gl . End ( );
 					gl . PopAttrib ( );
 				}
+
 				if ( MW . HackCheckBox_C6_R1_CheckBox_Control . IsChecked . Value )
 				{
 					gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
@@ -1113,29 +1280,35 @@ FreshReset:
 
 			if ( MW. HackCheckBox_C1_R1_CheckBox_Control . IsChecked . Value )
 			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . PushMatrix ( );
 				gl . Translate ( cf0 [ 0 ] , cf0 [ 1 ] , z0 );
 				gl . Scale ( ts , -ts , ts );
 				gl . DrawText3D ( faceName: f0 , fontSize: 12f , extrusion: .05f , deviation: 0f , text: txt0 );
 				gl . PopMatrix ( );
+				gl . PopAttrib ( );
 			}
 
 			if ( MW.HackCheckBox_C2_R1_CheckBox_Control . IsChecked . Value )
 			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . PushMatrix ( );
 				gl . Translate ( cf [ 0 ] , cf [ 1 ] , ( z0 + z1 ) * .5d );
 				gl . Scale ( ts , -ts , ts );
 				gl . DrawText3D ( faceName: f0 , fontSize: 12f , extrusion: .05f , deviation: 0f , text: txt2 );
 				gl . PopMatrix ( );
+				gl . PopAttrib ( );
 			}
 
 			if ( MW.HackCheckBox_C3_R1_CheckBox_Control . IsChecked . Value )
 			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . PushMatrix ( );
 				gl . Translate ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
 				gl . Scale ( ts , -ts , ts );
 				gl . DrawText3D ( faceName: f0 , fontSize: 12f , extrusion: .05f , deviation: 0f , text: txt1 );
 				gl . PopMatrix ( );
+				gl . PopAttrib ( );
 			}
 		}
 
@@ -1497,6 +1670,7 @@ FreshReset:
 
 	public class Region
 	{
+		public DMT01.MainWindow MW=  ( DMT01 . MainWindow ) System. Windows. Application . Current . MainWindow;
 		public double Max;
 		public double Min;		   
 		public int N;
@@ -1529,7 +1703,7 @@ FreshReset:
 					}
 					if ( v < 0 )
 					{
-						System . Diagnostics . Debug . WriteLine ( String . Format ( "no negativity please {0} at [{1},{2}] {3} " , v, i, j , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+						//System . Diagnostics . Debug . WriteLine ( String . Format ( "no negativity please {0} at [{1},{2}] {3} " , v, i, j , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 						Cells [ i , j ] = 0.0f;
 					}
 					else
@@ -1542,6 +1716,9 @@ FreshReset:
 					this . N++;
 				}
 			}
+			MW . region_threshold_H_Slider_UserControl . SliderMinValue = Min;
+			MW . region_threshold_H_Slider_UserControl . SliderMaxValue = Max;
+
 
 			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , Display() , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
@@ -1580,6 +1757,13 @@ FreshReset:
 		static TimeSpan ElapsedDateTime;
 		static int CurrentWorksheetIndex;
 		public static OpenGL staticGLHook;
+		public enum LineStinkerModes
+		{
+			StartAtNearVertex,
+			StartAtFarVertex,
+			FloatBetweenVerticies
+		}
+		public LineStinkerModes Stankey=LineStinkerModes.StartAtFarVertex;
 
 		[Serializable ( )]
 		public class SeralizeControlCommonFields
@@ -1959,12 +2143,18 @@ FreshReset:
 		private void ArmsTooShortToBoxWithHashem ( OpenGL gl )
 		{
 			if ( Sheety == null )
+			{
 				return;
+			}
+
 			staticGLHook = gl;
 			if ( staticGLHook == null )
+			{
 				return;
+			}
 
 			Window mw =Application . Current . MainWindow;
+
 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 			gl . PushMatrix ( );
 			gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
@@ -2576,15 +2766,13 @@ FreshReset:
 		private void myOpenGLControl_Resized ( object sender , SharpGL . SceneGraph . OpenGLEventArgs args )
 		{
 
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "resized" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
-			//  Get the OpenGL object.
 			OpenGL gl = myOpenGLControl . OpenGL;
 
 			DoAspect ( );
 
 			Resizes++;
-
 		}
 
 		private void Save0_Button_Click ( object sender , RoutedEventArgs e )

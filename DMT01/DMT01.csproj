@@ -161,7 +161,6 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Page Include="H_Slider_UserControl1.xaml">
       <SubType>Designer</SubType>
@@ -190,6 +189,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="README.md" />
     <None Include="UNEP_NATDIS_disasters_2002_2010.rgf" />
     <None Include="UNEP_NATDIS_disasters_2002_2010.xlsx" />
   </ItemGroup>

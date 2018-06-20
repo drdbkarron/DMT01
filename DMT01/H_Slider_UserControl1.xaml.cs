@@ -233,9 +233,11 @@ namespace DMT01
             {
             String F = String . Format ( "{0}.xml" , HC . Name );
             if ( !System . IO . File . Exists ( F ) )
-                return null;
+			{
+				return null;
+			}
 
-            return Deseralize_H_Slider_UserControl1 ( F , HC );
+			return Deseralize_H_Slider_UserControl1 ( F , HC );
             }
 
     public static H_Slider_UserControl1_SaveState_Class Deseralize_H_Slider_UserControl1 ( String F , H_Slider_UserControl1 HC )
@@ -243,9 +245,11 @@ namespace DMT01
         Debug . WriteLine ( String . Format ( "{0} {1}" , nameof ( Deseralize_H_Slider_UserControl1 ) , F ) );
 
         if ( !System . IO . File . Exists ( F ) )
-            return null;
+			{
+				return null;
+			}
 
-        String XmlFileContents = System . IO . File . ReadAllText ( F );
+			String XmlFileContents = System . IO . File . ReadAllText ( F );
 
         StringReader XmlStringReader = new StringReader ( XmlFileContents );
 
@@ -308,13 +312,13 @@ namespace DMT01
         {
         theH_Slider . Minimum++;
         theH_Slider . Maximum--;
-        if ( theH_Slider . Minimum >= theH_Slider . Maximum )
+        if ( this . theH_Slider . Minimum >= this . theH_Slider . Maximum )
             {
-            theH_Slider . Maximum = theH_Slider . Minimum + 5.0;
+				this . theH_Slider . Maximum = theH_Slider . Minimum + 5.0;
             }
         }
 
-    private void Plus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
+        private void Plus_Spread_Min_Max_Button_Click ( object sender , RoutedEventArgs e )
             {
             theH_Slider . Maximum++;
             theH_Slider . Minimum--;
