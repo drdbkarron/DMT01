@@ -1,0 +1,10 @@
+﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>CheckBox</ControlClass>
+    <ControlName>show_wompy_3d_seed_cursor_checkBox_Control</ControlName>
+    <SaveStateFileName>show_wompy_3d_seed_cursor_checkBox_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <CheckBoxState>false</CheckBoxState>
+  <CheckBoxName>show_wompy_3d_seed_cursor_checkBox_Control</CheckBoxName>
+</CheckBoxControlSaveState>

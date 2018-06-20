@@ -1,0 +1,10 @@
+﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>CheckBox</ControlClass>
+    <ControlName>Draw_Minus_Z_Axis_Leg_CheckBox_Control</ControlName>
+    <SaveStateFileName>Draw_Minus_Z_Axis_Leg_CheckBox_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxName>Draw_Minus_Z_Axis_Leg_CheckBox_Control</CheckBoxName>
+</CheckBoxControlSaveState>
