@@ -4023,6 +4023,37 @@ FreshReset:
 			L . Content = MainWindow . myOpenGLControlViewportAspect . ToString ( "#0.0#" );
 		}
 
+		private void StankyLineStartModeEnum_ComboBox_Control_Initialized ( object sender , EventArgs e )
+		{
+			ComboBox CB = sender as ComboBox;
+						 
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+		}
+
+		private void StankyLineStartModeEnum_ComboBox_Control_Loaded ( object sender , RoutedEventArgs e )
+		{
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+		}
+
+		private void StankyLineStartModeEnum_ComboBox_Control_ContextMenuClosing ( object sender , ContextMenuEventArgs e )
+		{
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+		}
+
+		private void StankyLineStartModeEnum_ComboBox_Control_ContextMenuOpening ( object sender , ContextMenuEventArgs e )
+		{
+
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+		}
+
+		private void StankyLineStartModeEnum_ComboBox_Control_DataContextChanged ( object sender , DependencyPropertyChangedEventArgs e )
+		{
+
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+		}
+
 		private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
 		{
 

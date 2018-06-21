@@ -952,8 +952,8 @@
 											VerticalAlignment="Top"
 											LabelText="#2 -2Pi to +2Pi"
 											SliderMaxValue="1"
-											SliderMinValue="-1"
-											SliderValue="0" />
+											SliderMinValue="0"
+											SliderValue="0.5" />
 										<local:H_Slider_UserControl1
 											x:Name="Hack_H_Slider_03_UserControl"
 											Grid.Row="2"
@@ -979,12 +979,13 @@
 											SliderMinValue="-1"
 											SliderValue="0" />
 										<ComboBox
+											x:Name="StankyLineStartModeEnum_ComboBox_Control"
 											Grid.Row="1"
+											Grid.Column="1"
 											Width="107"
 											Margin="846,10,0,0"
 											HorizontalAlignment="Left"
-											VerticalAlignment="Top" />
-
+											VerticalAlignment="Top" Initialized="StankyLineStartModeEnum_ComboBox_Control_Initialized" Loaded="StankyLineStartModeEnum_ComboBox_Control_Loaded" ContextMenuClosing="StankyLineStartModeEnum_ComboBox_Control_ContextMenuClosing" ContextMenuOpening="StankyLineStartModeEnum_ComboBox_Control_ContextMenuOpening" DataContextChanged="StankyLineStartModeEnum_ComboBox_Control_DataContextChanged" />
 									</Grid>
 								</TabItem>
 								<TabItem
