@@ -18,5 +18,6 @@
             Margin="90,106,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top" />
+        <WpfControlLibrary2:Enum1ComboBoxUserControl HorizontalAlignment="Left" Height="110" Margin="90,255,0,0" VerticalAlignment="Top" Width="137" Loaded="Enum1ComboBoxUserControl_Loaded"/>
     </Grid>
 </Window>

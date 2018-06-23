@@ -4,10 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ReoGrid="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
     xmlns:WPF="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
+    xmlns:WpfControlLibrary2="clr-namespace:WpfControlLibrary2;assembly=WpfControlLibrary2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DMT01;assembly=WpfControlLibrary2"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    xmlns:local="clr-namespace:DMT01;assembly=WpfControlLibrary2"
     x:Name="DMT_Main_Window_Control"
     Title="DMT_MainWindow"
     Width="1072"
@@ -974,24 +975,12 @@
                                             SliderMaxValue="1"
                                             SliderMinValue="-1"
                                             SliderValue="0" />
-                                        <ComboBox
-                                            x:Name="StankyLineStartModeEnum_ComboBox_Control"
+                                        <WpfControlLibrary2:Enum1ComboBoxUserControl
+                                            x:Name="myStankeyEnum_ComboBoxUserControl"
                                             Grid.Row="1"
-                                            Grid.Column="1"
-                                            Width="107"
-                                            Margin="846,10,0,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Top"
-                                            ContextMenuClosing="StankyLineStartModeEnum_ComboBox_Control_ContextMenuClosing"
-                                            ContextMenuOpening="StankyLineStartModeEnum_ComboBox_Control_ContextMenuOpening"
-                                            DataContextChanged="StankyLineStartModeEnum_ComboBox_Control_DataContextChanged"
-                                            Initialized="StankyLineStartModeEnum_ComboBox_Control_Initialized"
-                                            Loaded="StankyLineStartModeEnum_ComboBox_Control_Loaded">
-                                            <Button />
-                                            <Button />
-                                            <Button />
-                                            <Button />
-                                        </ComboBox>
+                                            Height="64"
+                                            Margin="0,10,10,0"
+                                            VerticalAlignment="Top" HorizontalAlignment="Right" Width="102" />
                                     </Grid>
                                 </TabItem>
                                 <TabItem

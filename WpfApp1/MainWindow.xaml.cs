@@ -24,5 +24,11 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private void Enum1ComboBoxUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+        }
     }
 }
