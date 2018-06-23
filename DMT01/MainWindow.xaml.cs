@@ -5,43 +5,43 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System . Windows;
-using System . Windows . Controls;
-using System . Windows . Data;
-using System . Windows . Documents;
-using System . Windows . Input;
-using System . Windows . Media;
-using System . Windows . Media . Imaging;
-using System . Windows . Navigation;
-using System . Windows . Resources;
-using System . Windows . Shapes;
-using System . Drawing;
-using System . Xml;
-using System . Resources;
-using System . Reflection;
-using System . IO;
-using System . Globalization;
-using System . Xml . Serialization;
-using System . Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Resources;
+using System.Windows.Shapes;
+using System.Drawing;
+using System.Xml;
+using System.Resources;
+using System.Reflection;
+using System.IO;
+using System.Globalization;
+using System.Xml.Serialization;
+using System.Threading;
 using GlmSharp;
 using GlmNet;
-using SharpGL . Enumerations;
-using SharpGL . SceneGraph;
-using SharpGL . SceneGraph . Cameras;
-using SharpGL . SceneGraph . Core;
-using SharpGL . SceneGraph . Primitives;
-using SharpGL . WPF . SceneTree;
-using unvell . ReoGrid . DataFormat;
-using unvell . ReoGrid . CellTypes;
-using unvell . ReoGrid;
-using unvell . ReoGrid . Actions;
-using unvell . ReoGrid . Rendering;
-using unvell . ReoGrid . Graphics;
+using SharpGL.Enumerations;
+using SharpGL.SceneGraph;
+using SharpGL.SceneGraph.Cameras;
+using SharpGL.SceneGraph.Core;
+using SharpGL.SceneGraph.Primitives;
+using SharpGL.WPF.SceneTree;
+using unvell.ReoGrid.DataFormat;
+using unvell.ReoGrid.CellTypes;
+using unvell.ReoGrid;
+using unvell.ReoGrid.Actions;
+using unvell.ReoGrid.Rendering;
+using unvell.ReoGrid.Graphics;
 using WpfScreenHelper;
 using LocalMaths;
 
-namespace System . Windows . Controls
-    {
+namespace System.Windows.Controls
+{
     public static class MyExt
         {
         public static void PerformClick ( this Button btn )
@@ -114,11 +114,22 @@ class MyCheckBox : CheckBoxCell
 }
 
 namespace DMT01
-    {
+{
 
-	#region DMT_Geometry_Classes
+    #region DMT_Geometry_Classes
 
-	public class Vertex
+    public class LineStinkerClass
+	{
+		public enum LineStinkerModes
+		{
+			StartAtNearVertex,
+			StartAtFarVertex,
+			FloatBetweenVerticies
+		}
+	}
+
+
+public class Vertex
 	{
 		public short VertexIndex;
 		public int I, J;
@@ -893,7 +904,7 @@ FreshReset:
 			}
 		}
 
-		private float [ ][ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction, MainWindow . LineStinkerModes mode )
+		private float [ ][ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction, DMT01. LineStinkerClass.LineStinkerModes mode )
 		{
 
 			if ( fraction < 0 )
@@ -919,15 +930,15 @@ FreshReset:
 			float [ ] stinky1 = new float [ 3 ];
 			switch ( mode )
 			{
-				case LineStinkerModes . StartAtNearVertex:
+				case DMT01.LineStinkerClass.LineStinkerModes . StartAtNearVertex:
 					stinky0= cf0;
 					stinky1 = Add ( v_forward , cf0 );
 					break;
-				case LineStinkerModes . StartAtFarVertex:
+				case DMT01 . LineStinkerClass . LineStinkerModes . StartAtFarVertex:
 					stinky0= cf1;
 					stinky1 = Add ( v_forward , cf1 );
 					break;
-				case LineStinkerModes . FloatBetweenVerticies:
+				case DMT01 . LineStinkerClass . LineStinkerModes . FloatBetweenVerticies:
 					stinky1 = Add ( v_forward , cf0 );
 					stinky0 = Add ( v_reverse, cf0);
 
@@ -1757,31 +1768,9 @@ FreshReset:
 		static TimeSpan ElapsedDateTime;
 		static int CurrentWorksheetIndex;
 		public static OpenGL staticGLHook;
-		public enum LineStinkerModes
-		{
-			StartAtNearVertex,
-			StartAtFarVertex,
-			FloatBetweenVerticies
-		}
-		public LineStinkerModes Stankey=LineStinkerModes.StartAtFarVertex;
 
-		[Serializable ( )]
-		public class SeralizeControlCommonFields
-		{
-			public String ControlClass;
-			public String ControlName;
-			public String SaveStateFileName;
-			public Boolean UpdatedFromXmlFiles;
-			//public Object Parent;
-			public SeralizeControlCommonFields ( )
-			{
-				ControlClass = string . Empty;
-				ControlName = string . Empty;
-				SaveStateFileName = string . Empty;
-				UpdatedFromXmlFiles = false;
-				UpdatedFromXmlFiles = false;
-			}
-		}
+
+		public DMT01.LineStinkerClass.LineStinkerModes Stankey=DMT01.LineStinkerClass.LineStinkerModes.StartAtFarVertex;
 
 		[Serializable ( )]
 		public class DMT_Main_Window_Control_SaveState
@@ -1869,6 +1858,7 @@ FreshReset:
 		}
 
 		static NWorksheety Sheety;
+
 		#endregion persistance
 
 

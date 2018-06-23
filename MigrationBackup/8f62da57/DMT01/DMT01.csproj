@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{625EA211-E85F-483C-A51F-5B8677F5FA7E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DMT01</RootNamespace>
+    <AssemblyName>DMT01</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicExpresso.Core, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicExpresso.Core.2.0.2\lib\net461\DynamicExpresso.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GlmNet, Version=0.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GlmNet.0.5.1.0\lib\net40\GlmNet.dll</HintPath>
+    </Reference>
+    <Reference Include="GlmSharp, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GlmSharp.0.9.8\lib\Net45\GlmSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Entity.Design.Extensibility, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="SharpGL, Version=2.4.0.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpGL.2.4.0.0\lib\net40\SharpGL.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL.SceneGraph, Version=2.4.0.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpGL.2.4.0.0\lib\net40\SharpGL.SceneGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL.WPF, Version=2.4.0.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpGL.WPF.2.4.0.0\lib\net40\SharpGL.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\unvell.ReoGridWPF.dll.2.1.0.0\lib\20\unvell.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfScreenHelper, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfScreenHelper.0.3.0.0\lib\net40\WpfScreenHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="H_Slider_UserControl1.xaml.cs">
+      <DependentUpon>H_Slider_UserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LocalMaths.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Axis_Arrow_Grid.cs" />
+    <Compile Include="DMT_class.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="H_Slider_UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MySimpleMath.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="README.md" />
+    <None Include="UNEP_NATDIS_disasters_2002_2010.rgf" />
+    <None Include="UNEP_NATDIS_disasters_2002_2010.xlsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\arrow-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\down-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\up-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\down_arrowBMP.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\arrow-down-on-black-circular-background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Debug\AnnotateAxisXYZ_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateOrigin_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateXTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateYTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AnnotateZTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\AxisDrawMe_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Axis_DrawNegativeCheckBox.xml" />
+    <Resource Include="bin\Debug\Axis_DrawNegativeCheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Axis_Length_XYZ_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Linewidth_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Property1_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Property2_H_Slider_UserControl1.xml" />
+    <Resource Include="bin\Debug\Axis_Property3_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_TickSize_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Axis_Ticks_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\DMT_Main_Window_Control.xml" />
+    <Resource Include="bin\Debug\DoDoTickMarks_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawAllSpreadsheetData_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawGreyScale_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetFocusCell_s_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetGrid_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetSelectedCell_s_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetSideBorder_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetTextObjects_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSpreadsheetTopBorder_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoSelectDataToNormalize_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Do_Orbit_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Do_Orbit_Pull_Back_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DrawTeaPot_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Eye_X_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Eye_Y_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Eye_Z_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Bottom_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Left_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Right_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_Top_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_zFar_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Frustum_zNear_H_Slider_UserControl.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\UpArrowBMP.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Debug\SharpGL.SceneGraph.xml" />
+    <Resource Include="bin\Debug\SharpGL.WPF.xml" />
+    <Resource Include="bin\Debug\SharpGL.xml" />
+    <Resource Include="bin\Debug\unused_check_box_1_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\unvell.ReoGrid.xml" />
+    <Resource Include="bin\Debug\UseLookAtViewingTransform_RadioButton.xml" />
+    <Resource Include="bin\Debug\UseLookAtViewingTransform_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\UseOrtho3D_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\UseOrthographic_Viewing_Transform_radioButton_Control.xml" />
+    <Resource Include="bin\Debug\UsePerspetiveViewingTransform_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\Use_Viewing_Frustrum_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\YourArmsTooShortToBoxWithHashem.xml" />
+    <Resource Include="bin\Debug\Z_Fudge_H_Slider_0_UserControl.xml" />
+    <Resource Include="bin\Debug\Z_Fudge_H_Slider_1_UserControl.xml" />
+    <Resource Include="bin\Debug\Z_Fudge_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\MouseScreenAnnotationFontSize_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Left_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Near_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Right_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Top_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_ASPECT_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_FOVY_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_Z_FAR_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Perspective_Z_NEAR_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\ScreenAnnotationFont_SizeH_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\show_boxel_index1_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\show_wompy_3d_seed_cursor_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet3DNumericLeftMargin_H_Slider_User_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet_Aspect_Scale_Hack_checkBox_Control.xml" />
+    <Resource Include="bin\Debug\Spreadsheet_Grid_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Threshold_Hack_H_Slider_2_UserControl.xml" />
+    <Resource Include="bin\Debug\LaunchSavedStateOnInitalization_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\LoadSpreadsheetAtInitalization_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\LookAtTarget_X_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_Eye_X_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_Eye_Y_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_Eye_Z_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAt_X_Up_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\LookAt_Y_Up_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\LookAt_Z_Up_RadioButton_Control.xml" />
+    <Resource Include="bin\Debug\Orthographic_Far_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAtTarget_Y_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\LookAtTarget_Z_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack0CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack1CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack2CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack3CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\EdgeFactorHack4CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DrawMouseScreenSpaceAnnotation_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DrawScreenSpaceAnnotationGrid_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Draw_Minus_Z_Axis_Leg_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\GlmSharp.xml" />
+    <Resource Include="bin\Debug\H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Axis_tick_annotation_scale_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\DoDrawReoGridSpreadsheet_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Do_Execute_Select_Data_Button_on_Startup_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DynamicExpresso.Core.xml" />
+    <Content Include="bin\Debug\Microsoft.Data.Entity.Design.Extensibility.dll" />
+    <Content Include="bin\Debug\Microsoft.Windows.Design.Extensibility.dll" />
+    <Resource Include="bin\Debug\Orbit_Delta_Angle_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orbit_Delta_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orbit_Radius_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orbit_Rotation_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\Orthographic_Bottom_H_Slider_UserControl.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
