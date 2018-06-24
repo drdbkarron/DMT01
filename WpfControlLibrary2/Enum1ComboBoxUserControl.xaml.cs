@@ -16,22 +16,33 @@ using System.Windows.Shapes;
 
 namespace WpfControlLibrary2
 {
-    /// <summary>
-    /// Interaction logic for Enum1ComboBoxUserControl.xaml
-    /// </summary>
+ 
+
     public partial class Enum1ComboBoxUserControl : UserControl
     {
+        public int value;
+
         public Enum1ComboBoxUserControl()
         {
+
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+
             InitializeComponent();
+
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
         }
 
-        public DMT01.LineStinkerClass xxxx;
 
-        public DMT01.LineStinkerClass Value
+        public int Value
         {
-        get {
-                return this.xxxx;
+            get
+            {
+                return this.value;
+            }
+            set
+            {
+                value = this.Value;
+                return;
             }
         }
 

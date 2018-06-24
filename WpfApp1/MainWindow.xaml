@@ -12,12 +12,12 @@
     Height="450"
     mc:Ignorable="d">
     <Grid Margin="0,-27,-399,0">
-        <DMT01:H_Slider_UserControl1
-            Width="1043"
-            Height="100"
-            Margin="90,106,0,0"
+        <WpfControlLibrary2:Enum1ComboBoxUserControl
+            Width="137"
+            Height="110"
+            Margin="90,255,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
-        <WpfControlLibrary2:Enum1ComboBoxUserControl HorizontalAlignment="Left" Height="110" Margin="90,255,0,0" VerticalAlignment="Top" Width="137" Loaded="Enum1ComboBoxUserControl_Loaded"/>
+            VerticalAlignment="Top"
+            Loaded="Enum1ComboBoxUserControl_Loaded" />
     </Grid>
 </Window>
