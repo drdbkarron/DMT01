@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DMT01">
-      <HintPath>..\DMT01\obj\Debug\DMT01.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -67,6 +64,7 @@
     <Compile Include="H_Slider_UserControl1.xaml.cs">
       <DependentUpon>H_Slider_UserControl1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LineStinkerClass.cs" />
     <Compile Include="SeralizeControlCommonFields.cs" />
   </ItemGroup>
   <ItemGroup>

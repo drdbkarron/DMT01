@@ -13,15 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace WpfControlLibrary2
 {
- 
-
     public partial class Enum1ComboBoxUserControl : UserControl
     {
-        public int value;
-
+        private LineStinkerModes modes;
         public Enum1ComboBoxUserControl()
         {
 
@@ -30,19 +26,19 @@ namespace WpfControlLibrary2
             InitializeComponent();
 
             System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+
         }
 
-
-        public int Value
+        public LineStinkerModes Modes
         {
             get
             {
-                return this.value;
+                return this.modes;
             }
+
             set
             {
-                value = this.Value;
-                return;
+                this.modes = value;
             }
         }
 
@@ -50,10 +46,10 @@ namespace WpfControlLibrary2
         {
             this.myStankeyEnum_Combo_Box_Control.SelectedValuePath = "Key";
             this.myStankeyEnum_Combo_Box_Control.DisplayMemberPath = "Value";
-            var a = Enum.GetNames(typeof(DMT01.LineStinkerClass));
-            var b = Enum.GetValues(typeof(DMT01.LineStinkerClass));
+            var a = Enum.GetNames(typeof(WpfControlLibrary2.LineStinkerClass));
+            var b = Enum.GetValues(typeof(WpfControlLibrary2.LineStinkerClass));
 
-            foreach (DMT01.LineStinkerClass Num in (DMT01.LineStinkerClass[])Enum.GetValues(typeof(DMT01.LineStinkerClass)))
+            foreach (WpfControlLibrary2.LineStinkerClass Num in (WpfControlLibrary2.LineStinkerClass[])Enum.GetValues(typeof(WpfControlLibrary2.LineStinkerClass)))
             {
 
                 System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "dippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));

@@ -118,15 +118,7 @@ namespace DMT01
 
     #region DMT_Geometry_Classes
 
-    public class LineStinkerClass
-	{
-		public enum LineStinkerModes
-		{
-			StartAtNearVertex,
-			StartAtFarVertex,
-			FloatBetweenVerticies
-		}
-	}
+  
 
 
 public class Vertex
@@ -876,13 +868,13 @@ FreshReset:
 
 				float [ ] [ ] [ ] Stinkers = new float [ 4 ] [ ] [ ];
 				Stinkers [ 0 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 0 ] . cf ,
-					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW .Stankey );
+					fraction: this.MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW .Stankey );
 				Stinkers [ 1 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 1 ] . cf ,
-					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
+					fraction: this.MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
 				Stinkers [2 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 2 ] . cf ,
-					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
+					fraction: this.MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
 				Stinkers [ 3 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 3 ] . cf ,
-					fraction: MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
+					fraction: this.MW . Hack_H_Slider_02_UserControl . SliderValue , mode: this . MW . Stankey );
 
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . Color ( 1 , .2 , .9 );
@@ -904,7 +896,7 @@ FreshReset:
 			}
 		}
 
-		private float [ ][ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction, DMT01. LineStinkerClass.LineStinkerModes mode )
+		private float [ ][ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction, WpfControlLibrary2.LineStinkerModes mode )
 		{
 
 			if ( fraction < 0 )
@@ -930,15 +922,15 @@ FreshReset:
 			float [ ] stinky1 = new float [ 3 ];
 			switch ( mode )
 			{
-				case DMT01.LineStinkerClass.LineStinkerModes . StartAtNearVertex:
+				case WpfControlLibrary2.LineStinkerModes . StartAtNearVertex:
 					stinky0= cf0;
 					stinky1 = Add ( v_forward , cf0 );
 					break;
-				case DMT01 . LineStinkerClass . LineStinkerModes . StartAtFarVertex:
+				case WpfControlLibrary2. LineStinkerModes . StartAtFarVertex:
 					stinky0= cf1;
 					stinky1 = Add ( v_forward , cf1 );
 					break;
-				case DMT01 . LineStinkerClass . LineStinkerModes . FloatBetweenVerticies:
+				case WpfControlLibrary2. LineStinkerModes . FloatBetweenVerticies:
 					stinky1 = Add ( v_forward , cf0 );
 					stinky0 = Add ( v_reverse, cf0);
 
@@ -1770,7 +1762,7 @@ FreshReset:
 		public static OpenGL staticGLHook;
 
 
-		public DMT01.LineStinkerClass.LineStinkerModes Stankey=DMT01.LineStinkerClass.LineStinkerModes.StartAtFarVertex;
+		public WpfControlLibrary2.LineStinkerModes Stankey= WpfControlLibrary2.LineStinkerModes.StartAtFarVertex;
 
 		[Serializable ( )]
 		public class DMT_Main_Window_Control_SaveState
