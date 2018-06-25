@@ -17,30 +17,20 @@ namespace WpfControlLibrary2
 {
     public partial class Enum1ComboBoxUserControl : UserControl
     {
-        private LineStinkerModes modes;
+  
         public Enum1ComboBoxUserControl()
         {
 
             System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
 
-            InitializeComponent();
+            this.InitializeComponent();
+            var d=this.DataContext;
 
             System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
 
         }
 
-        public LineStinkerModes Modes
-        {
-            get
-            {
-                return this.modes;
-            }
-
-            set
-            {
-                this.modes = value;
-            }
-        }
+   
 
         private void myStankeyEnum_Combo_Box_Control_Initialized(object sender, EventArgs e)
         {

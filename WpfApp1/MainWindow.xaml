@@ -2,22 +2,45 @@
     x:Class="WpfApp1.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:DMT01="clr-namespace:DMT01;assembly=WpfControlLibrary2"
-    xmlns:WpfControlLibrary2="clr-namespace:WpfControlLibrary2;assembly=WpfControlLibrary2"
+    xmlns:Properties="clr-namespace:WpfApp1.Properties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WpfApp1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="1246.797"
+    Width="1243"
     Height="450"
     mc:Ignorable="d">
-    <Grid Margin="0,-27,-399,0">
-        <WpfControlLibrary2:Enum1ComboBoxUserControl
-            Width="137"
-            Height="110"
-            Margin="90,255,0,0"
+    <Window.Background>
+        <RadialGradientBrush>
+            <GradientStop Offset="0" Color="#FFD8D2C6" />
+            <GradientStop Offset="1" Color="#FF5F4612" />
+        </RadialGradientBrush>
+    </Window.Background>
+    <Grid Margin="10" Background="#FFB0C1A5">
+        <ComboBox
+            x:Name="myTestComboBox"
+            Width="265"
+            Margin="23,33,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Loaded="Enum1ComboBoxUserControl_Loaded" />
+            Initialized="myTestComboBox_Initialized" Height="72"  />
+        <ComboBox
+            x:Name="myTextComboBoxValues"
+            Width="131"
+            Height="49"
+            Margin="364,33,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Cursor="Hand"
+            DropDownClosed="myTextComboBoxValues_DropDownClosed"
+            FontSize="10"
+            Initialized="myTextComboBoxValues_Initialized"
+            Text="blibbity">
+            <ComboBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="1" Color="#FF09393E" />
+                    <GradientStop Color="#FFEA1B1B" />
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
     </Grid>
 </Window>

@@ -975,12 +975,6 @@
                                             SliderMaxValue="1"
                                             SliderMinValue="-1"
                                             SliderValue="0" />
-                                        <WpfControlLibrary2:Enum1ComboBoxUserControl
-                                            x:Name="myStankeyEnum_ComboBoxUserControl"
-                                            Grid.Row="1"
-                                            Height="64"
-                                            Margin="0,10,10,0"
-                                            VerticalAlignment="Top" HorizontalAlignment="Right" Width="102" />
                                     </Grid>
                                 </TabItem>
                                 <TabItem

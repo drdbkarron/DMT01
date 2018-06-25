@@ -8,9 +8,11 @@ namespace WpfControlLibrary2
 {
     public enum LineStinkerModes
     {
-        StartAtNearVertex,
-        StartAtFarVertex,
-        FloatBetweenVerticies
+        UnInitalized=0,
+        StartAtNearVertex =1,
+        StartAtFarVertex =2,
+        FloatBetweenVerticies =3,
+        TestHighValue=10
     }
 
     public class LineStinkerClass
