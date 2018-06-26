@@ -118,7 +118,7 @@ namespace DMT01
 
     #region DMT_Geometry_Classes
 
-  
+
 
 
 public class Vertex
@@ -296,7 +296,7 @@ public class Vertex
 		}
 	}
 
-	public  class Boxel	
+	public  class Boxel
 	{
 		public DMT01.MainWindow MW;
 		public int I;
@@ -1188,7 +1188,7 @@ FreshReset:
 			gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , z1 );
 			gl . End ( );
 			gl . PopAttrib ( );
-			
+
 			if ( MW . HackCheckBox_C5_R1_CheckBox_Control . IsChecked . Value )
 			{
 				float u = MW.Threshold_Hack_H_Slider_2_UserControl.SliderValue;
@@ -1202,7 +1202,7 @@ FreshReset:
 				float y = ( 1 - u ) * y0 + u * y1;
 				float z = ( 1 - u ) * z0 + u * z1;
 
-				float [ ] c_th = new float [ ]     
+				float [ ] c_th = new float [ ]
 					{
 						x,y,z
 					};
@@ -1240,7 +1240,7 @@ FreshReset:
 		private float[] toFloatArray ( dvec3 dv )
 		{
 			float [ ] fa = new float [ ] { (float)dv . x , (float)dv . y , (float)dv . z};
-			return fa;	
+			return fa;
 		}
 
 		private dvec3 add ( dvec3 r , float [ ] f )
@@ -1364,9 +1364,9 @@ FreshReset:
 			{
 				//tex:
 				// $$ x = ( 1 - u ) X_{0} + u X_{1} $$
-				// $$ y = ( 1 - u ) Y_{0} + u Y_{1} $$ 
+				// $$ y = ( 1 - u ) Y_{0} + u Y_{1} $$
 				// $$ z = ( 1 - u ) Z_{0} + u Z_{1} $$
-				// $$ v = ( 1 - u ) V_{0} + u V_{1} $$ 
+				// $$ v = ( 1 - u ) V_{0} + u V_{1} $$
 				//											where $$ 0 \leq u \leq 1 $$
 				//  Solve for u from v:
 				//		expand multiplicatives
@@ -1382,8 +1382,8 @@ FreshReset:
 				//  flip signs (multiply both sides by -1)
 				// $$ ( -v + V_{0} ) / ( V_{0} + V_{1} ) = u $$
 				// flip sign again and flip sides to move  $u$ to LHS and we are done
-				// $$ u = ( v - V_{0} ) / ( V_{0} + V_{1} ) $$ 
-				// if v=V_{0}, u=0, 
+				// $$ u = ( v - V_{0} ) / ( V_{0} + V_{1} ) $$
+				// if v=V_{0}, u=0,
 				float v = MW . Threshold_Hack_H_Slider_2_UserControl . SliderValue;
 
 				float V0 = E . V [ 0 ] . V;
@@ -1484,7 +1484,7 @@ FreshReset:
 			//			cf[2]+threshold_hack1
 			//		};
 			//	if ( IsInBetween ( cf , E ) )		   // this should be catching the  imtermediate points
-			//	{ 
+			//	{
 			//		System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 			//	}
 			//	gl . PointSize ( 5 );
@@ -1675,7 +1675,7 @@ FreshReset:
 	{
 		public DMT01.MainWindow MW=  ( DMT01 . MainWindow ) System. Windows. Application . Current . MainWindow;
 		public double Max;
-		public double Min;		   
+		public double Min;
 		public int N;
 		public int Start_Rows;
 		public int End_Rows;
@@ -1738,9 +1738,9 @@ FreshReset:
 				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "badness heree" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 			}
 
-			String a = String . Format ( "{0} in {1}->{2}, {3} Rows; {4}->{5},{6} Cols; Min:{7} Max: {8}" , 
-				N, 
-				this.Start_Rows, this.End_Rows, Rows, 
+			String a = String . Format ( "{0} in {1}->{2}, {3} Rows; {4}->{5},{6} Cols; Min:{7} Max: {8}" ,
+				N,
+				this.Start_Rows, this.End_Rows, Rows,
 				this.Start_Cols, this.End_Cols,	Cols,
 				Min.ToString(Stranger), Max.ToString(Stranger));
 
@@ -3183,9 +3183,9 @@ FreshReset:
 						//Debug . WriteLine ( String . Format ( @"{0} at [{1},{2}] NodeType:{3} {4} {5} Attributes?? {6}" ,
 						//      XmlFileName ,
 						//      ( ( IXmlLineInfo ) xmlReader ). LineNumber ,
-						//      ( ( IXmlLineInfo ) xmlReader )  . LinePosition , 
-						//      xmlReader . NodeType . ToString(), 
-						//      xmlReader . Name , 
+						//      ( ( IXmlLineInfo ) xmlReader )  . LinePosition ,
+						//      xmlReader . NodeType . ToString(),
+						//      xmlReader . Name ,
 						//      xmlReader.Depth,
 						//      xmlReader . HasAttributes
 						//      ) );
@@ -3214,9 +3214,9 @@ FreshReset:
 						//Debug . WriteLine ( String . Format ( @"{0} at [{3},{4}] NodeType:{1} {2} Attributes? {5} {6}" ,
 						//       XmlFileName ,
 						//        ( ( IXmlLineInfo ) xmlReader ) . LineNumber ,
-						//        ( ( IXmlLineInfo ) xmlReader ) . LinePosition , 
-						//       xmlReader . NodeType . ToString ( ) , 
-						//       xmlReader . Name , 
+						//        ( ( IXmlLineInfo ) xmlReader ) . LinePosition ,
+						//       xmlReader . NodeType . ToString ( ) ,
+						//       xmlReader . Name ,
 						//       xmlReader . HasAttributes ,
 						//       xmlReader.Depth
 						//       ) );
@@ -3249,12 +3249,12 @@ FreshReset:
 						//Debug . WriteLine ( String . Format ( @"{0} at [{1},{2}] NodeType:{3} {4} Attributes?? {5} {6} {7} {8}" ,
 						//      XmlFileName ,
 						//       ( ( IXmlLineInfo ) xmlReader ) . LineNumber ,
-						//      ( ( IXmlLineInfo ) xmlReader ) . LinePosition , 
-						//      xmlReader . NodeType . ToString ( ) , 
-						//      xmlReader . Name , 
-						//      xmlReader . HasAttributes , 
-						//      xmlReader . ValueType , 
-						//      xmlReader . Value, 
+						//      ( ( IXmlLineInfo ) xmlReader ) . LinePosition ,
+						//      xmlReader . NodeType . ToString ( ) ,
+						//      xmlReader . Name ,
+						//      xmlReader . HasAttributes ,
+						//      xmlReader . ValueType ,
+						//      xmlReader . Value,
 						//      xmlReader.Depth ) );
 						break;
 
@@ -4008,7 +4008,7 @@ FreshReset:
 		private void StankyLineStartModeEnum_ComboBox_Control_Initialized ( object sender , EventArgs e )
 		{
 			ComboBox CB = sender as ComboBox;
-						 
+
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 		}
 
@@ -4074,4 +4074,4 @@ FreshReset:
 
     }
 }
- 
+

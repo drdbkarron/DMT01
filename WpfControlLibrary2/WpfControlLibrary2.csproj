@@ -66,7 +66,14 @@
       <DependentUpon>H_Slider_UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="LineStinkerClass.cs" />
+    <Compile Include="LineStinkerComboBoxUserControl.xaml.cs">
+      <DependentUpon>LineStinkerComboBoxUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SeralizeControlCommonFields.cs" />
+    <Page Include="LineStinkerComboBoxUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

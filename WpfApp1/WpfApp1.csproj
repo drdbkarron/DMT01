@@ -99,6 +99,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="WpfColorFontDialog">
+      <Version>1.0.5</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\WpfControlLibrary2\WpfControlLibrary2.csproj">
       <Project>{65E7BBFE-D099-42B5-9577-C47D3772D607}</Project>
       <Name>WpfControlLibrary2</Name>

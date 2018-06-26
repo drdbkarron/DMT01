@@ -912,9 +912,10 @@
                                             <GradientStop Offset="1" Color="#FFB23A3A" />
                                         </LinearGradientBrush>
                                     </TabItem.Background>
-                                    <Grid>
+                                    <Grid x:Name="ThresholdingSlidersGrid">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
+                                            <ColumnDefinition Width="112" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="76*" />
@@ -930,7 +931,8 @@
                                         </Grid.Background>
                                         <local:H_Slider_UserControl1
                                             x:Name="Hack_H_Slider_01_UserControl"
-                                            Width="955"
+                                            Grid.ColumnSpan="2"
+                                            Width="948"
                                             Height="73"
                                             Margin="1,1,0,0"
                                             HorizontalAlignment="Left"
@@ -954,6 +956,7 @@
                                         <local:H_Slider_UserControl1
                                             x:Name="Hack_H_Slider_03_UserControl"
                                             Grid.Row="2"
+                                            Grid.ColumnSpan="2"
                                             Width="955"
                                             Height="66"
                                             Margin="1,1,0,0"
@@ -966,6 +969,7 @@
                                         <local:H_Slider_UserControl1
                                             x:Name="Hack_H_Slider_04_UserControl"
                                             Grid.Row="3"
+                                            Grid.ColumnSpan="2"
                                             Width="955"
                                             Height="66"
                                             Margin="1,1,0,0"
@@ -975,6 +979,15 @@
                                             SliderMaxValue="1"
                                             SliderMinValue="-1"
                                             SliderValue="0" />
+                                        <WpfControlLibrary2:LineStinkerComboBoxUserControl x:Name="lineStinkerModeenumcomboBoxUserControl"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Width="112"
+                                            Height="150"
+                                            Margin="0,4,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top" 
+                                            Grid.RowSpan="1" />
                                     </Grid>
                                 </TabItem>
                                 <TabItem

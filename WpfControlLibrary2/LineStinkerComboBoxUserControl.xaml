@@ -1,0 +1,52 @@
+﻿<UserControl
+    x:Class="WpfControlLibrary2.LineStinkerComboBoxUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfControlLibrary2"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="276.714"
+    Height="205.715"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="LineStinkerGrid"
+        Margin="0,0,0,0"
+        Cursor="Hand">
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Offset="0" Color="#FFDE9C9C" />
+                <GradientStop Offset="1" Color="#FFF9EAEA" />
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*" />
+            <RowDefinition Height="161*" />
+        </Grid.RowDefinitions>
+        <Label
+            x:Name="LineStinkerLabel"
+            Margin="10,1"
+            Padding="4"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderBrush="#FF9F20CF"
+            BorderThickness="4"
+            Content="Describe What This is For Here">
+            <Label.Background>
+                <RadialGradientBrush>
+                    <GradientStop Offset="0" Color="#FF938989" />
+                    <GradientStop Offset="1" Color="#FFD3EFF3" />
+                </RadialGradientBrush>
+            </Label.Background>
+        </Label>
+
+        <ComboBox
+            x:Name="LineStinkerComboBox"
+            Grid.Row="1"
+            Height="29"
+            Margin="10,6,10,0"
+            VerticalAlignment="Top"
+            DropDownClosed="LineStinkerComboBox_DropDownClosed"
+            Initialized="LineStinkerComboBox_Initialized" />
+
+    </Grid>
+</UserControl>
