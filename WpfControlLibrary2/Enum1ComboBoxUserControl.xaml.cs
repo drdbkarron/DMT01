@@ -19,36 +19,34 @@ namespace WpfControlLibrary2
     {
         public Enum1ComboBoxUserControl()
         {
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
 
             this.InitializeComponent();
 
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
         }
-
-   
 
         private void myStankeyEnum_Combo_Box_Control_Initialized(object sender, EventArgs e)
         {
-            var a = Enum.GetNames(typeof(WpfControlLibrary2.LineStinkerClass));
-            var b = Enum.GetValues(typeof(WpfControlLibrary2.LineStinkerClass));
+			string [ ] a = Enum.GetNames(typeof(WpfControlLibrary2.LineStinkerClass));
+			Array b = Enum.GetValues(typeof(WpfControlLibrary2.LineStinkerClass));
 
             foreach (WpfControlLibrary2.LineStinkerClass Num in (WpfControlLibrary2.LineStinkerClass[])Enum.GetValues(typeof(WpfControlLibrary2.LineStinkerClass)))
             {
-                System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "dippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+                System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "dippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
             }
 
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
         }
 
         private void myStankeyEnum_Combo_Box_Control_Loaded(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
         }
 
         private void myStankyEnumComboBoxUserControl_Initialized(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
         }
     }
 }

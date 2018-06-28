@@ -30,7 +30,7 @@ namespace WpfControlLibrary2
 
             List<T> values = new List<T>();
 
-            var fields = from field in enumType.GetFields()
+			IEnumerable<System . Reflection . FieldInfo> fields = from field in enumType.GetFields()
                          where field.IsLiteral
                          select field;
 
@@ -52,7 +52,7 @@ namespace WpfControlLibrary2
 
             List<object> values = new List<object>();
 
-            var fields = from field in enumType.GetFields()
+			IEnumerable<System . Reflection . FieldInfo> fields = from field in enumType.GetFields()
                          where field.IsLiteral
                          select field;
 
@@ -113,6 +113,4 @@ namespace WpfControlLibrary2
             return (System.Collections.IEnumerable)getValuesMethod.Invoke(null, null);
         }
     }
-
-
 }

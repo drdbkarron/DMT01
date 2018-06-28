@@ -37,7 +37,9 @@ namespace WpfControlLibrary2
 		public void OnLineStinkerComboBoxUserControlSelectedChanged ( object sender , EventArgs e )
 			{
 			if ( this. LineStinkerEnumValueChanged != null )
-				this. LineStinkerEnumValueChanged (this , e );
+				{
+				this . LineStinkerEnumValueChanged (this , e );
+				}
 			}
 
 		public LineStinkerModes Mode {
@@ -51,7 +53,6 @@ namespace WpfControlLibrary2
 				this .LineStinkerComboBox.SelectedItem = this . Mode;
 				}
 			}
-
 
 		public String LabelString
 			{
@@ -72,7 +73,6 @@ namespace WpfControlLibrary2
 			var m=Enum.GetValues(typeof(LineStinkerModes));
 			this . LineStinkerComboBox . ItemsSource  = m;
 			this . LineStinkerComboBox . SelectedItem = this . _mode;
-
 			}
 
 		private void LineStinkerComboBox_DropDownClosed ( object sender , EventArgs e )

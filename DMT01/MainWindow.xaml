@@ -979,15 +979,17 @@
                                             SliderMaxValue="1"
                                             SliderMinValue="-1"
                                             SliderValue="0" />
-                                        <WpfControlLibrary2:LineStinkerComboBoxUserControl x:Name="lineStinkerModeenumcomboBoxUserControl"
+                                        <WpfControlLibrary2:LineStinkerComboBoxUserControl
+                                            x:Name="lineStinkerModeenumcomboBoxUserControl"
                                             Grid.Row="1"
+                                            Grid.RowSpan="1"
                                             Grid.Column="1"
                                             Width="112"
                                             Height="150"
                                             Margin="0,4,0,0"
                                             HorizontalAlignment="Left"
-                                            VerticalAlignment="Top" 
-                                            Grid.RowSpan="1" />
+                                            VerticalAlignment="Top"
+                                            LabelString="Stinkyness" />
                                     </Grid>
                                 </TabItem>
                                 <TabItem

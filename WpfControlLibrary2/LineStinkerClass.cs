@@ -31,6 +31,5 @@ namespace WpfControlLibrary2
                 this.stinky = value;
             }
         }
-
      }
 }

@@ -12,13 +12,12 @@ namespace DMT01
 		//public Object Parent;
 		public SeralizeControlCommonFields ( )
 		{
-			ControlClass = string . Empty;
-			ControlName = string . Empty;
-			SaveStateFileName = string . Empty;
-			UpdatedFromXmlFiles = false;
-			UpdatedFromXmlFiles = false;
+			this . ControlClass = string . Empty;
+			this . ControlName = string . Empty;
+			this . SaveStateFileName = string . Empty;
+			this . UpdatedFromXmlFiles = false;
+			this . UpdatedFromXmlFiles = false;
 		}
 	}
-
   }
- 
+

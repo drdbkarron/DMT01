@@ -9,3 +9,4 @@
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "CC0001:You should use 'var' whenever possible." , Justification = "<Pending>" , Scope = "member" , Target = "~M:WpfControlLibrary2.EnumHelper.GetValues(System.Type)~System.Object[]" )]
 
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "CC0001:You should use 'var' whenever possible." , Justification = "<Pending>" , Scope = "member" , Target = "~M:WpfControlLibrary2.EnumHelper.GetEnumValues``1~System.Collections.Generic.List{``0}" )]
+[assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE0013:Simplify Names" , Justification = "<Pending>" , Scope = "member" , Target = "~M:WpfControlLibrary2.Enum1ComboBoxUserControl.#ctor" )]

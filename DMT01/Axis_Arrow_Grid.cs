@@ -36,21 +36,21 @@ namespace Axis_Arrow_Grid
     public static class Arrow_Class
         {
         private static Boolean ShowLocalAxis = true;
+
         public static void Arrow ( OpenGL gl )
             {
             Arrow ( gl , 1 );
             }
+
         public static void Arrow ( OpenGL gl , float zscale )
             {
-
-            float r_Arrow_shaft_cylinder = 0.09f;
-            float r_arrow_head = 0.20f;
+			const float r_Arrow_shaft_cylinder = 0.09f;
+			const float r_arrow_head = 0.20f;
             float step_radians = 30.0f * MySimpleMath . MySimpleMath . degrees_to_radians ( );
-            float cyl_height = 0.50f;
-            float cone_height = 0.5f;
+			const float cyl_height = 0.50f;
+			const float cone_height = 0.5f;
 
             gl . PushMatrix ( );
-
 
             if ( ShowLocalAxis )
                 {
@@ -64,6 +64,7 @@ namespace Axis_Arrow_Grid
             ArrowHeadCone ( gl , r_arrow_head , cone_height + 0.05f , step_radians , zscale );
             gl . PopMatrix ( );
             }
+
         static void ArrowHeadCone ( SharpGL . OpenGL gl , float r_arrow_head , float cone_height , float step , float zscale )
             {
             double stopper = Math . PI - step;
@@ -79,8 +80,8 @@ namespace Axis_Arrow_Grid
                 //Triangle . Draw ( gl , Vertex0 , Vertex1 , Vertex2 , true , false );
                 //Triangle . Draw ( gl , Vertex1 , Vertex2 , Vertex3 , false , false );
                 }
-
             }
+
         static void ArrowShaftCylinder ( SharpGL . OpenGL gl , float r_Arrow_shaft_cylinder , float cyl_height , double step , double zscale )
             {
             double stopper = Math . PI - step;
@@ -88,7 +89,7 @@ namespace Axis_Arrow_Grid
                 {
                 float x = r_Arrow_shaft_cylinder * ( float ) Math . Sin ( i );
                 float y = r_Arrow_shaft_cylinder * ( float ) Math . Cos ( i );
-                float z = 0.0f;
+				const float z = 0.0f;
 
                 float x0 = x;
                 float y0 = y;
@@ -98,7 +99,7 @@ namespace Axis_Arrow_Grid
 
                 float x1 = r_Arrow_shaft_cylinder * ( float ) Math . Sin ( i0 );
                 float y1 = r_Arrow_shaft_cylinder * ( float ) Math . Cos ( i0 );
-                float z1 = 0.0f;
+				const float z1 = 0.0f;
 
                 float x2 = x1;
                 float y2 = y1;
@@ -113,9 +114,11 @@ namespace Axis_Arrow_Grid
                 }
             }
         }
+
     public class CubeClass
         {
         public float rquad = 0;
+
         public void DrawCube ( OpenGL gl )
             {
             gl . PushMatrix ( );
@@ -131,7 +134,6 @@ namespace Axis_Arrow_Grid
             gl . Vertex ( -1.0f , 1.0f , -1.0f );			// Top Left Of The Quad (Top)
             gl . Vertex ( -1.0f , 1.0f , 1.0f );			// Bottom Left Of The Quad (Top)
             gl . Vertex ( 1.0f , 1.0f , 1.0f );			// Bottom Right Of The Quad (Top)
-
 
             gl . Color ( 1.0f , 0.5f , 0.0f );			// Set The Color To Orange
             gl . Vertex ( 1.0f , -1.0f , 1.0f );			// Top Right Of The Quad (Bottom)
@@ -165,15 +167,17 @@ namespace Axis_Arrow_Grid
             gl . End ( );						// Done Drawing The Q
             gl . PopMatrix ( );
             }
+
         public void Rotate ( )
             {
 			this . rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
-
             }
         }
+
     public class Tetrahedra_Class
         {
         public float rtri = 0;
+
         public void DrawTetrahedra ( OpenGL gl )
             {
             gl . PushMatrix ( );
@@ -214,13 +218,14 @@ namespace Axis_Arrow_Grid
             gl . Vertex ( -1.0f , -1.0f , 1.0f );			// Right Of Triangle (Left)
             gl . End ( );						// Done Drawing The Pyramid
             gl . PopMatrix ( );
-
             }
+
         public void Rotate ( )
             {
 			this . rtri += 3.0f;// 0.2f; }
             }
         }
+
     public static class Axis_Class
         {
         const String AxisLabelFont = "Times New Roman";
@@ -342,7 +347,7 @@ namespace Axis_Arrow_Grid
                 gl . PushMatrix ( );
                 gl . Translate ( 0 , 0 , AxesLength );
                 gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"+Z" );
-                gl . PopMatrix ( );            
+                gl . PopMatrix ( );
                 }
 
 			if ( DoMinusXYZAnnotation && Draw_Minus_Z_Axis_Leg )
@@ -468,15 +473,16 @@ namespace Axis_Arrow_Grid
                 gl . PopAttrib ( );
             }
         }
+
         public static class Grid_Class
         {
             public static void MyGrid ( SharpGL . OpenGL gl , int iLo , int iHi , int jLo , int jHi )
             {
-                String ColumnAnnotationFont = "Times New Roman";
-                int Ilo = 0;
-                int Ihi = 10;
-                int Jlo = 0;
-                int Jhi = 10;
+			const String ColumnAnnotationFont = "Times New Roman";
+			const int Ilo = 0;
+			const int Ihi = 10;
+			const int Jlo = 0;
+			const int Jhi = 10;
 
                 gl . PushAttrib ( SharpGL . OpenGL . GL_CURRENT_BIT | SharpGL . OpenGL . GL_ENABLE_BIT | SharpGL . OpenGL . GL_LINE_BIT );
                 gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
@@ -555,6 +561,7 @@ namespace Axis_Arrow_Grid
                 gl . PopAttrib ( );
             }
         }
+
         /// <summary>
         /// The Grid design time primitive is displays a grid in the scene.
         /// </summary>

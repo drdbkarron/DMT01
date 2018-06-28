@@ -69,10 +69,22 @@
     <Compile Include="LineStinkerComboBoxUserControl.xaml.cs">
       <DependentUpon>LineStinkerComboBoxUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PointSizeComboBoxUserControl.cs">
+      <DependentUpon>PointSizeComboBoxUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SeralizeControlCommonFields.cs" />
     <Page Include="LineStinkerComboBoxUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PointSizeComboBoxUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PointsSizeComboBoxUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <DependentUpon>Enum1ComboBoxUserControl.xaml</DependentUpon>
     </Page>
   </ItemGroup>
   <ItemGroup>
