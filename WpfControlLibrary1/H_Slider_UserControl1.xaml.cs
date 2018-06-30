@@ -278,5 +278,5 @@ namespace WpfControlLibrary1
 				this . theH_Slider . Minimum = this . theH_Slider . Maximum - 5.0;
                 }
             }
-        }
+    }
 }

@@ -6,50 +6,52 @@
     xmlns:local="clr-namespace:WpfControlLibrary1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="PointSizeComboBoxUserControl"
-    Width="183"
-    Height="296.12"
+    Width="188"
+    Height="309"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
-    mc:Ignorable="d">
-    <Grid Width="176" Margin="1">
-        <Grid.Background>
-            <RadialGradientBrush>
-                <GradientStop Color="#FF1078A8" Offset="0"/>
-                <GradientStop Color="White" Offset="1"/>
-            </RadialGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="6*"/>
-        </Grid.RowDefinitions>
+    mc:Ignorable="d" Background="#FF00FFC5" Margin="0">
+	<Grid Width="176" Margin="2,6,1,1" Height="298" MinWidth="100" MinHeight="162" HorizontalAlignment="Center" VerticalAlignment="Top">
+		<Grid.Background>
+			<RadialGradientBrush>
+				<GradientStop Color="#FF1078A8" Offset="0"/>
+				<GradientStop Color="White" Offset="1"/>
+			</RadialGradientBrush>
+		</Grid.Background>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="33*"/>
+			<RowDefinition Height="265*"/>
+		</Grid.RowDefinitions>
 		<Label x:Name="PointSizeLabel" Content="Integer Valued Combo Box" HorizontalAlignment="Left" 
 			   Margin="10,0,0,0" VerticalAlignment="Top" Height="26" Width="156">
 			<Label.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FFDC7777" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </RadialGradientBrush>
-            </Label.Background>
-        </Label>
+				<RadialGradientBrush>
+					<GradientStop Color="#FFDC7777" Offset="0"/>
+					<GradientStop Color="White" Offset="1"/>
+				</RadialGradientBrush>
+			</Label.Background>
+		</Label>
 
-        <ComboBox
+		<ComboBox
             x:Name="PointSizeComboBox"
-            Width="147"
-            Margin="2,2,0,0"
-            HorizontalAlignment="Left"
+            Width="146"
+            Margin="16,3,14,0"
             VerticalAlignment="Top"
-            SelectionChanged="PointSizeComboBox_SelectionChanged" Grid.Row="1" Height="22">
-            <ComboBoxItem Content="1" />
-            <ComboBoxItem Content="2" IsSelected="True" />
-            <ComboBoxItem Content="3" />
-            <ComboBoxItem Content="4" />
-            <ComboBoxItem Content="5" />
-            <ComboBoxItem Content="6" />
-            <ComboBoxItem Content="7" />
-            <ComboBoxItem Content="8" />
-            <ComboBoxItem Content="9" />
-            <ComboBoxItem Content="10" />
-        </ComboBox>
+            SelectionChanged="PointSizeComboBox_SelectionChanged" 
+			Grid.Row="1" 
+			Height="22" 
+			MaxDropDownHeight="365">
+			<ComboBoxItem Content="1" />
+			<ComboBoxItem Content="2" IsSelected="True" />
+			<ComboBoxItem Content="3" />
+			<ComboBoxItem Content="4" />
+			<ComboBoxItem Content="5" />
+			<ComboBoxItem Content="6" />
+			<ComboBoxItem Content="7" />
+			<ComboBoxItem Content="8" />
+			<ComboBoxItem Content="9" />
+			<ComboBoxItem Content="10" />
+		</ComboBox>
 
-    </Grid>
+	</Grid>
 </UserControl>

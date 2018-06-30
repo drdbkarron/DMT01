@@ -17,7 +17,7 @@ namespace WpfControlLibrary1
 {
 	public partial class PointSizeComboBoxUserControlClass : UserControl
 	{
-		private int _selection;
+		public int _selection;
 
 		public PointSizeComboBoxUserControlClass()
 		{
@@ -36,12 +36,28 @@ namespace WpfControlLibrary1
 			}
 		}
 
-		private void PointSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		public void PointSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			object WhatsThis =this.PointSizeComboBox.SelectedItem;
+			ComboBox CB = sender as ComboBox;
+
+			var EE = e . OriginalSource;
+			var EEE = e . RemovedItems;
+			var EEEE = e . Source;
+
+			if ( CB == null )
+				return;
+			object WhatsThis =CB.SelectedItem;
+			if ( WhatsThis == null )
+				return;
 			ComboBoxItem ThisIsWhatItIs = WhatsThis as ComboBoxItem;
+			if ( ThisIsWhatItIs == null )
+				return;
 			object Content = ThisIsWhatItIs . Content;
+			if ( Content == null )
+				return;
 			String ContentAsString = Content as String;
+			if ( ContentAsString == null )
+				return;
 			Boolean werked = int . TryParse ( ContentAsString , out int Numbah );
 			if ( !werked )
 				return;
