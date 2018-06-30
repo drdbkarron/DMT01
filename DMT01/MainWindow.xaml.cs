@@ -39,7 +39,7 @@ using unvell . ReoGrid . Rendering;
 using unvell . ReoGrid . Graphics;
 using WpfScreenHelper;
 using LocalMaths;
-using WpfControlLibrary2;
+using WpfControlLibrary1;
 
 namespace System . Windows . Controls
 	{
@@ -900,7 +900,7 @@ namespace DMT01
 				}
 			}
 
-		private float [ ] [ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction , WpfControlLibrary2 . LineStinkerModes mode )
+		private float [ ] [ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction , WpfControlLibrary1 . LineStinkerModes mode )
 			{
 			if ( fraction < 0 )
 				{
@@ -930,17 +930,17 @@ namespace DMT01
 
 			switch ( mode )
 				{
-				case WpfControlLibrary2 . LineStinkerModes . StartAtNearVertex:
+				case WpfControlLibrary1 . LineStinkerModes . StartAtNearVertex:
 					stinky0 = cf0;
 					stinky1 = Add ( v_forward , cf0 );
 					break;
 
-				case WpfControlLibrary2 . LineStinkerModes . StartAtFarVertex:
+				case WpfControlLibrary1 . LineStinkerModes . StartAtFarVertex:
 					stinky0 = cf1;
 					stinky1 = Add ( v_reverse , cf1 );
 					break;
 
-				case WpfControlLibrary2 . LineStinkerModes . FloatBetweenVerticies:
+				case WpfControlLibrary1 . LineStinkerModes . FloatBetweenVerticies:
 					float[] midpoint=new float[3];
 					midpoint = GetCentroid ( cf0 , cf1 );
 					stinky1 = Add ( v_forward , midpoint );
@@ -1835,7 +1835,7 @@ namespace DMT01
 		public class RadioCheckBoxSaveState
 			{
 			[XmlElement ( "SeralizeControlCommonFields" )]
-			public SeralizeControlCommonFields CommonFields;
+			public WpfControlLibrary1.SeralizeControlCommonFields CommonFields;
 
 			public Boolean RadioCheckBoxState;
 			public String RadioCheckBoxName;

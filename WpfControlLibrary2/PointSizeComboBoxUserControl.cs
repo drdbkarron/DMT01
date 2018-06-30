@@ -13,7 +13,7 @@ using System . Windows . Media . Imaging;
 using System . Windows . Navigation;
 using System . Windows . Shapes;
 
-namespace WpfControlLibrary2
+namespace WpfControlLibrary1
 	{
 	/// <summary>
 	/// Interaction logic for UserControl1.xaml

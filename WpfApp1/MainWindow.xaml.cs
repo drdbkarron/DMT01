@@ -20,7 +20,7 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        public static WpfControlLibrary2.LineStinkerModes SampleEnumDataContext = WpfControlLibrary2.LineStinkerModes.FloatBetweenVerticies;
+        public static WpfControlLibrary1.LineStinkerModes SampleEnumDataContext = WpfControlLibrary1.LineStinkerModes.FloatBetweenVerticies;
         public MainWindow()
         {
             System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
@@ -53,7 +53,7 @@ namespace WpfApp1
 
         private void myTextComboBoxValues_Initialized(object sender, EventArgs e)
         {
-            Type T = typeof(WpfControlLibrary2.LineStinkerModes);
+            Type T = typeof(WpfControlLibrary1.LineStinkerModes);
             var tt=Enum.GetUnderlyingType( T );
             this.myTextComboBoxValues.Text = "Select One";
            
@@ -76,8 +76,8 @@ namespace WpfApp1
 				return;
 			}
 
-			Type T = typeof(WpfControlLibrary2.LineStinkerModes);
-            WpfControlLibrary2.LineStinkerModes E = (WpfControlLibrary2.LineStinkerModes)b;
+			Type T = typeof(WpfControlLibrary1.LineStinkerModes);
+            WpfControlLibrary1.LineStinkerModes E = (WpfControlLibrary1.LineStinkerModes)b;
             var c = myTextComboBoxValues.SelectedValuePath;
 
             System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} \t{2} ", E, (int)E, (((System.Environment.StackTrace).Split('\n'))[2].Trim())));

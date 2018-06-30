@@ -104,9 +104,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WpfControlLibrary2\WpfControlLibrary2.csproj">
-      <Project>{65E7BBFE-D099-42B5-9577-C47D3772D607}</Project>
-      <Name>WpfControlLibrary2</Name>
+    <ProjectReference Include="..\WpfControlLibrary1\WpfControlLibrary1.csproj">
+      <Project>{e2938cbb-a03e-4241-890f-019e7ee74ad3}</Project>
+      <Name>WpfControlLibrary1</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

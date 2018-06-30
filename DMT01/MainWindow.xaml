@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ReoGrid="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
     xmlns:WPF="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
-    xmlns:WpfControlLibrary2="clr-namespace:WpfControlLibrary2;assembly=WpfControlLibrary2"
+    xmlns:WpfControlLibrary1="clr-namespace:WpfControlLibrary1;assembly=WpfControlLibrary1"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:DMT01;assembly=WpfControlLibrary2"
+    xmlns:local="clr-namespace:WpfControlLibrary1;assembly=WpfControlLibrary1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     x:Name="DMT_Main_Window_Control"
@@ -766,7 +766,7 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"
                                                 Orientation="Vertical">
-                                                <local:H_Slider_UserControl1
+                                                <WpfControlLibrary1:H_Slider_UserControl1
                                                     x:Name="Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control"
                                                     Width="842"
                                                     Height="74"
@@ -979,7 +979,7 @@
                                             SliderMaxValue="1"
                                             SliderMinValue="-1"
                                             SliderValue="0" />
-                                        <WpfControlLibrary2:LineStinkerComboBoxUserControl
+                                        <WpfControlLibrary1:LineStinkerComboBoxUserControl
                                             x:Name="lineStinkerModeenumcomboBoxUserControl"
                                             Grid.Row="1"
                                             Grid.RowSpan="1"
