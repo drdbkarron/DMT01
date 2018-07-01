@@ -40,10 +40,6 @@ namespace WpfControlLibrary1
 		{
 			ComboBox CB = sender as ComboBox;
 
-			var EE = e . OriginalSource;
-			var EEE = e . RemovedItems;
-			var EEEE = e . Source;
-
 			if ( CB == null )
 				return;
 			object WhatsThis =CB.SelectedItem;
