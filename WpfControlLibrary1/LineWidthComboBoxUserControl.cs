@@ -18,14 +18,13 @@ namespace WpfControlLibrary1
 	/// <summary>
 	/// Interaction logic for UserControl1.xaml
 	/// </summary>
-	public partial class LineWidthComboBoxUserControl : UserControl
+	public partial class LineWidthComboBoxUserControlClass : UserControl
 	{
 		public int linewidth;
 		public String labelString;
 
-		internal LineWidthComboBoxUserControl ( )
+		public LineWidthComboBoxUserControlClass ( )
 		{
-
 			InitializeComponent ( );
 		}
 
@@ -52,7 +51,6 @@ namespace WpfControlLibrary1
 			set
 			{
 				this .linewidth = value;
-
 			}
 		}
 
@@ -83,11 +81,14 @@ namespace WpfControlLibrary1
 			}
 
 			Boolean babuska=int.TryParse(S, out int Numbah);
-			if ( babuska == false ) return;
+			if ( babuska == false )
+			{
+				return;
+			}
 
-			Linewidth = Numbah;
+			this .Linewidth = Numbah;
 
-			System .Diagnostics .Debug .WriteLine ( String .Format ( "{0} {1} " , Linewidth , ( ( ( System .Environment .StackTrace ) .Split ( '\n' ) ) [ 2 ] .Trim ( ) ) ) );
+			System .Diagnostics .Debug .WriteLine ( String .Format ( "{0} {1} " , this .Linewidth ,  ( ( System .Environment .StackTrace ) .Split ( '\n' ) ) [ 2 ] .Trim ( )  ) );
 		}
 	}
 }

@@ -59,7 +59,7 @@ namespace Axis_Arrow_Grid
 
             ArrowShaftCylinder ( gl , r_Arrow_shaft_cylinder , cyl_height + .05f , step_radians , zscale );
 
-            gl . Translate ( 0 , 0 , ( cone_height - .05f * 2f ) * zscale );
+            gl . Translate ( 0 , 0 , ( cone_height - ( .05f * 2f ) ) * zscale );
 
             ArrowHeadCone ( gl , r_arrow_head , cone_height + 0.05f , step_radians , zscale );
             gl . PopMatrix ( );
@@ -117,7 +117,7 @@ namespace Axis_Arrow_Grid
 
     public class CubeClass
         {
-        public float rquad = 0;
+        public float rquad ;
 
         public void DrawCube ( OpenGL gl )
             {
@@ -176,7 +176,7 @@ namespace Axis_Arrow_Grid
 
     public class Tetrahedra_Class
         {
-        public float rtri = 0;
+        public float rtri ;
 
         public void DrawTetrahedra ( OpenGL gl )
             {
@@ -258,7 +258,7 @@ namespace Axis_Arrow_Grid
                 gl . PointSize ( Pointsize );
                 gl . Vertex ( Origin );
                 gl . PushMatrix ( );
-                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"0" );
+                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , "0" );
                 gl . PopMatrix ( );
                 }
 
@@ -281,7 +281,7 @@ namespace Axis_Arrow_Grid
                 {
                 gl . PushMatrix ( );
                 gl . Translate ( AxesLength , 0 , 0 );
-                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"+X" );
+                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , "+X" );
                 gl . PopMatrix ( );
                 }
 
@@ -289,7 +289,7 @@ namespace Axis_Arrow_Grid
                 {
                 gl . PushMatrix ( );
                 gl . Translate ( -AxesLength , 0 , 0 );
-                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , @"-X" );
+                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.2f , "-X" );
                 gl . PopMatrix ( );
                 }
 
@@ -312,7 +312,7 @@ namespace Axis_Arrow_Grid
                 {
                 gl . PushMatrix ( );
                 gl . Translate ( 0 , AxesLength , 0 );
-                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"+Y" );
+                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , "+Y" );
                 gl . PopMatrix ( );
                  }
 
@@ -320,7 +320,7 @@ namespace Axis_Arrow_Grid
 				{
 				gl . PushMatrix ( );
 				gl . Translate ( 0 , -AxesLength , 0 );
-				gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , @"-Y" );
+				gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.1f , "-Y" );
 				gl . PopMatrix ( );
 				}
 
@@ -346,7 +346,7 @@ namespace Axis_Arrow_Grid
 				{
                 gl . PushMatrix ( );
                 gl . Translate ( 0 , 0 , AxesLength );
-                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"+Z" );
+                gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , "+Z" );
                 gl . PopMatrix ( );
                 }
 
@@ -354,7 +354,7 @@ namespace Axis_Arrow_Grid
 				{
 				gl . PushMatrix ( );
 				gl . Translate ( 0 , 0 , -AxesLength );
-				gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , @"-Z" );
+				gl . DrawText3D ( AxisLabelFont , 10.0f , 0.0f , 0.05f , "-Z" );
 				gl . PopMatrix ( );
 				}
 
@@ -441,7 +441,7 @@ namespace Axis_Arrow_Grid
             gl . PopAttrib ( );
             gl . PopMatrix ( );
             }
-        
+
             public static void LocalAxis ( OpenGL gl )
             {
                 double[] Reddish = { 0.9, 0.3, 0.4 };
@@ -649,10 +649,7 @@ namespace Axis_Arrow_Grid
 
         public class Cube : Polygon
         {
-            /// <summary>
-            /// Initializes a new instance of the <see cref="PolyCubegon"/> class.
-            /// </summary>
-            public Cube ( )
+             public Cube ( )
             {
 			//  Set the name.
 			this . Name = "Cube";

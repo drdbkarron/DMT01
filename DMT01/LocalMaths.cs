@@ -147,94 +147,94 @@ namespace LocalMaths
             //                         );
             }
 
-        public  GlmSharp . mat4 LookAt (OpenGL gl, Boolean LookAt_X_Up_RadioButton_Control=false, Boolean LookAt_Y_Up_RadioButton_Control=false,
-            Boolean LookAt_Z_Up_RadioButton_Control=true,
-            float LookAt_Eye_X_H_Slider_UserControl=0.0f ,
-            float LookAt_Eye_Y_H_Slider_UserControl = 0.0f ,
-            float LookAt_Eye_Z_H_Slider_UserControl = 0.0f , float LookAt_Target_X_H_Slider_UserControl = 0.0f ,
-            float LookAt_Target_Y_H_Slider_UserControl = 0.0f ,
-            float LookAt_Target_Z_H_Slider_UserControl = 0.0f )
-            {
-            float x_up = 0.0f;
-            float y_up = 1.0f;
-            float z_up = 0.0f;
+        //public  GlmSharp . mat4 LookAt (OpenGL gl, Boolean LookAt_X_Up_RadioButton_Control=false, Boolean LookAt_Y_Up_RadioButton_Control=false,
+        //    Boolean LookAt_Z_Up_RadioButton_Control=true,
+        //    float LookAt_Eye_X_H_Slider_UserControl=0.0f ,
+        //    float LookAt_Eye_Y_H_Slider_UserControl = 0.0f ,
+        //    float LookAt_Eye_Z_H_Slider_UserControl = 0.0f , float LookAt_Target_X_H_Slider_UserControl = 0.0f ,
+        //    float LookAt_Target_Y_H_Slider_UserControl = 0.0f ,
+        //    float LookAt_Target_Z_H_Slider_UserControl = 0.0f )
+        //    {
+        //    float x_up = 0.0f;
+        //    float y_up = 1.0f;
+        //    float z_up = 0.0f;
 
-            if ( LookAt_X_Up_RadioButton_Control )
-                {
-                x_up = 1.0f;
-                }
-            else
-                {
-                x_up = 0.0f;
-                }
-            if ( LookAt_Y_Up_RadioButton_Control)
-                {
-                y_up = 1.0f;
-                }
-            else
-                {
-                y_up = 0.0f;
-                }
-            if ( LookAt_Z_Up_RadioButton_Control)
-                {
-                z_up = 1.0f;
-                }
-            else
-                {
-                z_up = 0.0f;
-                }
+        //    if ( LookAt_X_Up_RadioButton_Control )
+        //        {
+        //        x_up = 1.0f;
+        //        }
+        //    else
+        //        {
+        //        x_up = 0.0f;
+        //        }
+        //    if ( LookAt_Y_Up_RadioButton_Control)
+        //        {
+        //        y_up = 1.0f;
+        //        }
+        //    else
+        //        {
+        //        y_up = 0.0f;
+        //        }
+        //    if ( LookAt_Z_Up_RadioButton_Control)
+        //        {
+        //        z_up = 1.0f;
+        //        }
+        //    else
+        //        {
+        //        z_up = 0.0f;
+        //        }
 
-            GlmSharp . vec3 eye = new GlmSharp . vec3 (
-                LookAt_Eye_X_H_Slider_UserControl ,
-                LookAt_Eye_X_H_Slider_UserControl,
-                LookAt_Eye_Z_H_Slider_UserControl  );
+        //    GlmSharp . vec3 eye = new GlmSharp . vec3 (
+        //        LookAt_Eye_X_H_Slider_UserControl ,
+        //        LookAt_Eye_X_H_Slider_UserControl,
+        //        LookAt_Eye_Z_H_Slider_UserControl  );
 
-            GlmSharp . vec3 target = new GlmSharp . vec3 (
-                LookAt_Target_X_H_Slider_UserControl ,
-                LookAt_Target_Y_H_Slider_UserControl ,
-                LookAt_Target_Z_H_Slider_UserControl );
+        //    GlmSharp . vec3 target = new GlmSharp . vec3 (
+        //        LookAt_Target_X_H_Slider_UserControl ,
+        //        LookAt_Target_Y_H_Slider_UserControl ,
+        //        LookAt_Target_Z_H_Slider_UserControl );
 
-            GlmSharp . vec3 up = new GlmSharp . vec3 (
-                x_up , y_up , z_up );
+        //    GlmSharp . vec3 up = new GlmSharp . vec3 (
+        //        x_up , y_up , z_up );
 
-            GlmSharp . mat4 M = GlmSharp . mat4 . LookAt ( eye , target , up );
+        //    GlmSharp . mat4 M = GlmSharp . mat4 . LookAt ( eye , target , up );
 
-            //gl.LookAt(
-            //    LookAt_Eye_X_H_Slider_UserControl.SliderValue, 
-            //    LookAt_Eye_Y_H_Slider_UserControl.SliderValue, 
-            //    LookAt_Eye_Z_H_Slider_UserControl.SliderValue,
-            //    LookAtTarget_X_H_Slider_UserControl.SliderValue, 
-            //    LookAtTarget_Y_H_Slider_UserControl.SliderValue, 
-            //    LookAtTarget_Z_H_Slider_UserControl.SliderValue,
-            //    x_up, y_up, z_up);
+        //    //gl.LookAt(
+        //    //    LookAt_Eye_X_H_Slider_UserControl.SliderValue, 
+        //    //    LookAt_Eye_Y_H_Slider_UserControl.SliderValue, 
+        //    //    LookAt_Eye_Z_H_Slider_UserControl.SliderValue,
+        //    //    LookAtTarget_X_H_Slider_UserControl.SliderValue, 
+        //    //    LookAtTarget_Y_H_Slider_UserControl.SliderValue, 
+        //    //    LookAtTarget_Z_H_Slider_UserControl.SliderValue,
+        //    //    x_up, y_up, z_up);
 
-            return M;
-            }
+        //    return M;
+        //    }
 
-        public mat4 Perspective (OpenGL gl,
-                float Perspective_FOVY_H_Slider_UserControl ,
-                float Perspective_ASPECT_H_Slider_UserControl ,
-                float Perspective_Z_NEAR_H_Slider_UserControl ,
-                float Perspective_Z_FAR_H_Slider_UserControl)
-            {
-            //(double fovy, double aspect, double zNear, double zFar)
+        //public mat4 Perspective (OpenGL gl,
+        //        float Perspective_FOVY_H_Slider_UserControl ,
+        //        float Perspective_ASPECT_H_Slider_UserControl ,
+        //        float Perspective_Z_NEAR_H_Slider_UserControl ,
+        //        float Perspective_Z_FAR_H_Slider_UserControl)
+        //    {
+        //    //(double fovy, double aspect, double zNear, double zFar)
 
-           mat4 M = GlmSharp . mat4 . Perspective ( Perspective_FOVY_H_Slider_UserControl ,
-                Perspective_ASPECT_H_Slider_UserControl ,
-                Perspective_Z_NEAR_H_Slider_UserControl ,
-                Perspective_Z_FAR_H_Slider_UserControl );
+        //   mat4 M = GlmSharp . mat4 . Perspective ( Perspective_FOVY_H_Slider_UserControl ,
+        //        Perspective_ASPECT_H_Slider_UserControl ,
+        //        Perspective_Z_NEAR_H_Slider_UserControl ,
+        //        Perspective_Z_FAR_H_Slider_UserControl );
 
-            //Perspective ( Perspective_FOVY_H_Slider_UserControl ,
-            //    Perspective_ASPECT_H_Slider_UserControl ,
-            //    Perspective_Z_NEAR_H_Slider_UserControl ,
-            //    Perspective_Z_FAR_H_Slider_UserControl );
+        //    //Perspective ( Perspective_FOVY_H_Slider_UserControl ,
+        //    //    Perspective_ASPECT_H_Slider_UserControl ,
+        //    //    Perspective_Z_NEAR_H_Slider_UserControl ,
+        //    //    Perspective_Z_FAR_H_Slider_UserControl );
 
-            //gl . Perspective ( Perspective_FOVY_H_Slider_UserControl ,
-            //     Perspective_ASPECT_H_Slider_UserControl ,
-            //     Perspective_Z_NEAR_H_Slider_UserControl ,
-            //     Perspective_Z_FAR_H_Slider_UserControl );
+        //    //gl . Perspective ( Perspective_FOVY_H_Slider_UserControl ,
+        //    //     Perspective_ASPECT_H_Slider_UserControl ,
+        //    //     Perspective_Z_NEAR_H_Slider_UserControl ,
+        //    //     Perspective_Z_FAR_H_Slider_UserControl );
 
-            return M;
-            }
+        //    return M;
+        //    }
         }
     }

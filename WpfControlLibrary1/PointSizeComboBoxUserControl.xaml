@@ -1,46 +1,59 @@
 ﻿<UserControl
-    x:Class="WpfControlLibrary1.PointSizeComboBoxUserControlClass"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WpfControlLibrary1"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="PointSizeComboBoxUserControl"
-    Width="188"
-    Height="309"
-    HorizontalAlignment="Left"
-    VerticalAlignment="Top"
-    mc:Ignorable="d" Background="#FF00FFC5" Margin="0">
-	<Grid Width="176" Margin="2,6,1,1" Height="298" MinWidth="100" MinHeight="162" HorizontalAlignment="Center" VerticalAlignment="Top">
+	x:Class="WpfControlLibrary1.PointSizeComboBoxUserControlClass"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	x:Name="PointSizeComboBoxUserControl"
+	Width="188"
+	Height="309"
+	Margin="0"
+	HorizontalAlignment="Left"
+	VerticalAlignment="Top"
+	Background="#FF00FFC5"
+	mc:Ignorable="d">
+	<Grid
+		Width="176"
+		Height="298"
+		MinWidth="100"
+		MinHeight="162"
+		Margin="2,6,1,1"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Top">
 		<Grid.Background>
 			<RadialGradientBrush>
-				<GradientStop Color="#FF1078A8" Offset="0"/>
-				<GradientStop Color="White" Offset="1"/>
+				<GradientStop Offset="0" Color="#FF1078A8" />
+				<GradientStop Offset="1" Color="White" />
 			</RadialGradientBrush>
 		</Grid.Background>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="33*"/>
-			<RowDefinition Height="265*"/>
+			<RowDefinition Height="51*" />
+			<RowDefinition Height="247*" />
 		</Grid.RowDefinitions>
-		<Label x:Name="PointSizeLabel" Content="Integer Valued Combo Box" HorizontalAlignment="Left" 
-			   Margin="10,0,0,0" VerticalAlignment="Top" Height="26" Width="156">
+		<Label
+			x:Name="PointSizeLabel"
+			Width="156"
+			Height="41"
+			Margin="10,0,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Content="Pointsize Combo Box">
 			<Label.Background>
 				<RadialGradientBrush>
-					<GradientStop Color="#FFDC7777" Offset="0"/>
-					<GradientStop Color="White" Offset="1"/>
+					<GradientStop Offset="0" Color="#FFDC7777" />
+					<GradientStop Offset="1" Color="White" />
 				</RadialGradientBrush>
 			</Label.Background>
 		</Label>
 
 		<ComboBox
-            x:Name="PointSizeComboBox"
-            Width="146"
-            Margin="16,3,14,0"
-            VerticalAlignment="Top"
-            SelectionChanged="PointSizeComboBox_SelectionChanged" 
-			Grid.Row="1" 
-			Height="22" 
-			MaxDropDownHeight="365">
+			x:Name="PointSizeComboBox"
+			Grid.Row="1"
+			Height="22"
+			Margin="10,24,20,0"
+			VerticalAlignment="Top"
+			MaxDropDownHeight="365"
+			SelectionChanged="PointSizeComboBox_SelectionChanged">
 			<ComboBoxItem Content="1" />
 			<ComboBoxItem Content="2" IsSelected="True" />
 			<ComboBoxItem Content="3" />

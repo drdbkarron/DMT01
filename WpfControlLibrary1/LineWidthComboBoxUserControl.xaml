@@ -1,20 +1,20 @@
-﻿<UserControl
-	x:Class="WpfControlLibrary1.LineWidthComboBoxUserControl"
+﻿<UserControl x:Name="LineWidthComboBoxUserControl"
+	x:Class="WpfControlLibrary1.LineWidthComboBoxUserControlClass"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	d:DesignHeight="437.298"
 	d:DesignWidth="203.931"
-	mc:Ignorable="d"
+	mc:Ignorable="d" Background="#FFE81C1C"
 	>
-	<Grid>
+	<Grid Margin="4">
 		<Grid.RowDefinitions>
 			<RowDefinition
 				x:Name="jh8"
-				Height="56*"
+				Height="80*"
 				/>
-			<RowDefinition Height="381*" />
+			<RowDefinition Height="349*" />
 		</Grid.RowDefinitions>
 		<Grid.Background>
 			<LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
@@ -23,9 +23,9 @@
 			</LinearGradientBrush>
 		</Grid.Background>
 		<Label x:Name="LinewithLabel"
-			Width="135"
-			Height="26"
-			Margin="19,10,0,0"
+			Width="176"
+			Height="60"
+			Margin="10,10,0,0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
 			Content="Line width int"
@@ -41,7 +41,7 @@
 			Grid.Row="1"
 			Width="135"
 			Height="22"
-			Margin="10,10,0,0"
+			Margin="10,22,0,0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top" SelectionChanged="LinewidthComboBox_SelectionChanged"
 			>

@@ -267,9 +267,11 @@ namespace DMT01
 
 		public IsoEdge ( short v1 , short v2 , float IsoValue , Vertex V0 , Vertex V1 )
 			{
-			this . E = new Edge ( );
-			this . E . EdgeIndex = v1;
-			this . E . SubEdgeIndex = v2;
+			this .E = new Edge
+			{
+				EdgeIndex = v1 ,
+				SubEdgeIndex = v2
+			};
 			this . IsoEdgeIsoValue = IsoValue;
 			this . E . V [ 0 ] = V0;
 			this . E . V [ 1 ] = V1;
@@ -289,7 +291,7 @@ namespace DMT01
 		public short LargestVertex, SmallestVertex;
 		public Edge [ ] E = new Edge [ 4 ];
 		public IsoEdge [ ] IsoEdge = new IsoEdge [ 4 ];
-		public short IsoEdges = 0;
+		public short IsoEdges ;
 		public Boolean IsCritical;
 		public float delta_v;
 		public float max_V;
@@ -365,30 +367,30 @@ namespace DMT01
 			//            this. LoadTriangles ( );
 			}
 
-		private void DoCriticalIsoEdges ( )
-			{
+		//private void DoCriticalIsoEdges ( )
+		//	{
 
-			}
+		//	}
 
-		private bool IsBetween ( Edge e1 , Edge e2 )
-			{
-			throw new NotImplementedException ( );
-			}
+		//private bool IsBetween ( Edge e1 , Edge e2 )
+		//	{
+		//	throw new NotImplementedException ( );
+		//	}
 
-		private void InsertVertexOnEdge ( float v , Edge e )
-			{
-			if ( !IsInBetween ( v , e ) )
-				{
-				System . Diagnostics . Debug . WriteLine ( String . Format ( "xx{0} E{1} {2} {3} " ,
-					this . DisplayMe ( ) , e . EdgeIndex , Comparis ( v , e ) , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
+		//private void InsertVertexOnEdge ( float v , Edge e )
+		//	{
+		//	if ( !IsInBetween ( v , e ) )
+		//		{
+		//		System . Diagnostics . Debug . WriteLine ( String . Format ( "xx{0} E{1} {2} {3} " ,
+		//			this . DisplayMe ( ) , e . EdgeIndex , Comparis ( v , e ) , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 
-				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " ,  Centroid.V.ToString("0.000") , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-				return;
-				}
+		//		//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " ,  Centroid.V.ToString("0.000") , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+		//		return;
+		//		}
 
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "++{0} E{1} {2} {3} " ,
-				this . DisplayMe ( ) , e . EdgeIndex , Comparis ( v , e ) , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
-			}
+		//	System . Diagnostics . Debug . WriteLine ( String . Format ( "++{0} E{1} {2} {3} " ,
+		//		this . DisplayMe ( ) , e . EdgeIndex , Comparis ( v , e ) , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
+		//	}
 
 		private String DisplayMe ( )
 			{
@@ -767,8 +769,10 @@ namespace DMT01
 			float Z = ( this . V [ 0 ] . cf [ 2 ] + this . V [ 1 ] . cf [ 2 ] + this . V [ 2 ] . cf [ 2 ] + this . V [ 3 ] . cf [ 2 ] ) / 4f;
 			float V = ( this . V [ 0 ] . V + this . V [ 1 ] . V + this . V [ 2 ] . V + this . V [ 3 ] . V ) / 4f;
 
-			Vertex C = new Vertex ( X , Y , Z , V );
-			C . VertexIndex = 4;
+			Vertex C = new Vertex ( X , Y , Z , V )
+			{
+				VertexIndex = 4
+			};
 
 			return C;
 			}
@@ -861,7 +865,11 @@ namespace DMT01
 
 				Stinkers [ 0 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 0 ] . cf ,
 					fraction: this . MW . Hack_H_Slider_02_UserControl . SliderValue , mode: Stankey );
-				if ( Stinkers == null ) return;
+				if ( Stinkers == null )
+				{
+					return;
+				}
+
 				if ( this . MW . HackCheckBox_C2_R2_CheckBox_Control . IsChecked . Value )
 					{
 					float[] mp=GetCentroid(Stinkers[0]);
@@ -948,7 +956,6 @@ namespace DMT01
 					break;
 				default:
 					return null;
-					break;
 				}
 
 			stinkey_vertices [ 0 ] = new float [ 3 ] { stinky0 [ 0 ] , stinky0 [ 1 ] , stinky0 [ 2 ] };
@@ -1171,7 +1178,7 @@ namespace DMT01
 					{
 					double spinner2 =this.MW . Hack_H_Slider_04_UserControl . SliderValue * 2f * Math . PI;
 					float spinner2f=(float)spinner2;
-					var rotaxis = new GlmNet . vec3 ( 0 , 0 , 1 );
+					GlmNet .vec3 rotaxis = new GlmNet . vec3 ( 0 , 0 , 1 );
 					GlmNet . mat4 rotation = GlmNet . glm . rotate ( GlmNet . mat4 . identity ( ) ,spinner2f , rotaxis);
 					GlmNet . mat4 translation = GlmNet . glm . translate ( GlmNet . mat4 . identity ( ) , new GlmNet . vec3 ( 0 , 0 , 0 ) );
 					GlmNet . mat4 modelviewMatrix = rotation * translation;
@@ -1792,8 +1799,8 @@ namespace DMT01
 		{
 		#region Persistance_classes2
 
-		static long Draws = 0;
-		static long Resizes = 0;
+		static long Draws ;
+		static long Resizes ;
 		static DateTime StartDateTime;
 		static TimeSpan ElapsedDateTime;
 		static int CurrentWorksheetIndex;
@@ -1989,7 +1996,7 @@ namespace DMT01
 					{
 					for ( int j = bloppie ; j < viewport_height - bloppie ; j += bloppie )
 						{
-						var t = String . Format ( "{0},{1}" , i , j );
+						string t = String . Format ( "{0},{1}" , i , j );
 						int jy = ( int ) viewport_height - j;
 						gl . DrawText ( i , jy , 1 , 1 , 1 , "Arial" , fSize , t );
 						}
@@ -2184,8 +2191,10 @@ namespace DMT01
 					{
 					if ( IsInBetween ( 47 , j , 50 ) )
 						{
-						Boxel B = new Boxel ( i , j , Sheety . cells );
-						B . MW = ( DMT01 . MainWindow ) mw;
+						Boxel B = new Boxel ( i , j , Sheety .cells )
+						{
+							MW = ( DMT01 .MainWindow ) mw
+						};
 						if ( B . IsCritical )
 							{
 							B . DrawMe ( );
@@ -2265,7 +2274,7 @@ namespace DMT01
 			const int MaxDisplayRows = 30;
 			const int normal_col_width = 70;
 			const int normal_row_height = 20;
-			var CW = this.myReoGridControl . CurrentWorksheet;
+			Worksheet CW = this.myReoGridControl . CurrentWorksheet;
 
 			if ( this . DoDrawSpreadsheetSideBorder_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
 				{
@@ -2343,7 +2352,7 @@ namespace DMT01
 
 			if ( this . DoDrawSpreadsheetFocusCell_s_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
 				{
-				var FP = this.myReoGridControl . CurrentWorksheet . FocusPos;
+				CellPosition FP = this.myReoGridControl . CurrentWorksheet . FocusPos;
 				gl . PushMatrix ( );
 				gl . LineWidth ( 3 );
 				gl . Color ( .9 , .1 , .1 );
@@ -2359,7 +2368,7 @@ namespace DMT01
 
 			if ( this . DoDrawSpreadsheetSelectedCell_s_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
 				{
-				var SR = this.myReoGridControl . CurrentWorksheet . SelectionRange;
+				RangePosition SR = this.myReoGridControl . CurrentWorksheet . SelectionRange;
 				for ( int i = SR . StartPos . Row ; i <= SR . EndPos . Row ; i++ )
 					{
 					for ( int j = SR . StartPos . Col ; j <= SR . EndPos . Col ; j++ )
@@ -2462,7 +2471,7 @@ namespace DMT01
 						y0 = y1;
 						y1 -= height_factor;
 
-						var D = CW . Cells [ j , i ];
+						Cell D = CW . Cells [ j , i ];
 						if ( D . DataFormat == unvell . ReoGrid . DataFormat . CellDataFormatFlag . Text )
 							{
 							String Text = D . DisplayText;
@@ -2479,7 +2488,7 @@ namespace DMT01
 							else
 								{
 								gl . Translate ( x: x0 , y: c [ 1 ] - .25 , z: c [ 2 ] );
-								var big_x_scaling = 4.0f / ( float ) len;
+								float big_x_scaling = 4.0f / ( float ) len;
 								gl . Scale ( big_x_scaling , 0.7 , 1.0 );
 								}
 							gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 0.0f , extrusion: 0.1f , text: Text );
@@ -2519,7 +2528,7 @@ namespace DMT01
 							gl . Translate ( x: x0 + this . Spreadsheet3DNumericLeftMargin_H_Slider_User_Control . SliderValue , y: c [ 1 ] - .25 , z: c [ 2 ] - 1.0 );
 							String Text = number . ToString ( "#,###,##0.##" );
 							float len = Text . Length;
-							var big_x_scaling = this.Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control . SliderValue / len;
+							float big_x_scaling = this.Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control . SliderValue / len;
 							gl . Scale ( x: big_x_scaling , y: 0.7 , z: 1.0 );
 
 							gl . DrawText3D ( faceName: "Times New Roman" , fontSize: 1f , deviation: 1.0f , extrusion: 0.9f , text: Text );
@@ -2761,7 +2770,7 @@ namespace DMT01
 			String Path = String . Format ( @"{0}\{1}" , tr1 . Text . Trim ( ) , tr2 . Text . Trim ( ) );
 
 			String FileName = String . Format ( "{0}{1}" , scratchy , ".xll" );
-			var a = DMT01 . Properties . Resources . UNEP_NATDIS_disasters_2002_2010;
+			byte [ ] a = DMT01 . Properties . Resources . UNEP_NATDIS_disasters_2002_2010;
 			System . IO . File . WriteAllBytes ( FileName , a );
 
 			this . myReoGridControl . Load ( FileName , unvell . ReoGrid . IO . FileFormat . Excel2007 );
@@ -2841,8 +2850,8 @@ namespace DMT01
 				}
 #pragma warning restore CS0162 // Unreachable code detected
 
-			var children = LogicalTreeHelper . GetChildren ( f );
-			foreach ( var child in children )
+			System .Collections.IEnumerable children = LogicalTreeHelper . GetChildren ( f );
+			foreach ( object child in children )
 				{
 				FrameworkElement FE = child as FrameworkElement;
 
@@ -2946,7 +2955,7 @@ namespace DMT01
 
 			String StateFileName = String . Format ( "{0}.xml" , nameString );
 
-			var p = new RadioCheckBoxSaveState ( );
+			RadioCheckBoxSaveState p = new RadioCheckBoxSaveState ( );
 			p . CommonFields . SaveStateFileName = StateFileName;
 			p . CommonFields . ControlClass = nameof ( RadioButton );
 			p . CommonFields . ControlName = RB . Name;
@@ -2980,7 +2989,7 @@ namespace DMT01
 
 			String StateFileName = String . Format ( "{0}.xml" , nameString );
 
-			var p = new CheckBoxControlSaveState ( );
+			CheckBoxControlSaveState p = new CheckBoxControlSaveState ( );
 			p . CommonFields . SaveStateFileName = StateFileName;
 			p . CommonFields . ControlClass = nameof ( CheckBox );
 			p . CommonFields . ControlName = CB . Name;
@@ -3013,7 +3022,7 @@ namespace DMT01
 
 			String StateFileName = String . Format ( "{0}.xml" , nameString );
 
-			var p = new RadioCheckBoxSaveState ( );
+			RadioCheckBoxSaveState p = new RadioCheckBoxSaveState ( );
 			p . CommonFields . SaveStateFileName = StateFileName;
 			p . CommonFields . ControlName = RB . Name;
 			p . CommonFields . ControlClass = nameof ( RadioButton );
@@ -3041,7 +3050,7 @@ namespace DMT01
 			{
 			String StateFileName = String . Format ( "{0}.xml" , this.Name );
 
-			var p = new DMT_Main_Window_Control_SaveState ( );
+			DMT_Main_Window_Control_SaveState p = new DMT_Main_Window_Control_SaveState ( );
 			p . CommonFields . ControlClass = nameof ( Window );
 			p . CommonFields . ControlName = this . DMT_Main_Window_Control . Name;
 			p . CommonFields . SaveStateFileName = StateFileName;
@@ -3066,7 +3075,7 @@ namespace DMT01
 
 		private String GetName ( UIElement E )
 			{
-			var element = E as FrameworkElement;
+			FrameworkElement element = E as FrameworkElement;
 			if ( element != null )
 				{
 				return element . Name;
@@ -3358,8 +3367,8 @@ namespace DMT01
 			for ( int i = 0 ; i < AttributeCount ; i++ )
 				{
 				xR . MoveToAttribute ( i );
-				var n = xR . Name;
-				var v = xR . Value;
+				string n = xR . Name;
+				string v = xR . Value;
 				IXmlLineInfo xmlInfo = ( IXmlLineInfo ) xR;
 				int lineNumber = xmlInfo . LineNumber;
 				int linePosition = xmlInfo . LinePosition;
@@ -3396,7 +3405,7 @@ namespace DMT01
 						//Blufbelse ( xmlReader );
 						SeralizeControlCommonFields p = new SeralizeControlCommonFields ( );
 						XmlSerializer x = new XmlSerializer ( p . GetType ( ) );
-						var o = x . Deserialize ( xmlReader );
+						object o = x . Deserialize ( xmlReader );
 						p = ( SeralizeControlCommonFields ) o;
 						switch ( p . ControlClass )
 							{
@@ -3492,7 +3501,7 @@ namespace DMT01
 
 			XmlReader xmlReader = XmlReader . Create ( xmlStringReader , xmlReaderSettings );
 
-			var o = x . Deserialize ( xmlReader );
+			object o = x . Deserialize ( xmlReader );
 
 			pp = ( TabControlSaveState ) o;
 			TC . SelectedIndex = pp . SelectedIndex;
@@ -3525,7 +3534,7 @@ namespace DMT01
 
 			XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
 
-			var o = x . Deserialize ( xmlReader );
+			object o = x . Deserialize ( xmlReader );
 
 			pp = ( H_Slider_UserControl1_SaveState_Class ) o;
 			HC . SliderValue = pp . ResetValue;
@@ -3557,7 +3566,7 @@ namespace DMT01
 
 			XmlReader xmlReader = XmlReader . Create ( XmlStringReader , xmlReaderSettings );
 
-			var o = x . Deserialize ( xmlReader );
+			object o = x . Deserialize ( xmlReader );
 
 			pp = ( RadioCheckBoxSaveState ) o;
 			RB . IsChecked = pp . RadioCheckBoxState;
@@ -3677,15 +3686,15 @@ namespace DMT01
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Starting Normalization" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 
 			this . myReoGridControl . CurrentWorksheet = this . myReoGridControl . Worksheets [ 0 ];
-			var CW = this.myReoGridControl . CurrentWorksheet;
+			Worksheet CW = this.myReoGridControl . CurrentWorksheet;
 			if ( CW . Name == scratchy )
 				{
 				return;
 				}
 
-			var IsThisActualiedRange = CW . UsedRange;
-			var xx = CW . MaxContentCol;
-			var yy = CW . MaxContentRow;
+			RangePosition IsThisActualiedRange = CW . UsedRange;
+			int xx = CW . MaxContentCol;
+			int yy = CW . MaxContentRow;
 			int R, C;
 
 			GetActualizedRange ( CW: CW , maxRow: out R , maxCol: out C );
@@ -3729,7 +3738,7 @@ namespace DMT01
 				Scratcheroo . SetCellData ( row: DataRange . EndPos . Row + 1 , col: j + 1 , data: Norm );
 				for ( int i = DataRange . StartPos . Row ; i <= DataRange . EndPos . Row ; i++ )
 					{
-					var Val = CW . GetCellData<double> ( row: i , col: j );
+					double Val = CW . GetCellData<double> ( row: i , col: j );
 					double Normalized = Val * Norm;
 
 					Scratcheroo . SetCellData ( row: i , col: j , data: Normalized );
@@ -3737,7 +3746,7 @@ namespace DMT01
 				}
 			unvell . ReoGrid . NamedRange NamedDataRange =
 				new unvell . ReoGrid . NamedRange ( worksheet: Scratcheroo , name: scratchy , range: DataRange );
-			var exists = Scratcheroo . NamedRanges . Contains ( range: NamedDataRange );
+			bool exists = Scratcheroo . NamedRanges . Contains ( range: NamedDataRange );
 			if ( !exists )
 				{
 				Scratcheroo . NamedRanges . Add ( NamedDataRange );
@@ -3761,13 +3770,13 @@ namespace DMT01
 			for ( int j = 0 ; j <= R ; j++ )
 				{
 				//var CBC = new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
-				var CBC = new MyCheckBox ( );
+				MyCheckBox CBC = new MyCheckBox ( );
 				CBC . Click += this . CBC_Click;
 				Scratcheroo . SetCellData ( row: j , col: 0 , data: CBC );
 				}
 			for ( int i = 0 ; i <= C ; i++ )
 				{
-				var CBC = new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
+				CheckBoxCell CBC = new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
 				CBC . Click += this . CBC_Click;
 				CBC . CheckChanged += this . CBC_CheckChanged;
 				}
@@ -3813,9 +3822,9 @@ namespace DMT01
 			Snatcheroo . InsertRows ( row: R , count: 1 );
 			CellPosition cP = new CellPosition ( row: R , col: 0 );
 
-			var action0 = new unvell . ReoGrid . Actions . CopyRangeAction ( fromRange: RR , toPosition: cP );
+			CopyRangeAction action0 = new unvell . ReoGrid . Actions . CopyRangeAction ( fromRange: RR , toPosition: cP );
 			this . myReoGridControl . DoAction ( action0 );
-			var action1 = new unvell . ReoGrid . Actions . RemoveRowsAction ( row: R , rows: 1 );
+			RemoveRowsAction action1 = new unvell . ReoGrid . Actions . RemoveRowsAction ( row: R , rows: 1 );
 			this . myReoGridControl . DoAction ( action1 );
 			}
 
@@ -3877,9 +3886,9 @@ namespace DMT01
 
 		private static string GetHead ( Stream stream )
 			{
-			using ( var reader = new StreamReader ( stream ) )
+			using ( StreamReader reader = new StreamReader ( stream ) )
 				{
-				var buffer = new char [ 40 ];
+				char [ ] buffer = new char [ 40 ];
 				int nChars = reader . Read ( buffer , 0 , buffer . Length );
 				string text = new String ( buffer , 0 , nChars );
 
@@ -3988,8 +3997,8 @@ namespace DMT01
 
 		private int GetCurrentSheetIndex ( )
 			{
-			var b = this.myReoGridControl . CurrentWorksheet . Name;
-			var a = this.myReoGridControl . GetWorksheetIndex ( b );
+			string b = this.myReoGridControl . CurrentWorksheet . Name;
+			int a = this.myReoGridControl . GetWorksheetIndex ( b );
 			CurrentWorksheetIndex = a;
 			return a;
 			}
@@ -4049,9 +4058,11 @@ namespace DMT01
 			Worksheet . ReoGridRangeCollection R = Scratcheroo . Ranges;
 			NamedRange named_ranges = Scratcheroo . NamedRanges [ scratchy ];
 
-			Sheety = new NWorksheety ( );
-			Sheety . r0 = named_ranges . StartPos . Row;
-			Sheety . c0 = named_ranges . StartPos . Col;
+			Sheety = new NWorksheety
+			{
+				r0 = named_ranges .StartPos .Row ,
+				c0 = named_ranges .StartPos .Col
+			};
 			Sheety . r1 = named_ranges . Rows + Sheety . r0;
 			Sheety . c1 = named_ranges . Cols + Sheety . c0;
 			Sheety . cells = new float [ Sheety . c1 + 2 , Sheety . r1 + 2 ];

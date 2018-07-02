@@ -41,25 +41,43 @@ namespace WpfControlLibrary1
 			ComboBox CB = sender as ComboBox;
 
 			if ( CB == null )
+			{
 				return;
+			}
+
 			object WhatsThis =CB.SelectedItem;
 			if ( WhatsThis == null )
+			{
 				return;
+			}
+
 			ComboBoxItem ThisIsWhatItIs = WhatsThis as ComboBoxItem;
 			if ( ThisIsWhatItIs == null )
+			{
 				return;
+			}
+
 			object Content = ThisIsWhatItIs . Content;
 			if ( Content == null )
+			{
 				return;
+			}
+
 			String ContentAsString = Content as String;
 			if ( ContentAsString == null )
+			{
 				return;
+			}
+
 			Boolean werked = int . TryParse ( ContentAsString , out int Numbah );
 			if ( !werked )
+			{
 				return;
-			_selection = Numbah;
+			}
 
-			System.Diagnostics.Debug.WriteLine(String.Format("Numbah={0} {1} ", Numbah, (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+			this ._selection = Numbah;
+
+			System.Diagnostics.Debug.WriteLine(String.Format("Numbah={0} {1} ", Numbah, ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
 		}
 	}
 }

@@ -21,32 +21,33 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         public static WpfControlLibrary1.LineStinkerModes SampleEnumDataContext = WpfControlLibrary1.LineStinkerModes.FloatBetweenVerticies;
+
         public MainWindow()
         {
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
 
             this.InitializeComponent();
 
-			System .Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+			System .Diagnostics.Debug.WriteLine(String.Format("{0} {1} ", "snippy", ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
         }
 
         private void myTestComboBox_Initialized(object sender, EventArgs e)
         {
 			System.Drawing.FontFamily fontFamily = new System.Drawing.FontFamily("Arial");
-			var f=FontFamily.FamilyTypefaces;
+			FamilyTypefaceCollection f=this.FontFamily.FamilyTypefaces;
 
 			InstalledFontCollection IFC=new InstalledFontCollection();
-			var ff=IFC.Families;
+			System .Drawing.FontFamily[] ff=IFC.Families;
 
-				foreach ( var fff in ff )
+				foreach ( System .Drawing .FontFamily fff in ff )
 				{
-				var uu=fff.Name;
+				string uu=fff.Name;
 				if ( uu == "" )
 					{
 					continue;
 					}
 
-				var i=this . myTestComboBox . Items . Add ( uu );
+				int i=this . myTestComboBox . Items . Add ( uu );
 				}
 			//this.myTestComboBox.ItemsSource = f;
 			}
@@ -54,14 +55,14 @@ namespace WpfApp1
         private void myTextComboBoxValues_Initialized(object sender, EventArgs e)
         {
             Type T = typeof(WpfControlLibrary1.LineStinkerModes);
-            var tt=Enum.GetUnderlyingType( T );
+			Type tt=Enum.GetUnderlyingType( T );
             this.myTextComboBoxValues.Text = "Select One";
-           
+
             Array Values = Enum.GetValues(T);
             this.myTextComboBoxValues.ItemStringFormat = "--{0}--";
             foreach (object v in Values)
             {
-                var s = v.ToString();
+				string s = v.ToString();
                 string S = ((int)(v)).ToString(" 000 ")+s;
                 int n = this.myTextComboBoxValues.Items.Add(newItem: v);
             }
@@ -69,8 +70,8 @@ namespace WpfApp1
 
         private void myTextComboBoxValues_DropDownClosed(object sender, EventArgs e)
         {
-            var a = myTextComboBoxValues.SelectedIndex;
-            var b = myTextComboBoxValues.SelectedItem;
+			int a = this.myTextComboBoxValues.SelectedIndex;
+			object b = this.myTextComboBoxValues.SelectedItem;
 			if ( b == null )
 			{
 				return;
@@ -78,16 +79,18 @@ namespace WpfApp1
 
 			Type T = typeof(WpfControlLibrary1.LineStinkerModes);
             WpfControlLibrary1.LineStinkerModes E = (WpfControlLibrary1.LineStinkerModes)b;
-            var c = myTextComboBoxValues.SelectedValuePath;
+			string c = this.myTextComboBoxValues.SelectedValuePath;
 
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} \t{2} ", E, (int)E, (((System.Environment.StackTrace).Split('\n'))[2].Trim())));
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1} \t{2} ", E, (int)E, ((System.Environment.StackTrace).Split('\n'))[2].Trim()));
         }
 
 		private void ButtyButton_Click ( object sender , RoutedEventArgs e )
 			{
-			ColorFontDialog dialog = new ColorFontDialog(true,true,true);
-			dialog . Owner = this;
-			dialog . Font = FontInfo . GetControlFont ( this . TextBlockSample );
+			ColorFontDialog dialog = new ColorFontDialog ( true , true , true )
+			{
+				Owner = this ,
+				Font = FontInfo .GetControlFont ( this .TextBlockSample )
+			};
 			//dialog.FontSizes = new int[] { 10, 12, 14, 16, 18 };
 			if ( dialog . ShowDialog ( ) == true )
 				{
@@ -98,5 +101,10 @@ namespace WpfApp1
 					}
 				}
 			}
+
+		private void LineWidthComboBoxUserControlClass_Loaded ( object sender , RoutedEventArgs e )
+		{
+			System .Diagnostics .Debug .WriteLine ( String .Format ( "{0} {1} " , "snippy" ,  ( ( System .Environment .StackTrace ) .Split ( '\n' ) ) [ 2 ] .Trim ( )  ) );
 		}
+	}
 }

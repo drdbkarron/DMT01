@@ -53,6 +53,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfControlLibrary1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WpfControlLibrary1\bin\Debug\WpfControlLibrary1.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -102,12 +106,6 @@
     <PackageReference Include="WpfColorFontDialog">
       <Version>1.0.5</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WpfControlLibrary1\WpfControlLibrary1.csproj">
-      <Project>{e2938cbb-a03e-4241-890f-019e7ee74ad3}</Project>
-      <Name>WpfControlLibrary1</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
