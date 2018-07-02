@@ -47,12 +47,12 @@ namespace System . Windows . Controls
 		{
 		public static void PerformClick ( this Button btn )
 			{
-			btn . RaiseEvent ( new RoutedEventArgs ( Button . ClickEvent ) );
+			btn . RaiseEvent ( new RoutedEventArgs ( routedEvent: Primitives.ButtonBase. ClickEvent ) );
 			}
 
 		public static void PerformClick ( this CheckBox cb )
 			{
-			cb . RaiseEvent ( new RoutedEventArgs ( CheckBox . ClickEvent ) );
+			cb . RaiseEvent ( new RoutedEventArgs ( Primitives.ButtonBase. ClickEvent ) );
 			}
 		}
 	}
@@ -968,6 +968,7 @@ namespace DMT01
 			{
 			return GetCentroid ( a [ 0 ] , a [ 1 ] );
 			}
+
 		private float [ ] GetCentroid ( float [ ] a , float [ ] b )
 			{
 			float[] c=new float [3]{ 0,0,0 };
@@ -2447,9 +2448,7 @@ namespace DMT01
 					gl . Scale ( x: .25 , y: 1 , z: 1 );
 					}
 
-				int maxRow;
-				int maxCol;
-				GetActualizedRange ( CW , out maxRow , out maxCol );
+				GetActualizedRange ( CW , out int maxRow , out int maxCol );
 
 				float x1 = 0;
 				float x0 = 0;
@@ -2498,15 +2497,14 @@ namespace DMT01
 						if ( D . DataFormat == unvell . ReoGrid . DataFormat . CellDataFormatFlag . Number )
 							{
 							object CellData = D . Data;
-							float number;
-							if ( float . TryParse ( s: D . DisplayText , result: out number ) )
-								{
-								}
+							if ( float .TryParse ( s: D .DisplayText , result: out float number ) )
+							{
+							}
 							else
-								{
-								Debug . WriteLine ( String . Format ( "TryParse failed on {0}" , D . DisplayText ) );
+							{
+								Debug .WriteLine ( String .Format ( "TryParse failed on {0}" , D .DisplayText ) );
 								return;
-								}
+							}
 							gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
 							gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
 							gl . Enable ( SharpGL . OpenGL . GL_ALPHA );
@@ -2541,13 +2539,12 @@ namespace DMT01
 						if ( D . DataFormat == CellDataFormatFlag . Percent )
 							{
 							object Nuber = D . Data;
-							float number;
-							if ( float . TryParse ( s: D . DisplayText , result: out number ) )
-								{
-								}
+							if ( float .TryParse ( s: D .DisplayText , result: out float number ) )
+							{
+							}
 							else
-								{
-								}
+							{
+							}
 							gl . PushMatrix ( );
 
 							float [ ] c = LocalMaths . LocalMathsClass . GetCentroid ( x0 , y0 , x1 , y1 );
@@ -2563,13 +2560,12 @@ namespace DMT01
 						if ( D . DataFormat == CellDataFormatFlag . Currency )
 							{
 							object Nuber = D . Data;
-							float number;
-							if ( float . TryParse ( s: D . DisplayText , style: System . Globalization . NumberStyles . Currency , provider: new CultureInfo ( "en-US" ) , result: out number ) )
-								{
-								}
+							if ( float .TryParse ( s: D .DisplayText , style: System .Globalization .NumberStyles .Currency , provider: new CultureInfo ( "en-US" ) , result: out float number ) )
+							{
+							}
 							else
-								{
-								}
+							{
+							}
 							gl . PushMatrix ( );
 
 							float [ ] c = LocalMaths . LocalMathsClass . GetCentroid ( x0 , y0 , x1 , y1 );
@@ -3695,9 +3691,7 @@ namespace DMT01
 			RangePosition IsThisActualiedRange = CW . UsedRange;
 			int xx = CW . MaxContentCol;
 			int yy = CW . MaxContentRow;
-			int R, C;
-
-			GetActualizedRange ( CW: CW , maxRow: out R , maxCol: out C );
+			GetActualizedRange ( CW: CW , maxRow: out int R , maxCol: out int C );
 
 			unvell . ReoGrid . RangePosition DataRange = new unvell . ReoGrid . RangePosition ( row: 1 , col: 1 , rows: R , cols: C );
 
@@ -3765,8 +3759,7 @@ namespace DMT01
 				}
 
 			this . myReoGridControl . CurrentWorksheet = Scratcheroo;
-			int R, C;
-			GetActualizedRange ( CW: Scratcheroo , maxRow: out R , maxCol: out C );
+			GetActualizedRange ( CW: Scratcheroo , maxRow: out int R , maxCol: out int C );
 			for ( int j = 0 ; j <= R ; j++ )
 				{
 				//var CBC = new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
