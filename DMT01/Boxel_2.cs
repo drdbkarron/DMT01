@@ -886,6 +886,7 @@ namespace DMT01
 				}
 
 			AnnotateEdge ( gl , E );
+			
 
 			float knob00=  this.MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
 			float [ ] cf0 = E . V [ 0 ] . cf;
@@ -995,6 +996,23 @@ namespace DMT01
 				gl . End ( );
 				gl . PopAttrib ( );
 				}
+
+			if ( true )
+				{
+				float tknob = this .MW .region_threshold_H_Slider_UserControl .SliderValue;
+				if ( IsInBetween ( tknob , E ) )
+					{
+					gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+					gl .LineWidth ( 3 );
+					gl .PointSize ( 5 );
+					gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
+					gl .Vertex ( E .V [ 0 ] .cf );
+					gl .Vertex ( E .V [ 1 ] .cf );
+					gl .End ( );
+					gl .PopAttrib ( );
+
+				}
+			}
 			}
 
 		public float [ ] toFloatArray ( GlmNet .vec3 l )

@@ -35,10 +35,14 @@
 			Width="62"
 			Height="22"
 			Margin="2,2,0,0"
-			BorderThickness="2"
+			Padding="0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
-			Content="Pointsize Combo Box" FontSize="9" BorderBrush="#FF0E59DE" Padding="0" FontStretch="Condensed">
+			BorderBrush="#FF0E59DE"
+			BorderThickness="2"
+			Content="Pointsize Combo Box"
+			FontSize="9"
+			FontStretch="Condensed">
 			<Label.Background>
 				<RadialGradientBrush>
 					<GradientStop Offset="0" Color="#FFDC7777" />
@@ -49,12 +53,15 @@
 		<ComboBox
 			x:Name="PointSizeComboBox"
 			Grid.Row="1"
+			Width="34"
 			Height="22"
-			BorderThickness="4"
 			Margin="2,4,0,0"
+			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
+			Background="#FFA02222"
+			BorderThickness="4"
 			MaxDropDownHeight="365"
-			SelectionChanged="PointSizeComboBox_SelectionChanged" HorizontalAlignment="Left" Width="34" Background="#FFA02222">
+			SelectionChanged="PointSizeComboBox_SelectionChanged">
 			<ComboBoxItem Content="1" />
 			<ComboBoxItem Content="2" IsSelected="True" />
 			<ComboBoxItem Content="3" />

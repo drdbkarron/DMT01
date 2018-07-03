@@ -74,8 +74,7 @@ namespace WpfControlLibrary1
 				return;
 			}
 
-			String S=C as String;
-			if ( S == null )
+			if ( !( C is String S ) )
 			{
 				return;
 			}

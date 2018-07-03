@@ -39,7 +39,6 @@ namespace WpfControlLibrary1
 		public void PointSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			ComboBox CB = sender as ComboBox;
-
 			if ( CB == null )
 			{
 				return;

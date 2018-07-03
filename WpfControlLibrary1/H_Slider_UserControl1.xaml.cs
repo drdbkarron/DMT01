@@ -139,8 +139,7 @@ namespace WpfControlLibrary1
 
     public static void Seralize_H__Slider_UserControl1_SaveState ( UIElement e )
         {
-        H_Slider_UserControl1 HS = e as H_Slider_UserControl1;
-        if ( HS == null )
+        if ( !( e is H_Slider_UserControl1 HS ) )
             {
             return;
             }
@@ -280,8 +279,7 @@ namespace WpfControlLibrary1
 
 		private void H_Slider_UserControl_Loaded ( object sender , RoutedEventArgs e )
 		{
-		FrameworkElement FE=sender as FrameworkElement;
-		if ( FE == null )
+		if ( !( sender is FrameworkElement FE ) )
 			{
 				return;
 			}
