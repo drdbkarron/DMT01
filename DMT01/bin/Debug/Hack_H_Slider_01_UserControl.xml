@@ -8,5 +8,5 @@
   </SeralizeControlCommonFields>
   <MaxValue>1</MaxValue>
   <MinValue>-1</MinValue>
-  <ResetValue>0</ResetValue>
+  <ResetValue>-0.01734821</ResetValue>
 </H_Slider_UserControl1_SaveState_Class>

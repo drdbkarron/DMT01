@@ -4,17 +4,15 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	d:DesignHeight="437.298"
-	d:DesignWidth="203.931"
-	mc:Ignorable="d" Background="#FFE81C1C"
+	mc:Ignorable="d" Background="#FFE81C1C" Height="162" Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="2,2,0,0" FontSize="8"
 	>
-	<Grid Margin="4">
+	<Grid Height="155" Width="60" Margin="2,2,0,0">
 		<Grid.RowDefinitions>
 			<RowDefinition
 				x:Name="jh8"
-				Height="80*"
+				Height="29"
 				/>
-			<RowDefinition Height="349*" />
+			<RowDefinition />
 		</Grid.RowDefinitions>
 		<Grid.Background>
 			<LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
@@ -23,12 +21,12 @@
 			</LinearGradientBrush>
 		</Grid.Background>
 		<Label x:Name="LinewithLabel"
-			Width="176"
-			Height="60"
-			Margin="10,10,0,0"
+			Width="53"
+			Height="22"
+			Margin="2,2,0,0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
-			Content="Line width int"
+			Content="Line width int" Padding="1,1,0,0" BorderBrush="#FF74DA1F" BorderThickness="2"
 			>
 			<Label.Background>
 				<RadialGradientBrush>
@@ -39,9 +37,9 @@
 		</Label>
 		<ComboBox x:Name="LinewidthComboBox"
 			Grid.Row="1"
-			Width="135"
+			Width="33"
 			Height="22"
-			Margin="10,22,0,0"
+			Margin="10,0,0,0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top" SelectionChanged="LinewidthComboBox_SelectionChanged"
 			>

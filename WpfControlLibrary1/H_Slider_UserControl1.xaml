@@ -12,7 +12,7 @@
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     Background="#FFCD98BC"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Loaded="H_Slider_UserControl_Loaded">
     <Grid
         x:Name="H_Slider_UserControl_Grid"
         Width="826"
@@ -134,7 +134,7 @@
         <Button
             x:Name="Plus_Spread_Min_Max_Button"
             Width="29"
-            Margin="738,2,0,0"
+            Margin="749,2,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Plus_Spread_Min_Max_Button_Click"
@@ -147,6 +147,7 @@
             VerticalAlignment="Top"
             Click="Minus_Spread_Min_Max_Button_Click"
             Content="---" />
+		<Label x:Name="myXNameOfLabel" Content="Label" HorizontalAlignment="Left" Margin="570,3,0,0" VerticalAlignment="Top" Width="172" Height="19" Background="#FFE5EC5B" Padding="0" FontSize="10" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="True" BorderThickness="1" BorderBrush="#FFE60505" FontFamily="Arial Narrow" FontStretch="Condensed"/>
 
-    </Grid>
+	</Grid>
 </UserControl>

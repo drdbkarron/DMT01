@@ -21,10 +21,10 @@
 			<RowDefinition Height="199*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition />
-			<ColumnDefinition />
-			<ColumnDefinition />
-			<ColumnDefinition />
+			<ColumnDefinition Width="172*" />
+			<ColumnDefinition Width="225*" />
+			<ColumnDefinition Width="515*" />
+			<ColumnDefinition Width="303*" />
 		</Grid.ColumnDefinitions>
 		<ComboBox
 			x:Name="myTestComboBox"
@@ -79,13 +79,13 @@
 		<WpfControlLibrary1:LineWidthComboBoxUserControlClass
 			x:Name="lkkl"
 			Grid.Row="0"
-			Margin="62,0,24,0"
+			Margin="62,0,0,0"
 			Loaded="LineWidthComboBoxUserControlClass_Loaded" />
 		<WpfControlLibrary1:PointSizeComboBoxUserControlClass
 			x:Name="MyPointSizeComboBox"
 			Grid.Row="1"
-			Width="197"
-			Height="179"
+			Width="75"
+			Height="107"
 			Margin="53,10,0,0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top" />

@@ -5,48 +5,45 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfControlLibrary1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="276.714"
-    Height="205.715"
-    mc:Ignorable="d">
-    <Grid
+    Width="54.421"
+    Height="47.433"
+    mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Background="#FFC720A1" Margin="0">
+	<Grid
         x:Name="LineStinkerGrid"
-        Margin="0,0,0,0"
-        Cursor="Hand">
-        <Grid.Background>
-            <RadialGradientBrush>
-                <GradientStop Offset="0" Color="#FFDE9C9C" />
-                <GradientStop Offset="1" Color="#FFF9EAEA" />
-            </RadialGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="45*" />
-            <RowDefinition Height="161*" />
-        </Grid.RowDefinitions>
-        <Label
+        Cursor="Hand" Width="54" Height="42" Margin="2,2,2,0">
+		<Grid.Background>
+			<RadialGradientBrush>
+				<GradientStop Offset="0" Color="#FFDE9C9C" />
+				<GradientStop Offset="1" Color="#FFF9EAEA" />
+			</RadialGradientBrush>
+		</Grid.Background>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="16" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Label
             x:Name="LineStinkerLabel"
-            Margin="10,1"
-            Padding="4"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
+            Margin="1,1,0,0"
+            Padding="0"
             BorderBrush="#FF9F20CF"
-            BorderThickness="4"
-            Content="Describe What This is For Here">
-            <Label.Background>
-                <RadialGradientBrush>
-                    <GradientStop Offset="0" Color="#FF938989" />
-                    <GradientStop Offset="1" Color="#FFD3EFF3" />
-                </RadialGradientBrush>
-            </Label.Background>
-        </Label>
+            BorderThickness="1"
+            Content="Describe" FontSize="8" HorizontalAlignment="Left" VerticalAlignment="Top" Height="13" Width="47">
+			<Label.Background>
+				<RadialGradientBrush>
+					<GradientStop Offset="0" Color="#FF938989" />
+					<GradientStop Offset="1" Color="#FFD3EFF3" />
+				</RadialGradientBrush>
+			</Label.Background>
+		</Label>
 
-        <ComboBox
+		<ComboBox
             x:Name="LineStinkerComboBox"
             Grid.Row="1"
-            Height="29"
-            Margin="10,6,10,0"
+            Height="18"
+            Margin="1,3,5,0"
             VerticalAlignment="Top"
             DropDownClosed="LineStinkerComboBox_DropDownClosed"
-            Initialized="LineStinkerComboBox_Initialized" />
+            Initialized="LineStinkerComboBox_Initialized" Padding="3" ScrollViewer.CanContentScroll="False" />
 
-    </Grid>
+	</Grid>
 </UserControl>

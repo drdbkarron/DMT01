@@ -116,38 +116,37 @@ namespace WpfControlLibrary1
 
     public void ResetValue_Click ( object sender , RoutedEventArgs e )
         {
-            Button t = sender as Button;
-            DependencyObject ttt = t . Parent;
-            System . Windows . Controls . Grid G = ttt as System . Windows . Controls . Grid;
-            DependencyObject gg = G . Parent;
-            H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
-            Debug . WriteLine ( String . Format ( "{0} {1} {2} reset to " , nameof( ResetValue_Click ) , ttyy.Name,ttyy.SliderValue) );
-            Deseralize_H_Slider_UserControl1 ( ttyy );
-            Debug . WriteLine ( String . Format ( "{2}" , nameof ( ResetValue_Click ) , ttyy . Name , ttyy . SliderValue ) );
-            }
+        Button t = sender as Button;
+        DependencyObject ttt = t . Parent;
+        System . Windows . Controls . Grid G = ttt as System . Windows . Controls . Grid;
+        DependencyObject gg = G . Parent;
+        H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
+        Debug . WriteLine ( String . Format ( "{0} {1} {2} reset to " , nameof( ResetValue_Click ) , ttyy.Name,ttyy.SliderValue) );
+        Deseralize_H_Slider_UserControl1 ( ttyy );
+        }
 
     private void Save0_Button_Click ( object sender , RoutedEventArgs e )
-            {
-            Button t = sender as Button;
-            DependencyObject ttt = t . Parent;
-            System . Windows . Controls . Grid G = ttt as System . Windows . Controls . Grid;
-            DependencyObject gg = G . Parent;
-            H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
-            Debug . WriteLine ( String . Format ( "{0} Seralizing/Saving {1} {2}  " , nameof ( Save0_Button_Click ) , ttyy . SliderValue, ttyy . Name  ) );
-            Seralize_H__Slider_UserControl1_SaveState ( ttyy );
-            Debug . WriteLine ( String . Format ( "{0}.xml in {1}" , ttyy.Name, Environment.CurrentDirectory ) );
-            }
+        {
+        Button t = sender as Button;
+        DependencyObject ttt = t . Parent;
+        System . Windows . Controls . Grid G = ttt as System . Windows . Controls . Grid;
+        DependencyObject gg = G . Parent;
+        H_Slider_UserControl1 ttyy = gg as H_Slider_UserControl1;
+        //Debug . WriteLine ( String . Format ( "{0} Seralizing/Saving {1} {2}  " , nameof ( Save0_Button_Click ) , ttyy . SliderValue, ttyy . Name  ) );
+        Seralize_H__Slider_UserControl1_SaveState ( ttyy );
+        Debug . WriteLine ( String . Format ( "{0}.xml in {1}" , ttyy.Name, Environment.CurrentDirectory ) );
+        }
 
     public static void Seralize_H__Slider_UserControl1_SaveState ( UIElement e )
+        {
+        H_Slider_UserControl1 HS = e as H_Slider_UserControl1;
+        if ( HS == null )
             {
-            H_Slider_UserControl1 HS = e as H_Slider_UserControl1;
-            if ( HS == null )
-                {
-                return;
-                }
-
-            Seralize_H__Slider_UserControl1_SaveState ( HS );
+            return;
             }
+
+        Seralize_H__Slider_UserControl1_SaveState ( HS );
+        }
 
     public static void Seralize_H__Slider_UserControl1_SaveState ( H_Slider_UserControl1 ttyy )
         {
@@ -158,7 +157,7 @@ namespace WpfControlLibrary1
 
     public static void Seralize_H__Slider_UserControl1_SaveState ( string ControlName , String StateFileName , H_Slider_UserControl1 ttyy )
         {
-			H_Slider_UserControl1_SaveState_Class p =new H_Slider_UserControl1_SaveState_Class ();
+		H_Slider_UserControl1_SaveState_Class p =new H_Slider_UserControl1_SaveState_Class ();
         p . SeralizeControlCommonFields. ControlClass = nameof ( H_Slider_UserControl1 );
         p . SeralizeControlCommonFields . ControlName = ControlName;
         p . SeralizeControlCommonFields . SaveStateFileName = StateFileName;
@@ -166,15 +165,15 @@ namespace WpfControlLibrary1
         p . MaxValue = ( float ) ttyy . SliderMaxValue;
         p . MinValue = ( float ) ttyy. SliderMinValue;
 
-            XmlSerializer x = new XmlSerializer ( p.GetType());
+        XmlSerializer x = new XmlSerializer ( p.GetType());
 
-			XmlWriterSettings s = new XmlWriterSettings
-				{
-				Indent = true ,
-				NewLineOnAttributes = true ,
-				OmitXmlDeclaration = false
-				};
-			XmlWriter w=XmlWriter.Create(StateFileName,s);
+		XmlWriterSettings s = new XmlWriterSettings
+			{
+			Indent = true ,
+			NewLineOnAttributes = true ,
+			OmitXmlDeclaration = false
+			};
+		XmlWriter w=XmlWriter.Create(StateFileName,s);
 
         x . Serialize ( w , p );
         w . Close ( );
@@ -278,5 +277,22 @@ namespace WpfControlLibrary1
 				this . theH_Slider . Minimum = this . theH_Slider . Maximum - 5.0;
                 }
             }
-    }
+
+		private void H_Slider_UserControl_Loaded ( object sender , RoutedEventArgs e )
+		{
+		FrameworkElement FE=sender as FrameworkElement;
+		if ( FE == null )
+			{
+				return;
+			}
+
+			String xNameParent=FE.Name;
+
+		Label L= this .myXNameOfLabel;
+
+		L .Content = new Run ( xNameParent );
+
+		//System .Diagnostics .Debug .WriteLine ( String .Format ( "{0} {1} " , xNameParent ,  ( ( System .Environment .StackTrace ) .Split ( '\n' ) ) [ 2 ] .Trim ( )  ) );
+		}
+	}
 }

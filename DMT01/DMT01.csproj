@@ -85,6 +85,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Boxel_2.cs" />
+    <Compile Include="Edge.cs" />
+    <Compile Include="IsoEdge.cs" />
     <Compile Include="LocalMaths.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -101,6 +104,9 @@
     </Compile>
     <Compile Include="Axis_Arrow_Grid.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Region.cs" />
+    <Compile Include="SubEdge.cs" />
+    <Compile Include="Vertex.cs" />
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>

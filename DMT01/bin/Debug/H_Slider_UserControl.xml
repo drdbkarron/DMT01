@@ -7,6 +7,6 @@
     <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
   <MaxValue>100</MaxValue>
-  <MinValue>-200</MinValue>
+  <MinValue>-100</MinValue>
   <ResetValue>0</ResetValue>
 </H_Slider_UserControl1_SaveState_Class>
