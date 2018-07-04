@@ -13,14 +13,16 @@
 	VerticalAlignment="Center"
 	Background="#FFCD98BC"
 	Loaded="H_Slider_UserControl_Loaded"
-	mc:Ignorable="d">
+	mc:Ignorable="d"
+	>
 	<Grid
 		x:Name="H_Slider_UserControl_Grid"
 		Width="826"
 		Height="64"
 		Margin="1"
 		HorizontalAlignment="Center"
-		Background="#FF2D3A39">
+		Background="#FF2D3A39"
+		>
 		<DockPanel
 			x:Name="H_Slider_UserControl_DockPanel"
 			Width="825"
@@ -29,7 +31,8 @@
 			HorizontalAlignment="Left"
 			VerticalAlignment="Bottom"
 			Background="#FFF78513"
-			LastChildFill="False">
+			LastChildFill="False"
+			>
 			<Slider
 				x:Name="theH_Slider"
 				Width="824"
@@ -48,7 +51,8 @@
 				Minimum="-100"
 				SmallChange="1"
 				TickFrequency="10"
-				TickPlacement="BottomRight" />
+				TickPlacement="BottomRight"
+				/>
 		</DockPanel>
 		<TextBox
 			x:Name="Slider_Value_TextBox"
@@ -58,7 +62,8 @@
 			HorizontalAlignment="Center"
 			VerticalAlignment="Top"
 			Text="{Binding ElementName=theH_Slider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-			TextWrapping="Wrap" />
+			TextWrapping="Wrap"
+			/>
 		<Label
 			x:Name="HSliderControlClusterMain_Label"
 			Width="156"
@@ -69,7 +74,8 @@
 			VerticalAlignment="Top"
 			HorizontalContentAlignment="Center"
 			BorderBrush="#FF306456"
-			Content="Describe Slider Here">
+			Content="Describe Slider Here"
+			>
 			<Label.Background>
 				<RadialGradientBrush>
 					<GradientStop Offset="1" Color="#FF84877C" />
@@ -87,8 +93,9 @@
 			HorizontalContentAlignment="Center"
 			VerticalContentAlignment="Center"
 			Background="#FF608EDE"
-			Text="50"
-			TextWrapping="Wrap" />
+			Text="{Binding Minimum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+			TextWrapping="Wrap"
+			/>
 		<TextBox
 			x:Name="Slider_Hi_TextBox"
 			Width="39"
@@ -99,7 +106,8 @@
 			HorizontalContentAlignment="Center"
 			VerticalContentAlignment="Center"
 			Background="#FFC90C0C"
-			Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+			Text="{Binding Maximum, ElementName=theH_Slider, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+			/>
 		<Button
 			x:Name="ResetsliderValue_Button"
 			Width="75"
@@ -108,7 +116,8 @@
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
 			Click="ResetValue_Click"
-			Content="Reset">
+			Content="Reset"
+			>
 			<Button.Background>
 				<RadialGradientBrush>
 					<GradientStop Offset="1" Color="#FF423636" />
@@ -123,7 +132,8 @@
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
 			Click="Save0_Button_Click"
-			Content="Save 0">
+			Content="Save 0"
+			>
 			<Button.Background>
 				<RadialGradientBrush>
 					<GradientStop Offset="0" Color="Black" />
@@ -139,7 +149,8 @@
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
 			Click="Plus_Spread_Min_Max_Button_Click"
-			Content="+++" />
+			Content="+++"
+			/>
 		<Button
 			x:Name="Minus_Spread_Min_Max_Button"
 			Width="27"
@@ -147,7 +158,8 @@
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
 			Click="Minus_Spread_Min_Max_Button_Click"
-			Content="---" />
+			Content="---"
+			/>
 		<Label
 			x:Name="myXNameOfLabel"
 			Width="172"
@@ -160,11 +172,12 @@
 			Background="#FFE5EC5B"
 			BorderBrush="#FFE60505"
 			BorderThickness="1"
-			Content="Label"
+			Content="User Control x:Name goes here when Loaded"
 			FontFamily="Arial Narrow"
 			FontSize="10"
 			FontStretch="Condensed"
-			ScrollViewer.CanContentScroll="True" />
+			ScrollViewer.CanContentScroll="True"
+			/>
 
 	</Grid>
 </UserControl>

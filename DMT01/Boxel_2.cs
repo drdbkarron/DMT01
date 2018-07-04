@@ -5,6 +5,7 @@ using SharpGL;
 using GlmSharp;
 using WpfControlLibrary1;
 using GlmNet;
+using System .IO;
 
 namespace DMT01
 {
@@ -886,7 +887,6 @@ namespace DMT01
 				}
 
 			AnnotateEdge ( gl , E );
-			
 
 			float knob00=  this.MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
 			float [ ] cf0 = E . V [ 0 ] . cf;
@@ -924,17 +924,21 @@ namespace DMT01
 				}
 
 			float knob1= (float)(this.MW .Hack_H_Slider_01_UserControl .SliderValue * 2f * Math .PI);
+			float knobl1 = this .MW .Hack_H_Slider_03_UserControl .SliderValue;
 			GlmNet .mat4  d0q = GlmNet.glm.rotate (ID, knob1, z_rot_axis);
 			GlmNet. mat3 mm0 = d0q . to_mat3();
 			GlmNet.vec3 twisty1 = mm0 * cv;
-			GlmNet.vec3 located0 = twisty1+vf0;
+			GlmNet .vec3 twisty22 = twisty1 * knobl1;
+			GlmNet.vec3 located0 = twisty22+vf0;
 			float [ ] FA0 = toFloatArray ( located0 );
 
 			float knob2=(float)(this.MW . Hack_H_Slider_02_UserControl . SliderValue * 2f*Math . PI);
+			float knobl2 = this .MW .ArrowHeadSide2Length2_H_Slider_UserControl1 .SliderValue;
 			GlmNet .mat4  d1q = GlmNet.glm.rotate (ID, knob2, z_rot_axis);
 			GlmNet.mat3 mm1=d1q.to_mat3();
 			GlmNet.vec3 twisty2=mm1*cv;
-			GlmNet .vec3 located1 = twisty2 + vf0;
+			GlmNet .vec3 twisty21 = twisty2 * knobl2;
+			GlmNet .vec3 located1 = twisty21 + vf0;	 // this is now a fixed point in space
 			float [ ] FA1 = toFloatArray ( located1 );
 
 			if ( this . MW . HackCheckBox_C5_R2_CheckBox_Control . IsChecked . Value )
@@ -1000,20 +1004,20 @@ namespace DMT01
 			if ( true )
 				{
 				float tknob = this .MW .region_threshold_H_Slider_UserControl .SliderValue;
-				if ( IsInBetween ( tknob , E ) )
+				if ( !IsInBetween ( tknob , E ) )
 					{
-					gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
-					gl .LineWidth ( 3 );
-					gl .PointSize ( 5 );
-					gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
-					gl .Vertex ( E .V [ 0 ] .cf );
-					gl .Vertex ( E .V [ 1 ] .cf );
-					gl .End ( );
-					gl .PopAttrib ( );
-
-				}
+					return;
+					}
+				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+				gl .LineWidth ( 3 );
+				gl .PointSize ( 5 );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
+				gl .Vertex ( E .V [ 0 ] .cf );
+				gl .Vertex ( E .V [ 1 ] .cf );
+				gl .End ( );
+				gl .PopAttrib ( );
 			}
-			}
+		}
 
 		public float [ ] toFloatArray ( GlmNet .vec3 l )
 		{

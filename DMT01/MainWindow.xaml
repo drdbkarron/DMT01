@@ -869,13 +869,16 @@
 											LabelText="Region wide threshold"
 											SliderMaxValue="60"
 											SliderMinValue="0" />
-										<local:H_Slider_UserControl1
+										<local:H_Slider_UserControl1 x:Name="ArrowHeadSide2Length2_H_Slider_UserControl1"
 											Grid.Row="1"
 											Width="836"
 											Height="69"
-											Margin="60,1,60,0"
-											HorizontalAlignment="Center"
-											VerticalAlignment="Center" />
+											SliderValue="1"
+											SliderMinValue="0"
+											SliderMaxValue="1"
+											Margin="1"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Center" LabelText="ArrowHeadSide2 Length" />
 										<local:H_Slider_UserControl1
 											Grid.Row="2"
 											Width="836"
@@ -960,13 +963,13 @@
 											Grid.Row="2"
 											Width="834"
 											Height="66"
-											Margin="1,1,0,0"
+											Margin="1,1,1,1"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-											LabelText="#3 -2Pi to +2Pi"
+											LabelText="#3 Arrow Length"
 											SliderMaxValue="1"
-											SliderMinValue="-1"
-											SliderValue="0" />
+											SliderMinValue="0"
+											SliderValue="1" />
 										<local:H_Slider_UserControl1
 											x:Name="Hack_H_Slider_04_UserControl"
 											Grid.Row="3"

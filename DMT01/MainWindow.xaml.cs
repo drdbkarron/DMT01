@@ -1276,6 +1276,19 @@ namespace DMT01
 				{
 				return;
 				}
+			
+			if ( nameString == "" )
+			{
+				nameString = CB .Name;
+
+			}
+
+			if ( nameString == "" )
+			{
+				String Content = CB .Content as String;
+				System .Diagnostics .Debug .WriteLine ( String .Format ( "{0} contents <{1}> {2} " , "null name string" , Content, ( ( ( System .Environment .StackTrace ) .Split ( '\n' ) ) [ 2 ] .Trim ( ) ) ) );
+				return;
+			}
 
 			String StateFileName = String . Format ( "{0}.xml" , nameString );
 
@@ -1285,7 +1298,7 @@ namespace DMT01
 			p . CommonFields . ControlName = CB . Name;
 			p . CommonFields . UpdatedFromXmlFiles = true;
 
-			p . CheckBoxState = CB . IsChecked . GetValueOrDefault ( );
+			p . CheckBoxState = CB . IsChecked .Value;
 			p . CheckBoxName = CB . Name;
 
 			XmlSerializer x = new XmlSerializer ( p . GetType ( ) );
@@ -1300,6 +1313,8 @@ namespace DMT01
 
 			x . Serialize ( w , p );
 			w . Close ( );
+
+			System .Diagnostics .Debug .WriteLine ( String .Format ( "Wrote {0} at {1} " , StateFileName , ( ( ( System .Environment .StackTrace ) .Split ( '\n' ) ) [ 2 ] .Trim ( ) ) ) );
 			}
 
 		private void RadioCheckBoxSerialize ( string nameString , UIElement E )
@@ -2324,11 +2339,6 @@ namespace DMT01
 			{
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 			}
-
-		private void lineStinkerModeenumcomboBoxUserControl_Loaded ( object sender , RoutedEventArgs e )
-		{
-
-		}
 
 		private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
 			{
