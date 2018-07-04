@@ -509,6 +509,7 @@ namespace DMT01
 
 		internal void DrawMe ( )
 			{
+
 			DrawBoxelEdgeCycles ( );
 
 			AnnotateBoxelAtCentroid ( );
@@ -579,12 +580,13 @@ namespace DMT01
 
 			if ( this . MW . HackCheckBox_C1_R2_CheckBox_Control . IsChecked . Value )
 				{
-				if ( this . MW . Hack_H_Slider_02_UserControl . SliderValue < 0 )
+				float knobby = this.MW.CentroidToCornerLengthFraction_H_Slider_UserControl .SliderValue;
+				if ( knobby < 0 )
 					{
 					return;
 					}
 
-				if ( this . MW . Hack_H_Slider_02_UserControl . SliderValue > 1 )
+				if ( knobby > 1 )
 					{
 					return;
 					}
@@ -592,51 +594,46 @@ namespace DMT01
 				LineStinkerModes Stankey=this.MW.lineStinkerModeenumcomboBoxUserControl.Mode;
 
 				float [ ] [ ] [ ] Stinkers = new float [ 4 ] [ ] [ ];
-
-				Stinkers [ 0 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 0 ] . cf ,
-					fraction: this . MW . Hack_H_Slider_02_UserControl . SliderValue , mode: Stankey );
-				if ( Stinkers == null )
-				{
+				if (Stinkers == null)
 					return;
-				}
-
-				if ( this . MW . HackCheckBox_C2_R2_CheckBox_Control . IsChecked . Value )
-					{
-					float[] mp=GetCentroid(Stinkers[0]);
-					gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-					gl . Color ( 1 , .2 , .9 );
-					gl . PointSize( 1 );
-					gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
-
-					gl . End ( );
-					gl . PopAttrib ( );
-					}
-
+				Stinkers [ 0 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 0 ] . cf ,
+					fraction: knobby , mode: Stankey );
+				if ( Stinkers [ 0 ] == null )
+					return;
 				Stinkers [ 1 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 1 ] . cf ,
-					fraction: this . MW . Hack_H_Slider_02_UserControl . SliderValue , mode: Stankey );
+					fraction: knobby , mode: Stankey );
+				if ( Stinkers [ 1 ] == null )
+					return;
 				Stinkers [ 2 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 2 ] . cf ,
-					fraction: this . MW . Hack_H_Slider_02_UserControl . SliderValue , mode: Stankey );
+					fraction: knobby , mode: Stankey );
+				if ( Stinkers [2 ] == null )
+					return;
 				Stinkers [ 3 ] = LineStinker ( cf0: this . Centroid . cf , cf1: this . V [ 3 ] . cf ,
-					fraction: this . MW . Hack_H_Slider_02_UserControl . SliderValue , mode: Stankey );
+					fraction: knobby , mode: Stankey );
+				if ( Stinkers [3  ] == null )
+					return;
 
-				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . Color ( 1 , .2 , .9 );
-				gl . LineWidth ( 1 );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				if ( this .MW .HackCheckBox_C2_R2_CheckBox_Control .IsChecked .Value )
+				{
+					gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+					gl .Color ( 1 , .2 , .9 );
+					gl .LineWidth ( 1 );
+					gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
 
-				gl . Vertex ( x: Stinkers [ 0 ] [ 0 ] [ 0 ] , y: Stinkers [ 0 ] [ 0 ] [ 1 ] , z: Stinkers [ 0 ] [ 0 ] [ 2 ] );
-				gl . Vertex ( x: Stinkers [ 0 ] [ 1 ] [ 0 ] , y: Stinkers [ 0 ] [ 1 ] [ 1 ] , z: Stinkers [ 0 ] [ 1 ] [ 2 ] );
-				gl . Vertex ( x: Stinkers [ 1 ] [ 0 ] [ 0 ] , y: Stinkers [ 1 ] [ 0 ] [ 1 ] , z: Stinkers [ 1 ] [ 0 ] [ 2 ] );
-				gl . Vertex ( x: Stinkers [ 1 ] [ 1 ] [ 0 ] , y: Stinkers [ 1 ] [ 1 ] [ 1 ] , z: Stinkers [ 1 ] [ 1 ] [ 2 ] );
-				gl . Vertex ( x: Stinkers [ 2 ] [ 0 ] [ 0 ] , y: Stinkers [ 2 ] [ 0 ] [ 1 ] , z: Stinkers [ 2 ] [ 0 ] [ 2 ] );
-				gl . Vertex ( x: Stinkers [ 2 ] [ 1 ] [ 0 ] , y: Stinkers [ 2 ] [ 1 ] [ 1 ] , z: Stinkers [ 2 ] [ 1 ] [ 2 ] );
-				gl . Vertex ( x: Stinkers [ 3 ] [ 0 ] [ 0 ] , y: Stinkers [ 3 ] [ 0 ] [ 1 ] , z: Stinkers [ 3 ] [ 0 ] [ 2 ] );
-				gl . Vertex ( x: Stinkers [ 3 ] [ 1 ] [ 0 ] , y: Stinkers [ 3 ] [ 1 ] [ 1 ] , z: Stinkers [ 3 ] [ 1 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 0 ] [ 0 ] [ 0 ] , y: Stinkers [ 0 ] [ 0 ] [ 1 ] , z: Stinkers [ 0 ] [ 0 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 0 ] [ 1 ] [ 0 ] , y: Stinkers [ 0 ] [ 1 ] [ 1 ] , z: Stinkers [ 0 ] [ 1 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 1 ] [ 0 ] [ 0 ] , y: Stinkers [ 1 ] [ 0 ] [ 1 ] , z: Stinkers [ 1 ] [ 0 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 1 ] [ 1 ] [ 0 ] , y: Stinkers [ 1 ] [ 1 ] [ 1 ] , z: Stinkers [ 1 ] [ 1 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 2 ] [ 0 ] [ 0 ] , y: Stinkers [ 2 ] [ 0 ] [ 1 ] , z: Stinkers [ 2 ] [ 0 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 2 ] [ 1 ] [ 0 ] , y: Stinkers [ 2 ] [ 1 ] [ 1 ] , z: Stinkers [ 2 ] [ 1 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 3 ] [ 0 ] [ 0 ] , y: Stinkers [ 3 ] [ 0 ] [ 1 ] , z: Stinkers [ 3 ] [ 0 ] [ 2 ] );
+					gl .Vertex ( x: Stinkers [ 3 ] [ 1 ] [ 0 ] , y: Stinkers [ 3 ] [ 1 ] [ 1 ] , z: Stinkers [ 3 ] [ 1 ] [ 2 ] );
 
-				gl . End ( );
-				gl . PopAttrib ( );
+					gl .End ( );
+					gl .PopAttrib ( );
 				}
 			}
+		}
 
 		private float [ ] [ ] LineStinker ( float [ ] cf0 , float [ ] cf1 , float fraction , WpfControlLibrary1 . LineStinkerModes mode )
 			{
@@ -873,95 +870,23 @@ namespace DMT01
 				}
 			}
 
-		private void DebugDrawEdge ( Edge E )
+		protected void DebugDrawEdge ( Edge E )
+		{
+			if ( this .MW == null )
 			{
-			if ( this . MW == null )
-				{
 				return;
-				}
+			}
 
-			OpenGL gl = this.MW.myOpenGLControl.OpenGL;
+			OpenGL gl = this .MW .myOpenGLControl .OpenGL;
 			if ( gl == null )
-				{
+			{
 				return;
-				}
+			}
 
 			AnnotateEdge ( gl , E );
 
-			float knob00=  this.MW . Z_Fudge_H_Slider_0_UserControl . SliderValue;
-			float [ ] cf0 = E . V [ 0 ] . cf;
-			float [ ] cf1 = E . V [ 1 ] . cf;
-			float [ ] cent = { this . Centroid .cf[0] , this . Centroid .cf [ 1 ] ,Centroid.cf[2] };
-
-			GlmNet .vec3 vf0 = new GlmNet .vec3 ( x: cf0 [ 0 ] , y: cf0 [ 1 ] , z: cf0 [ 2 ] );
-			GlmNet .vec3 vf1 = new GlmNet .vec3 ( x: cf1 [ 0 ] , y: cf1 [ 1 ] , z: cf1 [ 2 ] );
-			GlmNet .vec3 vce = new GlmNet .vec3 ( x: cent [ 0 ] , y: cent [ 1 ] , z: cent [ 2 ] );
-
-			float [ ] faaa = subtract ( cf0 , cent );
-			GlmNet . vec3 cv = new GlmNet.vec3( x: faaa[0], y: faaa[1], z: faaa[2] );
-
-			GlmNet . vec3 z_rot_axis = new GlmNet . vec3 ( 0 , 0 , 1 );
-			GlmNet . mat4 ID = GlmNet .mat4 .identity ( );
-			GlmNet . vec3 ZV = new GlmNet .vec3 ( 0 , 0 , 0 );
-			GlmNet .vec3 noon = new GlmNet .vec3 ( x: 0 , y: 1 , z: 0 );
-
-			if ( this . MW . HackCheckBox_C7_R1_CheckBox_Control . IsChecked . Value )
-				{
-				double spinner2 =this.MW . Hack_H_Slider_04_UserControl . SliderValue * 2f * Math . PI;
-				float spinner2f=(float)spinner2;
-				GlmNet . mat4 rotation = GlmNet . glm . rotate ( ID , spinner2f , z_rot_axis);
-				GlmNet . mat3 normalMatrix = rotation . to_mat3 ( );
-				GlmNet . vec3 rotated_noon = normalMatrix * noon;
-				float [ ] ccc = { rotated_noon . x + cent[0], rotated_noon . y+cent[1] , rotated_noon . z +cent[2]};
-				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . Color ( 1 , .2 , .9 );
-				gl .LineWidth ( 1 );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-				gl . Vertex ( cent );
-				gl . Vertex ( ccc );
-				gl . End ( );
-				gl . PopAttrib ( );
-				}
-
-			float knob1= (float)(this.MW .Hack_H_Slider_01_UserControl .SliderValue * 2f * Math .PI);
-			float knobl1 = this .MW .Hack_H_Slider_03_UserControl .SliderValue;
-			GlmNet .mat4  d0q = GlmNet.glm.rotate (ID, knob1, z_rot_axis);
-			GlmNet. mat3 mm0 = d0q . to_mat3();
-			GlmNet.vec3 twisty1 = mm0 * cv;
-			GlmNet .vec3 twisty22 = twisty1 * knobl1;
-			GlmNet.vec3 located0 = twisty22+vf0;
-			float [ ] FA0 = toFloatArray ( located0 );
-
-			float knob2=(float)(this.MW . Hack_H_Slider_02_UserControl . SliderValue * 2f*Math . PI);
-			float knobl2 = this .MW .ArrowHeadSide2Length2_H_Slider_UserControl1 .SliderValue;
-			GlmNet .mat4  d1q = GlmNet.glm.rotate (ID, knob2, z_rot_axis);
-			GlmNet.mat3 mm1=d1q.to_mat3();
-			GlmNet.vec3 twisty2=mm1*cv;
-			GlmNet .vec3 twisty21 = twisty2 * knobl2;
-			GlmNet .vec3 located1 = twisty21 + vf0;	 // this is now a fixed point in space
-			float [ ] FA1 = toFloatArray ( located1 );
-
-			if ( this . MW . HackCheckBox_C5_R2_CheckBox_Control . IsChecked . Value )
-				{
-				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . Color ( 0 , .8 , 1 );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-				gl . Vertex ( cf0 );
-				gl . Vertex ( FA0 );
-				gl . End ( );
-				gl . PopAttrib ( );
-				}
-
-			if ( this . MW . HackCheckBox_C6_R1_CheckBox_Control . IsChecked . Value )
-				{
-				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . Color ( 1 , .2 , .9 );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-				gl . Vertex ( cf0 );
-				gl . Vertex ( FA1 );
-				gl . End ( );
-				gl . PopAttrib ( );
-				}
+			float [ ] cf0 = E .V [ 0 ] .cf;
+			float [ ] cf1 = E .V [ 1 ] .cf;
 
 			if ( this .MW .HackCheckBox_C4_R1_CheckBox_Control .IsChecked .Value )
 			{
@@ -975,39 +900,170 @@ namespace DMT01
 				gl .PopAttrib ( );
 			}
 
-			if ( this . MW . HackCheckBox_C5_R1_CheckBox_Control . IsChecked . Value )
+			float [ ] cent = { this .Centroid .cf [ 0 ] , this .Centroid .cf [ 1 ] , this .Centroid .cf [ 2 ] };
+
+			GlmNet .vec3 vf0 = new GlmNet .vec3 ( x: cf0 [ 0 ] , y: cf0 [ 1 ] , z: cf0 [ 2 ] );
+			GlmNet .vec3 vf1 = new GlmNet .vec3 ( x: cf1 [ 0 ] , y: cf1 [ 1 ] , z: cf1 [ 2 ] );
+			GlmNet .vec3 vce = new GlmNet .vec3 ( x: this .Centroid .cf [ 0 ] , y: this .Centroid .cf [ 1 ] , z: this .Centroid .cf [ 2 ] );
+
+			float [ ] faaa = subtract ( cf0 , cent );
+			GlmNet .vec3 cv = new GlmNet .vec3 ( x: faaa [ 0 ] , y: faaa [ 1 ] , z: faaa [ 2 ] );
+			GlmNet .vec3 v3z_RotateAxis = new GlmNet .vec3 ( 0 , 0 , 1 );
+			GlmNet .mat4 ID = GlmNet .mat4 .identity ( );
+			GlmNet .vec3 ZV = new GlmNet .vec3 ( 0 , 0 , 0 );
+			GlmNet .vec3 noon = new GlmNet .vec3 ( x: 0 , y: 1 , z: 0 );
+
+			if ( this .MW .HackCheckBox_C9_R2_CheckBox_Control .IsChecked .Value )
+			{
+				float TwistyKnob = ( float ) ( this .MW .HighSideHalfArrowAngleOffCentroid_H_Slider_UserControl .SliderValue * Math .PI );
+				float StreatchyKnob = this .MW .HighSideHalfArrowHeadLengthFraction_H_Slider_UserControl .SliderValue;
+				Vertex Bigger, Smaller;
+				Boolean ShowCentroid = false;
+				if ( E .V [ 0 ] .V > E .V [ 1 ] .V )
 				{
-				float u = this.MW.Threshold_Hack_H_Slider_2_UserControl.SliderValue;
+					Bigger = E .V [ 0 ];
+					Smaller = E .V [ 1 ];
+				}
+				else if ( E .V [ 0 ] .V < E .V [ 1 ] .V )
+				{
+					Bigger = E .V [ 1 ];
+					Smaller = E .V [ 0 ];
+					TwistyKnob = -TwistyKnob;
+				}
+				else
+				{
+					return; // == flat edge
+				}
+							// p prefix fixed point
+							// v prefix direction unfixed vector
+
+				GlmNet .vec3 pcf0		= new GlmNet .vec3 ( x: Smaller.cf [ 0 ] , y: Smaller .cf [ 1 ] , z: Smaller .cf [ 2 ] );
+				GlmNet .vec3 p3Bigger	= new GlmNet .vec3 ( x: Bigger .cf [ 0 ] , y: Bigger.cf[ 1 ] , z: Bigger.cf [ 2 ] );
+				GlmNet .vec3 p3Centroid = new GlmNet .vec3 ( this .Centroid .cf [ 0 ] , this .Centroid .cf [ 1 ] , this .Centroid .cf [ 2 ] );
+
+				GlmNet .mat4 m4rotator = GlmNet .glm .rotate ( ID , TwistyKnob , v3z_RotateAxis );
+				GlmNet .mat3 m3rotator = m4rotator .to_mat3 ( );
+				GlmNet .vec3 v3Centroid = p3Centroid - p3Bigger;
+				GlmNet .vec3 v3twisted = m3rotator * v3Centroid;
+				//GlmNet .vec3 twisty1 = GlmNet.mat3.identity() * v3Centroid;
+				GlmNet .vec3 v3twistedStreatchey = v3twisted * StreatchyKnob;
+				GlmNet .vec3 pt = v3twistedStreatchey + p3Bigger;
+				
+				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
+				gl .Color ( 0 , .8 , 1 );
+				gl .LineWidth ( 2 );
+				gl .Vertex ( Smaller .cf );
+				gl .Vertex ( Bigger .cf );
+				gl .Color ( .9 , .7 , .4 );
+				gl .LineWidth ( 1 );
+				gl .Vertex ( Bigger .cf );
+				gl .Vertex ( x: pt.x, y: pt.y,z: pt.z );
+				if ( ShowCentroid )
+				{
+					gl .Color ( .5 , .7 , .8 );
+					gl .LineWidth ( 1 );
+					gl .Vertex ( Bigger .cf );
+					gl .Vertex ( Centroid .cf );
+				}
+				gl .Color ( .9 , .2 , .3 );
+				gl .Vertex ( Bigger .cf );
+				gl .Vertex ( pt.x, pt.y, pt.z);
+				gl .End ( );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Points );
+				gl .PointSize ( 4 );
+				gl .Color (red: .9 , green: .1 , blue: .1 );
+				gl .Vertex ( Bigger .cf );
+				if ( ShowCentroid )
+				{
+					gl .PointSize ( 2 );
+					gl .Vertex ( Centroid .cf );
+				}
+				gl .PointSize ( 6 );
+				gl .Vertex ( pt .x , pt .y , pt .z );
+				gl .End ( );
+				gl .PopAttrib ( );
+
+			}
+
+			if ( this .MW .HackCheckBox_C7_R1_CheckBox_Control .IsChecked .Value )
+			{
+				RotationTest ( E , gl );
+			}
+
+			if ( this .MW .HackCheckBox_C5_R2_CheckBox_Control .IsChecked .Value )
+			{
+				float knob1 = ( float ) ( this .MW .Hack_H_Slider_01_UserControl .SliderValue * 2f * Math .PI );
+				float knobl1 = this .MW .Hack_H_Slider_03_UserControl .SliderValue;
+				GlmNet .mat4 d0q = GlmNet .glm .rotate ( ID , knob1 , v3z_RotateAxis );
+				GlmNet .mat3 mm0 = d0q .to_mat3 ( );
+				GlmNet .vec3 twisty1 = mm0 * cv;
+				GlmNet .vec3 twisty22 = twisty1 * knobl1;
+				GlmNet .vec3 located0 = twisty22 + vf0;
+				float [ ] FA0 = toFloatArray ( located0 );
+
+				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+				gl .Color ( 0 , .8 , 1 );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
+				gl .Vertex ( cf0 );
+				gl .Vertex ( FA0 );
+				gl .End ( );
+				gl .PopAttrib ( );
+			}
+
+			if ( this .MW .HackCheckBox_C6_R1_CheckBox_Control .IsChecked .Value )
+			{
+				float knob2 = ( float ) ( this .MW .Hack_H_Slider_02_UserControl .SliderValue * 2f * Math .PI );
+				float knobl2 = this .MW .ArrowHeadSide2Length2_H_Slider_UserControl1 .SliderValue;
+				GlmNet .mat4 d1q = GlmNet .glm .rotate ( ID , knob2 , v3z_RotateAxis );
+				GlmNet .mat3 mm1 = d1q .to_mat3 ( );
+				GlmNet .vec3 twisty2 = mm1 * cv;
+				GlmNet .vec3 twisty21 = twisty2 * knobl2;
+				GlmNet .vec3 located1 = twisty21 + vf0;  // this is now a fixed point in space
+				float [ ] FA1 = toFloatArray ( located1 );
+
+				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+				gl .Color ( 1 , .2 , .9 );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
+				gl .Vertex ( cf0 );
+				gl .Vertex ( FA1 );
+				gl .End ( );
+				gl .PopAttrib ( );
+			}
+
+			if ( this .MW .HackCheckBox_C5_R1_CheckBox_Control .IsChecked .Value )
+			{
+				float u = this .MW .Threshold_Hack_H_Slider_2_UserControl .SliderValue;
 				float x0 = cf0 [ 0 ];
 				float y0 = cf0 [ 1 ];
 				float z0 = cf0 [ 2 ];
 
 				float x1 = cf1 [ 0 ];
 				float y1 = cf1 [ 1 ];
-				float z1 = cf1 [2 ];
+				float z1 = cf1 [ 2 ];
 
-				float x = (( 1 - u ) * x0) + (u * x1);
-				float y = (( 1 - u ) * y0) + (u * y1);
-				float z = (( 1 - u ) * z0) + (u * z1);
+				float x = ( ( 1 - u ) * x0 ) + ( u * x1 );
+				float y = ( ( 1 - u ) * y0 ) + ( u * y1 );
+				float z = ( ( 1 - u ) * z0 ) + ( u * z1 );
 
-				float [ ] c_th = {x,y,z};
+				float [ ] c_th = { x , y , z };
 
-				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . LineWidth ( 1 );
-				gl . PointSize ( 5 );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
-				gl . Vertex ( c_th [ 0 ] , c_th [ 1 ] , c_th [ 2 ] );
-				gl . End ( );
-				gl . PopAttrib ( );
-				}
+				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+				gl .LineWidth ( 1 );
+				gl .PointSize ( 5 );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Points );
+				gl .Vertex ( c_th [ 0 ] , c_th [ 1 ] , c_th [ 2 ] );
+				gl .End ( );
+				gl .PopAttrib ( );
+			}
 
-			if ( true )
+			if ( this .MW .HackCheckBox_C3_R2_CheckBox_Control .IsChecked .Value )
+			{
+				float v = this .MW .region_threshold_H_Slider_UserControl .SliderValue;
+				if ( !IsInBetween ( v , E ) )
 				{
-				float tknob = this .MW .region_threshold_H_Slider_UserControl .SliderValue;
-				if ( !IsInBetween ( tknob , E ) )
-					{
 					return;
-					}
+				}
 				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
 				gl .LineWidth ( 3 );
 				gl .PointSize ( 5 );
@@ -1016,7 +1072,65 @@ namespace DMT01
 				gl .Vertex ( E .V [ 1 ] .cf );
 				gl .End ( );
 				gl .PopAttrib ( );
+
+				float x0 = cf0 [ 0 ];
+				float y0 = cf0 [ 1 ];
+				float z0 = cf0 [ 2 ];
+				float v0 = E .V [ 0 ] .V;
+
+				float x1 = cf1 [ 0 ];
+				float y1 = cf1 [ 1 ];
+				float z1 = cf1 [ 2 ];
+				float v1 = E .V [ 1 ] .V;
+
+				float u = ( v - v0 ) / ( v1 - v0 );
+				float x = ( ( 1 - u ) * x0 ) + ( u * x1 );
+				float y = ( ( 1 - u ) * y0 ) + ( u * y1 );
+				float z = ( ( 1 - u ) * z0 ) + ( u * z1 );
+
+				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+				gl .LineWidth ( 1 );
+				gl .PointSize ( 5 );
+				gl .Color ( .3 , .5 , .8 );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Points );
+				gl .Vertex ( x , y , z );
+				gl .End ( );
+				gl .PopAttrib ( );
 			}
+		}
+
+		private void RotationTest ( Edge E , OpenGL gl  )
+		{
+			float knob00 = this .MW .Z_Fudge_H_Slider_0_UserControl .SliderValue;
+			float [ ] cf0 = E .V [ 0 ] .cf;
+			float [ ] cf1 = E .V [ 1 ] .cf;
+			float [ ] cent = { this .Centroid .cf [ 0 ] , this .Centroid .cf [ 1 ] , this .Centroid .cf [ 2 ] };
+
+			GlmNet .vec3 vf0 = new GlmNet .vec3 ( x: cf0 [ 0 ] , y: cf0 [ 1 ] , z: cf0 [ 2 ] );
+			GlmNet .vec3 vf1 = new GlmNet .vec3 ( x: cf1 [ 0 ] , y: cf1 [ 1 ] , z: cf1 [ 2 ] );
+			GlmNet .vec3 vce = new GlmNet .vec3 ( x: cent [ 0 ] , y: cent [ 1 ] , z: cent [ 2 ] );
+
+			float [ ] faaa = subtract ( cf0 , cent );
+			GlmNet .vec3 cv = new GlmNet .vec3 ( x: faaa [ 0 ] , y: faaa [ 1 ] , z: faaa [ 2 ] );
+			GlmNet .vec3 z_rot_axis = new GlmNet .vec3 ( 0 , 0 , 1 );
+			GlmNet .mat4 ID = GlmNet .mat4 .identity ( );
+			GlmNet .vec3 ZV = new GlmNet .vec3 ( 0 , 0 , 0 );
+			GlmNet .vec3 noon = new GlmNet .vec3 ( x: 0 , y: 1 , z: 0 );
+
+			double spinner2 = this .MW .Hack_H_Slider_04_UserControl .SliderValue * 2f * Math .PI;
+			float spinner2f = ( float ) spinner2;
+			GlmNet .mat4 rotation = GlmNet .glm .rotate ( ID , spinner2f , z_rot_axis );
+			GlmNet .mat3 normalMatrix = rotation .to_mat3 ( );
+			GlmNet .vec3 rotated_noon = normalMatrix * noon;
+			float [ ] ccc = { rotated_noon .x + cent [ 0 ] , rotated_noon .y + cent [ 1 ] , rotated_noon .z + cent [ 2 ] };
+			gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+			gl .Color ( 1 , .2 , .9 );
+			gl .LineWidth ( 1 );
+			gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
+			gl .Vertex ( cent );
+			gl .Vertex ( ccc );
+			gl .End ( );
+			gl .PopAttrib ( );
 		}
 
 		public float [ ] toFloatArray ( GlmNet .vec3 l )

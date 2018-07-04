@@ -4,7 +4,6 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:ReoGrid="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
 	xmlns:WPF="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
-	xmlns:WpfControlLibrary1="clr-namespace:WpfControlLibrary1;assembly=WpfControlLibrary1"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:WpfControlLibrary1;assembly=WpfControlLibrary1"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -36,7 +35,8 @@
 	WindowStartupLocation="Manual"
 	WindowState="Normal"
 	WindowStyle="ThreeDBorderWindow"
-	mc:Ignorable="d">
+	mc:Ignorable="d"
+	>
 
 	<StackPanel
 		x:Name="TopStackPanel"
@@ -47,7 +47,8 @@
 		VerticalAlignment="Top"
 		Background="#FFE2DECD"
 		Cursor="Hand"
-		Orientation="Vertical">
+		Orientation="Vertical"
+		>
 		<Grid
 			x:Name="SharpGLandReoGridBig_Grid"
 			Width="1043"
@@ -56,10 +57,17 @@
 			HorizontalAlignment="Left"
 			VerticalAlignment="Top"
 			Background="#FFAB79B6"
-			ScrollViewer.VerticalScrollBarVisibility="Disabled">
+			ScrollViewer.VerticalScrollBarVisibility="Disabled"
+			>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition x:Name="Col0" Width="441" />
-				<ColumnDefinition x:Name="Col1" Width="426" />
+				<ColumnDefinition
+					x:Name="Col0"
+					Width="441"
+					/>
+				<ColumnDefinition
+					x:Name="Col1"
+					Width="426"
+					/>
 			</Grid.ColumnDefinitions>
 			<ReoGrid:ReoGridControl
 				x:Name="myReoGridControl"
@@ -70,10 +78,14 @@
 				x:FieldModifier="public"
 				Loaded="myReoGridControl_Loaded"
 				RenderTransformOrigin="0.5,0.5"
-				Visibility="Visible">
+				Visibility="Visible"
+				>
 				<ReoGrid:ReoGridControl.RenderTransform>
 					<TransformGroup>
-						<ScaleTransform ScaleX="0.55" ScaleY="0.55" />
+						<ScaleTransform
+							ScaleX="0.55"
+							ScaleY="0.55"
+							/>
 						<SkewTransform />
 						<RotateTransform />
 						<TranslateTransform />
@@ -103,7 +115,8 @@
 				OpenGLInitialized="myOpenGLControl_OpenGLInitialized"
 				OpenGLVersion="OpenGL2_0"
 				Resized="myOpenGLControl_Resized"
-				ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+				ScrollViewer.VerticalScrollBarVisibility="Disabled"
+				/>
 		</Grid>
 		<StackPanel
 			x:Name="BottomStackPanel"
@@ -113,7 +126,8 @@
 			HorizontalAlignment="Left"
 			VerticalAlignment="Bottom"
 			Background="#FF1A319B"
-			ScrollViewer.HorizontalScrollBarVisibility="Visible">
+			ScrollViewer.HorizontalScrollBarVisibility="Visible"
+			>
 
 			<StackPanel
 				x:Name="DrawMe_StackPanel"
@@ -123,7 +137,8 @@
 				HorizontalAlignment="Left"
 				VerticalAlignment="Center"
 				Background="#FF5D4B5F"
-				Orientation="Horizontal">
+				Orientation="Horizontal"
+				>
 				<CheckBox
 					x:Name="DoDrawReoGridSpreadsheet_CheckBox_Control"
 					Width="83"
@@ -133,7 +148,8 @@
 					Click="DoDrawReoGridSpreadsheet_CheckBox_Control_Click"
 					Content="Draw Reo"
 					Cursor="Pen"
-					IsChecked="True" />
+					IsChecked="True"
+					/>
 				<CheckBox
 					x:Name="AxisDrawMe_CheckBox_Control"
 					Width="83"
@@ -142,7 +158,8 @@
 					BorderBrush="#FFEA0909"
 					BorderThickness="5,2,1,2"
 					Content="DrawAxis"
-					IsChecked="True" />
+					IsChecked="True"
+					/>
 				<CheckBox
 					x:Name="DrawTeaPot_CheckBox_Control"
 					Width="83"
@@ -151,7 +168,8 @@
 					BorderBrush="#FFEA0909"
 					BorderThickness="5,2,1,2"
 					Content="TeaPot"
-					IsChecked="True" />
+					IsChecked="True"
+					/>
 				<CheckBox
 					x:Name="Do_Orbit_CheckBox_Control"
 					Width="83"
@@ -159,7 +177,8 @@
 					HorizontalAlignment="Left"
 					BorderBrush="#FFEA0909"
 					BorderThickness="5,2,1,2"
-					Content="Do Orbit" />
+					Content="Do Orbit"
+					/>
 				<CheckBox
 					x:Name="Spreadsheet_Grid_CheckBox_Control"
 					Width="83"
@@ -168,14 +187,16 @@
 					BorderBrush="#FFEA0909"
 					BorderThickness="5,2,1,2"
 					Content="Draw Spreadsheet Grid"
-					IsChecked="True" />
+					IsChecked="True"
+					/>
 				<CheckBox
 					x:Name="Do_Orbit_Pull_Back_CheckBox_Control"
 					Margin="0,4,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Click="Do_Orbit_Pull_Back_CheckBox_Control_Click"
-					Content="Orbit Pull Back" />
+					Content="Orbit Pull Back"
+					/>
 				<StackPanel
 					x:Name="RadioButton_StackPanel"
 					Width="448"
@@ -184,37 +205,43 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Background="#FF7C2121"
-					Orientation="Horizontal">
+					Orientation="Horizontal"
+					>
 					<CheckBox
 						x:Name="UseOrthographic_Viewing_Transform_radioButton_Control"
 						Width="100"
 						Click="UseOrthographic_Viewing_Transform_radioButton_Control_Click"
 						Content="Orthographic"
-						IsChecked="False" />
+						IsChecked="False"
+						/>
 					<CheckBox
 						x:Name="Use_Viewing_Frustrum_RadioButton_Control"
 						Width="79"
 						Click="Use_Viewing_Frustrum_RadioButton_Click"
 						Content="Frustrum"
-						IsChecked="false" />
+						IsChecked="false"
+						/>
 					<CheckBox
 						x:Name="UsePerspetiveViewingTransform_RadioButton_Control"
 						Click="UsePerspetiveViewingTransform_Click"
 						Content="Perspective"
-						IsChecked="False" />
+						IsChecked="False"
+						/>
 					<CheckBox
 						x:Name="UseLookAtViewingTransform_RadioButton_Control"
 						Width="68"
 						Click="UseLookAtViewingTransform_RadioButton_Control_Click"
 						Content="LookAt"
-						IsChecked="False" />
+						IsChecked="False"
+						/>
 					<CheckBox
 						x:Name="DrawMouseScreenSpaceAnnotation_CheckBox_Control"
 						Width="76"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Top"
 						Content="Mouse in Screen"
-						IsChecked="True" />
+						IsChecked="True"
+						/>
 				</StackPanel>
 			</StackPanel>
 			<StackPanel
@@ -224,7 +251,8 @@
 				Margin="12,7,0,0"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
-				Orientation="Horizontal">
+				Orientation="Horizontal"
+				>
 				<StackPanel.Background>
 					<RadialGradientBrush>
 						<GradientStop Offset="0" Color="#FF9E6969" />
@@ -238,7 +266,8 @@
 					Margin="2,1,0,0"
 					HorizontalAlignment="Left"
 					Click="load_Button_Click"
-					Content="Load0" />
+					Content="Load0"
+					/>
 				<Button
 					x:Name="Save0_Button"
 					Width="84"
@@ -247,7 +276,8 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Click="Save0_Button_Click"
-					Content="Save0" />
+					Content="Save0"
+					/>
 				<RadioButton
 					x:Name="LaunchSavedStateOnInitalization_RadioButton_Control"
 					Width="122"
@@ -257,14 +287,16 @@
 					VerticalAlignment="Bottom"
 					Background="#FFEADDDD"
 					Content="Load Saved On Init"
-					IsChecked="True" />
+					IsChecked="True"
+					/>
 				<CheckBox
 					x:Name="DrawScreenSpaceAnnotationGrid_CheckBox_Control"
 					Width="133"
 					Margin="6,3,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Draw Screen Numbas" />
+					Content="Draw Screen Numbas"
+					/>
 				<CheckBox
 					x:Name="YourArmsTooShortToBoxWithHashem"
 					Width="133"
@@ -272,25 +304,29 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Content="Run develop code"
-					IsChecked="True" />
+					IsChecked="True"
+					/>
 				<CheckBox
 					Width="133"
 					Margin="6,3,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Check Box Unassigned" />
+					Content="Check Box Unassigned"
+					/>
 				<CheckBox
 					Width="133"
 					Margin="6,3,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Check Box Unassigned" />
+					Content="Check Box Unassigned"
+					/>
 				<CheckBox
 					Width="133"
 					Margin="6,3,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Check Box Unassigned" />
+					Content="Check Box Unassigned"
+					/>
 			</StackPanel>
 			<StackPanel
 				x:Name="Status_Label_StackPanel"
@@ -300,7 +336,8 @@
 				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				Background="#FF613642"
-				Orientation="Horizontal">
+				Orientation="Horizontal"
+				>
 				<Label
 					x:Name="Draws_Label"
 					Width="132"
@@ -310,7 +347,8 @@
 					VerticalAlignment="Center"
 					Background="#FFEAD0D0"
 					BorderThickness="1"
-					Content="Draws" />
+					Content="Draws"
+					/>
 				<Label
 					x:Name="Elapsed_Label"
 					Width="61"
@@ -323,14 +361,16 @@
 					Content="elapsed"
 					Initialized="Elapsed_Label_Initialized"
 					MouseEnter="Elapsed_Label_MouseEnter"
-					MouseLeave="Elapsed_Label_MouseLeave" />
+					MouseLeave="Elapsed_Label_MouseLeave"
+					/>
 				<Label
 					x:Name="Sheet_Number_Label"
 					Width="52"
 					Margin="0,5,0,7"
 					Content="{Binding myReoGrid}"
 					MouseEnter="Sheet_Number_Label_MouseEnter"
-					MouseLeave="Sheet_Number_Label_MouseLeave">
+					MouseLeave="Sheet_Number_Label_MouseLeave"
+					>
 					<Label.Background>
 						<RadialGradientBrush>
 							<GradientStop Offset="0" Color="#FF978C8E" />
@@ -347,7 +387,8 @@
 					VerticalAlignment="Center"
 					Background="#FFEAD0D0"
 					BorderThickness="1"
-					Content="FPS" />
+					Content="FPS"
+					/>
 				<Label
 					x:Name="Buffer_Mode_Label"
 					Width="61"
@@ -357,7 +398,8 @@
 					VerticalAlignment="Center"
 					Background="#FFEAD0D0"
 					BorderThickness="1"
-					Content="BufferMode" />
+					Content="BufferMode"
+					/>
 				<Label
 					x:Name="Orbit_Delta_Label"
 					Width="61"
@@ -367,7 +409,8 @@
 					VerticalAlignment="Center"
 					Background="#FFEAD0D0"
 					BorderThickness="1"
-					Content="{Binding SliderValue, ElementName=Orbit_Delta_Angle_H_Slider_UserControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+					Content="{Binding SliderValue, ElementName=Orbit_Delta_Angle_H_Slider_UserControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+					/>
 				<Label
 					x:Name="OpenGL_Height_Label"
 					Width="61"
@@ -377,7 +420,8 @@
 					VerticalAlignment="Center"
 					Background="#FFEAD0D0"
 					BorderThickness="1"
-					Content="{Binding Height, ElementName=myOpenGLControl, UpdateSourceTrigger=PropertyChanged}" />
+					Content="{Binding Height, ElementName=myOpenGLControl, UpdateSourceTrigger=PropertyChanged}"
+					/>
 				<Label
 					x:Name="OpenGl_Width_Label"
 					Width="61"
@@ -387,7 +431,8 @@
 					VerticalAlignment="Center"
 					Background="#FFEAD0D0"
 					BorderThickness="1"
-					Content="{Binding Width, ElementName=myOpenGLControl, UpdateSourceTrigger=PropertyChanged}" />
+					Content="{Binding Width, ElementName=myOpenGLControl, UpdateSourceTrigger=PropertyChanged}"
+					/>
 				<Label
 					x:Name="Aspect_Label"
 					Width="61"
@@ -397,13 +442,15 @@
 					VerticalAlignment="Center"
 					Background="#FFEAD0D0"
 					BorderThickness="1"
-					MouseLeave="Aspect_Label_MouseLeave" />
+					MouseLeave="Aspect_Label_MouseLeave"
+					/>
 				<Label
 					x:Name="Screen_X_Label"
 					Width="51"
 					Margin="1,0,0,0"
 					HorizontalAlignment="Left"
-					Content="Mouse X">
+					Content="Mouse X"
+					>
 					<Label.Background>
 						<RadialGradientBrush GradientOrigin="1,0.5">
 							<GradientStop Offset="0" Color="Black" />
@@ -415,7 +462,8 @@
 					x:Name="Screen_Y_Label"
 					Width="41"
 					Margin="8,0,0,0"
-					Content="'">
+					Content="'"
+					>
 					<Label.Background>
 						<RadialGradientBrush GradientOrigin="0,0.5">
 							<GradientStop Offset="0" Color="Black" />
@@ -429,7 +477,8 @@
 					Margin="2,5,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Viewport XY">
+					Content="Viewport XY"
+					>
 					<Label.Background>
 						<RadialGradientBrush>
 							<GradientStop Offset="0" Color="Black" />
@@ -445,11 +494,13 @@
 				Margin="4,5,21,5"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
-				Background="#FFF1F1C6">
+				Background="#FFF1F1C6"
+				>
 				<TabItem
 					x:Name="SpreadsheetSupport_TabItem"
 					Margin="0"
-					Header="Spreadsheet Load file">
+					Header="Spreadsheet Load file"
+					>
 					<Grid
 						x:Name="SpreadsheetFileName_Grid"
 						Width="987"
@@ -457,7 +508,8 @@
 						Margin="6,8,0,0"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Top"
-						Background="#FFC1DC47">
+						Background="#FFC1DC47"
+						>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
@@ -472,7 +524,8 @@
 							Margin="10,0,0,0"
 							HorizontalAlignment="Left"
 							VerticalAlignment="Top"
-							Orientation="Horizontal">
+							Orientation="Horizontal"
+							>
 							<StackPanel.Background>
 								<RadialGradientBrush>
 									<GradientStop Offset="0" Color="#FFDEB5B5" />
@@ -484,63 +537,73 @@
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="Draw Top Border" />
+								Content="Draw Top Border"
+								/>
 							<CheckBox
 								x:Name="DoDrawSpreadsheetSideBorder_CheckBox_Control"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="Draw side border" />
+								Content="Draw side border"
+								/>
 							<CheckBox
 								x:Name="DoDrawSpreadsheetFocusCell_s_CheckBox_Control"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="Draw Focus" />
+								Content="Draw Focus"
+								/>
 							<CheckBox
 								x:Name="DoDrawSpreadsheetSelectedCell_s_CheckBox_Control"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="Draw Selected" />
+								Content="Draw Selected"
+								/>
 							<CheckBox
 								x:Name="DoDrawSpreadsheetTextObjects_CheckBox_Control"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="Draw text" />
+								Content="Draw text"
+								/>
 							<CheckBox
 								x:Name="DoDrawSpreadsheetGrid_CheckBox_Control"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="Draw Grid" />
+								Content="Draw Grid"
+								/>
 							<CheckBox
 								x:Name="DoDrawAllSpreadsheetData_CheckBox_Control"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="All Data" />
+								Content="All Data"
+								/>
 							<CheckBox
 								x:Name="DoSelectDataToNormalize_CheckBox_Control"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="Select Data to Normalize" />
+								Content="Select Data to Normalize"
+								/>
 							<CheckBox
 								x:Name="DoDrawGreyScale_CheckBox_Control"
 								Width="137"
 								Background="#FFE8CECE"
 								BorderBrush="#FFDE2F2F"
 								BorderThickness="5,1,1,1"
-								Content="DoGreyScale" />
+								Content="DoGreyScale"
+								/>
 						</StackPanel>
 						<StackPanel
 							Grid.Row="1"
 							Height="27"
 							Margin="0,5,0,0"
 							VerticalAlignment="Top"
-							Orientation="Horizontal">
+							Orientation="Horizontal"
+							>
 							<Button
 								x:Name="DoSelectDataRangeForNormalization_Button"
 								Width="79"
@@ -549,7 +612,8 @@
 								HorizontalAlignment="Left"
 								VerticalAlignment="Bottom"
 								Click="SelectDataRangeForNormalization_DoNormalizationOnScratchSheet_Click"
-								Content="Select Data" />
+								Content="Select Data"
+								/>
 							<CheckBox
 								x:Name="Do_Execute_Select_Data_Button_on_Startup_CheckBox_Control"
 								Width="115"
@@ -558,13 +622,15 @@
 								VerticalContentAlignment="Bottom"
 								Background="#FFC14242"
 								BorderBrush="#FF0F1959"
-								Content="&lt;-Execute Startup" />
+								Content="&lt;-Execute Startup"
+								/>
 							<Button
 								x:Name="DoSaveSelectedData_Button"
 								Width="86"
 								Margin="7,4,0,2"
 								Click="DoSaveSelectedData_Button_Click"
-								Content="Save Selected" />
+								Content="Save Selected"
+								/>
 							<CheckBox
 								x:Name="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control"
 								Width="117"
@@ -573,7 +639,8 @@
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top"
 								Checked="InstallHandRowPivotButtonsInScratchSpreadsheet_CheckBox_Control_Checked"
-								Content="Hand Pivot Mode" />
+								Content="Hand Pivot Mode"
+								/>
 							<Button
 								x:Name="Do_Iterate_Resoures_Button"
 								Width="87"
@@ -582,7 +649,8 @@
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top"
 								Click="Do_Iterate_Resoures_Button_Click"
-								Content="Resources" />
+								Content="Resources"
+								/>
 							<CheckBox
 								x:Name="Spreadsheet_Aspect_Scale_Hack_checkBox_Control"
 								Width="152"
@@ -590,7 +658,8 @@
 								Margin="5,2,0,0"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top"
-								Content="Spreadsheet Aspect Hack" />
+								Content="Spreadsheet Aspect Hack"
+								/>
 						</StackPanel>
 						<DockPanel
 							x:Name="file_and_dir_spreadsheet_DockPanel"
@@ -600,13 +669,15 @@
 							Margin="6,2,0,0"
 							HorizontalAlignment="Left"
 							VerticalAlignment="Top"
-							Background="#FF393E47">
+							Background="#FF393E47"
+							>
 							<StackPanel
 								Width="619"
 								Height="133"
 								Margin="1,3,0,0"
 								HorizontalAlignment="Left"
-								VerticalAlignment="Top">
+								VerticalAlignment="Top"
+								>
 								<TextBlock
 									x:Name="Spreadsheet_File_Name_TextBlock"
 									Width="607"
@@ -617,7 +688,8 @@
 									VerticalAlignment="Top"
 									Background="#FF3B9393"
 									TextAlignment="Center"
-									TextWrapping="Wrap"><Run Text="Spreadsheet File Name" /></TextBlock>
+									TextWrapping="Wrap"
+									><Run Text="Spreadsheet File Name" /></TextBlock>
 								<RichTextBox
 									x:Name="SpreadsheetFileName_RichTextBox"
 									Width="607"
@@ -627,7 +699,8 @@
 									Padding="0"
 									HorizontalAlignment="Left"
 									VerticalAlignment="Top"
-									Background="#FFF0EB87">
+									Background="#FFF0EB87"
+									>
 									<FlowDocument>
 										<Paragraph>
 											<Run Text="UNEP_NATDIS_disasters_2002_2010.xlsx" />
@@ -644,7 +717,8 @@
 									VerticalAlignment="Top"
 									Background="#FF3B9393"
 									TextAlignment="Center"
-									TextWrapping="Wrap"><Run Text="Spreadsheet Directory Name" /></TextBlock>
+									TextWrapping="Wrap"
+									><Run Text="Spreadsheet Directory Name" /></TextBlock>
 								<RichTextBox
 									x:Name="SpreadsheetDirPath_RichTextBox"
 									Width="607"
@@ -654,7 +728,8 @@
 									Padding="0"
 									HorizontalAlignment="Left"
 									VerticalAlignment="Top"
-									Background="#FF975959">
+									Background="#FF975959"
+									>
 									<FlowDocument>
 										<Paragraph>
 											<Run Text="./" />
@@ -665,7 +740,8 @@
 							<StackPanel
 								Width="225"
 								Height="119"
-								VerticalAlignment="Center">
+								VerticalAlignment="Center"
+								>
 								<Button
 									x:Name="spreadsheet_load_Button"
 									Width="109"
@@ -674,7 +750,8 @@
 									HorizontalAlignment="Left"
 									VerticalAlignment="Top"
 									Click="spreadsheet_load_Button_Click"
-									Content="load spreadsheet" />
+									Content="load spreadsheet"
+									/>
 								<CheckBox
 									x:Name="LoadSpreadsheetAtInitalization_CheckBox_Control"
 									Width="199"
@@ -685,7 +762,8 @@
 									Background="#FFEC8F8F"
 									Content="Load Spreadsheet At Initalization"
 									Foreground="#FFFFFEFE"
-									IsChecked="false" />
+									IsChecked="false"
+									/>
 							</StackPanel>
 						</DockPanel>
 						<StackPanel
@@ -695,12 +773,14 @@
 							Height="358"
 							Margin="1"
 							Background="#FFC5BCB5"
-							Orientation="Vertical">
+							Orientation="Vertical"
+							>
 							<Label
 								x:Name="Sheet_Specific_Tab_Control_Label"
 								HorizontalAlignment="Center"
 								VerticalAlignment="Center"
-								Content="Sheet Specific_3D Visualization Settings Sheet 2 is 3d temp" />
+								Content="Sheet Specific_3D Visualization Settings Sheet 2 is 3d temp"
+								/>
 							<TabControl
 								x:Name="tabControl"
 								Width="964"
@@ -710,7 +790,8 @@
 								VerticalAlignment="Top"
 								Background="#FFF0DDDD"
 								SelectedIndex="4"
-								TabStripPlacement="Bottom">
+								TabStripPlacement="Bottom"
+								>
 								<TabItem
 									x:Name="Sheet_1__TabItem"
 									Width="91"
@@ -718,31 +799,36 @@
 									Margin="4,0,1,0"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
-									Header="1 Sheet">
+									Header="1 Sheet"
+									>
 									<Grid
 										Height="281"
 										Margin="0,0,1,0"
-										Background="#FFE5E5E5">
+										Background="#FFE5E5E5"
+										>
 										<StackPanel
 											Width="946"
 											Height="273"
 											Margin="10,0,-12,0"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-											Orientation="Horizontal">
+											Orientation="Horizontal"
+											>
 											<StackPanel
 												Height="179"
 												Margin="1,1,0,0"
 												HorizontalAlignment="Left"
 												VerticalAlignment="Top"
-												Orientation="Vertical">
+												Orientation="Vertical"
+												>
 												<CheckBox
 													x:Name="show_boxel_index1_checkBox_Control"
 													Width="98"
 													Height="30"
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
-													Content="Show Index" />
+													Content="Show Index"
+													/>
 												<CheckBox
 													x:Name="unused_check_box_1_checkBox_Control"
 													Width="90"
@@ -750,14 +836,16 @@
 													Padding="-2,1,0,0"
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
-													Content="gird dytiddy" />
+													Content="gird dytiddy"
+													/>
 												<CheckBox
 													x:Name="show_wompy_3d_seed_cursor_checkBox_Control"
 													Width="98"
 													Height="30"
 													HorizontalAlignment="Center"
 													VerticalAlignment="Center"
-													Content="Show Data" />
+													Content="Show Data"
+													/>
 												<CheckBox Content="unused 1" />
 											</StackPanel>
 											<StackPanel
@@ -765,7 +853,8 @@
 												Margin="0,0,0,-97"
 												HorizontalAlignment="Left"
 												VerticalAlignment="Top"
-												Orientation="Vertical">
+												Orientation="Vertical"
+												>
 												<local:H_Slider_UserControl1
 													x:Name="Spreadsheet3DNumericWidthFittingFactor_H_Slider_User_Control"
 													Width="842"
@@ -776,7 +865,8 @@
 													LabelText="3D Numeral Width FitHack"
 													SliderMaxValue="5"
 													SliderMinValue="1"
-													SliderValue="1" />
+													SliderValue="1"
+													/>
 												<local:H_Slider_UserControl1
 													x:Name="Spreadsheet3DNumericLeftMargin_H_Slider_User_Control"
 													Width="840"
@@ -788,7 +878,8 @@
 													VerticalContentAlignment="Top"
 													LabelText="3d left margin numeric"
 													SliderMaxValue="5"
-													SliderMinValue="0" />
+													SliderMinValue="0"
+													/>
 											</StackPanel>
 										</StackPanel>
 									</Grid>
@@ -800,7 +891,8 @@
 									Margin="4,0,1,0"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
-									Header="2 Sheet">
+									Header="2 Sheet"
+									>
 									<Grid Background="#FFE5E5E5" />
 								</TabItem>
 								<TabItem
@@ -809,17 +901,20 @@
 									Margin="4,0,1,0"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
-									Header=" 3 Sheet">
+									Header=" 3 Sheet"
+									>
 									<Grid
 										Width="958"
 										Margin="0,0,0,-98"
-										Background="#FFE5E5E5">
+										Background="#FFE5E5E5"
+										>
 										<StackPanel
 											Width="851"
 											Height="264"
 											Margin="10,20,0,0"
 											HorizontalAlignment="Left"
-											VerticalAlignment="Top" />
+											VerticalAlignment="Top"
+											/>
 									</Grid>
 
 								</TabItem>
@@ -830,7 +925,8 @@
 									Margin="4,0,1,0"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
-									Header="z-Thresholding sliders">
+									Header="z-Thresholding sliders"
+									>
 									<TabItem.Background>
 										<RadialGradientBrush>
 											<GradientStop Offset="0.079" Color="#FFA07676" />
@@ -842,7 +938,10 @@
 											<LinearGradientBrush MappingMode="RelativeToBoundingBox" SpreadMethod="Reflect" StartPoint="0.5,0" EndPoint="0.5,1">
 												<LinearGradientBrush.RelativeTransform>
 													<TransformGroup>
-														<ScaleTransform CenterX="0.5" CenterY="0.5" />
+														<ScaleTransform
+															CenterX="0.5"
+															CenterY="0.5"
+															/>
 														<SkewTransform CenterX="0.5" CenterY="0.5" />
 														<RotateTransform Angle="30.964" CenterX="0.5" CenterY="0.5" />
 														<TranslateTransform />
@@ -853,7 +952,10 @@
 											</LinearGradientBrush>
 										</Grid.Background>
 										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" MinHeight="18" />
+											<RowDefinition
+												Height="Auto"
+												MinHeight="18"
+												/>
 											<RowDefinition />
 											<RowDefinition />
 											<RowDefinition />
@@ -868,38 +970,55 @@
 											VerticalAlignment="Center"
 											LabelText="Region wide threshold"
 											SliderMaxValue="60"
-											SliderMinValue="0" />
-										<local:H_Slider_UserControl1 x:Name="ArrowHeadSide2Length2_H_Slider_UserControl1"
+											SliderMinValue="0"
+											/>
+										<local:H_Slider_UserControl1
+											x:Name="ArrowHeadSide2Length2_H_Slider_UserControl1"
 											Grid.Row="1"
 											Width="836"
 											Height="69"
-											SliderValue="1"
-											SliderMinValue="0"
-											SliderMaxValue="1"
 											Margin="1"
 											HorizontalAlignment="Left"
-											VerticalAlignment="Center" LabelText="ArrowHeadSide2 Length" />
+											VerticalAlignment="Center"
+											LabelText="ArrowHeadSide2 Length"
+											SliderMaxValue="1"
+											SliderMinValue="0"
+											SliderValue="1"
+											/>
 										<local:H_Slider_UserControl1
+											x:Name="CentroidToCornerLengthFraction_H_Slider_UserControl"
 											Grid.Row="2"
 											Width="836"
 											Height="69"
 											Margin="2,1,60,0"
 											HorizontalAlignment="Left"
-											VerticalAlignment="Center" />
-										<local:H_Slider_UserControl1
-											Grid.Row="3"
+											VerticalAlignment="Center"
+											LabelText="Centroid To Vertex Line Length"
+											SliderMaxValue="1"
+											SliderMinValue="0"
+											SliderValue="1"
+											/>
+										<local:H_Slider_UserControl1 x:Name="HighSideHalfArrowAngleOffCentroid_H_Slider_UserControl"
+																	 Grid.Row="3"
 											Width="836"
 											Height="69"
 											Margin="60,1,60,0"
 											HorizontalAlignment="Center"
-											VerticalAlignment="Center" />
-										<local:H_Slider_UserControl1
-											Grid.Row="4"
+											VerticalAlignment="Center"
+																	 LabelText="HighSideHalfArrowAngleOffCentroid"
+																	 SliderMaxValue="1"
+																	 SliderMinValue="-1" />
+										<local:H_Slider_UserControl1 x:Name="HighSideHalfArrowHeadLengthFraction_H_Slider_UserControl"
+																	 Grid.Row="4"
 											Width="836"
 											Height="69"
 											Margin="60,1,3,0"
 											HorizontalAlignment="Right"
-											VerticalAlignment="Center" />
+											VerticalAlignment="Center"
+																	 SliderMaxValue="1"
+																	 SliderMinValue="0"
+																	 SliderValue="1"
+																	 LabelText="HighSideHalfArrowHeadLengthFraction" />
 									</Grid>
 								</TabItem>
 								<TabItem
@@ -908,17 +1027,24 @@
 									Margin="4,0,1,0"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
-									Header="Z-Hack Sliders">
+									Header="Z-Hack Sliders"
+									>
 									<TabItem.Background>
 										<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
 											<GradientStop Offset="0" Color="#FF44D458" />
 											<GradientStop Offset="1" Color="#FFB23A3A" />
 										</LinearGradientBrush>
 									</TabItem.Background>
-									<Grid x:Name="ThresholdingSlidersGrid" Margin="3,0,0,0">
+									<Grid
+										x:Name="ThresholdingSlidersGrid"
+										Margin="3,0,0,0"
+										>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition />
-											<ColumnDefinition x:Name="rightHandCol" Width="123" />
+											<ColumnDefinition
+												x:Name="rightHandCol"
+												Width="123"
+												/>
 										</Grid.ColumnDefinitions>
 										<Grid.RowDefinitions>
 											<RowDefinition Height="76*" />
@@ -944,7 +1070,16 @@
 											LabelText="#1-2Pi to +2Pi"
 											SliderMaxValue="1"
 											SliderMinValue="-1"
-											SliderValue="0" />
+											SliderValue="0"
+											/>
+										<local:PointSizeComboBoxUserControlClass
+											Grid.Column="1"
+											Width="107"
+											Height="76"
+											Margin="1"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top"
+											/>
 										<local:H_Slider_UserControl1
 											x:Name="Hack_H_Slider_02_UserControl"
 											Grid.Row="1"
@@ -957,7 +1092,20 @@
 											LabelText="#2 -2Pi to +2Pi"
 											SliderMaxValue="1"
 											SliderMinValue="0"
-											SliderValue="0.5" />
+											SliderValue="0.5"
+											/>
+										<local:LineStinkerComboBoxUserControl
+											x:Name="lineStinkerModeenumcomboBoxUserControl"
+											Grid.Row="1"
+											Grid.RowSpan="1"
+											Grid.Column="1"
+											Width="112"
+											Height="150"
+											Margin="0,4,0,0"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top"
+											LabelString="Stinkyness"
+											/>
 										<local:H_Slider_UserControl1
 											x:Name="Hack_H_Slider_03_UserControl"
 											Grid.Row="2"
@@ -969,7 +1117,17 @@
 											LabelText="#3 Arrow Length"
 											SliderMaxValue="1"
 											SliderMinValue="0"
-											SliderValue="1" />
+											SliderValue="1"
+											/>
+										<local:LineWidthComboBoxUserControlClass
+											Grid.Row="2"
+											Grid.Column="1"
+											Width="115"
+											Height="73"
+											Margin="3,3,0,0"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top"
+											/>
 										<local:H_Slider_UserControl1
 											x:Name="Hack_H_Slider_04_UserControl"
 											Grid.Row="3"
@@ -982,43 +1140,19 @@
 											LabelText="#4 -2Pi to +2Pi"
 											SliderMaxValue="1"
 											SliderMinValue="-1"
-											SliderValue="0" />
-										<local:PointSizeComboBoxUserControlClass
-											Grid.Column="1"
-											Width="107"
-											Height="76"
-											Margin="1"
-											HorizontalAlignment="Left"
-											VerticalAlignment="Top" />
-										<local:LineStinkerComboBoxUserControl
-											x:Name="lineStinkerModeenumcomboBoxUserControl"
-											Grid.Row="1"
-											Grid.RowSpan="1"
-											Grid.Column="1"
-											Width="112"
-											Height="150"
-											Margin="0,4,0,0"
-											HorizontalAlignment="Left"
-											VerticalAlignment="Top"
-											LabelString="Stinkyness" />
-										<local:LineWidthComboBoxUserControlClass
-											Grid.Row="2"
-											Grid.Column="1"
-											Width="115"
-											Height="73"
-											Margin="3,3,0,0"
-											HorizontalAlignment="Left"
-											VerticalAlignment="Top" />
+											SliderValue="0"
+											/>
 									</Grid>
 								</TabItem>
 								<TabItem
 									x:Name="debugging_Z_HACKS_2_TabItem"
-									Width="129"
+									Width="130"
 									Height="18"
-									Margin="4,0,1,0"
+									Margin="1,0,-2,0"
 									HorizontalAlignment="Center"
-									VerticalAlignment="Center"
-									Header="Z-HACKS 0 (Boolean)">
+									VerticalAlignment="Top"
+									Header="Z-HACKS 0 (Boolean)"
+									>
 									<Grid>
 										<Grid.Background>
 											<RadialGradientBrush>
@@ -1055,74 +1189,89 @@
 										<Label
 											x:Name="HackGrid_C0_R0_Label"
 											Grid.Column="0"
-											Content="Col 0" />
+											Content="Col 0"
+											/>
 										<Label
 											x:Name="HackGrid_C1_R0_Label"
 											Grid.Column="1"
-											Content="Col 1" />
+											Content="Col 1"
+											/>
 										<Label
 											x:Name="HackGrid_C2_R0_Label"
 											Grid.Column="2"
-											Content="Col 2" />
+											Content="Col 2"
+											/>
 										<Label
 											x:Name="HackGrid_C3_R0_Label"
 											Grid.Column="3"
-											Content="Col 3" />
+											Content="Col 3"
+											/>
 										<Label
 											x:Name="HackGrid_C4_R0_Label"
 											Grid.Column="4"
-											Content="Col 4" />
+											Content="Col 4"
+											/>
 										<Label
 											x:Name="HackGrid_C5_R0_Label"
 											Grid.Column="5"
-											Content="Col 5" />
+											Content="Col 5"
+											/>
 										<Label
 											x:Name="HackGrid_C6_R0_Label"
 											Grid.Column="6"
-											Content="Col 6" />
+											Content="Col 6"
+											/>
 										<Label
 											x:Name="HackGrid_C7_R0_Label"
 											Grid.Column="7"
-											Content="Col 7" />
+											Content="Col 7"
+											/>
 										<Label
 											x:Name="HackGrid_C8_R0_Label"
 											Grid.Column="8"
-											Content="Col 8" />
+											Content="Col 8"
+											/>
 										<Label
 											x:Name="HackGrid_C9_R0_Label"
 											Grid.Column="9"
-											Content="Col 9" />
+											Content="Col 9"
+											/>
 										<Label
 											x:Name="HackGrid_C10_R0_Label"
 											Grid.Column="10"
-											Content="Col 10" />
+											Content="Col 10"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R1_Label"
 											Grid.Row="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="R1 Edge Ann" />
+											Content="R1 Edge Ann"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R1" />
+											Content="C1 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R1" />
+											Content="C2 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R1" />
+											Content="C3 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R1_CheckBox_Control"
 											Grid.Row="1"
@@ -1130,49 +1279,56 @@
 											Padding="0"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R1" />
+											Content="C4 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R1" />
+											Content="C5 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R1" />
+											Content="C6 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R1" />
+											Content="C7 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R1" />
+											Content="C8 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R1" />
+											Content="C9 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R1_CheckBox_Control"
 											Grid.Row="1"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R1" />
+											Content="C10 R1"
+											/>
 
 										<Label
 											x:Name="HackGrid_C0_R2_Label"
@@ -1182,686 +1338,785 @@
 											VerticalAlignment="Center"
 											HorizontalContentAlignment="Center"
 											VerticalContentAlignment="Center"
-											Content="Row 2" />
+											Content="Row 2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R2" />
+											Content="C1 R2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R2" />
+											Content="C2 R2"
+											/>
 										<CheckBox
-											x:Name="HackCheckBox_C3_R2CheckBox_Control"
+											x:Name="HackCheckBox_C3_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R2" />
+											Content="C3 R2"
+											/>
 										<CheckBox
-											x:Name="HackCheckBox_C4_R_CheckBox_Control"
+											x:Name="HackCheckBox_C4_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="4"
 											Padding="0"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R2" />
+											Content="C4 R2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R2" />
+											Content="C5 R2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R2" />
+											Content="C6 R2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R2" />
+											Content="C7 R2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R2" />
+											Content="C8 R2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R2" />
+											Content="C9 R2"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R2_CheckBox_Control"
 											Grid.Row="2"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R2" />
+											Content="C10 R2"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R3_Label"
 											Grid.Row="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 3" />
+											Content="Row 3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R3" />
+											Content="C1 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R3" />
+											Content="C2 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R3" />
+											Content="C3 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R3" />
+											Content="C4 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R3" />
+											Content="C5 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R3" />
+											Content="C6 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R3" />
+											Content="C7 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R3" />
+											Content="C8 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R3" />
+											Content="C9 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R3_CheckBox_Control"
 											Grid.Row="3"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R3" />
+											Content="C10 R3"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R4_Label"
 											Grid.Row="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 4" />
+											Content="Row 4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R4" />
+											Content="C1 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R4" />
+											Content="C2 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R4" />
+											Content="C3 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R4" />
+											Content="C4 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R4" />
+											Content="C5 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R4" />
+											Content="C6 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R4" />
+											Content="C7 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R4" />
+											Content="C8 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R4" />
+											Content="C9 R4"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R4_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R4" />
+											Content="C10 R4"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R5_Label"
 											Grid.Row="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 5" />
+											Content="Row 5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R5" />
+											Content="C1 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R5" />
+											Content="C2 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R5" />
+											Content="C3 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R5" />
+											Content="C4 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R5" />
+											Content="C5 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R5" />
+											Content="C6 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R5" />
+											Content="C7 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R5" />
+											Content="C8 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R5" />
+											Content="C9 R5"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R5_CheckBox_Control"
 											Grid.Row="5"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R5" />
+											Content="C10 R5"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R6_Label"
 											Grid.Row="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 6" />
-										<CheckBox
-											x:Name="HackCheckBox_C1_R6_CheckBox_Control"
-											Grid.Row="6"
-											Grid.Column="2"
-											HorizontalAlignment="Center"
-											VerticalAlignment="Center"
-											Content="C1 R6" />
+											Content="Row 6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R6" />
+											Content="C2 R6"
+											/>
+										<CheckBox
+											x:Name="HackCheckBox_C1_R6_CheckBox_Control"
+											Grid.Row="6"
+											Grid.Column="2"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Content="C1 R6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R6" />
+											Content="C3 R6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R6" />
+											Content="C4 R6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R6" />
+											Content="C5 R6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R3" />
+											Content="C6 R3"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R6" />
+											Content="C7 R6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R6" />
+											Content="C8 R6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R6" />
+											Content="C9 R6"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R6_CheckBox_Control"
 											Grid.Row="6"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R6" />
+											Content="C10 R6"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R7_Label"
 											Grid.Row="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 7" />
+											Content="Row 7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R7" />
+											Content="C1 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R7" />
+											Content="C2 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R7CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R7" />
+											Content="C3 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R7" />
+											Content="C4 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R7" />
+											Content="C5 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R7" />
+											Content="C6 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R7" />
+											Content="C7 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R7" />
+											Content="C8 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R7" />
+											Content="C9 R7"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R7_CheckBox_Control"
 											Grid.Row="7"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R7" />
+											Content="C10 R7"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R8_Label"
 											Grid.Row="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 8" />
+											Content="Row 8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R8" />
+											Content="C1 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R8" />
+											Content="C2 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R8" />
+											Content="C3 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R8" />
+											Content="C4 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R1" />
+											Content="C5 R1"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R8" />
+											Content="C6 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R8" />
+											Content="C7 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R8" />
+											Content="C8 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R8" />
+											Content="C9 R8"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R8_CheckBox_Control"
 											Grid.Row="8"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R8" />
+											Content="C10 R8"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R9_Label"
 											Grid.Row="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 9" />
+											Content="Row 9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R9" />
+											Content="C1 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R9" />
+											Content="C2 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R9" />
+											Content="C3 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R9" />
+											Content="C4 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R9" />
+											Content="C5 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R9" />
+											Content="C6 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R9" />
+											Content="C7 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R9" />
+											Content="C8 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R9" />
+											Content="C9 R9"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R9_CheckBox_Control"
 											Grid.Row="9"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R9" />
+											Content="C10 R9"
+											/>
 										<Label
 											x:Name="HackGrid_C0_R10_Label"
 											Grid.Row="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="Row 10" />
+											Content="Row 10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C1_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="1"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C1 R10" />
+											Content="C1 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C2_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="2"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C2 R10" />
+											Content="C2 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C3_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="3"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C3 R10" />
+											Content="C3 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C4_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="4"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C4 R10" />
+											Content="C4 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C5_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="5"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C5 R10" />
+											Content="C5 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C6_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="6"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C6 R10" />
+											Content="C6 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C7_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="7"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C7 R10" />
+											Content="C7 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C8_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="8"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C8 R10" />
+											Content="C8 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C9_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="9"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C9 R10" />
+											Content="C9 R10"
+											/>
 										<CheckBox
 											x:Name="HackCheckBox_C10_R10_CheckBox_Control"
 											Grid.Row="10"
 											Grid.Column="10"
 											HorizontalAlignment="Center"
 											VerticalAlignment="Center"
-											Content="C10 R10" />
+											Content="C10 R10"
+											/>
 
 									</Grid>
 								</TabItem>
@@ -1872,7 +2127,8 @@
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
 									BorderBrush="#FFA41212"
-									Header="Z-HACKS">
+									Header="Z-HACKS"
+									>
 									<TabItem.Background>
 										<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
 											<GradientStop Offset="0" Color="#FFF0F0F0" />
@@ -1907,7 +2163,8 @@
 											LabelText="Z factor hack 0"
 											SliderMaxValue="1"
 											SliderMinValue="0"
-											SliderValue="1" />
+											SliderValue="1"
+											/>
 										<local:H_Slider_UserControl1
 											x:Name="Z_Fudge_H_Slider_1_UserControl"
 											Grid.Row="1"
@@ -1921,7 +2178,77 @@
 											LabelText="Z factor hack 1"
 											SliderMaxValue="1"
 											SliderMinValue="0"
-											SliderValue="1" />
+											SliderValue="1"
+											/>
+										<StackPanel
+											Grid.Row="1"
+											Width="85"
+											Height="84"
+											Margin="0,7,7,0"
+											HorizontalAlignment="Right"
+											VerticalAlignment="Top"
+											/>
+										<StackPanel
+											Grid.Row="2"
+											Width="89"
+											Height="78"
+											Margin="5,7,0,0"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top"
+											Orientation="Vertical"
+											>
+											<StackPanel.Background>
+												<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+													<GradientStop Offset="0" Color="#FFEABEBE" />
+													<GradientStop Offset="1" Color="White" />
+												</LinearGradientBrush>
+											</StackPanel.Background>
+											<CheckBox
+												x:Name="EdgeFactorHack0CheckBox_Control"
+												Width="88"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Top"
+												Content="Edge 0"
+												/>
+											<CheckBox
+												x:Name="EdgeFactorHack1CheckBox_Control"
+												Width="88"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Top"
+												Content="Edge 1"
+												/>
+											<CheckBox
+												x:Name="EdgeFactorHack2CheckBox_Control"
+												Width="88"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Top"
+												Content="Edge 2"
+												/>
+											<CheckBox
+												x:Name="EdgeFactorHack3CheckBox_Control"
+												Width="88"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Top"
+												Content="Edge 3"
+												/>
+											<CheckBox
+												x:Name="EdgeFactorHack4CheckBox_Control"
+												Width="88"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Top"
+												Content="Hack 4"
+												RenderTransformOrigin="0.5,0.5"
+												>
+												<CheckBox.RenderTransform>
+													<TransformGroup>
+														<ScaleTransform />
+														<SkewTransform AngleX="-16.39" />
+														<RotateTransform />
+														<TranslateTransform X="2.206" />
+													</TransformGroup>
+												</CheckBox.RenderTransform>
+											</CheckBox>
+										</StackPanel>
 										<local:H_Slider_UserControl1
 											x:Name="Threshold_Hack_H_Slider_2_UserControl"
 											Grid.Row="2"
@@ -1936,69 +2263,8 @@
 											LabelText="Edge factor hack 0"
 											SliderMaxValue="1"
 											SliderMinValue="0"
-											SliderValue="1" />
-										<StackPanel
-											Grid.Row="2"
-											Width="89"
-											Height="78"
-											Margin="5,7,0,0"
-											HorizontalAlignment="Left"
-											VerticalAlignment="Top"
-											Orientation="Vertical">
-											<StackPanel.Background>
-												<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-													<GradientStop Offset="0" Color="#FFEABEBE" />
-													<GradientStop Offset="1" Color="White" />
-												</LinearGradientBrush>
-											</StackPanel.Background>
-											<CheckBox
-												x:Name="EdgeFactorHack0CheckBox_Control"
-												Width="88"
-												HorizontalAlignment="Left"
-												VerticalAlignment="Top"
-												Content="Edge 0" />
-											<CheckBox
-												x:Name="EdgeFactorHack1CheckBox_Control"
-												Width="88"
-												HorizontalAlignment="Left"
-												VerticalAlignment="Top"
-												Content="Edge 1" />
-											<CheckBox
-												x:Name="EdgeFactorHack2CheckBox_Control"
-												Width="88"
-												HorizontalAlignment="Left"
-												VerticalAlignment="Top"
-												Content="Edge 2" />
-											<CheckBox
-												x:Name="EdgeFactorHack3CheckBox_Control"
-												Width="88"
-												HorizontalAlignment="Left"
-												VerticalAlignment="Top"
-												Content="Edge 3" />
-											<CheckBox
-												x:Name="EdgeFactorHack4CheckBox_Control"
-												Width="88"
-												HorizontalAlignment="Left"
-												VerticalAlignment="Top"
-												Content="Hack 4"
-												RenderTransformOrigin="0.5,0.5">
-												<CheckBox.RenderTransform>
-													<TransformGroup>
-														<ScaleTransform />
-														<SkewTransform AngleX="-16.39" />
-														<RotateTransform />
-														<TranslateTransform X="2.206" />
-													</TransformGroup>
-												</CheckBox.RenderTransform>
-											</CheckBox>
-										</StackPanel>
-										<StackPanel
-											Grid.Row="1"
-											Width="85"
-											Height="84"
-											Margin="0,7,7,0"
-											HorizontalAlignment="Right"
-											VerticalAlignment="Top" />
+											SliderValue="1"
+											/>
 									</Grid>
 								</TabItem>
 								<TabItem
@@ -2008,8 +2274,12 @@
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
 									Header="last tab"
-									TabIndex="7">
-									<Grid Margin="0,0,0,-4" Background="#FFE5E5E5">
+									TabIndex="7"
+									>
+									<Grid
+										Margin="0,0,0,-4"
+										Background="#FFE5E5E5"
+										>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition />
 											<ColumnDefinition />
@@ -2035,21 +2305,24 @@
 				<TabItem
 					x:Name="Eye_and_Camera_TabItem"
 					Margin="0"
-					Header="Camera Eye Orbit">
+					Header="Camera Eye Orbit"
+					>
 					<Grid Height="555">
 						<StackPanel
 							Width="973"
 							Height="557"
 							HorizontalAlignment="Left"
 							VerticalAlignment="Top"
-							Orientation="Vertical">
+							Orientation="Vertical"
+							>
 							<Grid
 								x:Name="Orbit_Distance_and_Rotate_Grid"
 								Width="961"
 								Height="264"
 								Margin="10,7,0,0"
 								HorizontalAlignment="Left"
-								VerticalAlignment="Top">
+								VerticalAlignment="Top"
+								>
 								<Grid.RowDefinitions>
 									<RowDefinition Height="29*" />
 									<RowDefinition Height="29*" />
@@ -2072,7 +2345,8 @@
 									LabelText="Orbit Total Rotation Angle"
 									SliderMaxValue="1000"
 									SliderMinValue="-1000"
-									SliderValue="0.0">
+									SliderValue="0.0"
+									>
 									<local:H_Slider_UserControl1.Background>
 										<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
 											<GradientStop Offset="0" Color="Black" />
@@ -2091,7 +2365,8 @@
 									LabelText="Rotation Delta Angle"
 									SliderMaxValue="10"
 									SliderMinValue="-10"
-									SliderValue="3" />
+									SliderValue="3"
+									/>
 								<local:H_Slider_UserControl1
 									x:Name="Orbit_Radius_H_Slider_UserControl"
 									Grid.Row="2"
@@ -2102,7 +2377,8 @@
 									VerticalAlignment="Top"
 									LabelText="Orbit Radius"
 									SliderMinValue="-100"
-									SliderValue="10" />
+									SliderValue="10"
+									/>
 							</Grid>
 							<Grid
 								x:Name="SceneTranslate_Grid"
@@ -2111,7 +2387,8 @@
 								Margin="3,9,0,0"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top"
-								Background="#FFC1DC47">
+								Background="#FFC1DC47"
+								>
 								<Grid.RowDefinitions>
 									<RowDefinition Height="88*" />
 									<RowDefinition Height="88*" />
@@ -2130,7 +2407,8 @@
 									LabelText="Z Eye Coordinate"
 									SliderMaxValue="100"
 									SliderMinValue="-100"
-									SliderValue="-10" />
+									SliderValue="-10"
+									/>
 								<local:H_Slider_UserControl1
 									x:Name="Eye_X_H_Slider_UserControl"
 									Grid.Row="1"
@@ -2142,7 +2420,8 @@
 									LabelText="X Eye Coordinate"
 									SliderMaxValue="100"
 									SliderMinValue="-100"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 								<local:H_Slider_UserControl1
 									x:Name="Eye_Y_H_Slider_UserControl"
 									Grid.Row="2"
@@ -2154,7 +2433,8 @@
 									LabelText="Y Eye Coordinate"
 									SliderMaxValue="100"
 									SliderMinValue="-100"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 							</Grid>
 
 						</StackPanel>
@@ -2165,18 +2445,21 @@
 					Width="32"
 					Margin="-2,0,0,1"
 					HorizontalAlignment="Left"
-					Header="Axis">
+					Header="Axis"
+					>
 					<Grid
 						Width="955"
 						Height="572"
-						Background="#FF82DABE">
+						Background="#FF82DABE"
+						>
 						<StackPanel
 							Width="938"
 							Height="546"
 							Margin="8,8,0,0"
 							HorizontalAlignment="Left"
 							VerticalAlignment="Top"
-							Orientation="Vertical">
+							Orientation="Vertical"
+							>
 							<local:H_Slider_UserControl1
 								x:Name="Axis_Length_XYZ_H_Slider_UserControl"
 								Width="943"
@@ -2187,7 +2470,8 @@
 								VerticalContentAlignment="Center"
 								LabelText="Axis overall XYZ"
 								SliderMaxValue="50"
-								SliderMinValue="1" />
+								SliderMinValue="1"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Axis_Ticks_H_Slider_UserControl"
 								Width="943"
@@ -2199,7 +2483,8 @@
 								LabelText="Ticks"
 								SliderMaxValue="10"
 								SliderMinValue="0"
-								SliderValue="2" />
+								SliderValue="2"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Axis_Linewidth_H_Slider_UserControl"
 								Width="943"
@@ -2210,7 +2495,8 @@
 								VerticalContentAlignment="Top"
 								LabelText="Linewidth"
 								SliderMaxValue="5"
-								SliderMinValue="1" />
+								SliderMinValue="1"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Axis_TickSize_H_Slider_UserControl"
 								Width="943"
@@ -2222,7 +2508,8 @@
 								LabelText="Tick Point Size"
 								SliderMaxValue="12"
 								SliderMinValue="1"
-								SliderValue="5" />
+								SliderValue="5"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Axis_tick_annotation_scale_H_Slider_UserControl"
 								Width="943"
@@ -2234,7 +2521,8 @@
 								LabelText="Tick Annotation Font Scale "
 								SliderMaxValue="2"
 								SliderMinValue=".1"
-								SliderValue="0.8" />
+								SliderValue="0.8"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="ScreenAnnotationFont_SizeH_Slider_UserControl"
 								Width="943"
@@ -2245,7 +2533,8 @@
 								VerticalContentAlignment="Top"
 								LabelText="ScreenAnnotationFont"
 								SliderMaxValue="22"
-								SliderMinValue="6" />
+								SliderMinValue="6"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="MouseScreenAnnotationFontSize_H_Slider_UserControl"
 								Width="943"
@@ -2257,7 +2546,8 @@
 								LabelText="MouseAnnotationFontSize"
 								SliderMaxValue="40"
 								SliderMinValue="8"
-								SliderValue="10" />
+								SliderValue="10"
+								/>
 							<StackPanel Orientation="Horizontal">
 								<CheckBox
 									x:Name="Axis_DrawNegativeCheckBox_Control"
@@ -2267,7 +2557,8 @@
 									HorizontalAlignment="Left"
 									VerticalAlignment="Center"
 									VerticalContentAlignment="Center"
-									Content="Draw Minus Legs" />
+									Content="Draw Minus Legs"
+									/>
 								<CheckBox
 									x:Name="AnnotateOrigin_CheckBox_Control"
 									Width="86"
@@ -2275,7 +2566,8 @@
 									Margin="3,1,0,0"
 									HorizontalAlignment="Left"
 									VerticalAlignment="Center"
-									Content="TagOrigin" />
+									Content="TagOrigin"
+									/>
 								<CheckBox
 									x:Name="AnnotateAxisXYZ_CheckBox_Control"
 									Width="86"
@@ -2283,7 +2575,8 @@
 									Margin="3,1,0,0"
 									HorizontalAlignment="Left"
 									VerticalAlignment="Center"
-									Content="TagAxisXYZ" />
+									Content="TagAxisXYZ"
+									/>
 								<CheckBox
 									x:Name="DoDoTickMarks_CheckBox_Control"
 									Width="86"
@@ -2291,7 +2584,8 @@
 									Margin="3,1,0,0"
 									HorizontalAlignment="Left"
 									VerticalAlignment="Center"
-									Content="DoTicks" />
+									Content="DoTicks"
+									/>
 								<CheckBox
 									x:Name="AnnotateZTickMarks_CheckBox_Control"
 									Width="118"
@@ -2302,7 +2596,8 @@
 									Background="#FF839FFF"
 									BorderBrush="#FF080707"
 									BorderThickness="5,1,1,1"
-									Content="Annotate Z Ticks" />
+									Content="Annotate Z Ticks"
+									/>
 								<CheckBox
 									x:Name="AnnotateYTickMarks_CheckBox_Control"
 									Width="118"
@@ -2313,7 +2608,8 @@
 									Background="#FF839FFF"
 									BorderBrush="#FF080707"
 									BorderThickness="5,1,1,1"
-									Content="Annotate Y Ticks" />
+									Content="Annotate Y Ticks"
+									/>
 								<CheckBox
 									x:Name="AnnotateXTickMarks_CheckBox_Control"
 									Width="118"
@@ -2324,12 +2620,14 @@
 									Background="#FF839FFF"
 									BorderBrush="#FF080707"
 									BorderThickness="5,1,1,1"
-									Content="Annotate X Ticks" />
+									Content="Annotate X Ticks"
+									/>
 								<CheckBox
 									x:Name="Draw_Minus_Z_Axis_Leg_CheckBox_Control"
 									Width="112"
 									Content="Draw -Z Axis Leg"
-									IsChecked="true" />
+									IsChecked="true"
+									/>
 							</StackPanel>
 						</StackPanel>
 					</Grid>
@@ -2343,13 +2641,15 @@
 					VerticalAlignment="Top"
 					BorderBrush="#FFD41616"
 					BorderThickness="2.4,5,1.9,1"
-					Header="LookAt">
+					Header="LookAt"
+					>
 					<Grid
 						x:Name="LookAtTab_Grid"
 						Margin="0,3,0,-12"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Top"
-						Background="#FFE5E5E5">
+						Background="#FFE5E5E5"
+						>
 						<StackPanel
 							x:Name="LookAt_StackPanel"
 							Grid.Row="4"
@@ -2358,7 +2658,8 @@
 							Margin="1,1,0,1"
 							HorizontalAlignment="Left"
 							VerticalAlignment="Top"
-							Background="#FFE4E893">
+							Background="#FFE4E893"
+							>
 							<StackPanel
 								x:Name="LookAtEye_XYZ_StackPanel"
 								Width="972"
@@ -2366,7 +2667,8 @@
 								Margin="0,4"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top"
-								Background="#FF721D1D">
+								Background="#FF721D1D"
+								>
 								<local:H_Slider_UserControl1
 									x:Name="LookAt_Eye_X_H_Slider_UserControl"
 									Width="960"
@@ -2377,7 +2679,8 @@
 									LabelText="LookAt Eye X"
 									SliderMaxValue="50"
 									SliderMinValue="-50"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 								<local:H_Slider_UserControl1
 									x:Name="LookAt_Eye_Y_H_Slider_UserControl"
 									Width="960"
@@ -2388,7 +2691,8 @@
 									LabelText="LookAt Eye Y"
 									SliderMaxValue="50"
 									SliderMinValue="-50"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 								<local:H_Slider_UserControl1
 									x:Name="LookAt_Eye_Z_H_Slider_UserControl"
 									Width="960"
@@ -2400,7 +2704,8 @@
 									LabelText="LookAt EyeZ"
 									SliderMaxValue="50"
 									SliderMinValue="-50"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 							</StackPanel>
 							<StackPanel
 								x:Name="LookAtTarget_XYZ_StackPanel"
@@ -2409,7 +2714,8 @@
 								Margin="0,4,0,2"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top"
-								Background="#FF45C550">
+								Background="#FF45C550"
+								>
 								<local:H_Slider_UserControl1
 									x:Name="LookAtTarget_X_H_Slider_UserControl"
 									Width="965"
@@ -2423,7 +2729,8 @@
 									LabelText="LookAt Target X"
 									SliderMaxValue="50"
 									SliderMinValue="-50"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 								<local:H_Slider_UserControl1
 									x:Name="LookAtTarget_Y_H_Slider_UserControl"
 									Width="965"
@@ -2437,7 +2744,8 @@
 									LabelText="LookAt Target Y"
 									SliderMaxValue="100"
 									SliderMinValue="-100"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 								<local:H_Slider_UserControl1
 									x:Name="LookAtTarget_Z_H_Slider_UserControl"
 									Width="965"
@@ -2450,13 +2758,15 @@
 									LabelText="LookAt Target Z"
 									SliderMaxValue="100"
 									SliderMinValue="-100"
-									SliderValue="0" />
+									SliderValue="0"
+									/>
 							</StackPanel>
 							<StackPanel
 								Width="909"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top"
-								Orientation="Horizontal">
+								Orientation="Horizontal"
+								>
 								<StackPanel
 									x:Name="LookAt_WhatAxisIsUp_StackPanel"
 									Width="246"
@@ -2466,7 +2776,8 @@
 									VerticalAlignment="Center"
 									Background="#FFF0681B"
 									Orientation="Horizontal"
-									ScrollViewer.VerticalScrollBarVisibility="Disabled">
+									ScrollViewer.VerticalScrollBarVisibility="Disabled"
+									>
 									<RadioButton
 										x:Name="LookAt_X_Up_RadioButton_Control"
 										Width="73"
@@ -2478,7 +2789,8 @@
 										Content="X Up"
 										GroupName="LookAtUp_RadioButton_Group"
 										IsChecked="True"
-										SnapsToDevicePixels="True" />
+										SnapsToDevicePixels="True"
+										/>
 									<RadioButton
 										x:Name="LookAt_Y_Up_RadioButton_Control"
 										Margin="11,0,9,0"
@@ -2488,7 +2800,8 @@
 										Content="Y Up"
 										GroupName="LookAtUp_RadioButton_Group"
 										IsChecked="True"
-										SnapsToDevicePixels="True" />
+										SnapsToDevicePixels="True"
+										/>
 									<RadioButton
 										x:Name="LookAt_Z_Up_RadioButton_Control"
 										Margin="11,0,9,0"
@@ -2498,7 +2811,8 @@
 										Content="Z Up"
 										GroupName="LookAtUp_RadioButton_Group"
 										IsChecked="True"
-										SnapsToDevicePixels="True" />
+										SnapsToDevicePixels="True"
+										/>
 								</StackPanel>
 							</StackPanel>
 						</StackPanel>
@@ -2513,7 +2827,8 @@
 					VerticalAlignment="Top"
 					BorderBrush="#FFD41616"
 					BorderThickness="2.4,5,1.9,1"
-					Header="Perspective">
+					Header="Perspective"
+					>
 					<Grid Background="#FFCB4141">
 						<Grid
 							x:Name="Perspective_Grid"
@@ -2521,7 +2836,8 @@
 							Height="463"
 							Margin="10,10,0,0"
 							HorizontalAlignment="Left"
-							VerticalAlignment="Top">
+							VerticalAlignment="Top"
+							>
 							<Grid.Background>
 								<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
 									<GradientStop Offset="0" Color="Black" />
@@ -2547,7 +2863,8 @@
 								LabelText="Perspective fovy"
 								SliderMaxValue="90"
 								SliderMinValue="5"
-								SliderValue="30" />
+								SliderValue="30"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Perspective_ASPECT_H_Slider_UserControl"
 								Grid.Row="1"
@@ -2559,7 +2876,8 @@
 								LabelText="Perspective aspect"
 								SliderMaxValue="10"
 								SliderMinValue=".1"
-								SliderValue="1" />
+								SliderValue="1"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Perspective_Z_NEAR_H_Slider_UserControl"
 								Grid.Row="2"
@@ -2569,7 +2887,8 @@
 								Margin="10,16,10,105"
 								HorizontalAlignment="Center"
 								VerticalAlignment="Center"
-								LabelText="Perspetive zNear" />
+								LabelText="Perspetive zNear"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Perspective_Z_FAR_H_Slider_UserControl"
 								Grid.Row="4"
@@ -2581,7 +2900,8 @@
 								LabelText="Perspective zFar"
 								SliderMaxValue="100"
 								SliderMinValue="-100"
-								SliderValue="0" />
+								SliderValue="0"
+								/>
 						</Grid>
 					</Grid>
 				</TabItem>
@@ -2592,17 +2912,22 @@
 					Margin="0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Header="Projection and Modeling">
+					Header="Projection and Modeling"
+					>
 					<Grid Background="#FFE5E5E5" />
 				</TabItem>
-				<TabItem x:Name="Lighting_TabItem" Header="Lights">
+				<TabItem
+					x:Name="Lighting_TabItem"
+					Header="Lights"
+					>
 					<Grid
 						x:Name="Lightig_Grid"
 						Width="956"
 						Height="586"
 						Margin="9,4,9,-2"
 						HorizontalAlignment="Left"
-						VerticalAlignment="Top">
+						VerticalAlignment="Top"
+						>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
@@ -2619,7 +2944,8 @@
 							Margin="17,3,17,0"
 							HorizontalAlignment="Center"
 							VerticalAlignment="Top"
-							Orientation="Horizontal">
+							Orientation="Horizontal"
+							>
 							<StackPanel.Background>
 								<RadialGradientBrush>
 									<GradientStop Offset="0" Color="#FFF3E2E2" />
@@ -2649,21 +2975,38 @@
 							VerticalAlignment="Center"
 							Background="{x:Null}"
 							BorderBrush="#FFF70C0C"
-							BorderThickness="2">
+							BorderThickness="2"
+							>
 							<TabItem Header="LIGHT0">
 								<Grid
 									Margin="8,0,4,0"
 									HorizontalAlignment="Left"
 									VerticalAlignment="Top"
 									Background="#FFE5E5E5"
-									ScrollViewer.HorizontalScrollBarVisibility="Visible">
+									ScrollViewer.HorizontalScrollBarVisibility="Visible"
+									>
 									<Grid.RowDefinitions>
 										<RowDefinition Height="26" />
-										<RowDefinition Height="Auto" MinHeight="598" />
-										<RowDefinition Height="Auto" MinHeight="1" />
-										<RowDefinition Height="Auto" MinHeight="1" />
-										<RowDefinition Height="Auto" MinHeight="1" />
-										<RowDefinition Height="Auto" MinHeight="1" />
+										<RowDefinition
+											Height="Auto"
+											MinHeight="598"
+											/>
+										<RowDefinition
+											Height="Auto"
+											MinHeight="1"
+											/>
+										<RowDefinition
+											Height="Auto"
+											MinHeight="1"
+											/>
+										<RowDefinition
+											Height="Auto"
+											MinHeight="1"
+											/>
+										<RowDefinition
+											Height="Auto"
+											MinHeight="1"
+											/>
 
 									</Grid.RowDefinitions>
 									<Grid
@@ -2672,7 +3015,8 @@
 										Width="896"
 										Height="480"
 										Margin="10,9,17,0"
-										VerticalAlignment="Top">
+										VerticalAlignment="Top"
+										>
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
@@ -2695,7 +3039,8 @@
 											A="255"
 											B="255"
 											G="255"
-											R="255" />
+											R="255"
+											/>
 										<StackPanel
 											Grid.Column="1"
 											Width="625"
@@ -2703,7 +3048,8 @@
 											Margin="9,0,0,0"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-											Orientation="Horizontal">
+											Orientation="Horizontal"
+											>
 											<CheckBox Content="Show In Scene" />
 											<CheckBox Content="CheckBox" />
 											<CheckBox Content="CheckBox" />
@@ -2720,7 +3066,8 @@
 											Height="268"
 											Margin="6,0,0,0"
 											HorizontalAlignment="Left"
-											VerticalAlignment="Top">
+											VerticalAlignment="Top"
+											>
 											<local:H_Slider_UserControl1
 												Width="639"
 												Height="89"
@@ -2730,7 +3077,8 @@
 												RenderTransformOrigin="0.5,0.5"
 												ScrollViewer.CanContentScroll="True"
 												ScrollViewer.HorizontalScrollBarVisibility="Visible"
-												UseLayoutRounding="False" />
+												UseLayoutRounding="False"
+												/>
 											<local:H_Slider_UserControl1
 												Width="639"
 												Height="89"
@@ -2740,7 +3088,8 @@
 												RenderTransformOrigin="0.5,0.5"
 												ScrollViewer.CanContentScroll="True"
 												ScrollViewer.HorizontalScrollBarVisibility="Visible"
-												UseLayoutRounding="False" />
+												UseLayoutRounding="False"
+												/>
 											<local:H_Slider_UserControl1
 												Width="639"
 												Height="89"
@@ -2750,7 +3099,8 @@
 												RenderTransformOrigin="0.5,0.5"
 												ScrollViewer.CanContentScroll="True"
 												ScrollViewer.HorizontalScrollBarVisibility="Visible"
-												UseLayoutRounding="False" />
+												UseLayoutRounding="False"
+												/>
 										</StackPanel>
 									</Grid>
 									<StackPanel
@@ -2759,7 +3109,8 @@
 										Height="100"
 										Margin="54,11,0,0"
 										HorizontalAlignment="Left"
-										VerticalAlignment="Top" />
+										VerticalAlignment="Top"
+										/>
 								</Grid>
 							</TabItem>
 							<TabItem Header="LIGHT1">
@@ -2792,7 +3143,8 @@
 					Height="20"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Header="MATERIALs">
+					Header="MATERIALs"
+					>
 					<Grid Background="#FFE5E5E5">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="512*" />
@@ -2806,7 +3158,8 @@
 					Margin="-2,0,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Header="Grid">
+					Header="Grid"
+					>
 					<Grid Background="#FFE5E5E5" />
 				</TabItem>
 				<TabItem
@@ -2816,7 +3169,8 @@
 					Margin="-2,0,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Header="Orthographics Viewing">
+					Header="Orthographics Viewing"
+					>
 					<Grid
 						x:Name="Orthographic_Sliders_Grid"
 						Width="935"
@@ -2824,7 +3178,8 @@
 						Margin="2,10,0,0"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Top"
-						Background="#FFE5E5E5">
+						Background="#FFE5E5E5"
+						>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="100*" />
 							<RowDefinition Height="100*" />
@@ -2843,7 +3198,8 @@
 							LabelText="Orthographic Left"
 							SliderMaxValue="5"
 							SliderMinValue="0"
-							SliderValue="1" />
+							SliderValue="1"
+							/>
 						<local:H_Slider_UserControl1
 							x:Name="Orthographic_Right_H_Slider_UserControl"
 							Grid.RowSpan="2"
@@ -2855,7 +3211,8 @@
 							LabelText="orthographic Right"
 							SliderMaxValue="0"
 							SliderMinValue="-5"
-							SliderValue="-1" />
+							SliderValue="-1"
+							/>
 						<local:H_Slider_UserControl1
 							x:Name="Orthographic_Top_H_Slider_UserControl"
 							Grid.Row="2"
@@ -2867,7 +3224,8 @@
 							LabelText="Orthographic Top"
 							SliderMaxValue="200"
 							SliderMinValue="-1"
-							SliderValue="0" />
+							SliderValue="0"
+							/>
 						<local:H_Slider_UserControl1
 							x:Name="Orthographic_Bottom_H_Slider_UserControl"
 							Grid.Row="3"
@@ -2879,7 +3237,8 @@
 							LabelText="Orthographic Bottom"
 							SliderMaxValue="0"
 							SliderMinValue="-5"
-							SliderValue="-1" />
+							SliderValue="-1"
+							/>
 						<local:H_Slider_UserControl1
 							x:Name="Orthographic_Near_H_Slider_UserControl"
 							Grid.Row="4"
@@ -2891,7 +3250,8 @@
 							LabelText="Orthographic z Near"
 							SliderMaxValue="0"
 							SliderMinValue="-5"
-							SliderValue="-1" />
+							SliderValue="-1"
+							/>
 						<local:H_Slider_UserControl1
 							x:Name="Orthographic_Far_H_Slider_UserControl"
 							Grid.Row="5"
@@ -2903,7 +3263,8 @@
 							LabelText="Orthographic z Far"
 							SliderMaxValue="5"
 							SliderMinValue="0"
-							SliderValue="1" />
+							SliderValue="1"
+							/>
 					</Grid>
 				</TabItem>
 				<TabItem
@@ -2913,7 +3274,8 @@
 					Margin="-2,0,-7,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Header="Viewing Frustrum">
+					Header="Viewing Frustrum"
+					>
 					<Grid
 						x:Name="Viewing_frustrum_TabItem_Grid"
 						Width="972"
@@ -2921,11 +3283,13 @@
 						Margin="0"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Top"
-						Background="#FFE5E5E5">
+						Background="#FFE5E5E5"
+						>
 						<StackPanel
 							Margin="6,7,0,0"
 							HorizontalAlignment="Left"
-							VerticalAlignment="Top">
+							VerticalAlignment="Top"
+							>
 							<local:H_Slider_UserControl1
 								x:Name="Frustum_Left_H_Slider_UserControl"
 								Width="936"
@@ -2935,7 +3299,8 @@
 								LabelText="Left"
 								SliderMaxValue="20"
 								SliderMinValue="-20"
-								SliderValue="-10" />
+								SliderValue="-10"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Frustum_Right_H_Slider_UserControl"
 								Width="936"
@@ -2945,7 +3310,8 @@
 								LabelText="Right"
 								SliderMaxValue="20"
 								SliderMinValue="-20"
-								SliderValue="10" />
+								SliderValue="10"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Frustum_Bottom_H_Slider_UserControl"
 								Width="936"
@@ -2955,7 +3321,8 @@
 								LabelText="Bottom"
 								SliderMaxValue="0"
 								SliderMinValue="-20"
-								SliderValue="-10" />
+								SliderValue="-10"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Frustum_Top_H_Slider_UserControl"
 								Width="936"
@@ -2965,7 +3332,8 @@
 								LabelText="Top"
 								SliderMaxValue="20"
 								SliderMinValue="0"
-								SliderValue="10" />
+								SliderValue="10"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Frustum_zNear_H_Slider_UserControl"
 								Width="936"
@@ -2975,7 +3343,8 @@
 								LabelText="Near"
 								SliderMaxValue="20"
 								SliderMinValue="-20"
-								SliderValue="-10" />
+								SliderValue="-10"
+								/>
 							<local:H_Slider_UserControl1
 								x:Name="Frustum_zFar_H_Slider_UserControl"
 								Width="936"
@@ -2985,14 +3354,16 @@
 								LabelText="Far"
 								SliderMaxValue="20"
 								SliderMinValue="-20"
-								SliderValue="10" />
+								SliderValue="10"
+								/>
 						</StackPanel>
 					</Grid>
 				</TabItem>
 				<CheckBox
 					Width="100"
 					Height="100"
-					Content="CheckBox" />
+					Content="CheckBox"
+					/>
 			</TabControl>
 		</StackPanel>
 	</StackPanel>
