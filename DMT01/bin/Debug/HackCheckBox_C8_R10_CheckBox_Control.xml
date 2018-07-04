@@ -1,0 +1,10 @@
+﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>CheckBox</ControlClass>
+    <ControlName>HackCheckBox_C8_R10_CheckBox_Control</ControlName>
+    <SaveStateFileName>HackCheckBox_C8_R10_CheckBox_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <CheckBoxState>false</CheckBoxState>
+  <CheckBoxName>HackCheckBox_C8_R10_CheckBox_Control</CheckBoxName>
+</CheckBoxControlSaveState>
