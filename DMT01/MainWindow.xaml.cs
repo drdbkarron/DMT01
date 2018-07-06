@@ -487,7 +487,7 @@ namespace DMT01
 			gl . Scale ( 1 , -1 , 1 );
 
 			Region Selected_Region = new Region ( C: Sheety.cells, StartRows: Sheety . r0, EndRows: Sheety . r1 , StartCols: Sheety.c0, EndCols: Sheety.c1);
-
+			Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
 			for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
 				{
 				for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
@@ -498,7 +498,7 @@ namespace DMT01
 							{
 							MW = ( DMT01 .MainWindow ) mw
 							};
-						if ( HackCheckBox_C10_R2_CheckBox_Control.IsChecked.Value &&  B . IsCritical )
+						if ( this .HackCheckBox_C10_R2_CheckBox_Control .IsChecked.Value &&  B . IsCritical )
 							{
 							B . DrawMe ( );
 							}
@@ -2343,12 +2343,7 @@ namespace DMT01
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 			}
 
-		private void H_Slider_UserControl1_Loaded ( object sender , RoutedEventArgs e )
-		{
-
-		}
-
-		private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
+private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
 			{
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Starting Save Selected" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 

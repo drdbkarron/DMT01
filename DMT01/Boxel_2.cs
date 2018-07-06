@@ -890,12 +890,15 @@ namespace DMT01
 
 			if ( this .MW .HackCheckBox_C4_R1_CheckBox_Control .IsChecked .Value )
 			{
+				float [ ] cf00 = E .V [ 0 ] .cf;
+				float [ ] cf10 = E .V [ 1 ] .cf;
+
 				gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
 				gl .LineWidth ( 1 );
 				gl .Color ( 0.9 , 0.8 , 0.8 );
 				gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
-				gl .Vertex ( cf0 );
-				gl .Vertex ( cf1 );
+				gl .Vertex ( cf00 );
+				gl .Vertex ( cf10 );
 				gl .End ( );
 				gl .PopAttrib ( );
 			}
@@ -964,7 +967,7 @@ namespace DMT01
 					gl .Color ( .5 , .7 , .8 );
 					gl .LineWidth ( 1 );
 					gl .Vertex ( Bigger .cf );
-					gl .Vertex ( Centroid .cf );
+					gl .Vertex ( this .Centroid .cf );
 				}
 				gl .Color ( .9 , .2 , .3 );
 				gl .Vertex ( Bigger .cf );
@@ -977,7 +980,7 @@ namespace DMT01
 				if ( ShowCentroid )
 				{
 					gl .PointSize ( 2 );
-					gl .Vertex ( Centroid .cf );
+					gl .Vertex ( this .Centroid .cf );
 				}
 				gl .PointSize ( 6 );
 				gl .Vertex ( pt .x , pt .y , pt .z );

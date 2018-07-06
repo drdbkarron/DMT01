@@ -1,9 +1,15 @@
 ﻿using System;
+using WpfControlLibrary1;
 
 namespace DMT01
 {
-	public class Region
+	public class Region	   
 		{
+		public struct SpanStruct
+		{
+			public int LoHi;
+		};
+		public SpanStruct Row,Col;
 		public DMT01.MainWindow MW=  ( DMT01 . MainWindow ) System. Windows. Application . Current . MainWindow;
 		public double Max;
 		public double Min;
@@ -76,6 +82,30 @@ namespace DMT01
 
 			return a;
 			}
+
+		public void LoadRegionIntoQuadSelector ( QuadDropDownRegionSelector Q )
+		{
+			if ( Q == null )
+				return;
+			Q .RowLo= this .Start_Rows;
+			Q .RowHi = this .End_Rows;
+			Q .ColLo = this .Start_Cols;
+			Q .ColHi = this .End_Cols;
+			Q .RowLowComboBox .Items .Clear ( );
+			Q .RowHiComboBox .Items .Clear ( );
+			Q .ColLowComboBox .Items .Clear ( );
+			Q .ColHiComboBox .Items .Clear ( );
+			for ( int i = Q .RowLo ; i < Q .RowHi ; i++ )
+			{
+				Q .RowLowComboBox .Items .Add ( i );
+				Q .RowHiComboBox .Items .Add ( i );
+			}
+			for ( int i = Q .ColLo ; i < Q .ColHi ; i++ )
+			{
+				Q .ColLowComboBox .Items .Add ( i );
+				Q .ColLowComboBox .Items .Add ( i );
+			}
 		}
+	}
 	}
 

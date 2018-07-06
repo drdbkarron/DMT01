@@ -68,6 +68,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="QuadDropDownRegionSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enum1ComboBoxUserControl.xaml.cs">
@@ -98,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="QuadDropDownRegionSelector.xaml.cs">
+      <DependentUpon>QuadDropDownRegionSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="SeralizeControlCommonFields.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

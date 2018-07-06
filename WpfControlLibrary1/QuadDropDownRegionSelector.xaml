@@ -1,0 +1,545 @@
+﻿<UserControl
+	x:Class="WpfControlLibrary1.QuadDropDownRegionSelector"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	x:Name="QuadComboBoxRegionSelectionUserControl"
+	Width="121"
+	Height="121"
+	Margin="2"
+	Padding="2"
+	HorizontalAlignment="Left"
+	VerticalAlignment="Top"
+	HorizontalContentAlignment="Left"
+	VerticalContentAlignment="Top"
+	Background="#FF254346"
+	BorderThickness="2"
+	mc:Ignorable="d"
+	>
+	<Grid
+		x:Name="ComboBoxesGrid"
+		Width="104"
+		Height="86"
+		Margin="2,4,2,2"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Top"
+		Background="#FF424238"
+		Initialized="ComboBoxesGrid_Initialized"
+		Loaded="ComboBoxesGrid_Loaded"
+		ShowGridLines="True"
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Label
+			x:Name="Value_label_Display"
+			Grid.ColumnSpan="2"
+			Width="103"
+			Height="26"
+			Margin="1,1,0,0"
+			Padding="1,2"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			HorizontalContentAlignment="Center"
+			VerticalContentAlignment="Center"
+			Background="#FFD4C2D4"
+			BorderBrush="#FFF90505"
+			BorderThickness="3,5,4,3"
+			Content="R:{0}-&gt;{1},C:{2}-&gt;{3}"
+			FontSize="9"
+			/>
+		<ComboBox
+			x:Name="Row_Low_ComboBox"
+			Grid.Row="1"
+			Width="40"
+			Height="21"
+			Margin="6,4,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			BorderBrush="#FFCF10B5"
+			BorderThickness="3"
+			Foreground="#FF422E49"
+			SelectionChanged="Row_Low_ComboBox_SelectionChanged"
+			>
+			<ComboBox.Background>
+				<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+					<GradientStop Offset="0" Color="#FFF0F0F0" />
+					<GradientStop Offset="1" Color="#FFDAA5A5" />
+				</LinearGradientBrush>
+			</ComboBox.Background>
+			<ComboBoxItem Content="1" />
+			<ComboBoxItem Content="2" />
+			<ComboBoxItem Content="3" />
+			<ComboBoxItem Content="4" />
+			<ComboBoxItem Content="5" />
+			<ComboBoxItem Content="6" />
+			<ComboBoxItem Content="7" />
+			<ComboBoxItem Content="8" />
+			<ComboBoxItem Content="9" />
+			<ComboBoxItem Content="10" />
+			<ComboBoxItem Content="11" />
+			<ComboBoxItem Content="12" />
+			<ComboBoxItem Content="11" />
+			<ComboBoxItem Content="12" />
+			<ComboBoxItem Content="13" />
+			<ComboBoxItem Content="14" />
+			<ComboBoxItem Content="15" />
+			<ComboBoxItem Content="16" />
+			<ComboBoxItem Content="17" />
+			<ComboBoxItem Content="18" />
+			<ComboBoxItem Content="19" />
+			<ComboBoxItem Content="20" />
+			<ComboBoxItem Content="21" />
+			<ComboBoxItem Content="22" />
+			<ComboBoxItem Content="23" />
+			<ComboBoxItem Content="24" />
+			<ComboBoxItem Content="25" />
+			<ComboBoxItem Content="26" />
+			<ComboBoxItem Content="27" />
+			<ComboBoxItem Content="28" />
+			<ComboBoxItem Content="29" />
+			<ComboBoxItem Content="30" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+		</ComboBox>
+		<ComboBox
+			x:Name="Col_Low_ComboBox"
+			Grid.Row="1"
+			Grid.Column="1"
+			Width="40"
+			Height="21"
+			Margin="6,4,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			BorderBrush="#FFCF10B5"
+			BorderThickness="3"
+			Foreground="#FF422E49"
+			SelectionChanged="Col_Low_ComboBox_SelectionChanged"
+			>
+			<ComboBox.Background>
+				<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+					<GradientStop Offset="0" Color="#FFF0F0F0" />
+					<GradientStop Offset="1" Color="#FF270707" />
+				</LinearGradientBrush>
+			</ComboBox.Background>
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+		</ComboBox>
+		<ComboBox
+			x:Name="Row_High_ComboBox"
+			Grid.Row="2"
+			Width="40"
+			Height="21"
+			Margin="6,4,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			BorderBrush="#FFCF10B5"
+			BorderThickness="3"
+			Foreground="#FF422E49"
+			SelectionChanged="Row_High_ComboBox_SelectionChanged"
+			>
+			<ComboBox.Background>
+				<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+					<GradientStop Offset="0" Color="#FFF0F0F0" />
+					<GradientStop Offset="1" Color="#FFD9E6E3" />
+				</LinearGradientBrush>
+			</ComboBox.Background>
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+		</ComboBox>
+		<ComboBox
+			x:Name="Col_High_ComboBox"
+			Grid.Row="2"
+			Grid.Column="1"
+			Width="40"
+			Height="21"
+			Margin="6,4,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			BorderBrush="#FFCF10B5"
+			BorderThickness="3"
+			Foreground="#FF422E49"
+			SelectionChanged="Col_High_ComboBox_SelectionChanged"
+			>
+			<ComboBox.Background>
+				<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+					<GradientStop Offset="0" Color="#FFF0F0F0" />
+					<GradientStop Offset="1" Color="#FF566EAE" />
+				</LinearGradientBrush>
+			</ComboBox.Background>
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+			<ComboBoxItem Content="-0" />
+		</ComboBox>
+	</Grid>
+</UserControl>
