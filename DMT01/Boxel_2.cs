@@ -512,10 +512,76 @@ namespace DMT01
 
 			DrawBoxelEdgeCycles ( );
 
+			DrawCriticalBoxel ( );
 			AnnotateBoxelAtCentroid ( );
 
 			//VerifyCycles ( );
 			}
+
+		private void DrawCriticalBoxel ( )
+		{
+
+			if ( this .MW == null )
+			{
+				return;
+			}
+
+			OpenGL gl = this .MW .myOpenGLControl .OpenGL;
+			if ( gl == null )
+			{
+				return;
+			}
+
+			Edge E0 = this .E [ 0 ];
+			Edge E1 = this .E [ 1 ];
+			Edge E2 = this .E [ 2 ];
+			Edge E3 = this .E [ 3 ];
+
+			AnnotateEdge ( gl , E0 );
+			AnnotateEdge ( gl , E1 );
+			AnnotateEdge ( gl , E2 );
+			AnnotateEdge ( gl , E3 );
+
+			float v = this .MW .region_threshold_H_Slider_UserControl .SliderValue;
+			Boolean IsClearedAll=	( IsInBetween ( v , E0 ) && 
+									IsInBetween ( v , E1 ) && 
+									IsInBetween ( v , E2 ) && 
+									IsInBetween ( v , E3 ) )
+			if(!IsClearedAll)
+			{
+				return;
+			}
+
+			if ( IsInBetween ( v , E0 ) 
+			{ gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
+				gl .LineWidth ( 3 );
+				gl .PointSize ( 5 );
+				gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
+				gl .Vertex ( E0 .V [ 0 ] .cf );
+				gl .Vertex ( E1 .V [ 1 ] .cf );
+				gl .End ( );
+				gl .PopAttrib ( ); }
+
+			float x0 = cf0 [ 0 ];
+			float y0 = cf0 [ 1 ];
+			float z0 = cf0 [ 2 ];
+			float v0 = E .V [ 0 ] .V;
+
+			float x1 = cf1 [ 0 ];
+			float y1 = cf1 [ 1 ];
+			float z1 = cf1 [ 2 ];
+			float v1 = E .V [ 1 ] .V;
+
+			float u = ( v - v0 ) / ( v1 - v0 );
+			float x = ( ( 1 - u ) * x0 ) + ( u * x1 );
+			float y = ( ( 1 - u ) * y0 ) + ( u * y1 );
+			float z = ( ( 1 - u ) * z0 ) + ( u * z1 );
+
+
+
+			
+
+		}
 
 		private void AnnotateBoxelAtCentroid ( )
 			{
@@ -883,7 +949,7 @@ namespace DMT01
 				return;
 			}
 
-			AnnotateEdge ( gl , E );
+			if(true)AnnotateEdge ( gl , E );
 
 			float [ ] cf0 = E .V [ 0 ] .cf;
 			float [ ] cf1 = E .V [ 1 ] .cf;
@@ -1102,7 +1168,7 @@ namespace DMT01
 			}
 		}
 
-		private void RotationTest ( Edge E , OpenGL gl  )
+			private void RotationTest ( Edge E , OpenGL gl  )
 		{
 			float knob00 = this .MW .Z_Fudge_H_Slider_0_UserControl .SliderValue;
 			float [ ] cf0 = E .V [ 0 ] .cf;
