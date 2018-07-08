@@ -521,65 +521,172 @@ namespace DMT01
 		private void DrawCriticalBoxel ( )
 		{
 
-			if ( this .MW == null )
+			if ( this . MW == null )
 			{
 				return;
 			}
 
-			OpenGL gl = this .MW .myOpenGLControl .OpenGL;
+			OpenGL gl = this . MW . myOpenGLControl . OpenGL;
 			if ( gl == null )
 			{
 				return;
 			}
 
-			Edge E0 = this .E [ 0 ];
-			Edge E1 = this .E [ 1 ];
-			Edge E2 = this .E [ 2 ];
-			Edge E3 = this .E [ 3 ];
+			Edge E0 = this . E [ 0 ];
+			Edge E1 = this . E [ 1 ];
+			Edge E2 = this . E [ 2 ];
+			Edge E3 = this . E [ 3 ];
 
 			AnnotateEdge ( gl , E0 );
 			AnnotateEdge ( gl , E1 );
 			AnnotateEdge ( gl , E2 );
 			AnnotateEdge ( gl , E3 );
 
-			float v = this .MW .region_threshold_H_Slider_UserControl .SliderValue;
-			Boolean IsClearedAll=	( IsInBetween ( v , E0 ) && 
-									IsInBetween ( v , E1 ) && 
-									IsInBetween ( v , E2 ) && 
-									IsInBetween ( v , E3 ) )
-			if(!IsClearedAll)
+			float v = this . MW . region_threshold_H_Slider_UserControl . SliderValue;
+			Boolean IsClearedAll = ( IsInBetween ( v , E0 ) &&
+									 IsInBetween ( v , E1 ) &&
+									 IsInBetween ( v , E2 ) &&
+									 IsInBetween ( v , E3 ) );
+			if ( !IsClearedAll )
 			{
 				return;
 			}
 
-			if ( IsInBetween ( v , E0 ) 
-			{ gl .PushAttrib ( SharpGL .Enumerations .AttributeMask .All );
-				gl .LineWidth ( 3 );
-				gl .PointSize ( 5 );
-				gl .Begin ( SharpGL .Enumerations .BeginMode .Lines );
-				gl .Vertex ( E0 .V [ 0 ] .cf );
-				gl .Vertex ( E1 .V [ 1 ] .cf );
-				gl .End ( );
-				gl .PopAttrib ( ); }
+			if ( IsInBetween ( v , E0 ) )
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 3 );
+				gl . Color ( .9 , .5 , .2 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				gl . Vertex ( E0 . V [ 0 ] . cf );
+				gl . Vertex ( E0 . V [ 1 ] . cf );
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
+			if ( IsInBetween ( v , E1 ) )
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 3 );
+				gl . Color ( .9 , .5 , .2 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				gl . Vertex ( E1 . V [ 0 ] . cf );
+				gl . Vertex ( E1 . V [ 1 ] . cf );
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
+			if ( IsInBetween ( v , E2 ) )
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 3 );
+				gl . Color ( .9 , .5 , .2 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				gl . Vertex ( E2 . V [ 0 ] . cf );
+				gl . Vertex ( E2 . V [ 1 ] . cf );
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
+			if ( IsInBetween ( v , E3 ) )
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 3 );
+				gl . Color ( .9 , .5 , .2 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				gl . Vertex ( E2 . V [ 0 ] . cf );
+				gl . Vertex ( E3 . V [ 1 ] . cf );
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
 
-			float x0 = cf0 [ 0 ];
-			float y0 = cf0 [ 1 ];
-			float z0 = cf0 [ 2 ];
-			float v0 = E .V [ 0 ] .V;
+			float x0 = E0 . V [ 0 ] . cf [ 0 ];
+			float y0 = E0 . V [ 0 ] . cf [ 1 ];
+			float z0 = E0 . V [ 0 ] . cf [ 2 ];
+			float v0 = E0 . V [ 0 ] . V;
 
-			float x1 = cf1 [ 0 ];
-			float y1 = cf1 [ 1 ];
-			float z1 = cf1 [ 2 ];
-			float v1 = E .V [ 1 ] .V;
+			float x1 = E1 . V [ 0 ] . cf [ 0 ];
+			float y1 = E1 . V [ 0 ] . cf [ 1 ];
+			float z1 = E1 . V [ 0 ] . cf [ 2 ];
+			float v1 = E1 . V [ 0 ] . V;
 
-			float u = ( v - v0 ) / ( v1 - v0 );
-			float x = ( ( 1 - u ) * x0 ) + ( u * x1 );
-			float y = ( ( 1 - u ) * y0 ) + ( u * y1 );
-			float z = ( ( 1 - u ) * z0 ) + ( u * z1 );
+			float x2 = E2 . V [ 0 ] . cf [ 0 ];
+			float y2 = E2 . V [ 0 ] . cf [ 1 ];
+			float z2 = E2 . V [ 0 ] . cf [ 2 ];
+			float v2 = E2 . V [ 0 ] . V;
+
+			float x3 = E3 . V [ 0 ] . cf [ 0 ];
+			float y3 = E3 . V [ 0 ] . cf [ 1 ];
+			float z3 = E3 . V [ 0 ] . cf [ 2 ];
+			float v3 = E3 . V [ 0 ] . V;
+
+			float dv0 = v1 - v0;
+			float dv1 = v2 - v1;
+			float dv2 = v3 - v2;
+			float dv3 = v0 - v3;
+			double V = Math.Sqrt( ( dv0 * dv0 ) + dv1 * dv1 + dv2 * dv2 + dv3 * dv3);
+			var u0 = ( V - v0 ) / ( v1 - v0 );
+			var u1 = ( V - v1 ) / ( v2 - v1 );
+			var u2 = ( V - v2 ) / ( v3 - v2 );
+			var u3 = ( V - v3 ) / ( v0 - v3 );
+
+
+			//tex: $ u0 = (v4 - v)/(v0 - v1) 
+			//tex: $u0=(v-v0)/(v1-v0)$
+			//tex: $u0*(v1-v0)=(v-v0)$
+			//tex: $v0+u0*(v1-v0)=v$
+			//tex: $v=v0+u0*(v1-v0)$
+
+			//tex: $u1=(v-v1)/(v2-v1)$
+			//tex: $u1*(v1-v1)=(v-v1)$
+			//tex: $v1+u1*(v2-v1)=v$
+			//tex: $v=v0+u0*(v1-v0)$
+
+			//tex: $v=v0+u0*(v1-v0)$
+			//tex: $v=v1+u1*(v2-v1)$
+			//tex: $v=v2+u2*(v3-v2)$
+			//tex: $v=v3+u3*(v0-v3)$
+
+			//tex: $v0+u0*(v1-v0) = v1+u1*(v2-v1)$
+			//tex: $v1+u1*(v2-v1) = v2+u2*(v3-v2)$
+			//tex: $v2+u2*(v3-v2) = v3+u3*(v0-v3)$
+			//tex: $v3+u3*(v0-v3) = v0+u0*(v1-v0)$ 
+
+			// v0 + u0 * ( v1 - v0 ) = v1 + u1 * ( v2 - v1 ),	u0 = ( ( u1 - 1 ) * v1 - u1 * v2 + v0) / ( v0 - v1 ) , u1 = ( ( u0 - 1 ) * ( v0 - v1 ) ) / ( v1 - v2 )
+			// v1 + u1 * ( v2 - v1 ) = v2 + u2 * ( v3 - v2 ),	u1 = ( ( u2 - 1 ) * v2 - u2 * v3 + v1) / ( v1 - v2 ) , u2 = ( ( u1 - 1 ) * ( v1 - v2 ) ) / ( v2 - v3 ) 
+			// v2 + u2 * ( v3 - v2 ) = v3 + u3 * ( v0 - v3 ),	u2 =   ( u3 * ( v3 - v0 ) + v2 - v3 )  / ( v2 - v3 ) , u3 = ( ( u2 - 1 ) * ( v3 - v2 ) ) / ( v0 - v3 ) 
+			// v3 + u3 * ( v0 - v3 ) = v0 + u0 * ( v1 - v0 ),   u3 =   (-u0 * v0 + u0 * v1 + v0 - v3 ) / ( v0 - v3 ) , u0 = -( (u3 - 1)  * ( v0 - v3 ) ) / ( v0 - v1 ) }
+
+			//tex: $v=v0+u0*(v1-v0)$
+			//tex: $v=v0+( ( u1 - 1 ) * v1 - u1 * v2 + v0) / ( v0 - v1 )*(v1-v0)$
+			//tex: $ v = u1 ( v2 - v1 ) + v1 $
+
+			//tex: $v = ( ( u2 - 1 ) * v2 - u2 * v3 + v1) / ( v1 - v2 )  ( v2 - v1 ) + v1 $
+			//tex: $ v = u2 ( v3 - v2 ) + v2$
+
+			//tex: $v = ( u3 * ( v3 - v0 ) + v2 - v3 )  / ( v2 - v3 )  ( v3 - v2 ) + v2  $
+			//tex: $ v = u3 (v0 - v3) + v3 $
+			//tex: $v = ( (-u0 * v0 + u0 * v1 + v0 - v3 ) / ( v0 - v3 ) ) (v0 - v3) + v3 $
+			//tex: $ v = u0 (v1 - v0) + v0 $
+
+			//tex: $ v = u1 * ( v2 - v1 ) + v1 $
+			//tex: $ v = u2 * ( v3 - v2 ) + v2 $
+			//tex: $ v = u3 * ( v0 - v3 ) + v3 $
+			//tex: $ v = u0 * ( v1 - v0 ) + v0 $
+
+			//tex: $ u1 = (v1 - v)/(v1 - v2) $
+			//tex: $ u2 = (v2 - v)/(v2 - v3) $
+			//tex: $ u3 = (v3 - v)/(v3 - v0) $
+			//tex: $ u0 = (v4 - v)/(v0 - v1) $
 
 
 
-			
+
+			//float u = ( v - v0 ) / ( v1 - v0 );
+			//float x = ( ( 1 - u ) * x0 ) + ( u * x1 );
+			//float y = ( ( 1 - u ) * y0 ) + ( u * y1 );
+			//float z = ( ( 1 - u ) * z0 ) + ( u * z1 );
+
+
+
+
 
 		}
 
