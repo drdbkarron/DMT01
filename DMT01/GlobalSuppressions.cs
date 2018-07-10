@@ -19,3 +19,5 @@
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE0012:Simplify Names" , Justification = "<Pending>" , Scope = "type" , Target = "~T:Axis_Arrow_Grid.Arrow_Class" )]
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE0012:Simplify Names" , Justification = "<Pending>" , Scope = "type" , Target = "~T:Axis_Arrow_Grid.Axis_Class" )]
 [assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Style" , "IDE0012:Simplify Names" , Justification = "<Pending>" , Scope = "member" , Target = "~M:Axis_Arrow_Grid.Grid_Class.MyGrid(SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Int32)" )]
+[assembly: System . Diagnostics . CodeAnalysis . SuppressMessage ( "Potential Code Quality Issues" , "RECS0018:Comparison of floating point numbers with equality operator" , Justification = "<Pending>" , Scope = "member" , Target = "~M:DMT01.Boxel.IsThisCritical~System.Boolean" )]
+

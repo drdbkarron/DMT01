@@ -101,7 +101,7 @@ namespace DMT01
 	public partial class MainWindow : Window
 		{
 		#region Persistance_classes2
-
+		public static Region Selected_Region;
 		static long Draws ;
 		static long Resizes ;
 		static DateTime StartDateTime;
@@ -486,18 +486,33 @@ namespace DMT01
 			gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
 			gl . Scale ( 1 , -1 , 1 );
 
-			Region Selected_Region = new Region ( C: Sheety.cells, StartRows: Sheety . r0, EndRows: Sheety . r1 , StartCols: Sheety.c0, EndCols: Sheety.c1);
-			Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
+			if(MainWindow.Selected_Region==null)
+			{
+				MainWindow . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
+			}
+
+			//Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
+			
 			for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
 				{
 				for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 					{
 					if ( IsInBetween ( 47 , j , 50 ) )
 						{
-						Boxel B = new Boxel ( i , j , Sheety .cells )
+						Boxel B = MainWindow . Selected_Region . B [ i , j ];
+						if ( B== null )
+						{
+							B = new Boxel ( i , j , Sheety . cells )
 							{
-							MW = ( DMT01 .MainWindow ) mw
+								MW = ( DMT01 . MainWindow ) mw
 							};
+							MainWindow . Selected_Region . B [ i , j ] = B;
+						}
+						else
+						{
+							B = MainWindow . Selected_Region . B [ i , j ];
+						}
+
 						if ( this .HackCheckBox_C10_R2_CheckBox_Control .IsChecked.Value &&  B . IsCritical )
 							{
 							B . DrawMe ( );

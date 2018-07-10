@@ -3,7 +3,7 @@ using WpfControlLibrary1;
 
 namespace DMT01
 {
-	public class Region	   
+	public class Region
 		{
 		public struct SpanStruct
 		{
@@ -19,7 +19,7 @@ namespace DMT01
 		public int Start_Cols;
 		public int End_Cols;
 		public float[,] Cells;
-
+		public Boxel[,] B;
 		public Region ( float [ , ] C , int StartRows , int EndRows , int StartCols , int EndCols )
 			{
 			this . Start_Rows = StartRows;
@@ -29,6 +29,7 @@ namespace DMT01
 			this . Max = -double . MaxValue;
 			this . Min = double . MaxValue;
 			this . Cells = C;
+			this . B = new Boxel [ this . End_Cols , this . End_Rows ];
 
 			for ( int j = this . Start_Rows ; j < this . End_Rows ; j++ )
 				{

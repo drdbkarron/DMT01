@@ -46,22 +46,22 @@ namespace WpfControlLibrary1
 
 		private void QuadDropDownRegionSelector_RowLoChanged ( object sender , EventArgs e )
 		{
-			throw new NotImplementedException ( );
+			//throw new NotImplementedException ( );
 		}
 
 		private void QuadDropDownRegionSelector_RowHiChanged ( object sender , EventArgs e )
 		{
-			throw new NotImplementedException ( );
+			//throw new NotImplementedException ( );
 		}
 
 		private void QuadDropDownRegionSelector_ColLoChanged ( object sender , EventArgs e )
 		{
-			throw new NotImplementedException ( );
+			//throw new NotImplementedException ( );
 		}
 
 		private void QuadDropDownRegionSelector_ColHiChanged ( object sender , EventArgs e )
 		{
-			throw new NotImplementedException ( );
+			//throw new NotImplementedException ( );
 		}
 
 		public int RowLo
