@@ -466,19 +466,19 @@ namespace DMT01
 			}
 
 		private void ArmsTooShortToBoxWithHashem ( OpenGL gl )
-			{
+		{
 			if ( Sheety == null )
-				{
+			{
 				return;
-				}
+			}
 
 			staticGLHook = gl;
 			if ( staticGLHook == null )
-				{
+			{
 				return;
-				}
+			}
 
-			Window mw =Application . Current . MainWindow;
+			Window mw = Application . Current . MainWindow;
 
 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 			gl . PushMatrix ( );
@@ -486,25 +486,28 @@ namespace DMT01
 			gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
 			gl . Scale ( 1 , -1 , 1 );
 
-			if(MainWindow.Selected_Region==null)
+			if ( MainWindow . Selected_Region == null )
 			{
 				MainWindow . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
 			}
+			int ChoakerLowRow = 30;
+			int ChoakerHighRow = 50;
 
 			//Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
-			
+
 			for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
-				{
+			{
 				for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+				{
+					if ( IsInBetween ( ChoakerLowRow , j , ChoakerHighRow ) )
 					{
-					if ( IsInBetween ( 47 , j , 50 ) )
-						{
 						Boxel B = MainWindow . Selected_Region . B [ i , j ];
-						if ( B== null )
+						if ( B == null )
 						{
 							B = new Boxel ( i , j , Sheety . cells )
 							{
-								MW = ( DMT01 . MainWindow ) mw
+								MW = ( DMT01 . MainWindow ) mw ,
+								ParentRegion = MainWindow . Selected_Region
 							};
 							MainWindow . Selected_Region . B [ i , j ] = B;
 						}
@@ -513,16 +516,37 @@ namespace DMT01
 							B = MainWindow . Selected_Region . B [ i , j ];
 						}
 
-						if ( this .HackCheckBox_C10_R2_CheckBox_Control .IsChecked.Value &&  B . IsCritical )
-							{
+						if ( this . HackCheckBox_C10_R2_CheckBox_Control . IsChecked . Value )
+						{
 							B . DrawMe ( );
-							}
 						}
 					}
 				}
+			}
+			for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
+			{
+			}
 			gl . PopMatrix ( );
 			gl . PopAttrib ( );
+			if ( DoGlobalSweepThreshold_CheckBox_Control . IsChecked . Value )
+			{
+				this . CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue += CriticalitySweeper_DELTA_H_Slider_User_Control.SliderValue;
+				MainWindow . Selected_Region. Titration_Steps++;
+
+				if ( this. CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue <= this .CriticalitySweeper_LOW_H_Slider_User_Control . SliderValue )
+				{
+					this . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderValue = -this . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderValue;
+					this .CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue = this .  CriticalitySweeper_LOW_H_Slider_User_Control . SliderValue;
+
+				}
+				if ( this .CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue >= this . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderValue )
+				{
+					this . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderValue = -this . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderValue;
+					this.region_threshold_H_Slider_UserControl . SliderValue = this . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderValue;
+				}
 			}
+
+		}
 
 		private bool IsInBetween ( int v1 , int j , int v2 )
 			{

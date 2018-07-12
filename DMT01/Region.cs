@@ -11,6 +11,7 @@ namespace DMT01
 		};
 		public SpanStruct Row,Col;
 		public DMT01.MainWindow MW=  ( DMT01 . MainWindow ) System. Windows. Application . Current . MainWindow;
+		public int RegionalHits;
 		public double Max;
 		public double Min;
 		public int N;
@@ -20,6 +21,9 @@ namespace DMT01
 		public int End_Cols;
 		public float[,] Cells;
 		public Boxel[,] B;
+		public Boxel[,] BorderB;
+
+		public long Titration_Steps;
 		public Region ( float [ , ] C , int StartRows , int EndRows , int StartCols , int EndCols )
 			{
 			this . Start_Rows = StartRows;
@@ -59,10 +63,19 @@ namespace DMT01
 				}
 			this . MW . region_threshold_H_Slider_UserControl . SliderMinValue = this . Min;
 			this . MW . region_threshold_H_Slider_UserControl . SliderMaxValue = this . Max;
+			this . MW . CriticalitySweeper_LOW_H_Slider_User_Control . SliderValue = (float)this . Min;
+			this . MW . CriticalitySweeper_LOW_H_Slider_User_Control . SliderMinValue = this . Min;
+			this . MW . CriticalitySweeper_LOW_H_Slider_User_Control . SliderMaxValue = this . Max;
+			this . MW . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderMaxValue = this . Max;
+			this . MW . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderMinValue = this.Min;
+			this . MW . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderMaxValue = this . Max;
+			this . MW . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderMinValue = -this . Max * .1;	
+			this . MW . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderMaxValue = this . Max*.1;
+			this . MW . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderValue = .1f;
 
 			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , Display() , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
-			}
+		}
 
 		private String Display ( )
 			{
