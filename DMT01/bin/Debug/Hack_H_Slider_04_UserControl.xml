@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<H_Slider_UserControl1_SaveState_Class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>H_Slider_UserControl1</ControlClass>
+    <ControlName>Hack_H_Slider_04_UserControl</ControlName>
+    <SaveStateFileName>Hack_H_Slider_04_UserControl.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <MaxValue>1</MaxValue>
+  <MinValue>-1</MinValue>
+  <ResetValue>0</ResetValue>
+</H_Slider_UserControl1_SaveState_Class>

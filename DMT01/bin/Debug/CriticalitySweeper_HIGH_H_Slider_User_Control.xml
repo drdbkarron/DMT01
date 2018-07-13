@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<H_Slider_UserControl1_SaveState_Class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>H_Slider_UserControl1</ControlClass>
+    <ControlName>CriticalitySweeper_HIGH_H_Slider_User_Control</ControlName>
+    <SaveStateFileName>CriticalitySweeper_HIGH_H_Slider_User_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <MaxValue>57.12497</MaxValue>
+  <MinValue>0</MinValue>
+  <ResetValue>1.76967072</ResetValue>
+</H_Slider_UserControl1_SaveState_Class>
