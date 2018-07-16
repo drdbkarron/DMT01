@@ -48,7 +48,19 @@ namespace DMT01
 			this . cf = new float [ 3 ] { i , j , 0 };
 			this . I = i;
 			this . J = j;
-			this . V = c [ i , j ];
+			var a = c . GetLength ( 0 ) ;
+			var b = c . GetLength ( 1 ) ;
+			try
+			{
+				System . Boolean bobo =c [ i , j ] == null ;
+			}
+			catch( System . Exception.s s)
+			{
+				this . V = 0;
+				return;
+			}
+			float C = c [ i , j ];
+			this . V =C;
 			}
 
 		internal void Draw ( )

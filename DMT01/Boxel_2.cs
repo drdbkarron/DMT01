@@ -552,7 +552,6 @@ namespace DMT01
 			gl . Vertex ( x: x30 , y: y30 , z: z30 );
 			gl . End ( );
 			gl . PopAttrib ( );
-
 		}
 
 		private void DrawEdge ( Edge E )
@@ -866,7 +865,6 @@ namespace DMT01
 			}
 			if ( EdgeHits == 1 )
 			{
-
 				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "EdgeHits 1!!!" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 			}
 			else if ( EdgeHits == 2 )
@@ -888,7 +886,6 @@ namespace DMT01
 			}
 			else if ( EdgeHits == 3 )
 			{
-
 				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "EdgeHits 3 !!!" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . LineWidth ( LineWidth - 1 );
@@ -1900,7 +1897,7 @@ FreshReset:
 
 		internal void DrawMe ( )
 		{
-			//DrawBoxelEdgeCycles ( );
+			DrawBoxelEdgeCycles ( );
 			DrawHitsinBoxel ( );
 			//DrawCriticalBoxel ( );
 			//AnnotateBoxelAtCentroid ( );

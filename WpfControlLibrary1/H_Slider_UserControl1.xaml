@@ -14,7 +14,11 @@
 	Background="#FFCD98BC"
 	Loaded="H_Slider_UserControl_Loaded"
 	mc:Ignorable="d"
-	>
+			 Initialized="H_Slider_UserControl_Initialized"
+			 MouseEnter="H_Slider_UserControl_MouseEnter"
+			 MouseLeave="H_Slider_UserControl_MouseLeave"
+			 BorderBrush="#FFD6D60A"
+			 BorderThickness="2,1,7,1">
 	<Grid
 		x:Name="H_Slider_UserControl_Grid"
 		Width="826"

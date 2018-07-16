@@ -22,7 +22,6 @@ namespace DMT01
 		public float[,] Cells;
 		public Boxel[,] B;
 		public Boxel[,] BorderB;
-
 		public long Titration_Steps;
 		public Region ( float [ , ] C , int StartRows , int EndRows , int StartCols , int EndCols )
 			{
@@ -100,7 +99,10 @@ namespace DMT01
 		public void LoadRegionIntoQuadSelector ( QuadDropDownRegionSelector Q )
 		{
 			if ( Q == null )
+			{
 				return;
+			}
+
 			Q .RowLo= this .Start_Rows;
 			Q .RowHi = this .End_Rows;
 			Q .ColLo = this .Start_Cols;

@@ -5,6 +5,6 @@
     <SaveStateFileName>Draw_Minus_Z_Axis_Leg_CheckBox_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxState>false</CheckBoxState>
   <CheckBoxName>Draw_Minus_Z_Axis_Leg_CheckBox_Control</CheckBoxName>
 </CheckBoxControlSaveState>

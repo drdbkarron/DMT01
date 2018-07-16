@@ -102,8 +102,38 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DynamicExpresso.Core">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Extended.Wpf.Toolkit">
+      <Version>3.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="GlmNet">
+      <Version>0.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="GlmSharp">
+      <Version>0.9.8</Version>
+    </PackageReference>
+    <PackageReference Include="SharpGL">
+      <Version>2.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="SharpGL.WPF">
+      <Version>2.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="SharpGLCore">
+      <Version>2.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="unvell.ReoGrid.dll">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="unvell.ReoGridWPF.dll">
+      <Version>2.1.0</Version>
+    </PackageReference>
     <PackageReference Include="WpfColorFontDialog">
       <Version>1.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="WpfScreenHelper">
+      <Version>0.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

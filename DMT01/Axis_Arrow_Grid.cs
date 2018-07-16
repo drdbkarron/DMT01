@@ -1,48 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SharpGL;
-using MySimpleMath;
-using SharpGL . SceneGraph . Core;
+using SharpGL . WPF;
+using GlmSharp;
+using SharpGL . WPF . SceneTree;
+using GlmNet;
 using SharpGL . SceneGraph;
 using System . Xml . Serialization;
 using SharpGL . SceneGraph . Primitives;
-using DMT01;
-using XamlGeneratedNamespace;
+using SharpGL . SceneGraph . Core;
 
-namespace SharpGL.SceneGraph.Core
-    {
-    public class myGl: OpenGL
-    {
-        public void Scale ( float [  ] a)
-            {
-            this. Scale ( a [ 0 ] , a [ 1 ] , a [ 2 ] );
-            }
+//namespace SharpGL . SceneGraph . Core
+//{
+//	public class OpenGL
+//	{
+//		public void Scale ( float [ ] a )
+//		{
 
-        //private void private new Scale ( float v1 , float v2 , float v3 )
-        //    {
-        //    double V1 = ( double ) v1;
-        //    double V2 = ( double ) v2;
-        //    double V3 = ( double ) v3;
-        //    this. Scale ( V1 , V2 , V3 );
-        //    }
-        }
-}
+//			//GlmNet.glm.scale ( a [ 0 ] , a [ 1 ] , a [ 2 ] );
+//		}
+
+//		private void Scale ( float v1 , float v2 , float v3 )
+//		{
+//			double V1 = ( double ) v1;
+//			double V2 = ( double ) v2;
+//			double V3 = ( double ) v3;
+//			SharpGL.SceneGraph.Core.scale ( V1 , V2 , V3 );
+//		}
+//	}
+//}
 
 namespace Axis_Arrow_Grid
-    {
-    public static class Arrow_Class
+{
+	public static class Arrow_Class
         {
-        private static Boolean ShowLocalAxis = true;
+		static Boolean ShowLocalAxis = true;
 
-        public static void Arrow ( OpenGL gl )
+		public static void Arrow ( SharpGL . OpenGL gl )
             {
             Arrow ( gl , 1 );
             }
 
-        public static void Arrow ( OpenGL gl , float zscale )
+        public static void Arrow ( SharpGL . OpenGL gl , float zscale )
             {
 			const float r_Arrow_shaft_cylinder = 0.09f;
 			const float r_arrow_head = 0.20f;
@@ -119,7 +117,7 @@ namespace Axis_Arrow_Grid
         {
         public float rquad ;
 
-        public void DrawCube ( OpenGL gl )
+        public void DrawCube ( SharpGL . OpenGL gl )
             {
             gl . PushMatrix ( );
             gl . LoadIdentity ( );
@@ -178,7 +176,7 @@ namespace Axis_Arrow_Grid
         {
         public float rtri ;
 
-        public void DrawTetrahedra ( OpenGL gl )
+        public void DrawTetrahedra ( SharpGL . OpenGL gl )
             {
             gl . PushMatrix ( );
             gl . LoadIdentity ( );					// Reset The View
@@ -187,7 +185,7 @@ namespace Axis_Arrow_Grid
 
             gl . Rotate ( this . rtri , 0.0f , 1.0f , 0.0f );				// Rotate The Pyramid On It's Y Axis
 
-            gl . Begin ( OpenGL . GL_TRIANGLES );					// Start Drawing The Pyramid
+            gl . Begin ( SharpGL.OpenGL . GL_TRIANGLES );					// Start Drawing The Pyramid
 
             gl . Color ( 1.0f , 0.0f , 0.0f );			// Red
             gl . Vertex ( 0.0f , 1.0f , 0.0f );			// Top Of Triangle (Front)
@@ -442,7 +440,7 @@ namespace Axis_Arrow_Grid
             gl . PopMatrix ( );
             }
 
-            public static void LocalAxis ( OpenGL gl )
+            public static void LocalAxis ( SharpGL.OpenGL gl )
             {
                 double[] Reddish = { 0.9, 0.3, 0.4 };
                 double[] Greenish = { 0.1, 0.8, 0.3 };
@@ -580,7 +578,7 @@ namespace Axis_Arrow_Grid
             /// </summary>
             /// <param name="gl">The OpenGL instance.</param>
             /// <param name="renderMode">The render mode.</param>
-            public void Render ( OpenGL gl , RenderMode renderMode )
+            public void Render ( SharpGL . OpenGL gl , RenderMode renderMode )
             {
                 //  Design time primitives render only in design mode.
                 if ( renderMode != RenderMode . Design )
@@ -600,52 +598,52 @@ namespace Axis_Arrow_Grid
                 }
             }
 
-            /// <summary>
-            /// Creates the display list. This function draws the
-            /// geometry as well as compiling it.
-            /// </summary>
-            private void CreateDisplayList ( OpenGL gl )
-            {
+		/// <summary>
+		/// Creates the display list. This function draws the
+		/// geometry as well as compiling it.
+		/// </summary>
+		void CreateDisplayList ( SharpGL.OpenGL gl )
+		{
 			//  Create the display list. 
-			this . displayList = new DisplayList ( );
+			this . displayList = new DisplayList ();
 
 			//  Generate the display list and 
 			this . displayList . Generate ( gl );
 			this . displayList . New ( gl , DisplayList . DisplayListMode . CompileAndExecute );
 
-                //  Push attributes, set the color.
-                gl . PushAttrib ( OpenGL . GL_CURRENT_BIT | OpenGL . GL_ENABLE_BIT |
-                    OpenGL . GL_LINE_BIT );
-                gl . Disable ( OpenGL . GL_LIGHTING );
-                gl . Disable ( OpenGL . GL_TEXTURE_2D );
-                gl . LineWidth ( 1.0f );
+			//  Push attributes, set the color.
+			gl . PushAttrib ( OpenGL . GL_CURRENT_BIT | OpenGL . GL_ENABLE_BIT |
+				OpenGL . GL_LINE_BIT );
+			gl . Disable ( OpenGL . GL_LIGHTING );
+			gl . Disable ( OpenGL . GL_TEXTURE_2D );
+			gl . LineWidth ( 1.0f );
 
-                //  Draw the grid lines.
-                gl . Begin ( OpenGL . GL_LINES );
-                for ( int i = -10 ; i <= 10 ; i++ )
-                {
-                    float fcol = ((i % 10) == 0) ? 0.3f : 0.15f;
-                    gl . Color ( fcol , fcol , fcol );
-                    gl . Vertex ( i , -10 , 0 );
-                    gl . Vertex ( i , 10 , 0 );
-                    gl . Vertex ( -10 , i , 0 );
-                    gl . Vertex ( 10 , i , 0 );
-                }
-                gl . End ( );
+			//  Draw the grid lines.
+			gl . Begin ( SharpGL . OpenGL . GL_LINES );
+			for (int i = -10 ; i <= 10 ; i++)
+			{
+				float fcol = ( ( i % 10 ) == 0 ) ? 0.3f : 0.15f;
+				gl . Color ( fcol , fcol , fcol );
+				gl . Vertex ( i , -10 , 0 );
+				gl . Vertex ( i , 10 , 0 );
+				gl . Vertex ( -10 , i , 0 );
+				gl . Vertex ( 10 , i , 0 );
+			}
+			gl . End ();
 
-                //  Restore attributes.
-                gl . PopAttrib ( );
+			//  Restore attributes.
+			gl . PopAttrib ();
 
 			//  End the display list.
 			this . displayList . End ( gl );
-            }
+		}
 
-            /// <summary>
-            /// The internal display list.
-            /// </summary>
-            [XmlIgnore]
-            private DisplayList displayList;
-        }
+		/// <summary>
+		/// The internal display list.
+		/// </summary>
+		[XmlIgnore]
+		DisplayList displayList;
+	}
 
         public class Cube : Polygon
         {
@@ -658,11 +656,11 @@ namespace Axis_Arrow_Grid
                 CreateCubeGeometry ( );
             }
 
-            /// <summary>
-            /// This function makes a simple cube shape.
-            /// </summary>
-            private void CreateCubeGeometry ( )
-            {
+		/// <summary>
+		/// This function makes a simple cube shape.
+		/// </summary>
+		void CreateCubeGeometry ()
+		{
 			this . UVs . Add ( new UV ( 0 , 0 ) );
 			this . UVs . Add ( new UV ( 0 , 1 ) );
 			this . UVs . Add ( new UV ( 1 , 1 ) );
@@ -678,49 +676,49 @@ namespace Axis_Arrow_Grid
 			this . Vertices . Add ( new SharpGL . SceneGraph . Vertex ( 1 , 1 , 1 ) );
 			this . Vertices . Add ( new SharpGL . SceneGraph . Vertex ( -1 , 1 , 1 ) );
 
-                //	Add the faces.
-                Face face = new Face(); //	bottom
-                face . Indices . Add ( new Index ( 1 , 0 ) );
-                face . Indices . Add ( new Index ( 2 , 1 ) );
-                face . Indices . Add ( new Index ( 3 , 2 ) );
-                face . Indices . Add ( new Index ( 0 , 3 ) );
+			//	Add the faces.
+			Face face = new Face (); //	bottom
+			face . Indices . Add ( new Index ( 1 , 0 ) );
+			face . Indices . Add ( new Index ( 2 , 1 ) );
+			face . Indices . Add ( new Index ( 3 , 2 ) );
+			face . Indices . Add ( new Index ( 0 , 3 ) );
 			this . Faces . Add ( face );
 
-                face = new Face ( );        //	top
-                face . Indices . Add ( new Index ( 7 , 0 ) );
-                face . Indices . Add ( new Index ( 6 , 1 ) );
-                face . Indices . Add ( new Index ( 5 , 2 ) );
-                face . Indices . Add ( new Index ( 4 , 3 ) );
+			face = new Face ();        //	top
+			face . Indices . Add ( new Index ( 7 , 0 ) );
+			face . Indices . Add ( new Index ( 6 , 1 ) );
+			face . Indices . Add ( new Index ( 5 , 2 ) );
+			face . Indices . Add ( new Index ( 4 , 3 ) );
 			this . Faces . Add ( face );
 
-                face = new Face ( );        //	right
-                face . Indices . Add ( new Index ( 5 , 0 ) );
-                face . Indices . Add ( new Index ( 6 , 1 ) );
-                face . Indices . Add ( new Index ( 2 , 2 ) );
-                face . Indices . Add ( new Index ( 1 , 3 ) );
+			face = new Face ();        //	right
+			face . Indices . Add ( new Index ( 5 , 0 ) );
+			face . Indices . Add ( new Index ( 6 , 1 ) );
+			face . Indices . Add ( new Index ( 2 , 2 ) );
+			face . Indices . Add ( new Index ( 1 , 3 ) );
 			this . Faces . Add ( face );
 
-                face = new Face ( );        //	left
-                face . Indices . Add ( new Index ( 7 , 0 ) );
-                face . Indices . Add ( new Index ( 4 , 1 ) );
-                face . Indices . Add ( new Index ( 0 , 2 ) );
-                face . Indices . Add ( new Index ( 3 , 3 ) );
+			face = new Face ();        //	left
+			face . Indices . Add ( new Index ( 7 , 0 ) );
+			face . Indices . Add ( new Index ( 4 , 1 ) );
+			face . Indices . Add ( new Index ( 0 , 2 ) );
+			face . Indices . Add ( new Index ( 3 , 3 ) );
 			this . Faces . Add ( face );
 
-                face = new Face ( );        // front
-                face . Indices . Add ( new Index ( 4 , 0 ) );
-                face . Indices . Add ( new Index ( 5 , 1 ) );
-                face . Indices . Add ( new Index ( 1 , 2 ) );
-                face . Indices . Add ( new Index ( 0 , 3 ) );
+			face = new Face ();        // front
+			face . Indices . Add ( new Index ( 4 , 0 ) );
+			face . Indices . Add ( new Index ( 5 , 1 ) );
+			face . Indices . Add ( new Index ( 1 , 2 ) );
+			face . Indices . Add ( new Index ( 0 , 3 ) );
 			this . Faces . Add ( face );
 
-                face = new Face ( );        //	back
-                face . Indices . Add ( new Index ( 6 , 0 ) );
-                face . Indices . Add ( new Index ( 7 , 1 ) );
-                face . Indices . Add ( new Index ( 3 , 2 ) );
-                face . Indices . Add ( new Index ( 2 , 3 ) );
+			face = new Face ();        //	back
+			face . Indices . Add ( new Index ( 6 , 0 ) );
+			face . Indices . Add ( new Index ( 7 , 1 ) );
+			face . Indices . Add ( new Index ( 3 , 2 ) );
+			face . Indices . Add ( new Index ( 2 , 3 ) );
 			this . Faces . Add ( face );
-            }
-        }
+		}
+	}
     }
 

@@ -292,5 +292,35 @@ namespace WpfControlLibrary1
 
 		//System .Diagnostics .Debug .WriteLine ( String .Format ( "{0} {1} " , xNameParent ,  ( ( System .Environment .StackTrace ) .Split ( '\n' ) ) [ 2 ] .Trim ( )  ) );
 		}
+
+		private void H_Slider_UserControl_Initialized ( object sender , EventArgs e )
+		{
+
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+		}
+
+		private void H_Slider_UserControl_MouseEnter ( object sender , MouseEventArgs e )
+		{
+
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Enter" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			UserControl UC = sender as UserControl;
+			if ( UC is null )
+				return;
+			UC . BorderThickness = new Thickness(uniformLength:5d);
+		}
+
+		void H_Slider_UserControl_MouseLeave ( object sender , MouseEventArgs e )
+		{
+
+			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Leave" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			UserControl UC = sender as UserControl ;	 
+			if ( UC is null )
+				return ;
+			System . Windows . Thickness v = new Thickness ( left : 1d ,
+															top : 1d ,
+															right : 1d ,
+															bottom : 1d ) ;
+			UC . BorderThickness = v ;
+		}
 	}
 }

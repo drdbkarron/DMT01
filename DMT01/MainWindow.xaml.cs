@@ -107,7 +107,7 @@ namespace DMT01
 		static DateTime StartDateTime;
 		static TimeSpan ElapsedDateTime;
 		static int CurrentWorksheetIndex;
-		public static OpenGL staticGLHook;
+		public static SharpGL.OpenGL staticGLHook;
 
 		//public WpfControlLibrary2.LineStinkerModes Stankey= WpfControlLibrary2.LineStinkerModes.StartAtFarVertex;
 
@@ -465,7 +465,7 @@ namespace DMT01
 			Draws++;
 			}
 
-		private void ArmsTooShortToBoxWithHashem ( OpenGL gl )
+		private void ArmsTooShortToBoxWithHashem ( SharpGL . OpenGL gl )
 		{
 			if ( Sheety == null )
 			{
@@ -479,8 +479,7 @@ namespace DMT01
 			}
 
 			Window mw = Application . Current . MainWindow;
-
-			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+ 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 			gl . PushMatrix ( );
 			gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
 			gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
@@ -495,49 +494,85 @@ namespace DMT01
 
 			//Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
 
-			for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
+			if( this . DoGuts_CheckBox_Control .IsChecked.Value)
 			{
-				for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+				for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
 				{
-					if ( IsInBetween ( ChoakerLowRow , j , ChoakerHighRow ) )
+					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 					{
-						Boxel B = MainWindow . Selected_Region . B [ i , j ];
-						if ( B == null )
+						if ( IsInBetween ( ChoakerLowRow , j , ChoakerHighRow ) )
 						{
-							B = new Boxel ( i , j , Sheety . cells )
+							Boxel B = MainWindow . Selected_Region . B [ i , j ];
+							if ( B == null )
 							{
-								MW = ( DMT01 . MainWindow ) mw ,
-								ParentRegion = MainWindow . Selected_Region
-							};
-							MainWindow . Selected_Region . B [ i , j ] = B;
-						}
-						else
-						{
-							B = MainWindow . Selected_Region . B [ i , j ];
-						}
+								B = new Boxel ( i , j , Sheety . cells )
+								{
+									MW = ( DMT01 . MainWindow ) mw ,
+									ParentRegion = MainWindow . Selected_Region
+								};
+								MainWindow . Selected_Region . B [ i , j ] = B;
+							}
+							else
+							{
+								B = MainWindow . Selected_Region . B [ i , j ];
+							}
 
-						if ( this . HackCheckBox_C10_R2_CheckBox_Control . IsChecked . Value )
-						{
 							B . DrawMe ( );
 						}
 					}
 				}
 			}
-			for ( int j = Sheety . r0 ; j < Sheety . r1 ; j++ )
+
+			if ( this . DoBorder_CheckBox_Control . IsChecked . Value )
 			{
+				if ( this . DoBorder_RIGHT_CheckBox_Control . IsChecked . Value )
+				{
+					for ( int j = ChoakerLowRow ; j < ChoakerHighRow ; j++ )
+					{
+						int i = Sheety . c1+1;
+						BorderIceRows ( mw , ChoakerLowRow , ChoakerHighRow , i ,j);
+					}
+				}
+
+				if ( this . DoBorder_LEFT_CheckBox_Control . IsChecked . Value )
+				{
+					for ( int j = ChoakerLowRow ; j < ChoakerHighRow ; j++ )
+					{
+						int i = Sheety . c0 - 1;
+						BorderIceRows ( mw , ChoakerLowRow , ChoakerHighRow , i ,j );
+					}
+				}
+
+				if ( this . DoBorder_BOTTOM_CheckBox_Control . IsChecked . Value )
+				{
+					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+					{
+						int j = ChoakerLowRow - 1;
+						//BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
+					}
+				}
+
+				if ( this . DoBorder_TOP_CheckBox_Control . IsChecked . Value )
+				{
+					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+					{
+						int j = ChoakerHighRow;
+						//BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
+					}
+				}
 			}
+
 			gl . PopMatrix ( );
 			gl . PopAttrib ( );
-			if ( DoGlobalSweepThreshold_CheckBox_Control . IsChecked . Value )
+			if ( this . DoGlobalSweepThreshold_CheckBox_Control . IsChecked . Value )
 			{
-				this . CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue += CriticalitySweeper_DELTA_H_Slider_User_Control.SliderValue;
+				this . CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue += this . CriticalitySweeper_DELTA_H_Slider_User_Control .SliderValue;
 				MainWindow . Selected_Region. Titration_Steps++;
 
 				if ( this. CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue <= this .CriticalitySweeper_LOW_H_Slider_User_Control . SliderValue )
 				{
 					this . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderValue = -this . CriticalitySweeper_DELTA_H_Slider_User_Control . SliderValue;
 					this .CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue = this .  CriticalitySweeper_LOW_H_Slider_User_Control . SliderValue;
-
 				}
 				if ( this .CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue >= this . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderValue )
 				{
@@ -545,7 +580,55 @@ namespace DMT01
 					this.region_threshold_H_Slider_UserControl . SliderValue = this . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderValue;
 				}
 			}
+		}
 
+		private void BorderIceCols ( Window mw , int ChoakerLowRow , int ChoakerHighRow , int i , int j )
+		{
+			if ( MainWindow . Selected_Region . BorderB == null )
+			{
+				MainWindow . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
+			}
+			Boxel BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+			if ( BorderB == null )
+			{
+				BorderB = new Boxel ( i , j , Sheety . cells )
+				{
+					MW = ( DMT01 . MainWindow ) mw ,
+					ParentRegion = MainWindow . Selected_Region
+				};
+				MainWindow . Selected_Region . B [ i , j ] = BorderB;
+			}
+			else
+			{
+				BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+			}
+
+			BorderB . DrawMe ( );
+		}
+
+		private void BorderIceRows ( Window mw , int ChoakerLowRow , int ChoakerHighRow , int i , int j )
+		{
+			if ( MainWindow . Selected_Region . BorderB == null )
+			{
+				MainWindow . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
+			}
+
+			Boxel BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+			if ( BorderB == null )
+			{
+				BorderB = new Boxel ( i , j , Sheety . cells )
+				{
+					MW = ( DMT01 . MainWindow ) mw ,
+					ParentRegion = MainWindow . Selected_Region
+				};
+				MainWindow . Selected_Region . BorderB [ i , j ] = BorderB;
+			}
+			else
+			{
+				BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+			}
+
+			BorderB . DrawMe ( );
 		}
 
 		private bool IsInBetween ( int v1 , int j , int v2 )
@@ -568,7 +651,7 @@ namespace DMT01
 			return false;
 			}
 
-		private static void OldDrawWithoutBoxel ( OpenGL gl , int j , int i )
+		private static void OldDrawWithoutBoxel ( SharpGL . OpenGL gl , int j , int i )
 			{
 			if ( Sheety . cells [ i , j ] > 1.0f )
 				{
@@ -608,7 +691,7 @@ namespace DMT01
 				}
 			}
 
-		private void ReoGrid3DSpreadsheet ( OpenGL gl )
+		private void ReoGrid3DSpreadsheet ( SharpGL.OpenGL gl )
 			{
 			const float cell_height = 0.499f;
 			const float cell_width = 0.5f;
@@ -2382,7 +2465,7 @@ namespace DMT01
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 			}
 
-private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
+		private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
 			{
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Starting Save Selected" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 
