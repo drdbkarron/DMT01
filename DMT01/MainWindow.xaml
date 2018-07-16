@@ -942,7 +942,7 @@
 										<local:H_Slider_UserControl1
 											x:Name="CriticalitySweeper_THRESHOLD_H_Slider_User_Control"
 											Width="829"
-											Height="65"
+											Height="65" SliderMinValue="0" SliderMaxValue="85"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
 											/>
