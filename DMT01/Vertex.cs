@@ -48,13 +48,23 @@ namespace DMT01
 			this . cf = new float [ 3 ] { i , j , 0 };
 			this . I = i;
 			this . J = j;
-			var a = c . GetLength ( 0 ) ;
-			var b = c . GetLength ( 1 ) ;
+			var Eye = c . GetLength ( 0 ) ;
+			var Jay = c . GetLength ( 1 ) ;
+			if ( i > Eye )
+			{
+				this . V = 0 ;
+				return ;
+			}
+			if ( j > Jay )
+			{
+				this . V = 0 ;
+				return ;
+			}
 			try
 			{
 				System . Boolean bobo =c [ i , j ] == null ;
 			}
-			catch( System . Exception.s s)
+			catch( System .IndexOutOfRangeException s)
 			{
 				this . V = 0;
 				return;

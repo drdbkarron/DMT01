@@ -529,7 +529,7 @@ namespace DMT01
 				{
 					for ( int j = ChoakerLowRow ; j < ChoakerHighRow ; j++ )
 					{
-						int i = Sheety . c1+1;
+						int i = Sheety . c1;
 						BorderIceRows ( mw , ChoakerLowRow , ChoakerHighRow , i ,j);
 					}
 				}
@@ -548,7 +548,7 @@ namespace DMT01
 					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 					{
 						int j = ChoakerLowRow - 1;
-						//BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
+						BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
 					}
 				}
 
@@ -557,7 +557,7 @@ namespace DMT01
 					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 					{
 						int j = ChoakerHighRow;
-						//BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
+						BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
 					}
 				}
 			}

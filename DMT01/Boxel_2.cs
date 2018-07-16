@@ -1729,7 +1729,9 @@ FreshReset:
 				}
 				else
 				{
-					return; // == flat edge
+					Bigger = E . V [ 0 ];
+					Smaller = E . V [ 1 ];
+					//return; // == flat edge
 				}
 				// p prefix fixed point
 				// v prefix direction unfixed vector
