@@ -1007,7 +1007,7 @@
 											Height="65"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-											/>
+																	 LabelText="hi" />
 										<local:H_Slider_UserControl1
 											x:Name="CriticalitySweeper_LOW_H_Slider_User_Control"
 											Grid.Row="2"
@@ -1015,7 +1015,8 @@
 											Height="65"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-											/>
+																	 SliderMinValue="-1"
+																	 LabelText="lo" />
 										<local:PointSizeComboBoxUserControlClass
 											x:Name="SweeperHitPointSize_PointSizeComboBoxUser_Control"
 											Grid.Row="2"
@@ -1046,7 +1047,10 @@
 											Height="65"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-											/>
+																	 LabelText="delta"
+																	 SliderMaxValue="1"
+																	 SliderMinValue="-1"
+																	 SliderValue="0.01" />
 										<local:PointSizeComboBoxUserControlClass
 											x:Name="SweeperHitPointSize_PointSizeComboBoxUser_Control_Copy"
 											Grid.Row="3"
