@@ -60,15 +60,6 @@ namespace DMT01
 				this . V = 0 ;
 				return ;
 			}
-			try
-			{
-				System . Boolean bobo =c [ i , j ] == null ;
-			}
-			catch( System .IndexOutOfRangeException s)
-			{
-				this . V = 0;
-				return;
-			}
 			float C = c [ i , j ];
 			this . V =C;
 			}

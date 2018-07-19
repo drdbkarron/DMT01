@@ -5,6 +5,6 @@
     <SaveStateFileName>AnnotateYTickMarks_CheckBox_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <CheckBoxState>false</CheckBoxState>
+  <CheckBoxState>true</CheckBoxState>
   <CheckBoxName>AnnotateYTickMarks_CheckBox_Control</CheckBoxName>
 </CheckBoxControlSaveState>

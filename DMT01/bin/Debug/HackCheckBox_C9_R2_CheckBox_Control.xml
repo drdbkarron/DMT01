@@ -5,6 +5,6 @@
     <SaveStateFileName>HackCheckBox_C9_R2_CheckBox_Control.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxState>false</CheckBoxState>
   <CheckBoxName>HackCheckBox_C9_R2_CheckBox_Control</CheckBoxName>
 </CheckBoxControlSaveState>

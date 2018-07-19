@@ -489,8 +489,8 @@ namespace DMT01
 			{
 				MainWindow . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
 			}
-			int ChoakerLowRow = 30;
-			int ChoakerHighRow = 50;
+			int ChokerLowRow = 36;
+			int ChokerHighRow = 38;
 
 			//Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
 
@@ -500,7 +500,7 @@ namespace DMT01
 				{
 					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 					{
-						if ( IsInBetween ( ChoakerLowRow , j , ChoakerHighRow ) )
+						if ( IsInBetween ( ChokerLowRow , j , ChokerHighRow ) )
 						{
 							Boxel B = MainWindow . Selected_Region . B [ i , j ];
 							if ( B == null )
@@ -527,37 +527,37 @@ namespace DMT01
 			{
 				if ( this . DoBorder_RIGHT_CheckBox_Control . IsChecked . Value )
 				{
-					for ( int j = ChoakerLowRow ; j < ChoakerHighRow ; j++ )
+					for ( int j = ChokerLowRow ; j < ChokerHighRow ; j++ )
 					{
 						int i = Sheety . c1;
-						BorderIceRows ( mw , ChoakerLowRow , ChoakerHighRow , i ,j);
+						BorderIceRows ( mw , ChokerLowRow , ChokerHighRow , i ,j);
 					}
 				}
 
 				if ( this . DoBorder_LEFT_CheckBox_Control . IsChecked . Value )
 				{
-					for ( int j = ChoakerLowRow ; j < ChoakerHighRow ; j++ )
+					for ( int j = ChokerLowRow ; j < ChokerHighRow ; j++ )
 					{
 						int i = Sheety . c0 - 1;
-						BorderIceRows ( mw , ChoakerLowRow , ChoakerHighRow , i ,j );
+						BorderIceRows ( mw , ChokerLowRow , ChokerHighRow , i ,j );
 					}
 				}
 
 				if ( this . DoBorder_BOTTOM_CheckBox_Control . IsChecked . Value )
 				{
-					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+					for ( int i = Sheety . c0-1 ; i < Sheety . c1+1 ; i++ )
 					{
-						int j = ChoakerLowRow - 1;
-						BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
+						int j = ChokerLowRow - 1;
+						BorderIceCols ( mw , ChokerLowRow , ChokerHighRow , i , j );
 					}
 				}
 
 				if ( this . DoBorder_TOP_CheckBox_Control . IsChecked . Value )
 				{
-					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+					for ( int i = Sheety . c0-1 ; i < Sheety . c1+1 ; i++ )
 					{
-						int j = ChoakerHighRow;
-						BorderIceCols ( mw , ChoakerLowRow , ChoakerHighRow , i , j );
+						int j = ChokerHighRow;
+						BorderIceCols ( mw , ChokerLowRow , ChokerHighRow , i , j );
 					}
 				}
 			}
@@ -596,7 +596,7 @@ namespace DMT01
 					MW = ( DMT01 . MainWindow ) mw ,
 					ParentRegion = MainWindow . Selected_Region
 				};
-				MainWindow . Selected_Region . B [ i , j ] = BorderB;
+				MainWindow . Selected_Region . BorderB [ i , j ] = BorderB;
 			}
 			else
 			{

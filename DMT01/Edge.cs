@@ -62,7 +62,7 @@ namespace DMT01
 				String fomont = String . Format ( "E{0} sub {1} of {2} {3}" , this . EdgeIndex , this . SubEdgeIndex , this . SubEdgeCount , this . Showspan ( ) );
 				return fomont;
 				}
-			String fomont1 = String . Format ( "{0} {1}" , this . EdgeIndex , this . Showspan ( ) );
+			String fomont1 = String . Format ( "E{0} {1}" , this . EdgeIndex , this . Showspan ( ) );
 			return fomont1;
 			}
 

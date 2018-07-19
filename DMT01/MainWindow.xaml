@@ -942,9 +942,11 @@
 										<local:H_Slider_UserControl1
 											x:Name="CriticalitySweeper_THRESHOLD_H_Slider_User_Control"
 											Width="829"
-											Height="65" SliderMinValue="0" SliderMaxValue="85"
+											Height="65"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
+											SliderMaxValue="85"
+											SliderMinValue="0"
 											/>
 										<CheckBox
 											x:Name="DoGlobalSweepThreshold_CheckBox_Control"
@@ -975,9 +977,9 @@
 												x:Name="TwoHitWonderCheckBox_Control"
 												Width="96"
 												Height="20"
-												IsChecked="True"
 												Padding="1,2,0,0"
-												Content="2hit"
+												Content="2 hit"
+												IsChecked="True"
 												/>
 											<CheckBox
 												x:Name="ThreeHitWonderCheckBox_Control"
@@ -991,13 +993,13 @@
 												x:Name="FourHitWonderCheckBox_Control"
 												Width="96"
 												Height="20"
-												Content="4 HitWonder"
+												Content="4 hit"
+												IsChecked="True"
 												/>
 											<CheckBox
-												x:Name="Draw_BoxelHitBoxelEdges_CheckBox_Control"
 												Width="96"
 												Height="20"
-												Content="Draw  Edges"
+												Content="Check Box"
 												/>
 										</StackPanel>
 										<local:H_Slider_UserControl1
@@ -1007,7 +1009,8 @@
 											Height="65"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-																	 LabelText="hi" />
+											LabelText="hi"
+											/>
 										<local:H_Slider_UserControl1
 											x:Name="CriticalitySweeper_LOW_H_Slider_User_Control"
 											Grid.Row="2"
@@ -1015,8 +1018,9 @@
 											Height="65"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-																	 SliderMinValue="-1"
-																	 LabelText="lo" />
+											LabelText="lo"
+											SliderMinValue="-1"
+											/>
 										<local:PointSizeComboBoxUserControlClass
 											x:Name="SweeperHitPointSize_PointSizeComboBoxUser_Control"
 											Grid.Row="2"
@@ -1047,10 +1051,11 @@
 											Height="65"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
-																	 LabelText="delta"
-																	 SliderMaxValue="1"
-																	 SliderMinValue="-1"
-																	 SliderValue="0.01" />
+											LabelText="delta"
+											SliderMaxValue="1"
+											SliderMinValue="-1"
+											SliderValue="0.01"
+											/>
 										<local:PointSizeComboBoxUserControlClass
 											x:Name="SweeperHitPointSize_PointSizeComboBoxUser_Control_Copy"
 											Grid.Row="3"
@@ -1182,13 +1187,13 @@
 												<CheckBox
 													x:Name="DoBorder_RIGHT_CheckBox_Control"
 													Width="100"
-													IsChecked="True"
 													Height="15"
 													Margin="1,0"
 													Padding="4,0,0,0"
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
 													Content="Border RIGHT"
+													IsChecked="True"
 													/>
 											</StackPanel>
 											<StackPanel
@@ -1198,7 +1203,6 @@
 												>
 												<CheckBox
 													x:Name="DoBorder_TOP_CheckBox_Control"
-													IsChecked="True"
 													Width="100"
 													Height="15"
 													Margin="1,0"
@@ -1206,6 +1210,7 @@
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
 													Content="Border TOP"
+													IsChecked="True"
 													/>
 												<CheckBox
 													x:Name="DoBorder_BOTTOM_CheckBox_Control"
@@ -1225,22 +1230,24 @@
 												VerticalAlignment="Top"
 												>
 												<CheckBox
+													x:Name="DoDrawHitEdges_CheckBox_Control"
 													Width="100"
 													Height="15"
 													Margin="1,0"
 													Padding="4,0,0,0"
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
-													Content="CheckBox"
+													Content="Draw Hit Edges"
 													/>
 												<CheckBox
+													x:Name="DoDrawHits_CheckBox_Control"
 													Width="100"
 													Height="15"
 													Margin="1,0"
 													Padding="4,0,0,0"
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
-													Content="CheckBox"
+													Content="Draw Hits"
 													/>
 											</StackPanel>
 											<StackPanel
@@ -1249,25 +1256,39 @@
 												VerticalAlignment="Top"
 												>
 												<CheckBox
-													Width="100"
+													x:Name="DoTitateCriticalities_CheckBox_Control"
+													Width="124"
 													Height="15"
 													Margin="1,0"
 													Padding="4,0,0,0"
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
-													Content="CheckBox"
+													Content="Titrate 4Hit Crits"
 													/>
 												<CheckBox
+													x:Name="DoDrawSelfHits_CheckBox_Control"
 													Width="100"
 													Height="15"
 													Margin="1,0"
 													Padding="4,0,0,0"
 													HorizontalAlignment="Left"
 													VerticalAlignment="Top"
-													Content="CheckBox"
+													Content="Self Hits"
 													/>
 											</StackPanel>
 										</StackPanel>
+										<CheckBox x:Name="Do_RESET_TitateCriticalities_CheckBox_Control" Content="Reset Titrate"
+												  Grid.Column="1"
+												  HorizontalAlignment="Left"
+												  Margin="9,5,0,0"
+												  Grid.Row="4"
+												  VerticalAlignment="Top" />
+										<CheckBox Content="CheckBox"
+												  Grid.Column="1"
+												  HorizontalAlignment="Left"
+												  Margin="12,21,0,0"
+												  Grid.Row="4"
+												  VerticalAlignment="Top" />
 									</Grid>
 
 								</TabItem>

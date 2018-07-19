@@ -7,6 +7,9 @@ using WpfControlLibrary1;
 using GlmNet;
 using System . IO;
 using System . Windows . Controls;
+using System . Diagnostics;
+using Microsoft . Windows . Design . Features;
+using System . Net . Security;
 
 namespace DMT01
 {
@@ -23,35 +26,40 @@ namespace DMT01
 							 CriticalValueTitrated,
 		}
 		public Vertex Centroid = new Vertex ( );
-		public float crit_v;
-		public float delta_crit_v=.01f;
-		public float delta_v;
-		public Edge [ ] E = new Edge [ 4 ];
-		public int I;
+		public int Titration_Steps;
+		public float Penult_High_V;
+		public float Penult_Low_V;
+		public float Delta_V;
+		public float Delta_Crit_V=.001f;
+		public float Critical_V;
 		public Boolean IsCritical;
+		public Edge [ ] E = new Edge [ 4 ];
+		public short LargestVertexIndex;
+		public short SmallestVertexIndex;
+		public float LargestVertex_V;
+		public float SmallestVertex_V;
+		public Vertex[] Penult_High;
+		public Vertex[] Penult_Low;
+		public short[]  SortedVertexIndicies={ 0 , 1 , 2 , 3 };
+		public int I;
+		public int J;
 		public Boolean IsBorderBoxel;
 		public BoxelKind BoxelKindEnum;
 		public IsoEdge [ ] IsoEdge = new IsoEdge [ 4 ];
 		public short IsoEdges ;
-		public int J;
-		public short LargestVertexIndex, SmallestVertexIndex;
-		public float max_V;
-		public float min_V;
 		public DMT01.MainWindow MW;
 		public DMT01.Region ParentRegion;
-		public short[]  SortedVertexIndicies={ 0 , 1 , 2 , 3 };
 		public short Span=1;
-		public int Titration_Steps;
 		public Vertex [ ] V = new Vertex [ 4 ];
 
 		public Boxel ( int i , int j , float [ , ] c )
 		{
 			this . I = i;
 			this . J = j;
-			this . V [ 0 ] = new Vertex ( 0 , i , j , c );
-			this . V [ 1 ] = new Vertex ( 1 , i , j + this . Span , c );
-			this . V [ 2 ] = new Vertex ( 2 , i + this . Span , j + this . Span , c );
-			this . V [ 3 ] = new Vertex ( 3 , i + this . Span , j , c );
+			this . V [ 0 ] = new Vertex ( 0 , i					, j					, c );
+			this . V [ 1 ] = new Vertex ( 1 , i					, j + this . Span   , c );
+			this . V [ 2 ] = new Vertex ( 2 , i + this . Span	, j + this . Span   , c );
+			this . V [ 3 ] = new Vertex ( 3 , i + this . Span	, j					, c );
 
 			this . V [ 0 ] . Next = this . V [ 1 ];
 			this . V [ 1 ] . Next = this . V [ 2 ];
@@ -111,7 +119,17 @@ namespace DMT01
 			//	DoCriticalIsoEdges ( );
 			//}
 
-			//            this. LoadTriangles ( );
+			// this. LoadTriangles ( );
+			this . Penult_High = new Vertex[]{ this . V [ this . SortedVertexIndicies [ 2 ] ]};
+			this . Penult_Low = new Vertex[]{this . V [ this . SortedVertexIndicies [ 1 ] ]};
+			this . Penult_High_V = this .Penult_High[0] . V;
+			this . Penult_Low_V = this . Penult_Low[0] . V;
+			float SanityCheck = this . Penult_High_V - this . Penult_Low_V;
+			if ( SanityCheck < 0 )
+			{
+				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "SanityCheck:Insane!!!" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			}
+
 		}
 
 		private float [ ] add ( float [ ] a , float [ ] b )
@@ -315,8 +333,9 @@ namespace DMT01
 		private String DisplayMe ( )
 		{
 			const String Stranger = "0.00";
-			String strang = String . Format ( "[i{0},j{1}] {2}{3}{4}" , this . I , this . J ,
-				this . min_V . ToString ( Stranger ) , Comparis ( this . min_V , this . max_V ) , this . max_V . ToString ( Stranger ) );
+			String strang = String . Format ( "[i{0},j{1}] {2}{3}{4} {5}{6}{7}" , this . I , this . J ,
+				this . SmallestVertex_V . ToString ( Stranger ) , Comparis ( this . SmallestVertex_V , this . LargestVertex_V ) , this . LargestVertex_V . ToString ( Stranger ),
+				this . Penult_Low_V . ToString ( Stranger ) , Comparis ( this . Penult_Low_V , this . Penult_High_V ) , this . Penult_High_V . ToString ( Stranger ) );
 			return strang;
 		}
 
@@ -347,25 +366,25 @@ namespace DMT01
 
 		private void DoMinMaxDelta ( )
 		{
-			this . max_V = -float . MaxValue;
-			this . min_V = float . MaxValue;
+			this . LargestVertex_V = -float . MaxValue;
+			this . SmallestVertex_V = float . MaxValue;
 
 			for ( int i = 0 ; i < 4 ; i++ )
 			{
 				Vertex V = this . V [ i ];
 				float v = V . V;
 
-				if ( this . max_V < v )
+				if ( this . LargestVertex_V < v )
 				{
-					this . max_V = v;
+					this . LargestVertex_V = v;
 				}
 
-				if ( v < this . min_V )
+				if ( v < this . SmallestVertex_V )
 				{
-					this . min_V = v;
+					this . SmallestVertex_V = v;
 				}
 			}
-			this . delta_v = this . max_V - this . min_V;
+			this . Delta_V = this . LargestVertex_V - this . SmallestVertex_V;
 
 			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} {3} " , DisplayMe(), this.min_V, Comparis(this.min_V, this.max_V) , this.max_V, ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 		}
@@ -717,6 +736,12 @@ namespace DMT01
 				return;
 			}
 
+			short LineWidth = ( short ) MW . GlobalHitEdgeLineWidth_ComboBox_User_Control . Linewidth;
+			float [ ] LineColor = { .9f , .9f , .9f };
+			short PointSize = ( short ) MW . SweeperHitPointSize_PointSizeComboBoxUser_Control . Selection;
+			float [ ] PointColor = { 1 , 1 , 1 };
+			float [ ] TextColor = { .9f , .9f , .9f };
+
 			Edge E0 = this . E [ 0 ];
 			Edge E1 = this . E [ 1 ];
 			Edge E2 = this . E [ 2 ];
@@ -738,26 +763,13 @@ namespace DMT01
 			{
 				AnnotateEdge ( gl , E3 );
 			}
-//"OneHitWondercheckBox_Control" 
-//"TwoHitWonderCheckBox_Control"
-//"ThreeHitWonderCheckBox_Control"
-//"FourHitWonderCheckBox_Control"
-//"Draw_BoxelHitBoxelEdges_CheckBox_Control"
-													 
-			short EdgeHits = 0;
-			short LineWidth = (short)MW. GlobalHitEdgeLineWidth_ComboBox_User_Control.Linewidth;
-			float [ ] LineColor = { .9f , .9f , .9f };
-			short PointSize =(short) MW. SweeperHitPointSize_PointSizeComboBoxUser_Control.Selection;
-			float [ ] PointColor = { 1 , 1 , 1 };
-			float [ ] TextColor = { .9f , .9f , .9f };
-
 			float V= this.MW. CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue;
-
-			float [][ ] XYZ = new float [ 4][];
+			short EdgeHits = 0;
+			float [ ][ ] XYZ = new float [ 4][];
 
 			if ( IsInBetween ( V , E0 ) )
 			{
-				var u = ( V - E0 . V [ 0 ] . V ) / ( E0 . V [ 1 ] . V - E0 . V [ 0 ] . V );
+				float u = ( V - E0 . V [ 0 ] . V ) / ( E0 . V [ 1 ] . V - E0 . V [ 0 ] . V );
 				XYZ[0] =	new float[]
 					{
 					( 1 - u ) * E0 . V[1] . cf [0] + ( u * E0 . V[0] . cf[0] ),
@@ -766,7 +778,7 @@ namespace DMT01
 					};
 				EdgeHits++;
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				if ( this . MW . Draw_BoxelHitBoxelEdges_CheckBox_Control . IsChecked . Value )
+				if ( this . MW . DoDrawHitEdges_CheckBox_Control . IsChecked . Value )
 				{
 					gl . LineWidth ( LineWidth );
 					gl . Color ( LineColor );
@@ -775,16 +787,19 @@ namespace DMT01
 					gl . Vertex ( E0 . V [ 1 ] . cf );
 					gl . End ( );
 				}
-				gl . PointSize ( PointSize );
-				gl . Color ( PointColor );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
-				gl . Vertex ( XYZ[0] );
-				gl . End ( );
+				if ( this . MW . DoDrawHits_CheckBox_Control . IsChecked . Value )
+				{
+					gl . PointSize ( PointSize );
+					gl . Color ( PointColor );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+					gl . Vertex ( XYZ[0] );
+					gl . End ( );
+				}
 				gl . PopAttrib ( );
 			}
 			if ( IsInBetween ( V , E1 ) )
 			{
-				var u = ( V - E1 . V [ 0 ] . V ) / ( E1 . V [ 1 ] . V - E1 . V [ 0 ] . V );
+				float u = ( V - E1 . V [ 0 ] . V ) / ( E1 . V [ 1 ] . V - E1 . V [ 0 ] . V );
 				XYZ [ 1 ] = new float [ ] 
 					{
 					( 1 - u ) * E1 . V[1] . cf [0] + ( u * E1 . V[0] . cf[0] ),
@@ -793,7 +808,7 @@ namespace DMT01
 					};
 				EdgeHits++;
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				if ( this . MW . Draw_BoxelHitBoxelEdges_CheckBox_Control . IsChecked . Value )
+				if ( this . MW . DoDrawHitEdges_CheckBox_Control . IsChecked . Value )
 				{
 					gl . LineWidth ( LineWidth );
 					gl . Color ( LineColor );
@@ -802,16 +817,19 @@ namespace DMT01
 					gl . Vertex ( E1 . V [ 1 ] . cf );
 					gl . End ( );
 				}
-				gl . PointSize ( PointSize );
-				gl . Color ( PointColor );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
-				gl . Vertex ( XYZ[1] );
-				gl . End ( );
+				if ( this . MW . DoDrawHits_CheckBox_Control . IsChecked . Value )
+				{
+					gl . PointSize ( PointSize );
+					gl . Color ( PointColor );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+					gl . Vertex ( XYZ[1] );
+					gl . End ( );
+				}
 				gl . PopAttrib ( );
 			}
 			if ( IsInBetween ( V , E2 ) )
 			{
-				var u = ( V - E2 . V [ 0 ] . V ) / ( E2 . V [ 1 ] . V - E2 . V [ 0 ] . V );
+				float u = ( V - E2 . V [ 0 ] . V ) / ( E2 . V [ 1 ] . V - E2 . V [ 0 ] . V );
 				XYZ [ 2 ] = new float [ ]
 					{
 					( 1 - u ) * E2 . V[1] . cf [0] + ( u * E2 . V[0] . cf[0] ),
@@ -820,7 +838,7 @@ namespace DMT01
 					};
 				EdgeHits++;
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				if ( this . MW . Draw_BoxelHitBoxelEdges_CheckBox_Control . IsChecked . Value )
+				if ( this . MW . DoDrawHitEdges_CheckBox_Control . IsChecked . Value )
 				{
 					gl . LineWidth ( LineWidth );
 					gl . Color ( LineColor );
@@ -829,16 +847,19 @@ namespace DMT01
 					gl . Vertex ( E2 . V [ 1 ] . cf );
 					gl . End ( );
 				}
-				gl . PointSize ( PointSize );
-				gl . Color ( PointColor );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
-				gl . Vertex ( XYZ[2] );
-				gl . End ( );
+				if ( this . MW . DoDrawHits_CheckBox_Control . IsChecked . Value )
+				{
+					gl . PointSize ( PointSize );
+					gl . Color ( PointColor );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+					gl . Vertex ( XYZ[2] );
+					gl . End ( );
+				}
 				gl . PopAttrib ( );
 			}
 			if ( IsInBetween ( V , E3 ) )
 			{
-				var u = ( V - E3 . V [ 0 ] . V ) / ( E3 . V [ 1 ] . V - E3 . V [ 0 ] . V );
+				float u = ( V - E3 . V [ 0 ] . V ) / ( E3 . V [ 1 ] . V - E3 . V [ 0 ] . V );
 				XYZ [ 3 ] = new float [ ]
 					{
 					( 1 - u ) * E3 . V[1] . cf [0] + ( u * E3 . V[0] . cf[0] ),
@@ -847,7 +868,7 @@ namespace DMT01
 					};
 				EdgeHits++;
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				if ( this . MW . Draw_BoxelHitBoxelEdges_CheckBox_Control . IsChecked . Value )
+				if ( this . MW . DoDrawHitEdges_CheckBox_Control . IsChecked . Value )
 				{
 					gl . LineWidth ( LineWidth );
 					gl . Color ( LineColor );
@@ -856,18 +877,20 @@ namespace DMT01
 					gl . Vertex ( E3 . V [ 1 ] . cf );
 					gl . End ( );
 				}
-				gl . PointSize ( PointSize );
-				gl . Color ( PointColor );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
-				gl . Vertex ( XYZ[3] );
-				gl . End ( );
-				gl . PopAttrib ( );
-			}
-			if ( EdgeHits == 1 )
+				if(this.MW.DoDrawHits_CheckBox_Control.IsChecked.Value)
+				{
+					gl . PointSize ( PointSize );
+					gl . Color ( PointColor );
+					gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+					gl . Vertex ( XYZ[3] );
+					gl . End ( );	}
+					gl . PopAttrib ( );
+				}
+				 if ( this . MW . OneHitWondercheckBox_Control . IsChecked . Value && EdgeHits == 1 )
 			{
 				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "EdgeHits 1!!!" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 			}
-			else if ( EdgeHits == 2 )
+			else if ( this . MW . TwoHitWonderCheckBox_Control . IsChecked . Value && EdgeHits == 2 )
 			{
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . LineWidth ( LineWidth-1 );
@@ -884,7 +907,7 @@ namespace DMT01
 				gl . End ( );
 				gl . PopAttrib ( );
 			}
-			else if ( EdgeHits == 3 )
+			else if ( this . MW . ThreeHitWonderCheckBox_Control . IsChecked . Value && EdgeHits == 3 )
 			{
 				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "EdgeHits 3 !!!" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
@@ -903,8 +926,7 @@ namespace DMT01
 				gl . End ( );
 				gl . PopAttrib ( );
 			}
-			else
-	  if ( EdgeHits == 4 )
+			else if ( this . MW . FourHitWonderCheckBox_Control . IsChecked . Value && EdgeHits == 4 )
 			{
 				const float ts = 0.3f;
 				const string f0 = "Arial";
@@ -1086,38 +1108,40 @@ namespace DMT01
 			Boolean xb = IsInBetween ( cf0 [ 0 ] , cf [ 0 ] , cf1 [ 0 ] );
 			Boolean yb = IsInBetween ( cf0 [ 1 ] , cf [ 1 ] , cf1 [ 1 ] );
 			Boolean zb = IsInBetween ( cf0 [ 2 ] , cf [ 2 ] , cf1 [ 2 ] );
-			return xb && yb;
+			return xb && yb;   // not zb until we get serious about 3d
 		}
 
-		private bool IsInBetween ( float v1 , float tweener , float v3 )
+		private bool IsInBetween ( float v0 , float tweener , float v1 )
 		{
-			if ( v1 == tweener )
-			{
-				return true;
-			}
-			if ( tweener == v3 )
-			{
-				return false;
-			}
-			if ( v1 == v3 )
+			if ( v0 == v1 )
 			{
 				return false; // hmmm...
 			}
-			if ( v1 < v3 )     // starting small moving up and rising from v2 to v3
+
+			if ( v0 == tweener )
 			{
-				bool vee = ( v1 < tweener );
+				return false;
+			}
+			if ( tweener == v1 )
+			{
+				return false;
+			}
+			Boolean v0LTv1 = v0 < v1;
+			if ( v0LTv1 )     // starting small moving up and rising from v2 to v3
+			{
+				Boolean vee = ( v0 < tweener );
 				if ( vee )
 				{
-					bool bee = tweener < v3;
+					Boolean bee = tweener < v1;
 					if ( bee )
 					{
 						return true;
 					}
 				}
 			}
-			if ( v3 < v1 )     //   starting large, moving down and lowering from v3 to v1
+			if ( v1 < v0 )     //   starting large, moving down and lowering from v3 to v1
 			{
-				bool booley = IsInBetween ( v3 , tweener , v1 );
+				Boolean booley = IsInBetween ( v1 , tweener , v0 );
 				return booley;
 			}
 			return false;
@@ -1125,23 +1149,21 @@ namespace DMT01
 
 		private Boolean IsThisCritical ( )
 		{
-			Boolean flat = (
-				this . E [ 0 ] . delta_V == 0f &&
-				this . E [ 1 ] . delta_V == 0f &&
-				this . E [ 2 ] . delta_V == 0f &&
-				this . E [ 3 ] . delta_V == 0f );
-
+			Boolean flat0 = ( this . E [ 0 ] . delta_V == 0f );
+			Boolean flat1 = ( this . E [ 1 ] . delta_V == 0f );
+			Boolean flat2 = ( this . E [ 2 ] . delta_V == 0f );
+			Boolean flat3 = ( this . E [ 3 ] . delta_V == 0f );
+			Boolean flat =  ( flat0 && flat1 && flat2 && flat3 );
 			if ( flat )
 			{
 				return false;
 			}
+			Boolean wiggley00 = ( this . E [ 0 ] . delta_V > 0 );
+			Boolean wiggley01 = ( this . E [ 1 ] . delta_V < 0 );
+			Boolean wiggley02 = ( this . E [ 2 ] . delta_V > 0 );
+			Boolean wiggley03 = ( this . E [ 3 ] . delta_V < 0 );
 
-			Boolean wiggle0 = (
-				 this . E [ 0 ] . delta_V > 0 &&
-				 this . E [ 1 ] . delta_V < 0 &&
-				 this . E [ 2 ] . delta_V > 0 &&
-				 this . E [ 3 ] . delta_V < 0 );
-
+			Boolean wiggle0 = (	wiggley00 &&  wiggley01 &&	 wiggley02 &&	wiggley03 );
 			if ( wiggle0 )
 			{
 				this . IsCritical = true;
@@ -1149,19 +1171,18 @@ namespace DMT01
 				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 				return true;
 			}
-
-			Boolean wiggle1 = (
-				 this . E [ 0 ] . delta_V < 0 &&
-				 this . E [ 1 ] . delta_V > 0 &&
-				 this . E [ 2 ] . delta_V < 0 &&
-				 this . E [ 3 ] . delta_V > 0 );
-
+			Boolean wiggley10 = ( this . E [ 0 ] . delta_V > 0 );
+			Boolean wiggley11 = ( this . E [ 1 ] . delta_V < 0 );
+			Boolean wiggley12 = ( this . E [ 2 ] . delta_V > 0 );
+			Boolean wiggley13 = ( this . E [ 3 ] . delta_V < 0 );
+			Boolean wiggle1 = (wiggley10 &&	wiggley11 &&  wiggley12 &&	 wiggley13 );
 			if ( wiggle1 )
 			{
 				this . IsCritical = true;
 				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 				return true;
 			}
+			this.IsCritical=false;
 			return false;
 		}
 
@@ -1901,10 +1922,360 @@ FreshReset:
 		{
 			DrawBoxelEdgeCycles ( );
 			DrawHitsinBoxel ( );
+			if( this.MW.DoDrawSelfHits_CheckBox_Control.IsChecked.Value)
+			{
+				if(this.IsCritical)this . DrawOnEdges (  );
+			}
+
+			if ( this.MW.DoTitateCriticalities_CheckBox_Control.IsChecked.Value)
+			{
+				this .TitrateCriticalValues();
+			}
 			//DrawCriticalBoxel ( );
 			//AnnotateBoxelAtCentroid ( );
 
 			//VerifyCycles ( );
+		}
+
+		const short LineWidth = ( short )1;
+		static readonly float [ ] LineColor = { .9f , .9f , .9f };
+		const short PointSize = ( short ) 1;
+		static readonly float [ ] PointColor = { 1 , 1 , 1 };
+		static readonly float [ ] TextColor = { .9f , .9f , .9f };
+
+		private void TitrateCriticalValues ( )
+		{
+			if ( this . MW == null )
+			{
+				return;
+			}
+
+			OpenGL gl = this . MW . myOpenGLControl . OpenGL;
+			if ( gl == null )
+			{
+				return;
+			}
+
+			if(!this.IsCritical)
+				return;
+			if( MW.Do_RESET_TitateCriticalities_CheckBox_Control.IsChecked.Value )
+			{
+				this . Titration_Steps	=0;
+				return;
+			}
+			if ( this.Titration_Steps==0)
+			{
+				this.Critical_V=Penult_Low_V;
+				this . Delta_Crit_V=MW.CriticalitySweeper_DELTA_H_Slider_User_Control.SliderValue/50f;
+			}
+
+			Edge E0 = this . E [ 0 ];
+			Edge E1 = this . E [ 1 ];
+			Edge E2 = this . E [ 2 ];
+			Edge E3 = this . E [ 3 ];
+
+			short EdgeHits = 0;
+			float [ ] [ ] EdgeHit = new float [ 4 ] [ ];
+			if ( IsInBetween ( this . Critical_V , E0 ) ) {
+				float u = ( this . Critical_V - E0 . V [ 0 ] . V ) / ( E0 . V [ 1 ] . V - E0 . V [ 0 ] . V );
+				EdgeHit [ 0 ] = new float [ ]	{
+					( 1 - u ) * E0 . V[1] . cf [0] + ( u * E0 . V[0] . cf[0] ),
+					( 1 - u ) * E0 . V[1] . cf [1] + ( u * E0 . V[0] . cf[1] ),
+					( 1 - u ) * E0 . V[1] . cf [2] + ( u * E0 . V[0] . cf[2] ),	};
+				EdgeHits++;
+			}
+			if ( IsInBetween ( this . Critical_V , E1 ) ) {
+				float u = ( this . Critical_V - E1 . V [ 0 ] . V ) / ( E1 . V [ 1 ] . V - E1 . V [ 0 ] . V );
+				EdgeHit [ 1 ] = new float [ ]	{
+					( 1 - u ) * E1 . V[1] . cf [0] + ( u * E1 . V[0] . cf[0] ),
+					( 1 - u ) * E1 . V[1] . cf [1] + ( u * E1 . V[0] . cf[1] ),
+					( 1 - u ) * E1 . V[1] . cf [2] + ( u * E1 . V[0] . cf[2] ),	};
+				EdgeHits++;
+			}
+			if ( IsInBetween ( this . Critical_V , E2 ) ) {
+				float u = ( this . Critical_V - E2 . V [ 0 ] . V ) / ( E2 . V [ 1 ] . V - E2 . V [ 0 ] . V );
+				EdgeHit [ 2 ] = new float [ ]	 {
+					( 1 - u ) * E2 . V[1] . cf [0] + ( u * E2 . V[0] . cf[0] ),
+					( 1 - u ) * E2 . V[1] . cf [1] + ( u * E2 . V[0] . cf[1] ),
+					( 1 - u ) * E2 . V[1] . cf [2] + ( u * E2 . V[0] . cf[2] ),	   	};
+				EdgeHits++;
+			}
+			if ( IsInBetween ( this . Critical_V , E3 ) ) {
+				float u = ( this . Critical_V - E3 . V [ 0 ] . V ) / ( E3 . V [ 1 ] . V - E3 . V [ 0 ] . V );
+				EdgeHit [ 3 ] = new float [ ]{( 1 - u ) * E3 . V[1] . cf [0] + ( u * E3 . V[0] . cf[0] ),
+											  ( 1 - u ) * E3 . V[1] . cf [1] + ( u * E3 . V[0] . cf[1] ),
+											  ( 1 - u ) * E3 . V[1] . cf [2] + ( u * E3 . V[0] . cf[2] ),	};
+				EdgeHits++;
+			}
+			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+			if(false)
+			{
+				gl . LineWidth ( LineWidth - 1 );
+				gl . Color ( LineColor );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				if ( EdgeHit [ 0 ] != null )
+					gl . Vertex ( EdgeHit [ 0 ] );
+				if ( EdgeHit [ 1 ] != null )
+					gl . Vertex ( EdgeHit [ 1 ] );
+				if ( EdgeHit [ 1 ] != null )
+					gl . Vertex ( EdgeHit [ 1 ] );
+				if ( EdgeHit [ 2 ] != null )
+					gl . Vertex ( EdgeHit [ 2 ] );
+				if ( EdgeHit [ 2 ] != null )
+					gl . Vertex ( EdgeHit [ 2 ] );
+				if ( EdgeHit [ 3 ] != null )
+					gl . Vertex ( EdgeHit [ 3 ] );
+				if ( EdgeHit [ 3 ] != null )
+					gl . Vertex ( EdgeHit [ 3 ] );
+				if ( EdgeHit [ 0 ] != null )
+					gl . Vertex ( EdgeHit [ 0 ] );
+				gl . End ( );
+			}
+			if(true)
+			{
+				gl.PointSize( size: 4 );
+				gl.Color(.9,.9,1);
+
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+				if ( EdgeHit [ 0 ] != null )
+					gl . Vertex ( EdgeHit [ 0 ] );
+				if ( EdgeHit [ 1 ] != null )
+					gl . Vertex ( EdgeHit [ 1 ] );
+				if ( EdgeHit [ 1 ] != null )
+					gl . Vertex ( EdgeHit [ 1 ] );
+				if ( EdgeHit [ 2 ] != null )
+					gl . Vertex ( EdgeHit [ 2 ] );
+				if ( EdgeHit [ 2 ] != null )
+					gl . Vertex ( EdgeHit [ 2 ] );
+				if ( EdgeHit [ 3 ] != null )
+					gl . Vertex ( EdgeHit [ 3 ] );
+				if ( EdgeHit [ 3 ] != null )
+					gl . Vertex ( EdgeHit [ 3 ] );
+				if ( EdgeHit [ 0 ] != null )
+					gl . Vertex ( EdgeHit [ 0 ] );
+				gl . End ( );
+			}
+			gl . PopAttrib ( );
+			this . Titration_Steps++;
+			this . Critical_V += this . Delta_Crit_V;
+			if ( this . Critical_V > this . Penult_High_V )
+			{
+				this . Delta_Crit_V = -this . Delta_Crit_V ;
+				this . Critical_V = this . Penult_High_V;
+				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "^" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			}
+			if ( this . Critical_V < this . Penult_Low_V )
+			{
+				this . Delta_Crit_V = -this . Delta_Crit_V;
+				this . Critical_V = this . Penult_Low_V;
+				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "V" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			}
+		}
+
+		private void DrawOnEdges ( )
+		{
+			float v0 = this . Penult_Low_V;
+			float v1 = this . Penult_High_V;
+			this . DrawOnEdges ( v0 , v1 );
+		}
+
+		private void DrawOnEdges ( float v0 , float v1 )
+		{
+			OpenGL gl = this . MW . myOpenGLControl . OpenGL;
+			if ( gl == null )
+			{
+				return;
+			}
+			DrawOnEdges ( gl , v0 , v1 );
+		}
+
+		private void DrawOnEdges ( OpenGL gl,  float V0 , float V1 )
+		{
+			Edge E0 = this . E [ 0 ];
+			Edge E1 = this . E [ 1 ];
+			Edge E2 = this . E [ 2 ];
+			Edge E3 = this . E [ 3 ];
+			float [ ] [ ] EdgeHits0 = DrawOnEdges ( gl , E0 , V0 , V1 );
+			float [ ] [ ] EdgeHits1 = DrawOnEdges ( gl , E1 , V0 , V1 );
+			float [ ] [ ] EdgeHits2 = DrawOnEdges ( gl , E2 , V0 , V1 );
+			float [ ] [ ] EdgeHits3 = DrawOnEdges ( gl , E3 , V0 , V1 );
+			float [][][] EdgeHits={EdgeHits0, EdgeHits1, EdgeHits2, EdgeHits3};
+			if ( true )
+			{
+				for ( int i = 0 ; i < 4 ; i++ )
+				{
+					float [ ] e0 = this . E [ i ] . V [ 0 ] . cf;
+					float[] hit0=EdgeHits[i][0]	;
+					float D0=DistanceAlongEdgeCycle	(e0,hit0);
+					float[] hit1=EdgeHits[i][1];
+
+					float D1=DistanceAlongEdgeCycle(e0,hit1);
+					if ( D0 == 0.0f )
+					{
+
+						System . Diagnostics . Debug . WriteLine ( String . Format ( "zero distance Hit 0 {0} {1} " , DisplayMe(E[i]), ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+					}
+					if ( D1 == 0.0f )
+					{
+
+						System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "zero distance 1" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+
+					}
+					if ( D1 < D0 )
+					{
+						System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+					}
+				}
+			}
+
+			if ( true)
+			{
+				Boolean SelfEdgeHits=false;
+				Boolean CrossEdgeHits=true;
+
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				if ( SelfEdgeHits && ( EdgeHits [ 0 ] [ 0 ] != null ) && ( EdgeHits [ 0 ] [ 0 ] != null ) )
+				{
+					gl . LineWidth ( 1 );
+					gl . Color ( 0.9 , 0.2 , 02 );
+					gl . Vertex ( EdgeHits0 [ 0 ] );
+					gl . Vertex ( EdgeHits0 [ 1 ] );
+				}
+
+				if ( CrossEdgeHits && ( EdgeHits [ 0 ] [ 1 ] != null ) && ( EdgeHits [ 1 ] [ 0 ] != null ) )
+				{
+					gl . LineWidth ( 3 );
+					gl . Color ( 0.9 , 0.7 , 0.8 );
+					gl . Vertex ( EdgeHits0 [ 1 ] );
+					gl . Vertex ( EdgeHits1 [ 0 ] );
+				}
+
+				if ( SelfEdgeHits )
+				{
+					gl . LineWidth ( 1 );
+					gl . Color ( 0.9 , 0.9 , 0.9 );
+					gl . Vertex ( EdgeHits1 [ 0 ] );
+					gl . Vertex ( EdgeHits1 [ 1 ] );
+				}
+
+				if ( CrossEdgeHits )
+				{
+					gl . LineWidth ( 3 );
+					gl . Color ( 0.9 , 0.7 , 0.8 );
+					gl . Vertex ( EdgeHits1 [ 1 ] );
+					gl . Vertex ( EdgeHits2 [ 0 ] );
+				}
+
+				if ( SelfEdgeHits )
+				{
+					gl . LineWidth ( 1 );
+					gl . Color ( 0.9 , 0.9 , 0.9 );
+					gl . Vertex ( EdgeHits2 [ 0 ] );
+					gl . Vertex ( EdgeHits2 [ 1 ] );
+				}
+
+				if ( CrossEdgeHits )
+				{
+					gl . LineWidth ( 3 );
+					gl . Color ( 0.9 , 0.7 , 0.8 );
+					gl . Vertex ( EdgeHits2 [ 1 ] );
+					gl . Vertex ( EdgeHits3 [ 0 ] );
+				}
+
+				if ( SelfEdgeHits )
+				{
+					gl . LineWidth ( 1 );
+					gl . Color ( 0.9 , 0.9 , 0.9 );
+					gl . Vertex ( EdgeHits3 [ 0 ] );
+					gl . Vertex ( EdgeHits3 [ 1 ] );
+				}
+
+				if ( CrossEdgeHits )
+				{
+					gl . LineWidth ( 3 );
+					gl . Color ( 0.9 , 0.1 , 0.1 );
+					gl . Vertex ( EdgeHits3 [ 1 ] );
+					gl . Vertex ( EdgeHits0 [ 0 ] );
+				}
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
+
+		}
+
+		private float[][] DrawOnEdges ( OpenGL gl, Edge E , float v0 , float v1 )
+		{
+			float[][] EdgeHits=new float[][]{
+				DrawOnEdge ( gl, E , v0 ),
+				DrawOnEdge ( gl, E , v1 )};
+			float [ ] DistanceAongEdgeCycle = 
+				{ 
+					DistanceAlongEdgeCycle ( E . V [ 0 ] . cf , EdgeHits [ 0 ] ) , 
+					DistanceAlongEdgeCycle ( E . V [ 0 ] . cf , EdgeHits [ 1 ] ) 
+				};
+				Boolean OutOfOrder= DistanceAongEdgeCycle [ 0 ] > DistanceAongEdgeCycle [ 1 ];
+				if ( OutOfOrder )
+				{
+				float[] SwapperRoonie= EdgeHits[1];
+				EdgeHits[1]=EdgeHits[0];
+				EdgeHits[0]= SwapperRoonie;
+
+				}
+			return EdgeHits;
+		}
+
+		private float DistanceAlongEdgeCycle ( float [ ] x0 , float [ ] x1 )
+		{
+			double dsquaredx = ( x1 [ 0 ] - x0 [ 0 ] ) * ( x1 [ 0 ] - x0 [ 0 ] );
+			double dsquaredy = ( x1 [ 1 ] - x0 [ 1 ] ) * ( x1 [ 1 ] - x0 [ 1 ] );
+			double dsquaredZ = ( x1 [ 2 ] - x0 [ 2 ] ) * ( x1 [ 2 ] - x0 [ 2 ] );
+			double dsquared = dsquaredx + dsquaredy + dsquaredZ;
+
+			float d = ( float ) Math . Sqrt ( dsquared );
+			return d;
+		}
+
+		private float[] DrawOnEdge ( OpenGL gl, Edge E , float v0 )
+		{
+			if ( !IsInBetween ( v0 , E ) )
+			{	
+			//return;
+
+			}
+			float u = ( v0 - E . V [ 0 ] . V ) / ( E . V [ 1 ] . V - E . V [ 0 ] . V );
+			float[] EdgeHit  =   {
+					( 1 - u ) * E . V[1] . cf [0] + ( u * E . V[0] . cf[0] ),
+					( 1 - u ) * E . V[1] . cf [1] + ( u * E . V[0] . cf[1] ),
+					( 1 - u ) * E . V[1] . cf [2] + ( u * E . V[0] . cf[2] ),     };
+
+			if(false)
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 1 );
+				gl . Color ( 0.5 , 0.6 , 0.8 );
+				float [ ] cf0 = E . V [ 0 ] . cf;
+				float [ ] cf1 = E . V [ 1 ] . cf;
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
+				gl . Vertex ( cf0 [ 0 ] , cf0 [ 1 ] , cf0 [ 2 ] );
+				gl . Vertex ( cf1 [ 0 ] , cf1 [ 1 ] , cf1 [ 2 ] );
+				gl . End ( );
+				gl.PopAttrib();
+				}
+			if(true)
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( 0.8 , 0.7, 0.8 );
+				gl . PointSize(4)	 ;
+				gl . Begin ( SharpGL . Enumerations . BeginMode . Points );
+				gl . Vertex (EdgeHit );
+				gl . End ( );
+				gl . PopAttrib ( );
+
+			}
+			return EdgeHit;
+
 		}
 
 		public void AnnotateEdge ( OpenGL gl , Edge E )
