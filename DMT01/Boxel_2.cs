@@ -2008,27 +2008,16 @@ FreshReset:
 				EdgeHits++;
 			}
 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-			if(false)
+			if(EdgeHits==4)
 			{
 				gl . LineWidth ( LineWidth - 1 );
 				gl . Color ( LineColor );
-				gl . Begin ( SharpGL . Enumerations . BeginMode . Lines );
-				if ( EdgeHit [ 0 ] != null )
-					gl . Vertex ( EdgeHit [ 0 ] );
-				if ( EdgeHit [ 1 ] != null )
-					gl . Vertex ( EdgeHit [ 1 ] );
-				if ( EdgeHit [ 1 ] != null )
-					gl . Vertex ( EdgeHit [ 1 ] );
-				if ( EdgeHit [ 2 ] != null )
-					gl . Vertex ( EdgeHit [ 2 ] );
-				if ( EdgeHit [ 2 ] != null )
-					gl . Vertex ( EdgeHit [ 2 ] );
-				if ( EdgeHit [ 3 ] != null )
-					gl . Vertex ( EdgeHit [ 3 ] );
-				if ( EdgeHit [ 3 ] != null )
-					gl . Vertex ( EdgeHit [ 3 ] );
-				if ( EdgeHit [ 0 ] != null )
-					gl . Vertex ( EdgeHit [ 0 ] );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+				gl . Vertex ( EdgeHit [ 0 ] );
+				gl . Vertex ( EdgeHit [ 1 ] );
+				gl . Vertex ( EdgeHit [ 2 ] );
+				gl . Vertex ( EdgeHit [ 3 ] );
+				//gl . Vertex ( EdgeHit [ 0 ] );
 				gl . End ( );
 			}
 			if(true)
@@ -2041,18 +2030,10 @@ FreshReset:
 					gl . Vertex ( EdgeHit [ 0 ] );
 				if ( EdgeHit [ 1 ] != null )
 					gl . Vertex ( EdgeHit [ 1 ] );
-				if ( EdgeHit [ 1 ] != null )
-					gl . Vertex ( EdgeHit [ 1 ] );
-				if ( EdgeHit [ 2 ] != null )
-					gl . Vertex ( EdgeHit [ 2 ] );
 				if ( EdgeHit [ 2 ] != null )
 					gl . Vertex ( EdgeHit [ 2 ] );
 				if ( EdgeHit [ 3 ] != null )
 					gl . Vertex ( EdgeHit [ 3 ] );
-				if ( EdgeHit [ 3 ] != null )
-					gl . Vertex ( EdgeHit [ 3 ] );
-				if ( EdgeHit [ 0 ] != null )
-					gl . Vertex ( EdgeHit [ 0 ] );
 				gl . End ( );
 			}
 			gl . PopAttrib ( );
@@ -2100,7 +2081,7 @@ FreshReset:
 			float [ ] [ ] EdgeHits2 = DrawOnEdges ( gl , E2 , V0 , V1 );
 			float [ ] [ ] EdgeHits3 = DrawOnEdges ( gl , E3 , V0 , V1 );
 			float [][][] EdgeHits={EdgeHits0, EdgeHits1, EdgeHits2, EdgeHits3};
-			if ( true )
+			if ( false )
 			{
 				for ( int i = 0 ; i < 4 ; i++ )
 				{
@@ -2113,7 +2094,7 @@ FreshReset:
 					if ( D0 == 0.0f )
 					{
 
-						System . Diagnostics . Debug . WriteLine ( String . Format ( "zero distance Hit 0 {0} {1} " , DisplayMe(E[i]), ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+						//System . Diagnostics . Debug . WriteLine ( String . Format ( "zero distance Hit 0 {0} {1} " , DisplayMe(E[i]), ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
 					}
 					if ( D1 == 0.0f )
@@ -2239,16 +2220,7 @@ FreshReset:
 
 		private float[] DrawOnEdge ( OpenGL gl, Edge E , float v0 )
 		{
-			if ( !IsInBetween ( v0 , E ) )
-			{	
-			//return;
-
-			}
-			float u = ( v0 - E . V [ 0 ] . V ) / ( E . V [ 1 ] . V - E . V [ 0 ] . V );
-			float[] EdgeHit  =   {
-					( 1 - u ) * E . V[1] . cf [0] + ( u * E . V[0] . cf[0] ),
-					( 1 - u ) * E . V[1] . cf [1] + ( u * E . V[0] . cf[1] ),
-					( 1 - u ) * E . V[1] . cf [2] + ( u * E . V[0] . cf[2] ),     };
+			float[] EdgeHit  = CaculateEdgeHit ( E,v0);
 
 			if(false)
 			{
@@ -2278,6 +2250,40 @@ FreshReset:
 
 		}
 
+		private float[] CaculateEdgeHit(Edge E, float v)
+		{
+			float u = ( v - E . V [ 0 ] . V ) / ( E . V [ 1 ] . V - E . V [ 0 ] . V );
+			float [ ] EdgeHit =  
+			{
+					( 1 - u ) * E . V[1] . cf [0] + ( u * E . V[0] . cf[0] ),
+					( 1 - u ) * E . V[1] . cf [1] + ( u * E . V[0] . cf[1] ),
+					( 1 - u ) * E . V[1] . cf [2] + ( u * E . V[0] . cf[2] ),    
+					};
+
+			return EdgeHit;
+
+		}
+
+		private void DrawCriticalDiamond(OpenGL gl)
+		{
+			float [][][] EdgeHits=new float [4][][];
+			for ( int i = 0 ; i < 4 ; i++ )
+			{	
+				Edge E = this.E[i];
+				EdgeHits[i]  = new float [ ] [ ]
+					{
+					CaculateEdgeHit ( E , this . Penult_Low_V ),
+					CaculateEdgeHit ( E , this . Penult_High_V )
+					};
+			}
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+			}
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+			}
+
+		}
 		public void AnnotateEdge ( OpenGL gl , Edge E )
 		{
 			float [ ] cf0 = E . V [ 0 ] . cf;

@@ -489,8 +489,8 @@ namespace DMT01
 			{
 				MainWindow . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
 			}
-			int ChokerLowRow = 36;
-			int ChokerHighRow = 38;
+			int ChokerLowRow = 30;
+			int ChokerHighRow = 50;
 
 			//Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
 
@@ -588,6 +588,12 @@ namespace DMT01
 			{
 				MainWindow . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
 			}
+			var I_len = MainWindow . Selected_Region . BorderB . GetLength ( 0 );
+			var J_len = MainWindow . Selected_Region . BorderB . GetLength ( 1 );
+			if ( i >= I_len )
+				return;
+			if ( j >= J_len )
+				return;
 			Boxel BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
 			if ( BorderB == null )
 			{
@@ -612,6 +618,12 @@ namespace DMT01
 			{
 				MainWindow . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
 			}
+			var I_len = MainWindow . Selected_Region . BorderB.GetLength(0);
+			var J_len= MainWindow . Selected_Region . BorderB.GetLength(1);
+			if(i>= I_len )
+				return;
+			if(j>= J_len )
+				return;
 
 			Boxel BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
 			if ( BorderB == null )
