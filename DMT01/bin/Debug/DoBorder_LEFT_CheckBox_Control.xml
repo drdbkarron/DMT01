@@ -1,0 +1,10 @@
+﻿<CheckBoxControlSaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SeralizeControlCommonFields>
+    <ControlClass>CheckBox</ControlClass>
+    <ControlName>DoBorder_LEFT_CheckBox_Control</ControlName>
+    <SaveStateFileName>DoBorder_LEFT_CheckBox_Control.xml</SaveStateFileName>
+    <UpdatedFromXmlFiles>true</UpdatedFromXmlFiles>
+  </SeralizeControlCommonFields>
+  <CheckBoxState>true</CheckBoxState>
+  <CheckBoxName>DoBorder_LEFT_CheckBox_Control</CheckBoxName>
+</CheckBoxControlSaveState>
