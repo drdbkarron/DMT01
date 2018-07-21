@@ -211,6 +211,9 @@
     <EmbeddedResource Include="Resources\UpArrowBMP.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bin\Debug\TwoHitWonderCheckBox_Control.xml" />
+    <Resource Include="bin\Debug\ThreeHitWonderCheckBox_Control.xml" />
+    <Resource Include="bin\Debug\OneHitWondercheckBox_Control.xml" />
     <Resource Include="bin\Debug\region_threshold_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\unused_check_box_1_checkBox_Control.xml" />
     <Resource Include="bin\Debug\UseLookAtViewingTransform_RadioButton.xml" />
@@ -383,6 +386,22 @@
     <Resource Include="bin\Debug\HackCheckBox_C4_R2_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\HighSideHalfArrowAngleOffCentroid_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\HighSideHalfArrowHeadLengthFraction_H_Slider_UserControl.xml" />
+    <Resource Include="bin\Debug\DoBorder_BOTTOM_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoBorder_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoBorder_LEFT_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoBorder_RIGHT_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoBorder_TOP_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawHitEdges_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawHits_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoGuts_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoDrawSelfHits_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\DoTitateCriticalities_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Draw_BoxelHitBoxelEdges_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Edge0Annotation_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Edge1Annotation_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Edge2Annotation_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Edge3Annotation_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\FourHitWonderCheckBox_Control.xml" />
     <Content Include="bin\Debug\Microsoft.Data.Entity.Design.Extensibility.dll" />
     <Content Include="bin\Debug\Microsoft.Windows.Design.Extensibility.dll" />
     <Resource Include="bin\Debug\Orbit_Delta_Angle_H_Slider_UserControl.xml" />

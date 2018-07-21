@@ -164,18 +164,33 @@ namespace WpfControlLibrary1
 		{
 			ComboBox CB = sender as ComboBox;
 			if ( CB == null )
+			{
 				return;
+			}
+
 			Object Selected = CB .SelectedItem;
 			if ( Selected == null )
+			{
 				return;
+			}
+
 			String SelectedAsString = (String)Selected;
 			if ( SelectedAsString == null )
+			{
 				return;
+			}
+
 			Boolean werked = int .TryParse ( s: SelectedAsString , result: out int Numbah );
 			if ( !werked )
+			{
 				return;
+			}
+
 			if ( Numbah >= RowHi )
+			{
 				return;
+			}
+
 			RowLo = Numbah;
 		}
 
@@ -183,18 +198,33 @@ namespace WpfControlLibrary1
 		{
 			ComboBox CB = sender as ComboBox;
 			if ( CB == null )
+			{
 				return;
+			}
+
 			Object Selected = CB .SelectedItem;
 			if ( Selected == null )
+			{
 				return;
+			}
+
 			String SelectedAsString = Selected as String;
 			if ( SelectedAsString == null )
+			{
 				return;
+			}
+
 			Boolean werked = int .TryParse ( s: SelectedAsString , result: out int Numbah );
 			if ( !werked )
+			{
 				return;
+			}
+
 			if ( Numbah <= RowLo )
+			{
 				return;
+			}
+
 			RowHi = Numbah;
 
 		}
@@ -203,18 +233,33 @@ namespace WpfControlLibrary1
 		{
 			ComboBox CB = sender as ComboBox;
 			if ( CB == null )
+			{
 				return;
+			}
+
 			Object Selected = CB .SelectedItem;
 			if ( Selected == null )
+			{
 				return;
+			}
+
 			String SelectedAsString = Selected as String;
 			if ( SelectedAsString == null )
+			{
 				return;
+			}
+
 			Boolean werked = int .TryParse ( s: SelectedAsString , result: out int Numbah );
 			if ( !werked )
+			{
 				return;
+			}
+
 			if ( Numbah <= ColLo )
+			{
 				return;
+			}
+
 			ColLo = Numbah;
 		}
 
@@ -222,18 +267,33 @@ namespace WpfControlLibrary1
 		{
 			ComboBox CB = sender as ComboBox;
 			if ( CB == null )
+			{
 				return;
+			}
+
 			Object Selected = CB .SelectedItem;
 			if ( Selected == null )
+			{
 				return;
+			}
+
 			String SelectedAsString = Selected as String;
 			if ( SelectedAsString == null )
+			{
 				return;
+			}
+
 			Boolean werked = int .TryParse ( s: SelectedAsString , result: out int Numbah );
 			if ( !werked )
+			{
 				return;
+			}
+
 			if ( Numbah <= ColHi )
+			{
 				return;
+			}
+
 			ColHi = Numbah;
 
 		}

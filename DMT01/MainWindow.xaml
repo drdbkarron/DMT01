@@ -1277,18 +1277,23 @@
 													/>
 											</StackPanel>
 										</StackPanel>
-										<CheckBox x:Name="Do_RESET_TitateCriticalities_CheckBox_Control" Content="Reset Titrate"
-												  Grid.Column="1"
-												  HorizontalAlignment="Left"
-												  Margin="9,5,0,0"
-												  Grid.Row="4"
-												  VerticalAlignment="Top" />
-										<CheckBox Content="CheckBox"
-												  Grid.Column="1"
-												  HorizontalAlignment="Left"
-												  Margin="12,21,0,0"
-												  Grid.Row="4"
-												  VerticalAlignment="Top" />
+										<CheckBox
+											x:Name="Do_RESET_TitateCriticalities_CheckBox_Control"
+											Grid.Row="4"
+											Grid.Column="1"
+											Margin="9,5,0,0"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top"
+											Content="Reset Titrate"
+											/>
+										<CheckBox
+											Grid.Row="4"
+											Grid.Column="1"
+											Margin="12,21,0,0"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top"
+											Content="CheckBox"
+											/>
 									</Grid>
 
 								</TabItem>

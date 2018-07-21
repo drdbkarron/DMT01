@@ -489,7 +489,7 @@ namespace DMT01
 			{
 				MainWindow . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
 			}
-			int ChokerLowRow = 30;
+			int ChokerLowRow = 1;
 			int ChokerHighRow = 50;
 
 			//Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
