@@ -6,7 +6,7 @@
     <SaveStateFileName>Orbit_Rotation_H_Slider_UserControl.xml</SaveStateFileName>
     <UpdatedFromXmlFiles>false</UpdatedFromXmlFiles>
   </SeralizeControlCommonFields>
-  <MaxValue>858</MaxValue>
-  <MinValue>-858</MinValue>
-  <ResetValue>401.16153</ResetValue>
+  <MaxValue>30</MaxValue>
+  <MinValue>-30</MinValue>
+  <ResetValue>-7.162035</ResetValue>
 </H_Slider_UserControl1_SaveState_Class>

@@ -223,15 +223,15 @@ namespace DMT01
 			{
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Starting scripty check buttons" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 
-			if ( this . LaunchSavedStateOnInitalization_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . LaunchSavedStateOnInitalization_RadioButton_Control . IsChecked . Value )
 				{
 				this . Load_XML_Saved_Control_States_Button . PerformClick ( );
 				}
-			if ( this . LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . LoadSpreadsheetAtInitalization_CheckBox_Control . IsChecked . Value )
 				{
 				this . spreadsheet_load_Button . PerformClick ( );
 				}
-			if ( this . Do_Execute_Select_Data_Button_on_Startup_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . Do_Execute_Select_Data_Button_on_Startup_CheckBox_Control . IsChecked . Value )
 				{
 				this . DoSelectDataRangeForNormalization_Button . PerformClick ( );
 				}
@@ -275,7 +275,7 @@ namespace DMT01
 			gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Projection );
 			gl . LoadIdentity ( );
 			//gl . Flush ( );
-			if ( this . DrawMouseScreenSpaceAnnotation_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DrawMouseScreenSpaceAnnotation_CheckBox_Control . IsChecked . Value )
 				{
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . PushMatrix ( );
@@ -289,7 +289,7 @@ namespace DMT01
 				gl . PopAttrib ( );
 				}
 
-			if ( this . DrawScreenSpaceAnnotationGrid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DrawScreenSpaceAnnotationGrid_CheckBox_Control . IsChecked . Value )
 				{
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . PushMatrix ( );
@@ -308,7 +308,7 @@ namespace DMT01
 				gl . PopAttrib ( );
 				}
 
-			if ( this . UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . UseOrthographic_Viewing_Transform_radioButton_Control . IsChecked . Value )
 				{
 				gl . Ortho ( left: this . Orthographic_Left_H_Slider_UserControl . SliderValue ,
 							right: this . Orthographic_Right_H_Slider_UserControl . SliderValue ,
@@ -319,7 +319,7 @@ namespace DMT01
 							);
 				}
 
-			if ( this . Use_Viewing_Frustrum_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . Use_Viewing_Frustrum_RadioButton_Control . IsChecked . Value )
 				{
 				gl . Frustum ( left: this . Frustum_Left_H_Slider_UserControl . SliderValue ,
 					right: this . Frustum_Right_H_Slider_UserControl . SliderValue ,
@@ -329,7 +329,7 @@ namespace DMT01
 					zFar: this . Frustum_zFar_H_Slider_UserControl . SliderValue );
 				}
 
-			if ( this . UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . UsePerspetiveViewingTransform_RadioButton_Control . IsChecked . Value )
 				{
 				gl . Perspective (
 					fovy: this . Perspective_FOVY_H_Slider_UserControl . SliderValue ,
@@ -347,37 +347,11 @@ namespace DMT01
 			gl . MatrixMode ( SharpGL . Enumerations . MatrixMode . Modelview );
 			gl . LoadIdentity ( );
 
-			if ( this . UseLookAtViewingTransform_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . UseLookAtViewingTransform_RadioButton_Control . IsChecked .Value )
 				{
 				float x_up = 0.0f;
 				float y_up = 1.0f;
 				float z_up = 0.0f;
-
-				if ( this . LookAt_X_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-					{
-					x_up = 1.0f;
-					}
-				else
-					{
-					x_up = 0.0f;
-					}
-				if ( this . LookAt_Y_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-					{
-					y_up = 1.0f;
-					}
-				else
-					{
-					y_up = 0.0f;
-					}
-				if ( this . LookAt_Z_Up_RadioButton_Control . IsChecked . GetValueOrDefault ( ) )
-					{
-					z_up = 1.0f;
-					}
-				else
-					{
-					z_up = 0.0f;
-					}
-
 				gl . LookAt (
 					eyex: this . LookAt_Eye_X_H_Slider_UserControl . SliderValue ,
 					eyey: this . LookAt_Eye_Y_H_Slider_UserControl . SliderValue ,
@@ -386,11 +360,9 @@ namespace DMT01
 					centery: this . LookAtTarget_Y_H_Slider_UserControl . SliderValue ,
 					centerz: this . LookAtTarget_Z_H_Slider_UserControl . SliderValue ,
 					upx: x_up , upy: y_up , upz: z_up );
-
-				//M = M * LookAt ( gl );
 				}
 
-			if ( this . Do_Orbit_Pull_Back_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . Do_Orbit_Pull_Back_CheckBox_Control . IsChecked .Value )
 				{
 				gl . Translate (
 					x: this . Eye_X_H_Slider_UserControl . SliderValue ,
@@ -398,7 +370,7 @@ namespace DMT01
 					z: this . Eye_Z_H_Slider_UserControl . SliderValue );
 				}
 
-			if ( this . Do_Orbit_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . Do_Orbit_CheckBox_Control . IsChecked .Value )
 				{
 				gl . Translate ( 0.0 , 0.0 , this . Orbit_Radius_H_Slider_UserControl . SliderValue );
 
@@ -416,7 +388,7 @@ namespace DMT01
 					}
 				}
 
-			if ( this . AxisDrawMe_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . AxisDrawMe_CheckBox_Control . IsChecked.Value )
 				{
 				int Al = ( int ) ( ( this.Axis_Length_XYZ_H_Slider_UserControl . SliderValue ) + 0.5f );
 
@@ -429,30 +401,30 @@ namespace DMT01
 					AxesLength: Al ,
 					Pointsize: ps ,
 					LineWidth: lw ,
-					DoMinusTicks: this . Axis_DrawNegativeCheckBox_Control . IsChecked . GetValueOrDefault ( ) ,
-					TagOrigin: this . AnnotateOrigin_CheckBox_Control . IsChecked . GetValueOrDefault ( ) ,
-					DoXYZAnnotation: this . AnnotateAxisXYZ_CheckBox_Control . IsChecked . GetValueOrDefault ( ) ,
-					DoUnitTicks: this . DoDoTickMarks_CheckBox_Control . IsChecked . GetValueOrDefault ( ) ,
-					DoAnnotateZTicks: this . AnnotateZTickMarks_CheckBox_Control . IsChecked . GetValueOrDefault ( ) ,
-					DoAnnotateYTicks: this . AnnotateYTickMarks_CheckBox_Control . IsChecked . GetValueOrDefault ( ) ,
-					DoAnnotateXTicks: this . AnnotateXTickMarks_CheckBox_Control . IsChecked . GetValueOrDefault ( ) ,
+					DoMinusTicks: this . Axis_DrawNegativeCheckBox_Control . IsChecked . Value ,
+					TagOrigin: this . AnnotateOrigin_CheckBox_Control . IsChecked . Value ,
+					DoXYZAnnotation: this . AnnotateAxisXYZ_CheckBox_Control . IsChecked . Value ,
+					DoUnitTicks: this . DoDoTickMarks_CheckBox_Control . IsChecked . Value ,
+					DoAnnotateZTicks: this . AnnotateZTickMarks_CheckBox_Control . IsChecked . Value ,
+					DoAnnotateYTicks: this . AnnotateYTickMarks_CheckBox_Control . IsChecked . Value ,
+					DoAnnotateXTicks: this . AnnotateXTickMarks_CheckBox_Control . IsChecked . Value ,
 					tick_annotation_scale: this . Axis_tick_annotation_scale_H_Slider_UserControl . SliderValue ,
 					Draw_Minus_Z_Axis_Leg: this . Draw_Minus_Z_Axis_Leg_CheckBox_Control . IsChecked . Value
 					);
 				}
 
-			if ( this . YourArmsTooShortToBoxWithHashem . IsChecked . Value )
+			if ( this . DoYourArmsTooShortToBoxWithHashem . IsChecked . Value )
 				{
-				ArmsTooShortToBoxWithHashem ( gl );
+				this.ArmsTooShortToBoxWithHashem ( gl );
 				}
 
-			if ( this . DrawTeaPot_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DrawTeaPot_CheckBox_Control . IsChecked . Value )
 				{
 				Teapot tp = new Teapot ( );
 				tp . Draw ( gl , 14 , 1 , OpenGL . GL_FILL );
 				}
 
-			if ( this . Spreadsheet_Grid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . Spreadsheet_Grid_CheckBox_Control . IsChecked . Value )
 				{
 				ReoGrid3DSpreadsheet ( gl: gl );
 				}
@@ -479,7 +451,7 @@ namespace DMT01
 			}
 
 			Window mw = Application . Current . MainWindow;
- 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 			gl . PushMatrix ( );
 			gl . Disable ( SharpGL . OpenGL . GL_LIGHTING );
 			gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
@@ -564,6 +536,28 @@ namespace DMT01
 
 			gl . PopMatrix ( );
 			gl . PopAttrib ( );
+			if ( this . DoContourAnLabelAtThreshold . IsChecked . Value )
+			{
+				for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+				{
+					for ( int j = ChokerLowRow ; j < ChokerHighRow ; j++ )
+					{
+						if ( Selected_Region . B [ i , j ] != null )
+						{
+							Boxel B = Selected_Region . B [ i , j ];
+							if(B.BoxelKindEnum==BoxelKindEnum.IsNotCriticalTwoHits)
+							{
+
+							}
+
+							//Selected_Region . RecursionSeed[0] = B;
+
+						}
+
+					}
+				}
+			}
+
 			if ( this . DoGlobalSweepThreshold_CheckBox_Control . IsChecked . Value )
 			{
 				this . CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue += this . CriticalitySweeper_DELTA_H_Slider_User_Control .SliderValue;
@@ -713,7 +707,7 @@ namespace DMT01
 			const int normal_row_height = 20;
 			Worksheet CW = this.myReoGridControl . CurrentWorksheet;
 
-			if ( this . DoDrawSpreadsheetSideBorder_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DoDrawSpreadsheetSideBorder_CheckBox_Control . IsChecked . Value )
 				{
 				const float x0 = 0f;
 				const float x1 = -1f;
@@ -752,7 +746,7 @@ namespace DMT01
 					}
 				}
 
-			if ( this . DoDrawSpreadsheetTopBorder_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DoDrawSpreadsheetTopBorder_CheckBox_Control . IsChecked . Value )
 				{
 				float x0 = 0f;
 				float x1 = 0f;
@@ -787,7 +781,7 @@ namespace DMT01
 					}
 				}
 
-			if ( this . DoDrawSpreadsheetFocusCell_s_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DoDrawSpreadsheetFocusCell_s_CheckBox_Control . IsChecked . Value )
 				{
 				CellPosition FP = this.myReoGridControl . CurrentWorksheet . FocusPos;
 				gl . PushMatrix ( );
@@ -803,7 +797,7 @@ namespace DMT01
 				gl . PopMatrix ( );
 				}
 
-			if ( this . DoDrawSpreadsheetSelectedCell_s_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DoDrawSpreadsheetSelectedCell_s_CheckBox_Control . IsChecked . Value )
 				{
 				RangePosition SR = this.myReoGridControl . CurrentWorksheet . SelectionRange;
 				for ( int i = SR . StartPos . Row ; i <= SR . EndPos . Row ; i++ )
@@ -826,7 +820,7 @@ namespace DMT01
 					}
 				}
 
-			if ( this . DoDrawSpreadsheetGrid_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DoDrawSpreadsheetGrid_CheckBox_Control . IsChecked . Value )
 				{
 				gl . PushMatrix ( );
 				gl . LineWidth ( 1 );
@@ -867,7 +861,7 @@ namespace DMT01
 				gl . PopMatrix ( );
 				}
 
-			if ( this . DoDrawAllSpreadsheetData_CheckBox_Control . IsChecked . GetValueOrDefault ( ) )
+			if ( this . DoDrawAllSpreadsheetData_CheckBox_Control . IsChecked . Value )
 				{
 				gl . PushMatrix ( );
 				gl . PushAttrib ( SharpGL . OpenGL . GL_CURRENT_BIT |
@@ -879,7 +873,7 @@ namespace DMT01
 				//gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
 
 				gl . LineWidth ( 1 );
-				if ( this . Spreadsheet_Aspect_Scale_Hack_checkBox_Control . IsChecked . GetValueOrDefault ( ) )
+				if ( this . Spreadsheet_Aspect_Scale_Hack_checkBox_Control . IsChecked . Value )
 					{
 					gl . Scale ( x: .25 , y: 1 , z: 1 );
 					}
@@ -1386,7 +1380,7 @@ namespace DMT01
 			p . CommonFields . ControlName = RB . Name;
 			p . CommonFields . UpdatedFromXmlFiles = true;
 
-			p . RadioCheckBoxState = RB . IsChecked . GetValueOrDefault ( );
+			p . RadioCheckBoxState = RB . IsChecked . Value;
 			p . RadioCheckBoxName = RB . Name;
 			p . RadioGroupName = RB . GroupName;
 
@@ -1469,7 +1463,7 @@ namespace DMT01
 			p . CommonFields . ControlClass = nameof ( RadioButton );
 			p . CommonFields . UpdatedFromXmlFiles = true;
 
-			p . RadioCheckBoxState = RB . IsChecked . GetValueOrDefault ( );
+			p . RadioCheckBoxState = RB . IsChecked . Value;
 			p . RadioCheckBoxName = RB . Name;
 			p . RadioGroupName = RB . GroupName;
 
@@ -2405,7 +2399,7 @@ namespace DMT01
 
 			CheckBox CB = sender as CheckBox;
 
-			if ( CB . IsChecked . GetValueOrDefault ( ) )
+			if ( CB . IsChecked . Value )
 				{
 				this . myReoGridControl . Visibility = Visibility . Visible;
 				}

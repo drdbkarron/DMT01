@@ -298,23 +298,24 @@
 					Content="Draw Screen Numbas"
 					/>
 				<CheckBox
-					x:Name="YourArmsTooShortToBoxWithHashem"
+					x:Name="DoYourArmsTooShortToBoxWithHashem"
 					Width="133"
 					Margin="6,3,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Run develop code"
+					Content="Run New Threshold"
 					IsChecked="True"
 					/>
 				<CheckBox
-					Width="133"
+					x:Name="DoContourAnLabelAtThreshold"
+					Width="152"
 					Margin="6,3,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Check Box Unassigned"
+					Content="Run Contour and Label"
 					/>
 				<CheckBox
-					Width="133"
+					Width="121"
 					Margin="6,3,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
@@ -498,7 +499,9 @@
 				>
 				<TabItem
 					x:Name="SpreadsheetSupport_TabItem"
-					Margin="0"
+					Width="135"
+					Margin="4,0"
+					HorizontalAlignment="Left"
 					Header="Spreadsheet Load file"
 					>
 					<Grid
@@ -894,7 +897,14 @@
 									VerticalAlignment="Center"
 									Header="2 Sheet"
 									>
-									<Grid Background="#FFE5E5E5" />
+									<Grid x:Name="Contour_Labeling_Grid">
+										<Grid.Background>
+											<RadialGradientBrush>
+												<GradientStop Offset="1" Color="#FFA6A6A6" />
+												<GradientStop Color="#FFA24EBB" />
+											</RadialGradientBrush>
+										</Grid.Background>
+									</Grid>
 								</TabItem>
 								<TabItem
 									Width="122"
@@ -1281,7 +1291,7 @@
 											x:Name="Do_RESET_TitateCriticalities_CheckBox_Control"
 											Grid.Row="4"
 											Grid.Column="1"
-											Margin="9,5,0,0"
+											Margin="3,3,0,0"
 											HorizontalAlignment="Left"
 											VerticalAlignment="Top"
 											Content="Reset Titrate"
@@ -1289,9 +1299,9 @@
 										<CheckBox
 											Grid.Row="4"
 											Grid.Column="1"
-											Margin="12,21,0,0"
+											Margin="3,3,0,0"
 											HorizontalAlignment="Left"
-											VerticalAlignment="Top"
+											VerticalAlignment="Bottom"
 											Content="CheckBox"
 											/>
 									</Grid>
@@ -2694,7 +2704,9 @@
 				</TabItem>
 				<TabItem
 					x:Name="Eye_and_Camera_TabItem"
-					Margin="0"
+					Width="117"
+					Margin="4,0"
+					HorizontalAlignment="Left"
 					Header="Camera Eye Orbit"
 					>
 					<Grid Height="555">
@@ -2733,8 +2745,8 @@
 									VerticalAlignment="Top"
 									BorderBrush="#FFF01515"
 									LabelText="Orbit Total Rotation Angle"
-									SliderMaxValue="1000"
-									SliderMinValue="-1000"
+									SliderMaxValue="120"
+									SliderMinValue="-120"
 									SliderValue="0.0"
 									>
 									<local:H_Slider_UserControl1.Background>
@@ -2831,9 +2843,140 @@
 					</Grid>
 				</TabItem>
 				<TabItem
+					x:Name="LookAt_TabItem"
+					Width="88"
+					Height="20"
+					Margin="4,0"
+					HorizontalAlignment="Left"
+					Header="LookAt"
+					>
+					<Grid
+						x:Name="LookAtTab_Grid"
+						Margin="0,3,0,-12"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Top"
+						Background="#FFE5E5E5"
+						>
+						<StackPanel
+							x:Name="LookAt_StackPanel"
+							Grid.Row="4"
+							Width="978"
+							Height="534"
+							Margin="1,1,0,1"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							Background="#FFE4E893"
+							>
+							<StackPanel
+								x:Name="LookAtEye_XYZ_StackPanel"
+								Width="972"
+								Height="262"
+								Margin="0,4"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								Background="#FF721D1D"
+								>
+								<local:H_Slider_UserControl1
+									x:Name="LookAt_Eye_X_H_Slider_UserControl"
+									Width="960"
+									Height="82"
+									Margin="0,4,0,0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Top"
+									LabelText="LookAt Eye X"
+									SliderMaxValue="50"
+									SliderMinValue="-50"
+									SliderValue="0"
+									/>
+								<local:H_Slider_UserControl1
+									x:Name="LookAt_Eye_Y_H_Slider_UserControl"
+									Width="960"
+									Height="82"
+									Margin="5,4,0,0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									LabelText="LookAt Eye Y"
+									SliderMaxValue="50"
+									SliderMinValue="-50"
+									SliderValue="0"
+									/>
+								<local:H_Slider_UserControl1
+									x:Name="LookAt_Eye_Z_H_Slider_UserControl"
+									Width="960"
+									Height="82"
+									Margin="5,4,0,0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Top"
+									VerticalContentAlignment="Center"
+									LabelText="LookAt EyeZ"
+									SliderMaxValue="50"
+									SliderMinValue="-50"
+									SliderValue="0"
+									/>
+							</StackPanel>
+							<StackPanel
+								x:Name="LookAtTarget_XYZ_StackPanel"
+								Width="972"
+								Height="236"
+								Margin="0,4,0,2"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								Background="#FF45C550"
+								>
+								<local:H_Slider_UserControl1
+									x:Name="LookAtTarget_X_H_Slider_UserControl"
+									Width="965"
+									Height="77"
+									Margin="0,1,0,0"
+									Padding="5,2,2,1"
+									HorizontalAlignment="Center"
+									HorizontalContentAlignment="Center"
+									Background="#FFCF5EAB"
+									Grid.IsSharedSizeScope="True"
+									LabelText="LookAt Target X"
+									SliderMaxValue="50"
+									SliderMinValue="-50"
+									SliderValue="0"
+									/>
+								<local:H_Slider_UserControl1
+									x:Name="LookAtTarget_Y_H_Slider_UserControl"
+									Width="965"
+									Height="77"
+									Margin="0,1,0,0"
+									Padding="5,2,2,2"
+									HorizontalAlignment="Center"
+									HorizontalContentAlignment="Center"
+									Background="#FFCFA5C1"
+									Grid.IsSharedSizeScope="True"
+									LabelText="LookAt Target Y"
+									SliderMaxValue="100"
+									SliderMinValue="-100"
+									SliderValue="0"
+									/>
+								<local:H_Slider_UserControl1
+									x:Name="LookAtTarget_Z_H_Slider_UserControl"
+									Width="965"
+									Height="77"
+									Margin="0,1,0,0"
+									Padding="5,2,2,2"
+									HorizontalAlignment="Center"
+									HorizontalContentAlignment="Center"
+									Grid.IsSharedSizeScope="True"
+									LabelText="LookAt Target Z"
+									SliderMaxValue="100"
+									SliderMinValue="-100"
+									SliderValue="0"
+									/>
+							</StackPanel>
+						</StackPanel>
+					</Grid>
+				</TabItem>
+
+				<TabItem
 					x:Name="Axis_Properties_TabItem"
-					Width="32"
-					Margin="-2,0,0,1"
+					Width="84"
+					Height="20"
+					Margin="4,0"
 					HorizontalAlignment="Left"
 					Header="Axis"
 					>
@@ -3023,200 +3166,10 @@
 					</Grid>
 				</TabItem>
 				<TabItem
-					x:Name="LookAt_TabItem"
-					Width="112.7"
-					Height="20"
-					Margin="4,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					BorderBrush="#FFD41616"
-					BorderThickness="2.4,5,1.9,1"
-					Header="LookAt"
-					>
-					<Grid
-						x:Name="LookAtTab_Grid"
-						Margin="0,3,0,-12"
-						HorizontalAlignment="Left"
-						VerticalAlignment="Top"
-						Background="#FFE5E5E5"
-						>
-						<StackPanel
-							x:Name="LookAt_StackPanel"
-							Grid.Row="4"
-							Width="978"
-							Height="534"
-							Margin="1,1,0,1"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							Background="#FFE4E893"
-							>
-							<StackPanel
-								x:Name="LookAtEye_XYZ_StackPanel"
-								Width="972"
-								Height="262"
-								Margin="0,4"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								Background="#FF721D1D"
-								>
-								<local:H_Slider_UserControl1
-									x:Name="LookAt_Eye_X_H_Slider_UserControl"
-									Width="960"
-									Height="82"
-									Margin="0,4,0,0"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Top"
-									LabelText="LookAt Eye X"
-									SliderMaxValue="50"
-									SliderMinValue="-50"
-									SliderValue="0"
-									/>
-								<local:H_Slider_UserControl1
-									x:Name="LookAt_Eye_Y_H_Slider_UserControl"
-									Width="960"
-									Height="82"
-									Margin="5,4,0,0"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Center"
-									LabelText="LookAt Eye Y"
-									SliderMaxValue="50"
-									SliderMinValue="-50"
-									SliderValue="0"
-									/>
-								<local:H_Slider_UserControl1
-									x:Name="LookAt_Eye_Z_H_Slider_UserControl"
-									Width="960"
-									Height="82"
-									Margin="5,4,0,0"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Top"
-									VerticalContentAlignment="Center"
-									LabelText="LookAt EyeZ"
-									SliderMaxValue="50"
-									SliderMinValue="-50"
-									SliderValue="0"
-									/>
-							</StackPanel>
-							<StackPanel
-								x:Name="LookAtTarget_XYZ_StackPanel"
-								Width="972"
-								Height="236"
-								Margin="0,4,0,2"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								Background="#FF45C550"
-								>
-								<local:H_Slider_UserControl1
-									x:Name="LookAtTarget_X_H_Slider_UserControl"
-									Width="965"
-									Height="77"
-									Margin="0,1,0,0"
-									Padding="5,2,2,1"
-									HorizontalAlignment="Center"
-									HorizontalContentAlignment="Center"
-									Background="#FFCF5EAB"
-									Grid.IsSharedSizeScope="True"
-									LabelText="LookAt Target X"
-									SliderMaxValue="50"
-									SliderMinValue="-50"
-									SliderValue="0"
-									/>
-								<local:H_Slider_UserControl1
-									x:Name="LookAtTarget_Y_H_Slider_UserControl"
-									Width="965"
-									Height="77"
-									Margin="0,1,0,0"
-									Padding="5,2,2,2"
-									HorizontalAlignment="Center"
-									HorizontalContentAlignment="Center"
-									Background="#FFCFA5C1"
-									Grid.IsSharedSizeScope="True"
-									LabelText="LookAt Target Y"
-									SliderMaxValue="100"
-									SliderMinValue="-100"
-									SliderValue="0"
-									/>
-								<local:H_Slider_UserControl1
-									x:Name="LookAtTarget_Z_H_Slider_UserControl"
-									Width="965"
-									Height="77"
-									Margin="0,1,0,0"
-									Padding="5,2,2,2"
-									HorizontalAlignment="Center"
-									HorizontalContentAlignment="Center"
-									Grid.IsSharedSizeScope="True"
-									LabelText="LookAt Target Z"
-									SliderMaxValue="100"
-									SliderMinValue="-100"
-									SliderValue="0"
-									/>
-							</StackPanel>
-							<StackPanel
-								Width="909"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								Orientation="Horizontal"
-								>
-								<StackPanel
-									x:Name="LookAt_WhatAxisIsUp_StackPanel"
-									Width="246"
-									Height="20"
-									Margin="0"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Center"
-									Background="#FFF0681B"
-									Orientation="Horizontal"
-									ScrollViewer.VerticalScrollBarVisibility="Disabled"
-									>
-									<RadioButton
-										x:Name="LookAt_X_Up_RadioButton_Control"
-										Width="73"
-										Margin="11,0,9,0"
-										HorizontalContentAlignment="Left"
-										Background="#FF7DA083"
-										BorderBrush="#FFB66666"
-										BorderThickness="3"
-										Content="X Up"
-										GroupName="LookAtUp_RadioButton_Group"
-										IsChecked="True"
-										SnapsToDevicePixels="True"
-										/>
-									<RadioButton
-										x:Name="LookAt_Y_Up_RadioButton_Control"
-										Margin="11,0,9,0"
-										Background="#FF7DA083"
-										BorderBrush="#FFB66666"
-										BorderThickness="3"
-										Content="Y Up"
-										GroupName="LookAtUp_RadioButton_Group"
-										IsChecked="True"
-										SnapsToDevicePixels="True"
-										/>
-									<RadioButton
-										x:Name="LookAt_Z_Up_RadioButton_Control"
-										Margin="11,0,9,0"
-										Background="#FF7DA083"
-										BorderBrush="#FFB66666"
-										BorderThickness="3"
-										Content="Z Up"
-										GroupName="LookAtUp_RadioButton_Group"
-										IsChecked="True"
-										SnapsToDevicePixels="True"
-										/>
-								</StackPanel>
-							</StackPanel>
-						</StackPanel>
-					</Grid>
-				</TabItem>
-				<TabItem
 					x:Name="Perspective_TabItem"
-					Width="112.7"
-					Height="20"
+					Width="95"
 					Margin="4,0"
 					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					BorderBrush="#FFD41616"
-					BorderThickness="2.4,5,1.9,1"
 					Header="Perspective"
 					>
 					<Grid Background="#FFCB4141">
@@ -3296,18 +3249,203 @@
 					</Grid>
 				</TabItem>
 				<TabItem
-					x:Name="ProjectionAndModeling_TabItem"
-					Width="151"
-					Height="21"
-					Margin="0"
+					x:Name="Orthographics_Viewing_TabItem"
+					Width="143"
+					Margin="4,0"
 					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Header="Projection and Modeling"
+					Header="Orthographics Viewing"
 					>
-					<Grid Background="#FFE5E5E5" />
+					<Grid
+						x:Name="Orthographic_Sliders_Grid"
+						Width="935"
+						Height="498"
+						Margin="2,10,0,0"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Top"
+						Background="#FFE5E5E5"
+						>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="100*" />
+							<RowDefinition Height="100*" />
+							<RowDefinition Height="100*" />
+							<RowDefinition Height="100*" />
+							<RowDefinition Height="100*" />
+							<RowDefinition Height="100*" />
+						</Grid.RowDefinitions>
+						<local:H_Slider_UserControl1
+							x:Name="Orthographic_Left_H_Slider_UserControl"
+							Width="Auto"
+							Height="78"
+							Margin="2,7,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							LabelText="Orthographic Left"
+							SliderMaxValue="5"
+							SliderMinValue="0"
+							SliderValue="1"
+							/>
+						<local:H_Slider_UserControl1
+							x:Name="Orthographic_Right_H_Slider_UserControl"
+							Grid.RowSpan="2"
+							Width="Auto"
+							Height="78"
+							Margin="2,91,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							LabelText="orthographic Right"
+							SliderMaxValue="0"
+							SliderMinValue="-5"
+							SliderValue="-1"
+							/>
+						<local:H_Slider_UserControl1
+							x:Name="Orthographic_Top_H_Slider_UserControl"
+							Grid.Row="2"
+							Width="Auto"
+							Height="78"
+							Margin="2,7,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							LabelText="Orthographic Top"
+							SliderMaxValue="200"
+							SliderMinValue="-1"
+							SliderValue="0"
+							/>
+						<local:H_Slider_UserControl1
+							x:Name="Orthographic_Bottom_H_Slider_UserControl"
+							Grid.Row="3"
+							Width="Auto"
+							Height="78"
+							Margin="2,1,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							LabelText="Orthographic Bottom"
+							SliderMaxValue="0"
+							SliderMinValue="-5"
+							SliderValue="-1"
+							/>
+						<local:H_Slider_UserControl1
+							x:Name="Orthographic_Near_H_Slider_UserControl"
+							Grid.Row="4"
+							Width="Auto"
+							Height="78"
+							Margin="2,2,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							LabelText="Orthographic z Near"
+							SliderMaxValue="0"
+							SliderMinValue="-5"
+							SliderValue="-1"
+							/>
+						<local:H_Slider_UserControl1
+							x:Name="Orthographic_Far_H_Slider_UserControl"
+							Grid.Row="5"
+							Width="Auto"
+							Height="78"
+							Margin="2,5,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							LabelText="Orthographic z Far"
+							SliderMaxValue="5"
+							SliderMinValue="0"
+							SliderValue="1"
+							/>
+					</Grid>
+				</TabItem>
+				<TabItem
+					x:Name="Viewing_Frustrum_TabItem"
+					Width="123"
+					Margin="4,0"
+					HorizontalAlignment="Left"
+					Header="Viewing Frustrum"
+					>
+					<Grid
+						x:Name="Viewing_frustrum_TabItem_Grid"
+						Width="972"
+						Height="550"
+						Margin="0"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Top"
+						Background="#FFE5E5E5"
+						>
+						<StackPanel
+							Margin="6,7,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							>
+							<local:H_Slider_UserControl1
+								x:Name="Frustum_Left_H_Slider_UserControl"
+								Width="936"
+								Margin="5,7,0,0"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								LabelText="Left"
+								SliderMaxValue="20"
+								SliderMinValue="-20"
+								SliderValue="-10"
+								/>
+							<local:H_Slider_UserControl1
+								x:Name="Frustum_Right_H_Slider_UserControl"
+								Width="936"
+								Margin="5,7,0,0"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								LabelText="Right"
+								SliderMaxValue="20"
+								SliderMinValue="-20"
+								SliderValue="10"
+								/>
+							<local:H_Slider_UserControl1
+								x:Name="Frustum_Bottom_H_Slider_UserControl"
+								Width="936"
+								Margin="5,7,0,0"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								LabelText="Bottom"
+								SliderMaxValue="0"
+								SliderMinValue="-20"
+								SliderValue="-10"
+								/>
+							<local:H_Slider_UserControl1
+								x:Name="Frustum_Top_H_Slider_UserControl"
+								Width="936"
+								Margin="5,7,0,0"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								LabelText="Top"
+								SliderMaxValue="20"
+								SliderMinValue="0"
+								SliderValue="10"
+								/>
+							<local:H_Slider_UserControl1
+								x:Name="Frustum_zNear_H_Slider_UserControl"
+								Width="936"
+								Margin="5,7,0,0"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								LabelText="Near"
+								SliderMaxValue="20"
+								SliderMinValue="-20"
+								SliderValue="-10"
+								/>
+							<local:H_Slider_UserControl1
+								x:Name="Frustum_zFar_H_Slider_UserControl"
+								Width="936"
+								Margin="5,7,0,0"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top"
+								LabelText="Far"
+								SliderMaxValue="20"
+								SliderMinValue="-20"
+								SliderValue="10"
+								/>
+						</StackPanel>
+					</Grid>
 				</TabItem>
 				<TabItem
 					x:Name="Lighting_TabItem"
+					Width="61"
+					Margin="4,0"
+					HorizontalAlignment="Left"
 					Header="Lights"
 					>
 					<Grid
@@ -3529,10 +3667,9 @@
 				</TabItem>
 				<TabItem
 					x:Name="MATERIALs_TabItem"
-					Width="54"
-					Height="20"
+					Width="82"
+					Margin="4,0"
 					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
 					Header="MATERIALs"
 					>
 					<Grid Background="#FFE5E5E5">
@@ -3541,219 +3678,6 @@
 						</Grid.ColumnDefinitions>
 					</Grid>
 				</TabItem>
-				<TabItem
-					x:Name="Spreadsheet_Grid_TabItem"
-					Width="42"
-					Height="18"
-					Margin="-2,0,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Header="Grid"
-					>
-					<Grid Background="#FFE5E5E5" />
-				</TabItem>
-				<TabItem
-					x:Name="Orthographics_Viewing_TabItem"
-					Width="81"
-					Height="19"
-					Margin="-2,0,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Header="Orthographics Viewing"
-					>
-					<Grid
-						x:Name="Orthographic_Sliders_Grid"
-						Width="935"
-						Height="498"
-						Margin="2,10,0,0"
-						HorizontalAlignment="Left"
-						VerticalAlignment="Top"
-						Background="#FFE5E5E5"
-						>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="100*" />
-							<RowDefinition Height="100*" />
-							<RowDefinition Height="100*" />
-							<RowDefinition Height="100*" />
-							<RowDefinition Height="100*" />
-							<RowDefinition Height="100*" />
-						</Grid.RowDefinitions>
-						<local:H_Slider_UserControl1
-							x:Name="Orthographic_Left_H_Slider_UserControl"
-							Width="Auto"
-							Height="78"
-							Margin="2,7,0,0"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							LabelText="Orthographic Left"
-							SliderMaxValue="5"
-							SliderMinValue="0"
-							SliderValue="1"
-							/>
-						<local:H_Slider_UserControl1
-							x:Name="Orthographic_Right_H_Slider_UserControl"
-							Grid.RowSpan="2"
-							Width="Auto"
-							Height="78"
-							Margin="2,91,0,0"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							LabelText="orthographic Right"
-							SliderMaxValue="0"
-							SliderMinValue="-5"
-							SliderValue="-1"
-							/>
-						<local:H_Slider_UserControl1
-							x:Name="Orthographic_Top_H_Slider_UserControl"
-							Grid.Row="2"
-							Width="Auto"
-							Height="78"
-							Margin="2,7,0,0"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							LabelText="Orthographic Top"
-							SliderMaxValue="200"
-							SliderMinValue="-1"
-							SliderValue="0"
-							/>
-						<local:H_Slider_UserControl1
-							x:Name="Orthographic_Bottom_H_Slider_UserControl"
-							Grid.Row="3"
-							Width="Auto"
-							Height="78"
-							Margin="2,1,0,0"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							LabelText="Orthographic Bottom"
-							SliderMaxValue="0"
-							SliderMinValue="-5"
-							SliderValue="-1"
-							/>
-						<local:H_Slider_UserControl1
-							x:Name="Orthographic_Near_H_Slider_UserControl"
-							Grid.Row="4"
-							Width="Auto"
-							Height="78"
-							Margin="2,2,0,0"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							LabelText="Orthographic z Near"
-							SliderMaxValue="0"
-							SliderMinValue="-5"
-							SliderValue="-1"
-							/>
-						<local:H_Slider_UserControl1
-							x:Name="Orthographic_Far_H_Slider_UserControl"
-							Grid.Row="5"
-							Width="Auto"
-							Height="78"
-							Margin="2,5,0,0"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							LabelText="Orthographic z Far"
-							SliderMaxValue="5"
-							SliderMinValue="0"
-							SliderValue="1"
-							/>
-					</Grid>
-				</TabItem>
-				<TabItem
-					x:Name="Viewing_Frustrum_TabItem"
-					Width="112"
-					Height="19"
-					Margin="-2,0,-7,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Header="Viewing Frustrum"
-					>
-					<Grid
-						x:Name="Viewing_frustrum_TabItem_Grid"
-						Width="972"
-						Height="550"
-						Margin="0"
-						HorizontalAlignment="Left"
-						VerticalAlignment="Top"
-						Background="#FFE5E5E5"
-						>
-						<StackPanel
-							Margin="6,7,0,0"
-							HorizontalAlignment="Left"
-							VerticalAlignment="Top"
-							>
-							<local:H_Slider_UserControl1
-								x:Name="Frustum_Left_H_Slider_UserControl"
-								Width="936"
-								Margin="5,7,0,0"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								LabelText="Left"
-								SliderMaxValue="20"
-								SliderMinValue="-20"
-								SliderValue="-10"
-								/>
-							<local:H_Slider_UserControl1
-								x:Name="Frustum_Right_H_Slider_UserControl"
-								Width="936"
-								Margin="5,7,0,0"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								LabelText="Right"
-								SliderMaxValue="20"
-								SliderMinValue="-20"
-								SliderValue="10"
-								/>
-							<local:H_Slider_UserControl1
-								x:Name="Frustum_Bottom_H_Slider_UserControl"
-								Width="936"
-								Margin="5,7,0,0"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								LabelText="Bottom"
-								SliderMaxValue="0"
-								SliderMinValue="-20"
-								SliderValue="-10"
-								/>
-							<local:H_Slider_UserControl1
-								x:Name="Frustum_Top_H_Slider_UserControl"
-								Width="936"
-								Margin="5,7,0,0"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								LabelText="Top"
-								SliderMaxValue="20"
-								SliderMinValue="0"
-								SliderValue="10"
-								/>
-							<local:H_Slider_UserControl1
-								x:Name="Frustum_zNear_H_Slider_UserControl"
-								Width="936"
-								Margin="5,7,0,0"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								LabelText="Near"
-								SliderMaxValue="20"
-								SliderMinValue="-20"
-								SliderValue="-10"
-								/>
-							<local:H_Slider_UserControl1
-								x:Name="Frustum_zFar_H_Slider_UserControl"
-								Width="936"
-								Margin="5,7,0,0"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Top"
-								LabelText="Far"
-								SliderMaxValue="20"
-								SliderMinValue="-20"
-								SliderValue="10"
-								/>
-						</StackPanel>
-					</Grid>
-				</TabItem>
-				<CheckBox
-					Width="100"
-					Height="100"
-					Content="CheckBox"
-					/>
 			</TabControl>
 		</StackPanel>
 	</StackPanel>

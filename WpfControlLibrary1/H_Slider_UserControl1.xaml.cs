@@ -24,7 +24,7 @@ namespace WpfControlLibrary1
             public WpfControlLibrary1.SeralizeControlCommonFields SeralizeControlCommonFields = new WpfControlLibrary1 . SeralizeControlCommonFields ( );
             public float MaxValue =   -1.1f;
             public float MinValue =   -2.2f;
-            public float ResetValue = -3.3f;
+            public float ResetValue = -3.3f;		  // these numbers are markers for un-initalized
         }
 
     public partial class H_Slider_UserControl1 : UserControl
@@ -296,13 +296,13 @@ namespace WpfControlLibrary1
 		private void H_Slider_UserControl_Initialized ( object sender , EventArgs e )
 		{
 
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 		}
 
 		private void H_Slider_UserControl_MouseEnter ( object sender , MouseEventArgs e )
 		{
 
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Enter" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Enter" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 			UserControl UC = sender as UserControl;
 			if ( UC is null )
 			{
@@ -315,7 +315,7 @@ namespace WpfControlLibrary1
 		void H_Slider_UserControl_MouseLeave ( object sender , MouseEventArgs e )
 		{
 
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Leave" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+			//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Leave" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 			UserControl UC = sender as UserControl ;	 
 			if ( UC is null )
 			{

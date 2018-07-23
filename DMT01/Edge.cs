@@ -2,7 +2,7 @@
 
 namespace DMT01
 {
-		public class Edge
+	public class Edge
 		{
 		public short EdgeIndex;
 		public short SubEdgeIndex;
@@ -17,6 +17,7 @@ namespace DMT01
 		public Edge Previous;
 		public float delta_V;
 		public float[] delta_cf;
+		public float[] Hit;
 
 		public enum EdgeDirection
 			{
