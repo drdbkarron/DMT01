@@ -22,7 +22,7 @@ namespace DMT01
 		public float[,] Cells;
 		public Boxel[,] B;
 		public Boxel[,] BorderB;
-		public Boxel[] RecursionSeed;
+		public Boxel[] RecursionSeedBoxel;
 		public long Titration_Steps;
 		public Region ( float [ , ] C , int StartRows , int EndRows , int StartCols , int EndCols )
 			{

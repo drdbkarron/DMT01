@@ -545,12 +545,16 @@ namespace DMT01
 						if ( Selected_Region . B [ i , j ] != null )
 						{
 							Boxel B = Selected_Region . B [ i , j ];
-							if(B.BoxelKindEnum==BoxelKindEnum.IsNotCriticalTwoHits)
+							if ( B . BoxelKindEnum == BoxelKindEnum . IsNotCriticalTwoHits )
 							{
 
+								if ( Selected_Region . RecursionSeedBoxel == null )
+								{
+									Selected_Region . RecursionSeedBoxel = new Boxel [ 4 ];
+								}
+								Selected_Region . RecursionSeedBoxel [ 0 ] = B;
+								BoxelScanStart ( B );
 							}
-
-							//Selected_Region . RecursionSeed[0] = B;
 
 						}
 
@@ -574,6 +578,132 @@ namespace DMT01
 					this.region_threshold_H_Slider_UserControl . SliderValue = this . CriticalitySweeper_HIGH_H_Slider_User_Control . SliderValue;
 				}
 			}
+		}
+
+		private void BoxelScanStart ( Boxel StartingBoxel )
+		{
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+				Edge StartingEdge = StartingBoxel . E [ i ];
+				if ( StartingEdge . Hit == null )
+				{
+					continue;
+				}
+				BoxelScan ( StartingEdge  );
+			}
+		}
+
+		private void BoxelScan ( Edge ThisBoxelEntryEdge )
+		{
+			Edge ExitEdge=GetExitEdge( ThisBoxelEntryEdge );
+			Boxel AdjacentBoxel=AdjacentBoxelToEdge(ExitEdge);
+			ThisBoxelEntryEdge . AdjacentBoxel=AdjacentBoxel;
+			//Edge AdjacentBoxelEntryEdge=GetEntryEdge(AdjacentBoxel, ExitEdge );
+
+			//BoxelScan( AdjacentBoxelEntryEdge );
+
+		}
+
+		//private Edge GetEntryEdge ( Boxel B, Edge AdjacentBoxeExitEdge )
+		//{
+			
+		//}
+
+		private Edge GetExitEdge ( Edge EntryEdge )
+		{
+			Boxel EntryBoxel=EntryEdge.ParentBoxel;
+			Edge ExitEdge = EntryEdge.ParentEdge;
+			float [ ] EntryHit = EntryEdge . Hit;
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+				Edge E = EntryBoxel . E [ i ];
+				if ( E == null )
+					continue;
+				if ( E . Hit == null )
+					continue;
+				float [ ] Hit = E . Hit;
+				if ( equals ( EntryHit , Hit ) )
+					continue;
+				return E;
+			}
+			return ExitEdge;
+		}
+
+		private Boxel AdjacentBoxelToEdge (Edge e)
+		{
+			Boxel b	 =e.ParentBoxel;
+			Boxel [ ] B = new Boxel [ 4 ];
+			int [ , ] AllAdjacent = new int [ 4 , 2 ] {
+					{ b . I + 1 ,	b . J     } ,
+					{ b . I ,		b . J + 1 } ,
+					{ b . I - 1 ,	b . J     } ,
+					{ b . I ,		b . J - 1 } ,
+					};
+			Boxel Matcheroonie=null;
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+				Boolean GutsGood = ( Selected_Region . B [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ] != null );
+				Boolean BorderGood = ( Selected_Region . BorderB [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ] != null );
+
+				if ( BorderGood )
+				{
+				B[i] = Selected_Region . BorderB [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ];
+				}
+				else if ( GutsGood )
+				{
+				B[i] = Selected_Region . B [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ] ;
+				}
+				else 
+				{
+				B[i]=null;
+				}
+			}
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+				for ( int j = 0 ; j < 4 ; j++ )
+				{
+					Edge ee = B [ i ] . E [ j ];
+					Boolean VertexMatch=(equals(ee,e));
+					if ( ee . Hit == null )
+						continue;
+					Boolean HitMatch = ( equals ( ee . Hit , e . Hit ) );
+					if ( HitMatch )
+					{
+						Matcheroonie = B[i];
+						e.AdjacentBoxel=Matcheroonie;
+						goto bailout;
+					}
+				}
+			}
+
+bailout:
+			return Matcheroonie;
+		}
+
+		private Boolean equals ( Edge ee , Edge e )
+		{
+			Boolean VertexMatch01 = ( equals ( ee . V [ 0 ] , e . V [ 1 ] ) );
+			Boolean VertexMatch10 = ( equals ( ee . V [ 0 ] , e . V [ 1 ] ) );
+			Boolean VertexMatch = VertexMatch01 && VertexMatch10;
+			return VertexMatch;
+		}
+
+		private Boolean equals ( Vertex vertex1 , Vertex vertex2 )
+		{
+			Boolean cfs = equals ( vertex1 . cf , vertex2 . cf );
+			Boolean vs = float . Equals ( vertex1 . V , vertex2 . V );
+			Boolean VertexMatch = cfs && vs;
+			return VertexMatch;
+		}
+
+		private Boolean equals ( float [ ] hit1 , float [ ] hit2 )
+		{
+			Boolean x = ( hit1 [ 0 ] == hit2 [ 0 ] );
+			Boolean y = ( hit1 [ 1 ] == hit2 [ 1 ] );
+			Boolean z = ( hit1 [ 2 ] == hit2 [ 2 ] );
+			Boolean xyz= ( ( x && y ) && z );
+
+			return xyz;
 		}
 
 		private void BorderIceCols ( Window mw , int ChoakerLowRow , int ChoakerHighRow , int i , int j )

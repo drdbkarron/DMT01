@@ -84,20 +84,20 @@ namespace DMT01
 
 			this . Centroid = LoadCentroid ( );
 
-			this . E [ 0 ] = new Edge ( 0 , this . V [ 0 ] , this . V [ 1 ] );
-			this . E [ 1 ] = new Edge ( 1 , this . V [ 1 ] , this . V [ 2 ] );
-			this . E [ 2 ] = new Edge ( 2 , this . V [ 2 ] , this . V [ 3 ] );
-			this . E [ 3 ] = new Edge ( 3 , this . V [ 3 ] , this . V [ 0 ] );
+			this . E [ 0 ] = new Edge ( 0 , this . V [ 0 ] , this . V [ 1 ], this );
+			this . E [ 1 ] = new Edge ( 1 , this . V [ 1 ] , this . V [ 2 ] , this );
+			this . E [ 2 ] = new Edge ( 2 , this . V [ 2 ] , this . V [ 3 ] , this );
+			this . E [ 3 ] = new Edge ( 3 , this . V [ 3 ] , this . V [ 0 ] , this );
 
-			this . E [ 0 ] . Next = this . E [ 1 ];
-			this . E [ 1 ] . Next = this . E [ 2 ];
-			this . E [ 2 ] . Next = this . E [ 3 ];
-			this . E [ 3 ] . Next = this . E [ 0 ];
+			this . E [ 0 ] . NextPeer = this . E [ 1 ];
+			this . E [ 1 ] . NextPeer = this . E [ 2 ];
+			this . E [ 2 ] . NextPeer = this . E [ 3 ];
+			this . E [ 3 ] . NextPeer = this . E [ 0 ];
 
-			this . E [ 0 ] . Previous = this . E [ 3 ];
-			this . E [ 1 ] . Previous = this . E [ 0 ];
-			this . E [ 2 ] . Previous = this . E [ 1 ];
-			this . E [ 3 ] . Previous = this . E [ 2 ];
+			this . E [ 0 ] . PreviousEdge = this . E [ 3 ];
+			this . E [ 1 ] . PreviousEdge = this . E [ 0 ];
+			this . E [ 2 ] . PreviousEdge = this . E [ 1 ];
+			this . E [ 3 ] . PreviousEdge = this . E [ 2 ];
 
 			this . V [ 0 ] . NextEdge = this . E [ 0 ];
 			this . V [ 1 ] . NextEdge = this . E [ 1 ];
@@ -1025,7 +1025,7 @@ namespace DMT01
 		{
 			if ( e . SubEdgeCount > 0 )
 			{
-				if ( e . SubEdge != null )
+				if ( e . SubEdges != null )
 				{
 				}
 
@@ -1303,54 +1303,50 @@ namespace DMT01
 			if ( E . TweenVerts == 1 )
 			{
 				Vertex V = E . TweenVerte [ 0 ];
-				Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V );
-				Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V , V1 );
+				Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V, this );
+				Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V , V1, this );
 				V . Previous = V0;
 				V . Next = V1;
 				E . SubEdgeCount = 2;
-				E . SubEdge = new Edge [ 2 ] { SubEdge0 , SubEdge1 };
-				SubEdge0 . Previous = E . Previous;
+				E . SubEdges = new Edge [ 2 ] { SubEdge0 , SubEdge1 };
+				SubEdge0 . PreviousEdge = E . PreviousEdge;
 				SubEdge0 . IsSubEdge = true;
-				SubEdge0 . Parent = E;
-				SubEdge0 . Next = E . SubEdge [ 1 ];
-				SubEdge1 . Previous = E . SubEdge [ 0 ];
+				SubEdge0 . ParentEdge = E;
+				SubEdge0 . NextPeer = E . SubEdges [ 1 ];
+				SubEdge1 . PreviousEdge = E . SubEdges [ 0 ];
 				SubEdge1 . IsSubEdge = true;
-				SubEdge1 . Parent = E;
-				SubEdge1 . Next = E . Next;
-
+				SubEdge1 . ParentEdge = E;
+				SubEdge1 . NextPeer = E . NextPeer;
 				return;
 			}
 			else
 			if ( E . TweenVerts == 2 )
 			{
 				Vertex V00 = E . TweenVerte [ 0 ];
-				Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V00 );
+				Edge SubEdge0 = new Edge ( E . EdgeIndex , 0 , V0 , V00 , this);
 				Vertex V01 = E . TweenVerte [ 1 ];
 				V00 . Previous = V0;
 				V00 . Next = V01;
 				V01 . Previous = V00;
 				V01 . Next = V1;
-				Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V00 , V01 );
-				Edge SubEdge2 = new Edge ( E . EdgeIndex , 2 , V01 , V1 );
+				Edge SubEdge1 = new Edge ( E . EdgeIndex , 1 , V00 , V01, this );
+				Edge SubEdge2 = new Edge ( E . EdgeIndex , 2 , V01 , V1, this );
 				E . SubEdgeCount = 3;
-				E . SubEdge = new Edge [ 3 ] { SubEdge0 , SubEdge1 , SubEdge2 };
-
-				SubEdge0 . Previous = E . Previous;
-				SubEdge0 . Parent = E;
+				E . SubEdges = new Edge [ 3 ] { SubEdge0 , SubEdge1 , SubEdge2 };
+				SubEdge0 . PreviousEdge = E . PreviousEdge;
+				SubEdge0 . ParentEdge = E;
 				SubEdge0 . IsSubEdge = true;
-				SubEdge0 . Next = SubEdge1;
-				SubEdge1 . Previous = SubEdge0;
-				SubEdge1 . Parent = E;
+				SubEdge0 . NextPeer = SubEdge1;
+				SubEdge1 . PreviousEdge = SubEdge0;
+				SubEdge1 . ParentEdge = E;
 				SubEdge1 . IsSubEdge = true;
-				SubEdge1 . Next = SubEdge2;
-				SubEdge2 . Previous = SubEdge1;
-				SubEdge2 . Parent = E;
+				SubEdge1 . NextPeer = SubEdge2;
+				SubEdge2 . PreviousEdge = SubEdge1;
+				SubEdge2 . ParentEdge = E;
 				SubEdge2 . IsSubEdge = true;
-				SubEdge2 . Next = E . Next;
-
+				SubEdge2 . NextPeer = E . NextPeer;
 				return;
 			}
-
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "What are you doing here?" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 		}
 
@@ -1369,7 +1365,7 @@ namespace DMT01
 				{
 					if ( IsBetween ( v , e ) )
 					{
-						float [ ] cf = OnEdge ( v , e );
+						float [ ] cf = OnEdge ( v , e ); // needs testing
 						Edge E = this . E [ e ];
 						if ( E . TweenVerte == null )
 						{
@@ -1603,23 +1599,23 @@ FreshReset:
 			while ( ExitCondition )
 			{
 				//System . Diagnostics . Debug . Write  ( String . Format ( "^{0} " , E.EdgeIndex ) );
-				if ( E . SubEdge == null )
+				if ( E . SubEdges == null )
 				{
 					DrawEdge ( E , Edge . EdgeDirection . ClockwiseNext );
-					E = E . Next;
+					E = E . NextPeer;
 					int VI = E . V [ 0 ] . VertexIndex;
 					ExitCondition = smallest_index != VI;
 				}
 				else
 				{
-					Edge SE = E . SubEdge [ 0 ];
+					Edge SE = E . SubEdges [ 0 ];
 
 					while ( SE . IsSubEdge )
 					{
 						//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , SE.SubEdgeIndex , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 
 						DrawEdge ( SE , Edge . EdgeDirection . ClockwiseNext );
-						SE = SE . Next;
+						SE = SE . NextPeer;
 					}
 					ExitCondition = false;
 				}
@@ -1637,23 +1633,23 @@ FreshReset:
 			{
 				System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} v{1} {2}" , this . DisplayMe ( ) , E . EdgeIndex , E . IsSubEdge ) );
 
-				if ( E . SubEdge == null )
+				if ( E . SubEdges == null )
 				{
 					DrawEdge ( E , Edge . EdgeDirection . CounterClockwisePrevious );
 
-					E = E . Previous;
+					E = E . PreviousEdge;
 					int VI = E . V [ 1 ] . VertexIndex;
 					ExitCondition = this . LargestVertexIndex != VI;
 				}
 				else
 				{
 					int last_subedge = E . SubEdgeCount - 1;
-					Edge SE = E . SubEdge [ last_subedge ];
+					Edge SE = E . SubEdges [ last_subedge ];
 
 					while ( SE . IsSubEdge )
 					{
 						DrawEdge ( SE , Edge . EdgeDirection . CounterClockwisePrevious );
-						SE = SE . Previous;
+						SE = SE . PreviousEdge;
 					}
 					ExitCondition = false;
 				}

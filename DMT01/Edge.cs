@@ -4,32 +4,33 @@ namespace DMT01
 {
 	public class Edge
 		{
+		public enum EdgeDirection
+		{
+			ClockwiseNext,
+			CounterClockwisePrevious
+		}
 		public short EdgeIndex;
 		public short SubEdgeIndex;
 		public Boolean IsSubEdge;
 		public Vertex [ ] V = new Vertex [ 2 ];
-		public Edge[] SubEdge   ;
+		public Edge[] SubEdges;
 		public short SubEdgeCount;
 		public Vertex [ ] TweenVerte;
 		public short TweenVerts;
-		public Edge Next;
-		public Edge Parent;
-		public Edge Previous;
+		public Edge NextPeer;
+		public Edge ParentEdge;
+		public Edge PreviousEdge;
 		public float delta_V;
 		public float[] delta_cf;
 		public float[] Hit;
-
-		public enum EdgeDirection
-			{
-			ClockwiseNext,
-			CounterClockwisePrevious
-			}
+		public Boxel ParentBoxel;
+		public Boxel AdjacentBoxel;
 
 		public Edge ( )
 			{
 			}
 
-		public Edge ( short EI , Vertex V0 , Vertex V1 )
+		public Edge ( short EI , Vertex V0 , Vertex V1, Boxel Parent )
 			{
 			this . EdgeIndex = EI;
 			this . V = new Vertex [ 2 ] { V0 , V1 };
@@ -39,9 +40,10 @@ namespace DMT01
 					this . V [ 1 ] . cf[1] - this . V [ 0 ] . cf[1],
 					this . V [ 1 ] . cf[2] - this . V [ 0 ] . cf[2],
 				};
+			this.ParentBoxel=Parent;
 			}
 
-		public Edge ( short EI , short subEdgeIndex , Vertex V0 , Vertex V1 )
+		public Edge ( short EI , short subEdgeIndex , Vertex V0 , Vertex V1, Boxel Parent )
 			{
 			this . EdgeIndex = EI;
 			this . V [ 0 ] = V0;
@@ -54,6 +56,7 @@ namespace DMT01
 					};
 
 			this . SubEdgeIndex = subEdgeIndex;
+			this.ParentBoxel=Parent;
 			}
 
 		internal String DisplayMe ( )
