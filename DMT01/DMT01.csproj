@@ -126,6 +126,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\Scratcheroo" />
+    <None Include="bin\Debug\Scratcheroo.xll" />
+    <None Include="bin\Debug\WolframAlphaEquMatrix01" />
+    <None Include="bin\Debug\WolframAlphaEquMatrix01.tex" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -196,6 +200,7 @@
     <Resource Include="bin\Debug\DoSelectDataToNormalize_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\Do_Orbit_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\Do_Orbit_Pull_Back_CheckBox_Control.xml" />
+    <Resource Include="bin\Debug\Do_RESET_TitateCriticalities_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\DrawTeaPot_CheckBox_Control.xml" />
     <Resource Include="bin\Debug\Eye_X_H_Slider_UserControl.xml" />
     <Resource Include="bin\Debug\Eye_Y_H_Slider_UserControl.xml" />
@@ -211,6 +216,30 @@
     <EmbeddedResource Include="Resources\UpArrowBMP.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bin\Debug\DoYourArmsTooShortToBoxWithHashem.xml" />
+    <Resource Include="bin\Debug\DoContourAnLabelAtThreshold.xml" />
+    <Content Include="bin\Debug\DynamicExpresso.Core.dll" />
+    <Content Include="bin\Debug\EnvDTE.dll" />
+    <Content Include="bin\Debug\GlmNet.dll" />
+    <Content Include="bin\Debug\GlmNet.pdb" />
+    <Content Include="bin\Debug\GlmSharp.dll" />
+    <Content Include="bin\Debug\SharpGL.dll" />
+    <Content Include="bin\Debug\SharpGL.pdb" />
+    <Content Include="bin\Debug\SharpGL.SceneGraph.dll" />
+    <Content Include="bin\Debug\SharpGL.SceneGraph.pdb" />
+    <Content Include="bin\Debug\SharpGL.WPF.dll" />
+    <Content Include="bin\Debug\SharpGL.WPF.pdb" />
+    <Content Include="bin\Debug\WpfColorFontDialog.dll" />
+    <Content Include="bin\Debug\WpfControlLibrary1.dll" />
+    <Content Include="bin\Debug\WpfControlLibrary1.pdb" />
+    <Content Include="bin\Debug\WpfScreenHelper.dll" />
+    <Content Include="bin\Debug\WpfScreenHelper.pdb" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.DataGrid.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.Toolkit.dll" />
     <Resource Include="bin\Debug\TwoHitWonderCheckBox_Control.xml" />
     <Resource Include="bin\Debug\ThreeHitWonderCheckBox_Control.xml" />
     <Resource Include="bin\Debug\OneHitWondercheckBox_Control.xml" />
