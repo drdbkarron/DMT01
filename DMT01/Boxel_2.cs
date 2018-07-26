@@ -477,10 +477,10 @@ namespace DMT01
 			float z3 = E3 . V [ 0 ] . cf [ 2 ];
 			float v3 = E3 . V [ 0 ] . V;
 
-			float dv0 = Math . Abs ( E0 . delta_V );
-			float dv1 = Math . Abs ( E1 . delta_V );
-			float dv2 = Math . Abs ( E2 . delta_V );
-			float dv3 = Math . Abs ( E3 . delta_V );
+			float dv0 = Math . Abs ( E0 . Delta_V );
+			float dv1 = Math . Abs ( E1 . Delta_V );
+			float dv2 = Math . Abs ( E2 . Delta_V );
+			float dv3 = Math . Abs ( E3 . Delta_V );
 
 			double qp = dv0 * dv1 * dv2 * dv3;
 			double qm = ( dv0 + dv1 + dv2 + dv3 ) / 4.0;
@@ -1169,19 +1169,19 @@ namespace DMT01
 
 		private Boolean IsThisCritical ( )
 		{
-			Boolean flat0 = ( this . E [ 0 ] . delta_V == 0f );
-			Boolean flat1 = ( this . E [ 1 ] . delta_V == 0f );
-			Boolean flat2 = ( this . E [ 2 ] . delta_V == 0f );
-			Boolean flat3 = ( this . E [ 3 ] . delta_V == 0f );
+			Boolean flat0 = ( this . E [ 0 ] . Delta_V == 0f );
+			Boolean flat1 = ( this . E [ 1 ] . Delta_V == 0f );
+			Boolean flat2 = ( this . E [ 2 ] . Delta_V == 0f );
+			Boolean flat3 = ( this . E [ 3 ] . Delta_V == 0f );
 			Boolean flat =  ( flat0 && flat1 && flat2 && flat3 );
 			if ( flat )
 			{
 				return false;
 			}
-			Boolean wiggley00 = ( this . E [ 0 ] . delta_V > 0 );
-			Boolean wiggley01 = ( this . E [ 1 ] . delta_V < 0 );
-			Boolean wiggley02 = ( this . E [ 2 ] . delta_V > 0 );
-			Boolean wiggley03 = ( this . E [ 3 ] . delta_V < 0 );
+			Boolean wiggley00 = ( this . E [ 0 ] . Delta_V > 0 );
+			Boolean wiggley01 = ( this . E [ 1 ] . Delta_V < 0 );
+			Boolean wiggley02 = ( this . E [ 2 ] . Delta_V > 0 );
+			Boolean wiggley03 = ( this . E [ 3 ] . Delta_V < 0 );
 
 			Boolean wiggle0 = (	wiggley00 &&  wiggley01 &&	 wiggley02 &&	wiggley03 );
 			if ( wiggle0 )
@@ -1191,10 +1191,10 @@ namespace DMT01
 				//System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "" , ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
 				return true;
 			}
-			Boolean wiggley10 = ( this . E [ 0 ] . delta_V > 0 );
-			Boolean wiggley11 = ( this . E [ 1 ] . delta_V < 0 );
-			Boolean wiggley12 = ( this . E [ 2 ] . delta_V > 0 );
-			Boolean wiggley13 = ( this . E [ 3 ] . delta_V < 0 );
+			Boolean wiggley10 = ( this . E [ 0 ] . Delta_V > 0 );
+			Boolean wiggley11 = ( this . E [ 1 ] . Delta_V < 0 );
+			Boolean wiggley12 = ( this . E [ 2 ] . Delta_V > 0 );
+			Boolean wiggley13 = ( this . E [ 3 ] . Delta_V < 0 );
 			Boolean wiggle1 = (wiggley10 &&	wiggley11 &&  wiggley12 &&	 wiggley13 );
 			if ( wiggle1 )
 			{
@@ -2372,17 +2372,19 @@ FreshReset:
 			const float ts = 0.4f;
 			const string f0 = "Arial";
 			//String f1 = "Courrier New";
-			String EdgeVertex_0_txt0 = String . Format ( "{0}" , E . V [ 0 ] . V . ToString ( "0.000" ) );
-			String EdgeVertex_1_txt1 = String . Format ( "{0}" , E . V [ 1 ] . V . ToString ( "0.000" ) );
-			String txt2 = String . Format ( "{0}" , E . delta_V . ToString ( "0.000" ) );
+			String EdgeVertex_0_txt0 = String . Format ( "{0}" , E . V [ 0 ] . V . ToString ( "0.00" ) );
+			String EdgeVertex_1_txt1 = String . Format ( "{0}" , E . V [ 1 ] . V . ToString ( "0.00" ) );
+			String EdgeDelta_txt2 = String . Format ( "{0}" , E . Delta_V . ToString ( "0.00" ) );
 			String txt3 = String . Format ( "{0}" , E . EdgeIndex . ToString ( "0" ) );
 			String txt4 = String . Format ( "[{0},{1}]" , this . I . ToString ( "#0" ) , this . J . ToString ( "#0" ) );
 			if ( this . MW . HackCheckBox_C1_R1_CheckBox_Control . IsChecked . Value )
 			{
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . PushMatrix ( );
+				gl . PushMatrix ( )	 ;
+				gl.Color(.5,.2,.2);
 				gl . Translate ( cef0 [ 0 ] , cef0 [ 1 ] , cef0 [ 2 ] );
-				gl . Scale ( ts , -ts , ts );
+				gl . Scale ( .3 , -.3 , .3 );
+				gl . Translate ( -.5 , -.5 , 0 );
 				gl . DrawText3D ( faceName: f0 , fontSize: 12f , deviation: 0f , extrusion: .05f , text: EdgeVertex_0_txt0 );
 				gl . PopMatrix ( );
 				gl . PopAttrib ( );
@@ -2391,9 +2393,11 @@ FreshReset:
 			{
 				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
 				gl . PushMatrix ( );
+				gl . Color ( .6 , .3 , .3 );
 				gl . Translate ( cd [ 0 ] , cd [ 1 ] , cd [ 2 ] );
-				gl . Scale ( ts , -ts , ts );
-				gl . DrawText3D ( faceName: f0 , fontSize: 12f , deviation: 0f , extrusion: .05f , text: txt2 );
+				gl . Scale ( .3 , -.3 , .3 );
+				gl . Translate ( -.5 , -.5 , 0 );
+				gl . DrawText3D ( faceName: f0 , fontSize: 12f , deviation: 0f , extrusion: .05f , text: EdgeDelta_txt2 );
 				gl . PopMatrix ( );
 				gl . PopAttrib ( );
 			}
@@ -2527,7 +2531,34 @@ FreshReset:
 
 		}
 
-		private void ShorterLine ( OpenGL gl , float [ ] a , float [ ] b , float f )
+		public void SmallerBoxAbout(OpenGL gl, float f)
+		{
+		float []	  Centroid=this.Centroid.cf;
+		float [][]Spokes=new float[4][]{this.V[0].cf, this.V[1].cf, this.V[2].cf,this.V[3].cf};
+
+		float [] [ ] [ ] Shorty = new float[4][][]{
+				ShorterLine ( Centroid , Spokes[0] , f ),
+				ShorterLine ( Centroid , Spokes[1] , f ),
+				ShorterLine ( Centroid , Spokes[2] , f ),
+				ShorterLine ( Centroid , Spokes[3] , f ),};
+
+			if ( true )
+			{
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . LineWidth ( 1 );
+				gl . Color ( .4 , .4 , .4 );
+				gl . Begin ( SharpGL . Enumerations . BeginMode . LineLoop );
+				gl . Vertex ( Shorty [ 0 ] [1] );
+				gl . Vertex ( Shorty [ 1 ] [ 1 ] );
+				gl . Vertex ( Shorty [ 2 ] [ 1 ] );
+				gl . Vertex ( Shorty [ 3 ] [ 1 ] );
+				gl . End ( );
+				gl . PopAttrib ( );
+			}
+
+		}
+
+		public void ShorterLine ( OpenGL gl , float [ ] a , float [ ] b , float f )
 		{
 			float [ ] [ ] Shorten0 = ShorterLine ( a , b , f );
 			gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
@@ -2548,7 +2579,7 @@ FreshReset:
 			gl . PopAttrib ( );
 		} 
 
-		private float [ ][] ShorterLine ( float [ ] p0 , float [ ] p1,float fract)
+		public float [ ][] ShorterLine ( float [ ] p0 , float [ ] p1,float fract)
 		{
 			float [ ] v1 = subtract ( p0 , p1 );
 			float [ ] v2 = normalie ( v1 );
@@ -2559,25 +2590,25 @@ FreshReset:
 			return pee;
 		}
 
-		private float [ ] normalie ( float [ ] v1 )
+		public float [ ] normalie ( float [ ] v1 )
 		{
 			float mag = magnitue ( v1 );
 			float [ ] norm = divide ( v1 , mag );
 			return norm;
 		}
 
-		private float [ ] divide ( float [ ] v1 , float mag )
+		public float [ ] divide ( float [ ] v1 , float mag )
 		{
 			return new float [ ] { v1 [ 0 ] / mag , v1 [ 1 ] / mag , v1 [ 2 ] / mag };
 		}
 
-		private float magnitue ( float [ ] v )
+		public float magnitue ( float [ ] v )
 		{
 			float mag_xqured = ( v [ 0 ] * v [ 0 ] ) + v [ 1 ] * v [ 1 ] + v [ 2 ] * v [ 2 ];
 			return ( float ) Math . Sqrt ( mag_xqured );
 		}
 
-		private float [ ] Midpoint ( float [ ] a , float [ ] b )
+		public float [ ] Midpoint ( float [ ] a , float [ ] b )
 		{
 			return Multiply ( Add ( a , b ) , 0.5f );
 				}

@@ -20,7 +20,7 @@ namespace DMT01
 		public Edge NextPeer;
 		public Edge ParentEdge;
 		public Edge PreviousEdge;
-		public float delta_V;
+		public float Delta_V;
 		public float[] delta_cf;
 		public float[] Hit;
 		public Boxel ParentBoxel;
@@ -34,7 +34,7 @@ namespace DMT01
 			{
 			this . EdgeIndex = EI;
 			this . V = new Vertex [ 2 ] { V0 , V1 };
-			this . delta_V = this . V [ 1 ] . V - this . V [ 0 ] . V;
+			this . Delta_V = this . V [ 1 ] . V - this . V [ 0 ] . V;
 			this . delta_cf = new float [ 3 ] {
 					this . V [ 1 ] . cf[0] - this . V [ 0 ] . cf[0],
 					this . V [ 1 ] . cf[1] - this . V [ 0 ] . cf[1],
@@ -48,7 +48,7 @@ namespace DMT01
 			this . EdgeIndex = EI;
 			this . V [ 0 ] = V0;
 			this . V [ 1 ] = V1;
-			this . delta_V = this . V [ 1 ] . V - this . V [ 0 ] . V;
+			this . Delta_V = this . V [ 1 ] . V - this . V [ 0 ] . V;
 			this . delta_cf = new float [ 3 ] {
 					this . V [ 1 ] . cf[0] - this . V [ 0 ] . cf[0],
 					this . V [ 1 ] . cf[1] - this . V [ 0 ] . cf[1],
@@ -74,7 +74,7 @@ namespace DMT01
 			{
 			const String Stranger = "0.000";
 			string WaddaDo = String . Format ( "d{0} V[0]={1} -> V[1]={2}" ,
-				this . delta_V . ToString ( Stranger ) ,
+				this . Delta_V . ToString ( Stranger ) ,
 				this . V [ 0 ] . V . ToString ( Stranger ) ,
 				this . V [ 1 ] . V . ToString ( Stranger ) );
 			return WaddaDo;

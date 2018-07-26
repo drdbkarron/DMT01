@@ -461,8 +461,8 @@ namespace DMT01
 			{
 				MainWindow . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
 			}
-			int ChokerLowRow = 1;
-			int ChokerHighRow = 50;
+			int ChokerLowRow = 12;
+			int ChokerHighRow = 20;
 
 			//Selected_Region .LoadRegionIntoQuadSelector (  this.RegionQuadComboBoxUser_Control );
 
@@ -534,10 +534,9 @@ namespace DMT01
 				}
 			}
 
-			gl . PopMatrix ( );
-			gl . PopAttrib ( );
 			if ( this . DoContourAnLabelAtThreshold . IsChecked . Value )
 			{
+			ClearRecursionCrumbs(ChokerLowRow,ChokerHighRow);
 				for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 				{
 					for ( int j = ChokerLowRow ; j < ChokerHighRow ; j++ )
@@ -553,6 +552,8 @@ namespace DMT01
 									Selected_Region . RecursionSeedBoxel = new Boxel [ 4 ];
 								}
 								Selected_Region . RecursionSeedBoxel [ 0 ] = B;
+								if(B.BreadCrumbByteLabel[0]!=0b0)
+									continue;
 								BoxelScanStart ( B );
 							}
 
@@ -561,6 +562,8 @@ namespace DMT01
 					}
 				}
 			}
+			gl . PopMatrix ( );
+			gl . PopAttrib ( );
 
 			if ( this . DoGlobalSweepThreshold_CheckBox_Control . IsChecked . Value )
 			{
@@ -580,6 +583,24 @@ namespace DMT01
 			}
 		}
 
+		private void ClearRecursionCrumbs (int ChokerLowRow, int ChokerHighRow )
+		{
+			for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
+			{
+				for ( int j = ChokerLowRow ; j < ChokerHighRow ; j++ )
+				{
+					if ( Selected_Region . B [ i , j ] != null )
+					{
+						Boxel B = Selected_Region . B [ i , j ];
+						B.BreadCrumbByteLabel[0]=0b0;
+
+					}
+
+				}
+			}
+
+		}
+
 		private void BoxelScanStart ( Boxel StartingBoxel )
 		{
 			for ( int i = 0 ; i < 4 ; i++ )
@@ -589,103 +610,221 @@ namespace DMT01
 				{
 					continue;
 				}
-				BoxelScan ( StartingEdge  );
+				BoxelScan ( StartingEdge , 0 );
 			}
 		}
 
-		private void BoxelScan ( Edge ThisBoxelEntryEdge )
+		private void BoxelScan ( Edge ThisBoxelEntryEdge , int Depth )
 		{
-			Edge ExitEdge=GetExitEdge( ThisBoxelEntryEdge );
-			Boxel AdjacentBoxel=AdjacentBoxelToEdge(ExitEdge);
-			ThisBoxelEntryEdge . AdjacentBoxel=AdjacentBoxel;
-			//Edge AdjacentBoxelEntryEdge=GetEntryEdge(AdjacentBoxel, ExitEdge );
+			if ( ThisBoxelEntryEdge == null )
+				return;
+			if ( Depth > 100 )
+				return;
+			Edge ExitEdge = GetExitEdge ( ThisBoxelEntryEdge );
 
-			//BoxelScan( AdjacentBoxelEntryEdge );
+			if ( false )
+				AnnotateRecursion ( ThisBoxelEntryEdge , ExitEdge , Depth );
+			Boxel AdjacentBoxel = GetAdjacentBoxelToEdge ( ExitEdge , out Edge AdjacentBoxelEntryEdge , Depth );
+			ThisBoxelEntryEdge . AdjacentBoxel = AdjacentBoxel;
+			if ( true )
+				AnnotateRecursion ( ThisBoxelEntryEdge , AdjacentBoxelEntryEdge , Depth );
+			if ( ThisBoxelEntryEdge . ParentBoxel . BreadCrumbByteLabel [ 0 ] == 0b0 )
+			{
+				Selected_Region . Labels [ 0 ]++;
+				ThisBoxelEntryEdge . ParentBoxel . BreadCrumbByteLabel [ 0 ] = Selected_Region . Labels [ 0 ];
+			}
+			else
+				return;
+
+			BoxelScan ( AdjacentBoxelEntryEdge , Depth + 1 );
 
 		}
 
-		//private Edge GetEntryEdge ( Boxel B, Edge AdjacentBoxeExitEdge )
-		//{
-			
-		//}
+		private void AnnotateRecursion ( Edge E0 , Edge E1, int depth )
+		{
+
+			if ( E0 == null )
+				return;
+			if ( E0 . ParentBoxel == null )
+				return;
+			Boxel B0 = E0 . ParentBoxel;
+			if ( E1 == null )
+				return;
+			if ( E1 . ParentBoxel == null )
+				return;
+			Boxel B1 = E1 . ParentBoxel;
+
+			if ( false )
+			{
+				System . Diagnostics . Debug . WriteLine ( String . Format ( "{6}:B[{0},{1}*E{2}]-{7}->B[{3},{4}*E{5}] " ,
+				B0 . I , B0 . J , E0 . EdgeIndex ,
+				B1 . I , B1 . J , E1 . EdgeIndex , depth , EncodeBoxelAdjacency ( B0 , B1 ) ) );
+			}
+			if ( true )
+			{
+				OpenGL gl = MainWindow . staticGLHook;
+				if ( gl == null )
+					return;
+				float [] Centroid1=E0.ParentBoxel.Centroid.cf;
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( 0 , .9 , .1 );
+				gl . PointSize ( 6 );
+
+				B0 . SmallerBoxAbout ( gl , .65f );
+				gl . Color ( .9 , .9 , .1 );
+				B1 . SmallerBoxAbout ( gl , .55f );
+				gl . PopAttrib ( );
+			}
+		}
 
 		private Edge GetExitEdge ( Edge EntryEdge )
 		{
 			Boxel EntryBoxel=EntryEdge.ParentBoxel;
-			Edge ExitEdge = EntryEdge.ParentEdge;
 			float [ ] EntryHit = EntryEdge . Hit;
 			for ( int i = 0 ; i < 4 ; i++ )
 			{
 				Edge E = EntryBoxel . E [ i ];
 				if ( E == null )
 					continue;
+				Boolean CongruentEdges = equals ( E , EntryEdge );
+				if ( CongruentEdges )
+					continue;
 				if ( E . Hit == null )
 					continue;
 				float [ ] Hit = E . Hit;
 				if ( equals ( EntryHit , Hit ) )
 					continue;
-				return E;
+				if ( E . Hit != null )
+					return E;
 			}
-			return ExitEdge;
+			return null;
 		}
 
-		private Boxel AdjacentBoxelToEdge (Edge e)
+		private Boxel GetAdjacentBoxelToEdge (Edge ThisEdge, out Edge AdjacentBoxelEntryEdge, int Depth)
 		{
-			Boxel b	 =e.ParentBoxel;
-			Boxel [ ] B = new Boxel [ 4 ];
-			int [ , ] AllAdjacent = new int [ 4 , 2 ] {
-					{ b . I + 1 ,	b . J     } ,
-					{ b . I ,		b . J + 1 } ,
-					{ b . I - 1 ,	b . J     } ,
-					{ b . I ,		b . J - 1 } ,
+			
+			if(ThisEdge==null)
+			{
+				AdjacentBoxelEntryEdge=null;
+				return null;
+			}
+
+			Boxel ThisBoxel	= ThisEdge.ParentBoxel;
+			Boxel [ ] AdjacentBoxelArray = new Boxel [ 4 ];
+			int [ , ] AdjacentIndexArray = new int [ 4 , 2 ] {
+					{ ThisBoxel . I + 1 ,	ThisBoxel . J     } ,
+					{ ThisBoxel . I ,		ThisBoxel . J + 1 } ,
+					{ ThisBoxel . I - 1 ,	ThisBoxel . J     } ,
+					{ ThisBoxel . I ,		ThisBoxel . J - 1 } ,
 					};
-			Boxel Matcheroonie=null;
 			for ( int i = 0 ; i < 4 ; i++ )
 			{
-				Boolean GutsGood = ( Selected_Region . B [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ] != null );
-				Boolean BorderGood = ( Selected_Region . BorderB [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ] != null );
+				int i1Len = Selected_Region . B . GetLength ( 0 );
+				int j1Len = Selected_Region . B . GetLength ( 1 );
+				int I1 = AdjacentIndexArray [ i , 0 ];
+				int J1 = AdjacentIndexArray [ i , 1 ];
+				Boolean GutsInBounds = ( ( I1 >= 0 ) && ( I1 < i1Len ) && ( J1 >= 0 ) && ( J1 < j1Len ) );
+				Boolean GutsGood = ( GutsInBounds && ( ( Selected_Region . B [ I1 , J1 ] ) != null ) );
+				int i2Len = Selected_Region . BorderB . GetLength ( 0 );
+				int j2Len = Selected_Region . BorderB . GetLength ( 1 );
+				int I2 = AdjacentIndexArray [ i , 0 ];
+				int J2 = AdjacentIndexArray [ i , 1 ];
+				Boolean BorderInBounds = ( ( I2 >= 0 ) && ( I2 < i2Len ) && ( J2 >= 0 ) && ( J2 < j2Len ) );
+				Boolean BorderGood = ( BorderInBounds && ( Selected_Region . BorderB [ AdjacentIndexArray [ i , 0 ] , AdjacentIndexArray [ i , 1 ] ] ) != null );
 
 				if ( BorderGood )
 				{
-				B[i] = Selected_Region . BorderB [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ];
+				AdjacentBoxelArray[i] = Selected_Region . BorderB [ AdjacentIndexArray [ i , 0 ] , AdjacentIndexArray [ i , 1 ] ];
 				}
 				else if ( GutsGood )
 				{
-				B[i] = Selected_Region . B [ AllAdjacent [ i , 0 ] , AllAdjacent [ i , 1 ] ] ;
+				AdjacentBoxelArray[i] = Selected_Region . B [ AdjacentIndexArray [ i , 0 ] , AdjacentIndexArray [ i , 1 ] ] ;
 				}
 				else 
 				{
-				B[i]=null;
+				AdjacentBoxelArray[i]=null;
 				}
 			}
+			Boxel AdjacentBoxel=null;
+			AdjacentBoxelEntryEdge=null;
 			for ( int i = 0 ; i < 4 ; i++ )
 			{
+				if ( AdjacentBoxelArray [ i ] == null )
+				{
+					continue;
+				}
+				AdjacentBoxel = AdjacentBoxelArray [ i ];
+				if (false)
+				{
+					System . Diagnostics . Debug . WriteLine ( String . Format ( "{0}:{1}:  B[{2},{3}] {4} has {5} hits. " ,
+						Depth , i ,
+						AdjacentBoxel . I , AdjacentBoxel . J , EncodeBoxelAdjacency(ThisBoxel, AdjacentBoxel ) , AdjacentBoxel . EdgeHits , 
+						 ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+				}
 				for ( int j = 0 ; j < 4 ; j++ )
 				{
-					Edge ee = B [ i ] . E [ j ];
-					Boolean VertexMatch=(equals(ee,e));
-					if ( ee . Hit == null )
+					if ( AdjacentBoxel . E [ j ] ==null)
 						continue;
-					Boolean HitMatch = ( equals ( ee . Hit , e . Hit ) );
+					Edge AdjacentBoxelEdge = AdjacentBoxel . E [ j ];
+					Boolean EdgeMatch=equals(ThisEdge, AdjacentBoxelEdge);
+					if ( false )
+					{
+						System . Diagnostics . Debug . WriteLine ( String . Format ( "{0}:{1}:{2}:B[{3},{4}*E{5}]={6}=B[{7},{8}*E{9}]",
+							Depth,i,j,
+							ThisEdge . ParentBoxel . I , ThisEdge . ParentBoxel . J , ThisEdge . EdgeIndex ,
+							EdgeMatch ,
+							AdjacentBoxel . I , AdjacentBoxel . J , AdjacentBoxelEdge . EdgeIndex ,
+							( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
+					}
+					if ( AdjacentBoxelEdge . Hit == null )
+					{
+						continue;
+					}
+					Boolean HitMatch = ( equals ( AdjacentBoxelEdge . Hit , ThisEdge . Hit ) );
 					if ( HitMatch )
 					{
-						Matcheroonie = B[i];
-						e.AdjacentBoxel=Matcheroonie;
+						ThisEdge.AdjacentBoxel=AdjacentBoxel;
+						AdjacentBoxelEntryEdge=AdjacentBoxelEdge;
 						goto bailout;
 					}
 				}
 			}
-
 bailout:
-			return Matcheroonie;
+			return AdjacentBoxel;
 		}
 
-		private Boolean equals ( Edge ee , Edge e )
+		private String EncodeBoxelAdjacency ( Boxel Start , Boxel Neighboor )
 		{
-			Boolean VertexMatch01 = ( equals ( ee . V [ 0 ] , e . V [ 1 ] ) );
-			Boolean VertexMatch10 = ( equals ( ee . V [ 0 ] , e . V [ 1 ] ) );
-			Boolean VertexMatch = VertexMatch01 && VertexMatch10;
-			return VertexMatch;
+			int deltaI = Neighboor . I - Start . I;
+			int deltaJ = Neighboor . J - Start . J;
+			String S=String.Format("dB[{0},{1}]",deltaI.ToString("0"), deltaJ.ToString("0"));
+			return 	 S;
+		}
+
+		private Boolean equals ( Edge E0 , Edge E1 )
+		{
+			Boolean VertexMatch01 = ( equals ( E0 . V [ 0 ] , E1 . V [ 1 ] ) );
+			Boolean VertexMatch10 = ( equals ( E0 . V [ 1 ] , E1 . V [ 0 ] ) );
+			Boolean EdgeMatch = VertexMatch01 && VertexMatch10;
+			if ( false && EdgeMatch )
+			{
+				Debug.WriteLine("");
+				String Message = "B[{0},{1}*E{2}]*V[{3},{4}*{5}]={6}=B[{7},{8}*E{9}]*V[{10},{11}*{12}]";
+				System . Diagnostics . Debug . WriteLine ( String . Format ( Message ,
+					E0 . ParentBoxel . I , E0 . ParentBoxel . J , E0 . EdgeIndex , 
+					E0 . V [ 0 ] . I , E0 . V [ 0 ] . J , E0 . V [ 0 ] . VertexIndex , 
+					VertexMatch01,
+					E1 . ParentBoxel . I , E1 . ParentBoxel . J , E1 . EdgeIndex ,
+					E1 . V [ 1 ] . I , E1 . V [ 1 ] . J , E1 . V [ 1 ] . VertexIndex) );
+				System . Diagnostics . Debug . WriteLine ( String . Format ( Message ,
+					E0 . ParentBoxel . I , E0 . ParentBoxel . J , E0 . EdgeIndex , 
+					E0 . V [ 1 ] . I , E0 . V [ 1 ] . J , E0 . V [ 1 ] . VertexIndex ,
+					VertexMatch10 ,
+					E1 . ParentBoxel . I , E1 . ParentBoxel . J , E1 . EdgeIndex , 
+					E1 . V [ 0 ] . I , E1 . V [ 0 ] . J , E1 . V [ 0 ] . VertexIndex  ) );
+				Debug . WriteLine ( "" );
+			}
+			return EdgeMatch;
 		}
 
 		private Boolean equals ( Vertex vertex1 , Vertex vertex2 )
