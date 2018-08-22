@@ -2,7 +2,7 @@
 
 namespace WpfControlLibrary1
 {
-    [Serializable ( )]
+	[Serializable ( )]
 	public class SeralizeControlCommonFields
 	{
 		public String ControlClass;
