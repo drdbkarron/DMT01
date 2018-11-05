@@ -1,4 +1,5 @@
-﻿using SharpGL;
+﻿using System;
+using SharpGL;
 
 namespace DMT01
 {	public class Vertex
@@ -81,6 +82,23 @@ namespace DMT01
 			gl . Vertex ( this . cf );
 			gl . End ( );
 			}
-		};
-	}
+		public Boolean equals ( Vertex vertex1 , Vertex vertex2 )
+		{
+			Boolean cfs = equals ( vertex1 . cf , vertex2 . cf );
+			Boolean vs = float . Equals ( vertex1 . V , vertex2 . V );
+			Boolean VertexMatch = cfs && vs;
+			return VertexMatch;
+		}
+		public Boolean equals ( float [ ] hit1 , float [ ] hit2 )
+		{
+		Boolean x = ( hit1 [ 0 ] == hit2 [ 0 ] );
+		Boolean y = ( hit1 [ 1 ] == hit2 [ 1 ] );
+		Boolean z = ( hit1 [ 2 ] == hit2 [ 2 ] );
+		Boolean xyz = ( ( x && y ) && z );
+
+		return xyz;
+		}
+	};
+
+}
 

@@ -119,6 +119,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="WpfControlLibrary1.csproj.vsspell" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DynamicExpresso.Core">

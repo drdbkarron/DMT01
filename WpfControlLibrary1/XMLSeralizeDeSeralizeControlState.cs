@@ -1,4 +1,5 @@
 ﻿using System;
+using System . Collections . Generic;
 using System . Diagnostics;
 using System . Diagnostics . Contracts;
 using System . IO;
@@ -420,7 +421,13 @@ namespace WpfControlLibrary1
 		public static void LoadEm ( Window W )
 		{
 			MW=W;
-			String CWD=System.Environment.CurrentDirectory;
+			//String CWD=System.Environment.CurrentDirectory;
+			//var ED=System.Environment.GetEnvironmentVariables();
+			//int i=0;
+			//foreach (String s in ED.Keys)
+			//{
+			//Debug.WriteLine(String.Format("{0}:{1}",i++,s));
+			//}
 
 			String [ ] Xmls = System . IO . Directory . GetFiles ( @".\" , "*Control.xml" , 
 				System . IO . SearchOption . TopDirectoryOnly );

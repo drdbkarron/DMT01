@@ -70,7 +70,7 @@
                     />
             </Grid.ColumnDefinitions>
             <ReoGrid:ReoGridControl
-                x:Name="myReoGridControl"
+                x:Name="myReoGridControl" 
                 Grid.ColumnSpan="2"
                 Width="784"
                 Margin="-172,-117,0,-119"
@@ -497,6 +497,146 @@
                 VerticalAlignment="Top"
                 Background="#FFF1F1C6"
                 >
+                <TabItem
+                    x:Name="SolutionDirectorySaveRestoreSupport_TabItem"
+                    Width="76"
+                    Margin="-2,-2,-2,0"
+                    HorizontalAlignment="Left"
+                    Header="Solution"
+                    Loaded="SolutionDirectorySaveRestoreSupport_TabItem_Loaded"
+                    >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="38*" />
+                            <RowDefinition Height="44*" />
+                            <RowDefinition Height="72*" />
+                            <RowDefinition Height="62*" />
+                            <RowDefinition Height="132*" />
+                            <RowDefinition Height="116*" />
+                            <RowDefinition Height="115*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <RichTextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Width="158"
+                            Height="23"
+                            Margin="10,0,0,10"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            >
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="RichTextBox" />
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <RichTextBox
+                            Grid.Column="1"
+                            Height="23"
+                            Margin="10,10,10,0"
+                            VerticalAlignment="Top"
+                            >
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="RichTextBox" />
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <RichTextBox
+                            Grid.Row="4"
+                            Width="158"
+                            Height="23"
+                            Margin="23,33,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            >
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="RichTextBox" />
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <RichTextBox
+                            Grid.Row="5"
+                            Width="158"
+                            Height="23"
+                            Margin="10,32,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            >
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="RichTextBox" />
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <RichTextBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Height="23"
+                            Margin="10,10,167,0"
+                            VerticalAlignment="Top"
+                            >
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="RichTextBox" />
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <RichTextBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Height="23"
+                            Margin="10,22,167,0"
+                            VerticalAlignment="Top"
+                            >
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="RichTextBox" />
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <Label
+                            Width="253"
+                            Height="25"
+                            Margin="10,6,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="HOME"
+                            IsEnabled="False"
+                            />
+                        <Label
+                            Grid.Row="1"
+                            Width="302"
+                            Margin="10,11,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="PROJECT ROOT"
+                            />
+                        <Label
+                            Grid.Row="2"
+                            Width="283"
+                            Margin="10,22,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="This Solution"
+                            />
+                        <Label
+                            Grid.Row="3"
+                            Width="240"
+                            Margin="23,15,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="DMT State Files"
+                            />
+                    </Grid>
+
+                </TabItem>
                 <TabItem
                     x:Name="SpreadsheetSupport_TabItem"
                     Width="135"

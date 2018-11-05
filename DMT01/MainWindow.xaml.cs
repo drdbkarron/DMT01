@@ -39,69 +39,13 @@ using unvell .ReoGrid .Graphics;
 using WpfScreenHelper;
 using LocalMaths;
 using WpfControlLibrary1;
-
-namespace System .Windows .Controls
-{
-	public static class MyExt
-		{
-		public static void PerformClick ( this Button btn )
-			{
-			btn . RaiseEvent ( new RoutedEventArgs ( routedEvent: Primitives.ButtonBase. ClickEvent ) );
-			}
-
-		public static void PerformClick ( this CheckBox cb )
-			{
-			cb . RaiseEvent ( new RoutedEventArgs ( Primitives.ButtonBase. ClickEvent ) );
-			}
-		}
-	}
-
-class MyCheckBox : CheckBoxCell
-	{
-	System . Windows . Media . Imaging . BitmapSource UpArrow ;
-	System . Windows . Media . Imaging . BitmapSource DownArrow ;
-
-	public MyCheckBox ( )
-		{
-		System . Drawing . Bitmap ua = DMT01 . Properties . Resources . UpArrowBMP;
-		this . UpArrow = ConvertBitmap ( ua );
-		System . Drawing . Bitmap da = DMT01 . Properties . Resources . down_arrowBMP;
-		this . DownArrow = ConvertBitmap ( da );
-		}
-
-	protected override void OnContentPaint ( CellDrawingContext dc )
-		{
-		if ( this . IsChecked )
-			{
-			Debug . WriteLine ( String . Format ( "{0}" , nameof ( OnContentPaint ) ) );
-
-			dc . Graphics . DrawImage ( image: this . UpArrow , rect: this . ContentBounds );
-			}
-		else
-			{
-			Debug . WriteLine ( String . Format ( "{0}" , nameof ( OnContentPaint ) ) );
-
-			dc . Graphics . DrawImage ( image: this . DownArrow , rect: this . ContentBounds );
-			}
-		}
-
-	public static BitmapSource ConvertBitmap ( Bitmap source )
-		{
-		BitmapSource xx = System . Windows . Interop . Imaging . CreateBitmapSourceFromHBitmap (
-					  source . GetHbitmap ( ) ,
-					  IntPtr . Zero ,
-					  Int32Rect . Empty ,
-					  BitmapSizeOptions . FromEmptyOptions ( ) );
-		return xx;
-		}
-	}
+using Syroot . Windows . IO;
 
 namespace DMT01
 {
 	public partial class MainWindow : Window
 		{
 		#region Persistance_classes2
-		public static Region Selected_Region;
 		static long Draws ;
 		static long Resizes ;
 		static DateTime StartDateTime;
@@ -129,14 +73,14 @@ namespace DMT01
 			}
 
 		static NWorksheety Sheety;
-
-		#endregion persistance
+					  static public ReoGridControl myReoGridControl_STATIC;
+		#endregion Persistance_classes2
 
 		public MainWindow ( )
 			{
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "MainWindow()" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Replace ( @"C:\Users\karro\Source\Repos\DMT01\" , "${Soln}" ) . Trim ( ) ) );
 
-			InitializeComponent ( );
+			this . InitializeComponent ( );
 
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "InitalizeComponent Completed" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 			}
@@ -181,7 +125,7 @@ namespace DMT01
 				{
 				this . myReoGridControl . Load ( Path , unvell . ReoGrid . IO . FileFormat . Excel2007 );
 				}
-
+			myReoGridControl_STATIC=this.myReoGridControl;
 			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "Loading Spreadsheet completed" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
 			}
 
@@ -353,7 +297,7 @@ namespace DMT01
 
 			if ( this . Spreadsheet_Grid_CheckBox_Control . IsChecked . Value )
 				{
-				ReoGrid3DSpreadsheet ( gl: gl );
+				this . ReoGrid3DSpreadsheet ( gl: gl );
 				}
 
 			////DoAspect ( );
@@ -384,9 +328,9 @@ namespace DMT01
 			gl . Disable ( SharpGL . OpenGL . GL_TEXTURE_2D );
 			gl . Scale ( 1 , -1 , 1 );
 
-			if ( MainWindow . Selected_Region == null )
+			if ( Region . Selected_Region == null )
 			{
-				MainWindow . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
+				Region . Selected_Region = new Region ( C: Sheety . cells , StartRows: Sheety . r0 , EndRows: Sheety . r1 , StartCols: Sheety . c0 , EndCols: Sheety . c1 );
 			}
 			int ChokerLowRow = 12;
 			int ChokerHighRow = 20;
@@ -399,21 +343,21 @@ namespace DMT01
 				{
 					for ( int i = Sheety . c0 ; i < Sheety . c1 ; i++ )
 					{
-						if ( IsInBetween ( ChokerLowRow , j , ChokerHighRow ) )
+						if ( Tweeners.IsInBetween ( ChokerLowRow , j , ChokerHighRow ) )
 						{
-							Boxel B = MainWindow . Selected_Region . B [ i , j ];
+							Boxel B = Region . Selected_Region . B [ i , j ];
 							if ( B == null )
 							{
 								B = new Boxel ( i , j , Sheety . cells )
 								{
 									MW = ( DMT01 . MainWindow ) mw ,
-									ParentRegion = MainWindow . Selected_Region
+									ParentRegion = Region . Selected_Region
 								};
-								MainWindow . Selected_Region . B [ i , j ] = B;
+								Region . Selected_Region . B [ i , j ] = B;
 							}
 							else
 							{
-								B = MainWindow . Selected_Region . B [ i , j ];
+								B = Region . Selected_Region . B [ i , j ];
 							}
 
 							B . DrawMe ( );
@@ -468,20 +412,20 @@ namespace DMT01
 				{
 					for ( int j = ChokerLowRow ; j < ChokerHighRow ; j++ )
 					{
-						if ( Selected_Region . B [ i , j ] != null )
+						if ( Region . Selected_Region . B [ i , j ] != null )
 						{
-							Boxel B = Selected_Region . B [ i , j ];
+							Boxel B = Region . Selected_Region . B [ i , j ];
 							if ( B . BoxelKindEnum == BoxelKindEnum . IsNotCriticalTwoHits )
 							{
 
-								if ( Selected_Region . RecursionSeedBoxel == null )
+								if ( Region.Selected_Region . RecursionSeedBoxel == null )
 								{
-									Selected_Region . RecursionSeedBoxel = new Boxel [ 4 ];
+									Region.Selected_Region . RecursionSeedBoxel = new Boxel [ 4 ];
 								}
-								Selected_Region . RecursionSeedBoxel [ 0 ] = B;
+								Region.Selected_Region . RecursionSeedBoxel [ 0 ] = B;
 								if(B.BreadCrumbByteLabel[0]!=0b0)
 									continue;
-								BoxelScanStart ( B );
+								Boxel.BoxelScanStart ( B );
 							}
 
 						}
@@ -495,7 +439,7 @@ namespace DMT01
 			if ( this . DoGlobalSweepThreshold_CheckBox_Control . IsChecked . Value )
 			{
 				this . CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue += this . CriticalitySweeper_DELTA_H_Slider_User_Control .SliderValue;
-				MainWindow . Selected_Region. Titration_Steps++;
+				Region . Selected_Region. Titration_Steps++;
 
 				if ( this. CriticalitySweeper_THRESHOLD_H_Slider_User_Control . SliderValue <= this .CriticalitySweeper_LOW_H_Slider_User_Control . SliderValue )
 				{
@@ -516,9 +460,9 @@ namespace DMT01
 			{
 				for ( int j = ChokerLowRow ; j < ChokerHighRow ; j++ )
 				{
-					if ( Selected_Region . B [ i , j ] != null )
+					if ( Region . Selected_Region . B [ i , j ] != null )
 					{
-						Boxel B = Selected_Region . B [ i , j ];
+						Boxel B = Region . Selected_Region . B [ i , j ];
 						B.BreadCrumbByteLabel[0]=0b0;
 
 					}
@@ -528,275 +472,31 @@ namespace DMT01
 
 		}
 
-		private void BoxelScanStart ( Boxel StartingBoxel )
-		{
-			for ( int i = 0 ; i < 4 ; i++ )
-			{
-				Edge StartingEdge = StartingBoxel . E [ i ];
-				if ( StartingEdge . Hit == null )
-				{
-					continue;
-				}
-				BoxelScan ( StartingEdge , 0 );
-			}
-		}
-
-		private void BoxelScan ( Edge ThisBoxelEntryEdge , int Depth )
-		{
-			if ( ThisBoxelEntryEdge == null )
-				return;
-			if ( Depth > 100 )
-				return;
-			Edge ExitEdge = GetExitEdge ( ThisBoxelEntryEdge );
-
-			if ( false )
-				AnnotateRecursion ( ThisBoxelEntryEdge , ExitEdge , Depth );
-			Boxel AdjacentBoxel = GetAdjacentBoxelToEdge ( ExitEdge , out Edge AdjacentBoxelEntryEdge , Depth );
-			ThisBoxelEntryEdge . AdjacentBoxel = AdjacentBoxel;
-			if ( true )
-				AnnotateRecursion ( ThisBoxelEntryEdge , AdjacentBoxelEntryEdge , Depth );
-			if ( ThisBoxelEntryEdge . ParentBoxel . BreadCrumbByteLabel [ 0 ] == 0b0 )
-			{
-				Selected_Region . Labels [ 0 ]++;
-				ThisBoxelEntryEdge . ParentBoxel . BreadCrumbByteLabel [ 0 ] = Selected_Region . Labels [ 0 ];
-			}
-			else
-				return;
-
-			BoxelScan ( AdjacentBoxelEntryEdge , Depth + 1 );
-
-		}
-
-		private void AnnotateRecursion ( Edge E0 , Edge E1, int depth )
-		{
-
-			if ( E0 == null )
-				return;
-			if ( E0 . ParentBoxel == null )
-				return;
-			Boxel B0 = E0 . ParentBoxel;
-			if ( E1 == null )
-				return;
-			if ( E1 . ParentBoxel == null )
-				return;
-			Boxel B1 = E1 . ParentBoxel;
-
-			if ( false )
-			{
-				System . Diagnostics . Debug . WriteLine ( String . Format ( "{6}:B[{0},{1}*E{2}]-{7}->B[{3},{4}*E{5}] " ,
-				B0 . I , B0 . J , E0 . EdgeIndex ,
-				B1 . I , B1 . J , E1 . EdgeIndex , depth , EncodeBoxelAdjacency ( B0 , B1 ) ) );
-			}
-			if ( true )
-			{
-				OpenGL gl = MainWindow . staticGLHook;
-				if ( gl == null )
-					return;
-				float [] Centroid1=E0.ParentBoxel.Centroid.cf;
-				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
-				gl . Color ( 0 , .9 , .1 );
-				gl . PointSize ( 6 );
-
-				B0 . SmallerBoxAbout ( gl , .65f );
-				gl . Color ( .9 , .9 , .1 );
-				B1 . SmallerBoxAbout ( gl , .55f );
-				gl . PopAttrib ( );
-			}
-		}
-
-		private Edge GetExitEdge ( Edge EntryEdge )
-		{
-			Boxel EntryBoxel=EntryEdge.ParentBoxel;
-			float [ ] EntryHit = EntryEdge . Hit;
-			for ( int i = 0 ; i < 4 ; i++ )
-			{
-				Edge E = EntryBoxel . E [ i ];
-				if ( E == null )
-					continue;
-				Boolean CongruentEdges = equals ( E , EntryEdge );
-				if ( CongruentEdges )
-					continue;
-				if ( E . Hit == null )
-					continue;
-				float [ ] Hit = E . Hit;
-				if ( equals ( EntryHit , Hit ) )
-					continue;
-				if ( E . Hit != null )
-					return E;
-			}
-			return null;
-		}
-
-		private Boxel GetAdjacentBoxelToEdge (Edge ThisEdge, out Edge AdjacentBoxelEntryEdge, int Depth)
-		{
-			
-			if(ThisEdge==null)
-			{
-				AdjacentBoxelEntryEdge=null;
-				return null;
-			}
-
-			Boxel ThisBoxel	= ThisEdge.ParentBoxel;
-			Boxel [ ] AdjacentBoxelArray = new Boxel [ 4 ];
-			int [ , ] AdjacentIndexArray = new int [ 4 , 2 ] {
-					{ ThisBoxel . I + 1 ,	ThisBoxel . J     } ,
-					{ ThisBoxel . I ,		ThisBoxel . J + 1 } ,
-					{ ThisBoxel . I - 1 ,	ThisBoxel . J     } ,
-					{ ThisBoxel . I ,		ThisBoxel . J - 1 } ,
-					};
-			for ( int i = 0 ; i < 4 ; i++ )
-			{
-				int i1Len = Selected_Region . B . GetLength ( 0 );
-				int j1Len = Selected_Region . B . GetLength ( 1 );
-				int I1 = AdjacentIndexArray [ i , 0 ];
-				int J1 = AdjacentIndexArray [ i , 1 ];
-				Boolean GutsInBounds = ( ( I1 >= 0 ) && ( I1 < i1Len ) && ( J1 >= 0 ) && ( J1 < j1Len ) );
-				Boolean GutsGood = ( GutsInBounds && ( ( Selected_Region . B [ I1 , J1 ] ) != null ) );
-				int i2Len = Selected_Region . BorderB . GetLength ( 0 );
-				int j2Len = Selected_Region . BorderB . GetLength ( 1 );
-				int I2 = AdjacentIndexArray [ i , 0 ];
-				int J2 = AdjacentIndexArray [ i , 1 ];
-				Boolean BorderInBounds = ( ( I2 >= 0 ) && ( I2 < i2Len ) && ( J2 >= 0 ) && ( J2 < j2Len ) );
-				Boolean BorderGood = ( BorderInBounds && ( Selected_Region . BorderB [ AdjacentIndexArray [ i , 0 ] , AdjacentIndexArray [ i , 1 ] ] ) != null );
-
-				if ( BorderGood )
-				{
-				AdjacentBoxelArray[i] = Selected_Region . BorderB [ AdjacentIndexArray [ i , 0 ] , AdjacentIndexArray [ i , 1 ] ];
-				}
-				else if ( GutsGood )
-				{
-				AdjacentBoxelArray[i] = Selected_Region . B [ AdjacentIndexArray [ i , 0 ] , AdjacentIndexArray [ i , 1 ] ] ;
-				}
-				else 
-				{
-				AdjacentBoxelArray[i]=null;
-				}
-			}
-			Boxel AdjacentBoxel=null;
-			AdjacentBoxelEntryEdge=null;
-			for ( int i = 0 ; i < 4 ; i++ )
-			{
-				if ( AdjacentBoxelArray [ i ] == null )
-				{
-					continue;
-				}
-				AdjacentBoxel = AdjacentBoxelArray [ i ];
-				if (false)
-				{
-					System . Diagnostics . Debug . WriteLine ( String . Format ( "{0}:{1}:  B[{2},{3}] {4} has {5} hits. " ,
-						Depth , i ,
-						AdjacentBoxel . I , AdjacentBoxel . J , EncodeBoxelAdjacency(ThisBoxel, AdjacentBoxel ) , AdjacentBoxel . EdgeHits , 
-						 ( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-				}
-				for ( int j = 0 ; j < 4 ; j++ )
-				{
-					if ( AdjacentBoxel . E [ j ] ==null)
-						continue;
-					Edge AdjacentBoxelEdge = AdjacentBoxel . E [ j ];
-					Boolean EdgeMatch=equals(ThisEdge, AdjacentBoxelEdge);
-					if ( false )
-					{
-						System . Diagnostics . Debug . WriteLine ( String . Format ( "{0}:{1}:{2}:B[{3},{4}*E{5}]={6}=B[{7},{8}*E{9}]",
-							Depth,i,j,
-							ThisEdge . ParentBoxel . I , ThisEdge . ParentBoxel . J , ThisEdge . EdgeIndex ,
-							EdgeMatch ,
-							AdjacentBoxel . I , AdjacentBoxel . J , AdjacentBoxelEdge . EdgeIndex ,
-							( ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) ) );
-					}
-					if ( AdjacentBoxelEdge . Hit == null )
-					{
-						continue;
-					}
-					Boolean HitMatch = ( equals ( AdjacentBoxelEdge . Hit , ThisEdge . Hit ) );
-					if ( HitMatch )
-					{
-						ThisEdge.AdjacentBoxel=AdjacentBoxel;
-						AdjacentBoxelEntryEdge=AdjacentBoxelEdge;
-						goto bailout;
-					}
-				}
-			}
-bailout:
-			return AdjacentBoxel;
-		}
-
-		private String EncodeBoxelAdjacency ( Boxel Start , Boxel Neighboor )
-		{
-			int deltaI = Neighboor . I - Start . I;
-			int deltaJ = Neighboor . J - Start . J;
-			String S=String.Format("dB[{0},{1}]",deltaI.ToString("0"), deltaJ.ToString("0"));
-			return 	 S;
-		}
-
-		private Boolean equals ( Edge E0 , Edge E1 )
-		{
-			Boolean VertexMatch01 = ( equals ( E0 . V [ 0 ] , E1 . V [ 1 ] ) );
-			Boolean VertexMatch10 = ( equals ( E0 . V [ 1 ] , E1 . V [ 0 ] ) );
-			Boolean EdgeMatch = VertexMatch01 && VertexMatch10;
-			if ( false && EdgeMatch )
-			{
-				Debug.WriteLine("");
-				String Message = "B[{0},{1}*E{2}]*V[{3},{4}*{5}]={6}=B[{7},{8}*E{9}]*V[{10},{11}*{12}]";
-				System . Diagnostics . Debug . WriteLine ( String . Format ( Message ,
-					E0 . ParentBoxel . I , E0 . ParentBoxel . J , E0 . EdgeIndex , 
-					E0 . V [ 0 ] . I , E0 . V [ 0 ] . J , E0 . V [ 0 ] . VertexIndex , 
-					VertexMatch01,
-					E1 . ParentBoxel . I , E1 . ParentBoxel . J , E1 . EdgeIndex ,
-					E1 . V [ 1 ] . I , E1 . V [ 1 ] . J , E1 . V [ 1 ] . VertexIndex) );
-				System . Diagnostics . Debug . WriteLine ( String . Format ( Message ,
-					E0 . ParentBoxel . I , E0 . ParentBoxel . J , E0 . EdgeIndex , 
-					E0 . V [ 1 ] . I , E0 . V [ 1 ] . J , E0 . V [ 1 ] . VertexIndex ,
-					VertexMatch10 ,
-					E1 . ParentBoxel . I , E1 . ParentBoxel . J , E1 . EdgeIndex , 
-					E1 . V [ 0 ] . I , E1 . V [ 0 ] . J , E1 . V [ 0 ] . VertexIndex  ) );
-				Debug . WriteLine ( "" );
-			}
-			return EdgeMatch;
-		}
-
-		private Boolean equals ( Vertex vertex1 , Vertex vertex2 )
-		{
-			Boolean cfs = equals ( vertex1 . cf , vertex2 . cf );
-			Boolean vs = float . Equals ( vertex1 . V , vertex2 . V );
-			Boolean VertexMatch = cfs && vs;
-			return VertexMatch;
-		}
-
-		private Boolean equals ( float [ ] hit1 , float [ ] hit2 )
-		{
-			Boolean x = ( hit1 [ 0 ] == hit2 [ 0 ] );
-			Boolean y = ( hit1 [ 1 ] == hit2 [ 1 ] );
-			Boolean z = ( hit1 [ 2 ] == hit2 [ 2 ] );
-			Boolean xyz= ( ( x && y ) && z );
-
-			return xyz;
-		}
-
 		private void BorderIceCols ( Window mw , int ChoakerLowRow , int ChoakerHighRow , int i , int j )
 		{
-			if ( MainWindow . Selected_Region . BorderB == null )
+			if ( Region . Selected_Region . BorderB == null )
 			{
-				MainWindow . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
+				Region . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
 			}
-			var I_len = MainWindow . Selected_Region . BorderB . GetLength ( 0 );
-			var J_len = MainWindow . Selected_Region . BorderB . GetLength ( 1 );
+			var I_len = Region . Selected_Region . BorderB . GetLength ( 0 );
+			var J_len = Region . Selected_Region . BorderB . GetLength ( 1 );
 			if ( i >= I_len )
 				return;
 			if ( j >= J_len )
 				return;
-			Boxel BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+			Boxel BorderB = Region . Selected_Region . BorderB [ i , j ];
 			if ( BorderB == null )
 			{
 				BorderB = new Boxel ( i , j , Sheety . cells )
 				{
 					MW = ( DMT01 . MainWindow ) mw ,
-					ParentRegion = MainWindow . Selected_Region
+					ParentRegion = Region . Selected_Region
 				};
-				MainWindow . Selected_Region . BorderB [ i , j ] = BorderB;
+				Region . Selected_Region . BorderB [ i , j ] = BorderB;
 			}
 			else
 			{
-				BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+				BorderB = Region . Selected_Region . BorderB [ i , j ];
 			}
 
 			BorderB . DrawMe ( );
@@ -804,54 +504,34 @@ bailout:
 
 		private void BorderIceRows ( Window mw , int ChoakerLowRow , int ChoakerHighRow , int i , int j )
 		{
-			if ( MainWindow . Selected_Region . BorderB == null )
+			if ( Region . Selected_Region . BorderB == null )
 			{
-				MainWindow . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
+				Region . Selected_Region . BorderB = new Boxel [ Sheety . c1 + 2 , ChoakerHighRow + 2 ];
 			}
-			var I_len = MainWindow . Selected_Region . BorderB.GetLength(0);
-			var J_len= MainWindow . Selected_Region . BorderB.GetLength(1);
+			var I_len = Region . Selected_Region . BorderB.GetLength(0);
+			var J_len= Region . Selected_Region . BorderB.GetLength(1);
 			if(i>= I_len )
 				return;
 			if(j>= J_len )
 				return;
 
-			Boxel BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+			Boxel BorderB = Region . Selected_Region . BorderB [ i , j ];
 			if ( BorderB == null )
 			{
 				BorderB = new Boxel ( i , j , Sheety . cells )
 				{
 					MW = ( DMT01 . MainWindow ) mw ,
-					ParentRegion = MainWindow . Selected_Region
+					ParentRegion = Region . Selected_Region
 				};
-				MainWindow . Selected_Region . BorderB [ i , j ] = BorderB;
+				Region . Selected_Region . BorderB [ i , j ] = BorderB;
 			}
 			else
 			{
-				BorderB = MainWindow . Selected_Region . BorderB [ i , j ];
+				BorderB = Region . Selected_Region . BorderB [ i , j ];
 			}
 
 			BorderB . DrawMe ( );
 		}
-
-		private bool IsInBetween ( int v1 , int j , int v2 )
-			{
-			if ( v1 <= j )
-				{
-				if ( j <= v2 )
-					{
-					return true;
-					}
-				}
-			if ( v1 >= j )
-				{
-				if ( j >= v2 )
-					{
-					return true;
-					}
-				}
-
-			return false;
-			}
 
 		private static void OldDrawWithoutBoxel ( SharpGL . OpenGL gl , int j , int i )
 			{
@@ -1162,12 +842,7 @@ bailout:
 						if ( D . DataFormat == CellDataFormatFlag . Percent )
 							{
 							object Nuber = D . Data;
-							if ( float .TryParse ( s: D .DisplayText , result: out float number ) )
-							{
-							}
-							else
-							{
-							}
+							float .TryParse ( s: D .DisplayText , result: out float number );
 							gl . PushMatrix ( );
 
 							float [ ] c = LocalMaths . LocalMathsClass . GetCentroid ( x0 , y0 , x1 , y1 );
@@ -1183,12 +858,7 @@ bailout:
 						if ( D . DataFormat == CellDataFormatFlag . Currency )
 							{
 							object Nuber = D . Data;
-							if ( float .TryParse ( s: D .DisplayText , style: System .Globalization .NumberStyles .Currency , provider: new CultureInfo ( "en-US" ) , result: out float number ) )
-							{
-							}
-							else
-							{
-							}
+							float .TryParse ( s: D .DisplayText , style: System .Globalization .NumberStyles .Currency , provider: new CultureInfo ( "en-US" ) , result: out float number );
 							gl . PushMatrix ( );
 
 							float [ ] c = LocalMaths . LocalMathsClass . GetCentroid ( x0 , y0 , x1 , y1 );
@@ -1561,7 +1231,6 @@ bailout:
 			GetActualizedRange ( CW: Scratcheroo , maxRow: out int R , maxCol: out int C );
 			for ( int j = 0 ; j <= R ; j++ )
 				{
-				//var CBC = new unvell . ReoGrid . CellTypes . CheckBoxCell ( );
 				MyCheckBox CBC = new MyCheckBox ( );
 				CBC . Click += this . CBC_Click;
 				Scratcheroo . SetCellData ( row: j , col: 0 , data: CBC );
@@ -1583,44 +1252,8 @@ bailout:
 			{
 			Debug . WriteLine ( String . Format ( "{0}" , nameof ( CBC_CheckChanged ) ) );
 			CheckBoxCell CBC = sender as CheckBoxCell;
-			SwapRow ( CBC );
+			Pivot.SwapRow ( CBC );
 			}
-
-		#region SwapRow
-		void SwapRow ( CheckBoxCell CBC )
-			{
-			Worksheet Snatcheroo = CBC . Cell . Worksheet;
-			SwapRow ( Snatcheroo , CBC );
-			}
-
-		void SwapRow ( Worksheet Snatcheroo , CheckBoxCell CBC )
-			{
-			int R = CBC . Cell . Row;
-			SwapRow ( Snatcheroo , CBC , R );
-			}
-
-		void SwapRow ( Worksheet Snatcheroo , CheckBoxCell CBC , int R )
-			{
-			int r = -1;
-			int colMax = -1;
-			GetActualizedRange ( CW: Snatcheroo , maxRow: out r , maxCol: out colMax );
-			SwapRow ( Snatcheroo: Snatcheroo , CBC: CBC , R: R , r: r , colMax: colMax );
-			}
-
-		void SwapRow ( Worksheet Snatcheroo , CheckBoxCell CBC , int R , int r , int colMax )
-			{
-			RangePosition RR = new RangePosition ( row: R , col: 1 , rows: 1 , cols: colMax );
-
-			Snatcheroo . InsertRows ( row: R , count: 1 );
-			CellPosition cP = new CellPosition ( row: R , col: 0 );
-
-			CopyRangeAction action0 = new unvell . ReoGrid . Actions . CopyRangeAction ( fromRange: RR , toPosition: cP );
-			this . myReoGridControl . DoAction ( action0 );
-			RemoveRowsAction action1 = new unvell . ReoGrid . Actions . RemoveRowsAction ( row: R , rows: 1 );
-			this . myReoGridControl . DoAction ( action1 );
-			}
-
-		#endregion SwapRow
 
 		private void Do_Iterate_Resoures_Button_Click ( object sender , RoutedEventArgs e )
 			{
@@ -1795,13 +1428,6 @@ bailout:
 			return a;
 			}
 
-		private void Aspect_Label_MouseEnter ( object sender , MouseEventArgs e )
-			{
-			Label L = sender as Label;
-			DoAspect ( );
-			L . Content = myOpenGLControlViewportAspect . ToString ( "#0.0#" );
-			}
-
 		private void Aspect_Label_MouseLeave ( object sender , MouseEventArgs e )
 			{
 			Label L = sender as Label;
@@ -1809,32 +1435,29 @@ bailout:
 			L . Content = MainWindow . myOpenGLControlViewportAspect . ToString ( "#0.0#" );
 			}
 
-		private void StankyLineStartModeEnum_ComboBox_Control_Initialized ( object sender , EventArgs e )
+		private void SolutionDirectorySaveRestoreSupport_TabItem_Loaded ( object sender , RoutedEventArgs e )
+		{
+			Array b= Enum . GetValues ( typeof ( KnownFolderType ) );
+			foreach ( KnownFolderType t in b )
 			{
-			ComboBox CB = sender as ComboBox;
+				KnownFolder knownFolder = new KnownFolder ( t );
 
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
-			}
+				Debug . WriteLine ( knownFolder . Type . ToString ( ) );
+				try
+				{
+					Console . Write ( "Current Path: " );
+					Console . WriteLine ( knownFolder . Path );
+					Console . Write ( "Default Path: " );
+					Console . WriteLine ( knownFolder . DefaultPath );
 
-		private void StankyLineStartModeEnum_ComboBox_Control_Loaded ( object sender , RoutedEventArgs e )
-			{
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
+				}
+				catch ( Exception E )
+				{
+					System . Diagnostics . Debug . WriteLine ( String . Format ( "exception {0} " , 
+						E ));
+				}
 			}
-
-		private void StankyLineStartModeEnum_ComboBox_Control_ContextMenuClosing ( object sender , ContextMenuEventArgs e )
-			{
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
-			}
-
-		private void StankyLineStartModeEnum_ComboBox_Control_ContextMenuOpening ( object sender , ContextMenuEventArgs e )
-			{
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
-			}
-
-		private void StankyLineStartModeEnum_ComboBox_Control_DataContextChanged ( object sender , DependencyPropertyChangedEventArgs e )
-			{
-			System . Diagnostics . Debug . WriteLine ( String . Format ( "{0} {1} " , "snippy" , ( ( System . Environment . StackTrace ) . Split ( '\n' ) ) [ 2 ] . Trim ( ) ) );
-			}
+		}
 
 		private void DoSaveSelectedData_Button_Click ( object sender , RoutedEventArgs e )
 			{

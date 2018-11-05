@@ -25,6 +25,9 @@ namespace DMT01
 		public Boxel[] RecursionSeedBoxel;
 		public byte[] Labels=new byte[8];
 		public long Titration_Steps;
+
+		public static Region Selected_Region;
+
 		public Region ( float [ , ] C , int StartRows , int EndRows , int StartCols , int EndCols )
 			{
 			this . Start_Rows = StartRows;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System . Diagnostics;
+using SharpGL;
 
 namespace DMT01
 {
@@ -79,6 +81,141 @@ namespace DMT01
 				this . V [ 1 ] . V . ToString ( Stranger ) );
 			return WaddaDo;
 			}
+	
+		public static Boolean Equals ( Edge E0 , Edge E1 )
+		{
+			Boolean VertexMatch01 = ( Equals ( E0 . V [ 0 ] , E1 . V [ 1 ] ) );
+			Boolean VertexMatch10 = ( Equals ( E0 . V [ 1 ] , E1 . V [ 0 ] ) );
+			Boolean EdgeMatch = VertexMatch01 && VertexMatch10;
+			if ( false && EdgeMatch )
+			{
+				Debug . WriteLine ( "" );
+				String Message = "B[{0},{1}*E{2}]*V[{3},{4}*{5}]={6}=B[{7},{8}*E{9}]*V[{10},{11}*{12}]";
+				System . Diagnostics . Debug . WriteLine ( String . Format ( Message ,
+					E0 . ParentBoxel . I , E0 . ParentBoxel . J , E0 . EdgeIndex ,
+					E0 . V [ 0 ] . I , E0 . V [ 0 ] . J , E0 . V [ 0 ] . VertexIndex ,
+					VertexMatch01 ,
+					E1 . ParentBoxel . I , E1 . ParentBoxel . J , E1 . EdgeIndex ,
+					E1 . V [ 1 ] . I , E1 . V [ 1 ] . J , E1 . V [ 1 ] . VertexIndex ) );
+				System . Diagnostics . Debug . WriteLine ( String . Format ( Message ,
+					E0 . ParentBoxel . I , E0 . ParentBoxel . J , E0 . EdgeIndex ,
+					E0 . V [ 1 ] . I , E0 . V [ 1 ] . J , E0 . V [ 1 ] . VertexIndex ,
+					VertexMatch10 ,
+					E1 . ParentBoxel . I , E1 . ParentBoxel . J , E1 . EdgeIndex ,
+					E1 . V [ 0 ] . I , E1 . V [ 0 ] . J , E1 . V [ 0 ] . VertexIndex ) );
+				Debug . WriteLine ( "" );
+			}
+			return EdgeMatch;
 		}
+
+		public static Boolean Equals ( Vertex vertex1 , Vertex vertex2 )
+		{
+			Boolean cfs =  Equals ( vertex1 . cf , vertex2 . cf );
+			Boolean vs = float . Equals ( vertex1 . V , vertex2 . V );
+			Boolean VertexMatch = cfs && vs;
+			return VertexMatch;
+		}
+
+		public static Boolean Equals ( float [ ] hit1 , float [ ] hit2 )
+		{
+			Boolean x = ( hit1 [ 0 ] == hit2 [ 0 ] );
+			Boolean y = ( hit1 [ 1 ] == hit2 [ 1 ] );
+			Boolean z = ( hit1 [ 2 ] == hit2 [ 2 ] );
+			Boolean xyz = ( ( x && y ) && z );
+
+			return xyz;
+		}
+
+		public static Edge GetExitEdge ( Edge EntryEdge )
+		{
+			Boxel EntryBoxel = EntryEdge . ParentBoxel;
+			float [ ] EntryHit = EntryEdge . Hit;
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+				Edge E = EntryBoxel . E [ i ];
+				if ( E == null )
+				{
+					continue;
+				}
+
+				Boolean CongruentEdges =  Equals ( E , EntryEdge );
+				if ( CongruentEdges )
+				{
+					continue;
+				}
+
+				if ( E . Hit == null )
+				{
+					continue;
+				}
+
+				float [ ] Hit = E . Hit;
+				if ( Equals ( EntryHit , Hit ) )
+				{
+					continue;
+				}
+
+				if ( E . Hit != null )
+				{
+					return E;
+				}
+			}
+			return null;
+		}
+
+		public static void AnnotateRecursion ( Edge E0 , Edge E1 , int depth )
+		{
+
+			if ( E0 == null )
+			{
+				return;
+			}
+
+			if ( E0 . ParentBoxel == null )
+			{
+				return;
+			}
+
+			Boxel B0 = E0 . ParentBoxel;
+			if ( E1 == null )
+			{
+				return;
+			}
+
+			if ( E1 . ParentBoxel == null )
+			{
+				return;
+			}
+
+			Boxel B1 = E1 . ParentBoxel;
+
+			if ( false )
+			{
+				System . Diagnostics . Debug . WriteLine ( String . Format ( "{6}:B[{0},{1}*E{2}]-{7}->B[{3},{4}*E{5}] " ,
+				B0 . I , B0 . J , E0 . EdgeIndex ,
+				B1 . I , B1 . J , E1 . EdgeIndex , depth , Boxel.EncodeBoxelAdjacency ( B0 , B1 ) ) );
+			}
+			if ( true )
+			{
+				OpenGL gl = MainWindow . staticGLHook;
+				if ( gl == null )
+				{
+					return;
+				}
+
+				float [ ] Centroid1 = E0 . ParentBoxel . Centroid . cf;
+				gl . PushAttrib ( SharpGL . Enumerations . AttributeMask . All );
+				gl . Color ( 0 , .9 , .1 );
+				gl . PointSize ( 6 );
+
+				B0 . SmallerBoxAbout ( gl , .65f );
+				gl . Color ( .9 , .9 , .1 );
+				B1 . SmallerBoxAbout ( gl , .55f );
+				gl . PopAttrib ( );
+			}
+		}
+
 	}
+
+}
 
